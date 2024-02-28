@@ -1,0 +1,42 @@
+package Swing;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+// Controller
+public class CalculatorController {
+    
+    private CalculatorView theView;
+    private CalculatorModel theModel;
+    
+    public CalculatorController(CalculatorView theView, CalculatorModel theModel) {
+        this.theView = theView;
+        this.theModel = theModel;
+        
+        // Add ActionListener for the calculateButton in the View
+        this.theView.addCalculateListener(new CalculateListener());
+    }
+    
+    // Inner class implementing ActionListener for calculateButton
+    class CalculateListener implements ActionListener {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int firstNumber, secondNumber = 0;
+            
+            // Surround interactions with the view with try-catch block
+            // in case numbers weren't properly entered
+            try {
+                firstNumber = theView.getFirstNumber();
+                secondNumber = theView.getSecondNumber();
+                
+                theModel.addTwoNumbers(firstNumber, secondNumber);
+                
+                theView.setCalcSolution(theModel.getCalculationValue());
+            } catch (NumberFormatException ex) {
+                System.out.println(ex);
+                theView.displayErrorMessage("You Need to Enter 2 Integers");
+            }
+        }
+    }
+}
