@@ -2,6 +2,7 @@ package calculate.javafx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -28,11 +29,17 @@ public class CalculatorController implements Initializable {
     }
 
     public void calculate() {
-        int firstNumber = Integer.parseInt(tfFirstNumber.getText());
-        int secondNumber = Integer.parseInt(tfSecondNumber.getText());
-        int solution = firstNumber + secondNumber;
-
-        tfSolution.setText(Integer.toString(solution));
+        try {
+            int firstNumber = Integer.parseInt(tfFirstNumber.getText());
+            int secondNumber = Integer.parseInt(tfSecondNumber.getText());
+            int solution = firstNumber + secondNumber;
+            tfSolution.setText(Integer.toString(solution));
+        }catch (NumberFormatException e) {
+            System.out.println(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You Need to Enter 2 Integers");
+            alert.showAndWait();
+        }
     }
 
 }

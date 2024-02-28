@@ -15,13 +15,10 @@ public class MVCCalculator extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Calculator.fxml")));
-            primaryStage.setTitle("Virus");
             primaryStage.setResizable(false);
-            primaryStage.initStyle(StageStyle.DECORATED);
             Scene scene = new Scene(root);
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setScene(scene);
-            primaryStage.show();;
+            primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
