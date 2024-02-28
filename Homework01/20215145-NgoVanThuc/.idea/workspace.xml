@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b23ff522-f78a-4ed8-8c40-58144201f6ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Homework01/src/HelloWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/20215145-NgoVanThuc-Report-Homework01.docx" beforeDir="false" afterPath="$PROJECT_DIR$/20215145-NgoVanThuc-Report-Homework01.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework01/src/calculate/javafx/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Homework01/src/calculate/javafx/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework01/src/calculate/javafx/MVCCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Homework01/src/calculate/javafx/MVCCalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
