@@ -1,4 +1,4 @@
-package calculate.javafx;
+package test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +25,7 @@ public class MVCCalculator extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 
