@@ -1,4 +1,4 @@
-package calculate.javafx;
+package test;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

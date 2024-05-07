@@ -1,4 +1,4 @@
-package calculate.swing;
+package test;
 
 public class CalculatorModel {
     private int calculationValue;
@@ -7,7 +7,7 @@ public class CalculatorModel {
         calculationValue = firstNumber + secondNumber;
     }
 
-    public int getCalculationValue() {
+    public int getCalculationValue(int calculationValue) {
         return calculationValue;
     }
 }

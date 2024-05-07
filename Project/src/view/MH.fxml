@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="100.0" style="-fx-background-color: #001100;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="100.0" prefWidth="100.0" styleClass="logo" stylesheets="@../hust/NFT/controller/CssStyle/BGStyle.css" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="1146.0" text="BP Đặt hàng" textFill="#fafafa">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #001100;" styleClass="logout" stylesheets="@../hust/NFT/controller/CssStyle/BGStyle.css">
+               <HBox.margin>
+                  <Insets left="50.0" top="25.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="668.0" prefWidth="1366.0" style="-fx-background-color: #99CCCC;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1366.0" style="-fx-background-color: #333333;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="455.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="60.0" style="-fx-background-color: #333333;" text="Xử lý YCĐH" textFill="#e71515">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="456.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="60.0" style="-fx-background-color: #333333;" text="Xử lý đơn hủy" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="455.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="60.0" style="-fx-background-color: #333333;" text="Xem đơn hàng" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="568.0" prefWidth="1300.0">
+               <children>
+                  <VBox prefHeight="568.0" prefWidth="1300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="1300.0" text="Danh sách các site đáp ứng mặt hàng" textFill="#2e22d7">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView prefHeight="468.0" prefWidth="1300.0" style="-fx-background-color: #99CCCC;">
+                          <columns>
+                            <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="STT" />
+                              <TableColumn maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Mã Site" />
+                            <TableColumn maxWidth="325.0" minWidth="325.0" prefWidth="325.0" text="Tên Site" />
+                              <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Số lượng hàng còn" />
+                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Đơn vị" />
+                              <TableColumn prefWidth="150.0" text="Loại hình vận chuyển" />
+                              <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Ngày giao " />
+                              <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Số lượng muốn đặt" />
+                          </columns>
+                        </TableView>
+                        <HBox prefHeight="50.0" prefWidth="1300.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="500.0" prefWidth="800.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Quay lại">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="50.0" prefWidth="500.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" style="-fx-background-color: blue;" text="Tạo đơn" textFill="#fafafa">
+                                       <font>
+                                          <Font name="System Bold Italic" size="16.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="33.0" right="33.0" />
+               </VBox.margin></Pane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
