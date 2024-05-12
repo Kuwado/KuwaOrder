@@ -21,5 +21,6 @@ module application {
     exports fx;
     exports fx.make_order;
     opens fx.make_order to javafx.fxml;
+    exports model;
 }
 

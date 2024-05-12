@@ -17,7 +17,7 @@ public class HoanApplication extends Application {
         mc.setContentPath("/view/content/make_order/RequestList.fxml");
         mc.setAvatarPath("/images/avatar.jpg");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
-        fxmlLoader.setController(mc); // Đặt controller của FXMLLoader thành MainController đã tạo
+        fxmlLoader.setController(mc);
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
         stage.setTitle("Hello!");

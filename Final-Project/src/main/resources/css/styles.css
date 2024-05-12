@@ -26,7 +26,6 @@
 }
 
 
-
 /* ----------------------------------------------------- Icons -------------------------------------------- */
 
 /* --------------------------------------------------- Frame -----------------------------------------------*/
@@ -101,7 +100,7 @@
     -fx-padding: 0 0 0 20px;
 }
 
-.sidebar-btn:hover{
+.sidebar-btn:hover {
     -fx-background-color: #146886;
     -fx-border-color: WHITE;
     -fx-font-weight: 800;
@@ -114,7 +113,6 @@
     -fx-pref-height: 700px;
 }
 
-
 /* Breadcrumb */
 .breadcrumb {
     -fx-pref-height: 80px;
@@ -124,7 +122,7 @@
     -fx-background-color: none;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
-    -fx-font-weight: 650;
+    -fx-text-fill: #1b1b32;
 }
 
 .breadcrumb-btn:hover {
@@ -149,22 +147,7 @@
 
 .table-area {
     -fx-background-color: #ffffff;
-}
-
-.tb {
-    -fx-background-color: #ffffff;
-}
-
-.tb-row:odd {
-    -fx-background-color: #f9f9f9; /* Màu nền của các dòng lẻ */
-}
-
-.tb-row:even {
-    -fx-background-color: #ffffff; /* Màu nền của các dòng chẵn */
-}
-
-.tb-col {
-    -fx-background-color: transparent; /* Xóa màu nền */
+    -fx-background-radius: 20px;
 }
 
 .search-input {
@@ -176,4 +159,46 @@
     -fx-border-radius: 10px;
     -fx-border-width: 1px;
     -fx-border-color: black;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-column .label {
+    -fx-alignment: CENTER-LEFT; /* Căn trái nội dung của header */
+}
+
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #F7F6FE;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #1b1b32;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.tb-col {
+    -fx-alignment: center-left; /* Căn trái */
+}
+
+.tb-col-first {
+    -fx-alignment: center; /* Căn trái */
+}
+
+.tb-col-first .label {
+    -fx-alignment: center; /* Căn trái */
 }
