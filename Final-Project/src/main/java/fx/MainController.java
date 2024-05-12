@@ -1,17 +1,22 @@
 package fx;
 
+import java.util.ArrayList;
+
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,10 +27,15 @@ public class MainController {
     public String sidebarPath;
     //= "/view/parts/sidebar/OrderPlacement.fxml";
     public String contentPath;
+    public ArrayList<String> breadcrumbs;
     private boolean avatarStatus = false;
 
     public MainController() {
 
+    }
+
+    public void setBreadcrumbs(ArrayList<String> breadcrumbs) {
+        this.breadcrumbs = breadcrumbs;
     }
 
     public void setSidebarPath(String sidebarPath) {
@@ -40,13 +50,16 @@ public class MainController {
     private Circle avatar;
 
     @FXML
-    private VBox sidebar;
-
-    @FXML
     private Pane avatarBar;
 
     @FXML
+    private VBox sidebar;
+
+    @FXML
     private Pane content;
+
+    @FXML
+    private HBox breadcrumb;
 
 
     @FXML
@@ -54,6 +67,7 @@ public class MainController {
         loadAvatar(avatarPath);
         loadSidebar(sidebarPath);
         loadContent(contentPath);
+        createBreadcrumb(breadcrumbs);
         clickAvatar();
     }
 
@@ -87,7 +101,7 @@ public class MainController {
     }
 
     // Load và chèn nội dung vao content
-    private  void loadContent(String path) {
+    private void loadContent(String path) {
         try {
             FXMLLoader loader2 = new FXMLLoader(getClass().getResource(path));
             AnchorPane con = loader2.load();
@@ -103,10 +117,9 @@ public class MainController {
         avatarBar.setTranslateX(300);
         avatar.setOnMouseClicked(event -> {
             if (!avatarStatus) {
-                transitionAvatarBar(0,300);
+                transitionAvatarBar(0, 300);
                 avatarStatus = true;
-            }
-            else {
+            } else {
                 transitionAvatarBar(300, 0);
                 avatarStatus = false;
             }
@@ -123,6 +136,62 @@ public class MainController {
         avatarBar.setTranslateX(y);
     }
 
+    // Tạo hình cho breadcrumb
+    private void createCircleToBreadcrumb(String name) {
+        Circle circle = new Circle(30);
+        circle.setStroke(Color.WHITE);
+        circle.setStrokeWidth(5);
+        circle.setFill(null);
+
+        Label label = new Label(name);
+        label.setPrefHeight(48);
+        label.setPrefWidth(48);
+        label.setTextFill(Color.BLACK);
+        StackPane.setAlignment(label, Pos.CENTER);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(circle, label);
+        breadcrumb.getChildren().add(stackPane);
+    }
+
+    private void createLineToBreadcrumb() {
+        Line line = new Line(0, 0, 80, 0);
+        line.setStroke(Color.WHITE);
+        line.setStrokeWidth(5);
+        breadcrumb.getChildren().add(line);
+    }
+
+    private void highlightCircle(String name) {
+        Circle circleLast = new Circle(30);
+        circleLast.setStroke(Color.web("#3c1aad"));
+        circleLast.setStrokeWidth(5);
+        circleLast.setFill(Color.rgb(27, 27, 50));
+
+        Label label = new Label(name);
+        label.setPrefHeight(48);
+        label.setPrefWidth(48);
+        label.setTextFill(Color.WHITE);
+        StackPane.setAlignment(label, Pos.CENTER);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(circleLast, label);
+        breadcrumb.getChildren().add(stackPane);
+    }
+
+    private void createBreadcrumb(ArrayList<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (i == list.size() - 1) {
+                createLineToBreadcrumb();
+                highlightCircle(list.get(i));
+            } else if (i == 0) {
+                createCircleToBreadcrumb(list.get(i));
+            } else {
+                createLineToBreadcrumb();
+                createCircleToBreadcrumb(list.get(i));
+            }
+        }
+
+    }
 
 
 }

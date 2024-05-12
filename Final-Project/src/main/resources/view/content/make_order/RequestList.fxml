@@ -8,27 +8,27 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="800.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
+      <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="575.0" prefWidth="800.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="25.0">
          <children>
-            <TableView prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: orange;">
-              <columns>
-                <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="STT" />
-                <TableColumn maxWidth="220.0" minWidth="220.0" prefWidth="220.0" text="Tên yêu cầu đặt hàng" />
-                  <TableColumn maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Số lượng đơn " />
-                  <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Ngày gửi" />
-                  <TableColumn maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Trạng thái" />
-                  <TableColumn maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Hành động" />
-              </columns>
+            <TableView prefHeight="475.0" prefWidth="800.0" style="-fx-background-color: orange;">
+               <columns>
+                  <TableColumn fx:id="id" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="STT" />
+                  <TableColumn fx:id="name" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" text="Tên yêu cầu đặt hàng" />
+                  <TableColumn fx:id="quantity" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Số lượng đơn " />
+                  <TableColumn fx:id="send_date" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Ngày gửi" />
+                  <TableColumn fx:id="status" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Trạng thái" />
+                  <TableColumn fx:id="action" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Hành động" />
+               </columns>
             </TableView>
             <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
                <children>
-                  <Pagination maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
+                  <Pagination fx:id="pagination" maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
                </children>
             </VBox>
          </children>
       </VBox>
-      <Pane prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: green;" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
+      <Pane layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: green;" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>

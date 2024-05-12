@@ -114,3 +114,8 @@
     -fx-pref-height: 700px;
 }
 
+#test {
+    -fx-background-radius: 50%;
+    -fx-border-width: 5px ;
+    -fx-border-color: black;
+}

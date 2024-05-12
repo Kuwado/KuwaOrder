@@ -7,14 +7,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class HoanApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         MainController mc = new MainController();
+        ArrayList<String> breadcrumbs = new ArrayList<String>(Arrays.asList("Hello", "hi", "ba"));
         mc.setSidebarPath("/view/parts/sidebar/OrderPlacement.fxml");
         mc.setContentPath("/view/content/make_order/RequestList.fxml");
+        mc.setBreadcrumbs(breadcrumbs);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc); // Đặt controller của FXMLLoader thành MainController đã tạo
         Scene scene = new Scene(fxmlLoader.load());

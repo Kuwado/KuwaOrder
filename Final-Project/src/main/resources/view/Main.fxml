@@ -87,7 +87,7 @@
             </HBox>
             <AnchorPane prefHeight="700.0" prefWidth="1260.0">
                <children>
-                  <Pane id="content" fx:id="content" />
+                  <Pane id="content" fx:id="content" maxHeight="620.0" prefHeight="620.0" AnchorPane.topAnchor="80.0" />
                   <Pane id="avatar-bar" fx:id="avatarBar" layoutX="1093.0" prefHeight="180.0" prefWidth="250.0" style="-fx-background-color: #fafafa;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <VBox prefHeight="180.0" prefWidth="250.0">
@@ -135,6 +135,11 @@
                         <Insets bottom="20.0" top="20.0" />
                      </padding>
                   </Pane>
+                  <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" minWidth="0.0" prefHeight="80.0" style="-fx-background-color: #6a7991;">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>
