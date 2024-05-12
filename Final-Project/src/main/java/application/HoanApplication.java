@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class HoanApplication extends Application {
@@ -17,6 +15,7 @@ public class HoanApplication extends Application {
         MainController mc = new MainController();
         mc.setSidebarPath("/view/parts/sidebar/OrderPlacement.fxml");
         mc.setContentPath("/view/content/make_order/RequestList.fxml");
+        mc.setAvatarPath("/images/avatar.jpg");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc); // Đặt controller của FXMLLoader thành MainController đã tạo
         Scene scene = new Scene(fxmlLoader.load());

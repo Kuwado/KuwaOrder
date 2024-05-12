@@ -18,7 +18,7 @@ import java.net.URL;
 
 public class MainController {
 
-    private static final String avatarPath = "/images/avatar.jpg";
+    public String avatarPath;
     public String sidebarPath;
     //= "/view/parts/sidebar/OrderPlacement.fxml";
     public String contentPath;
@@ -34,6 +34,10 @@ public class MainController {
 
     public void setContentPath(String contentPath) {
         this.contentPath = contentPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 
     @FXML

@@ -124,10 +124,11 @@
     -fx-background-color: none;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
+    -fx-font-weight: 650;
 }
 
 .breadcrumb-btn:hover {
-    -fx-background-color: white;
+    -fx-background-color: #00ccff;
 }
 
 .breadcrumb-active {
@@ -137,4 +138,42 @@
 .breadcrumb-active > .breadcrumb-btn {
     -fx-border-width: 0 0 3px 0;
     -fx-border-color: #1f337b;
+}
+
+/* Privew Card */
+.preview-card {
+    -fx-background-radius: 25px;
+}
+
+/* Table */
+
+.table-area {
+    -fx-background-color: #ffffff;
+}
+
+.tb {
+    -fx-background-color: #ffffff;
+}
+
+.tb-row:odd {
+    -fx-background-color: #f9f9f9; /* Màu nền của các dòng lẻ */
+}
+
+.tb-row:even {
+    -fx-background-color: #ffffff; /* Màu nền của các dòng chẵn */
+}
+
+.tb-col {
+    -fx-background-color: transparent; /* Xóa màu nền */
+}
+
+.search-input {
+    -fx-background-color: transparent;
+}
+
+.search-bar {
+    -fx-background-color: transparent;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
 }
