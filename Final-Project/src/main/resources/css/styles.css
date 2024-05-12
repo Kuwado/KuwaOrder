@@ -1,0 +1,109 @@
+.root {
+    -fx-background-color: #dddddd;
+    -fx-font-size: 18px;
+}
+
+/*----------------------------------------------- Button ---------------------------------------------------------*/
+
+.btn {
+    -fx-background-radius: 18px 0 18px 0;
+    -fx-background-color: none;
+}
+
+.btn:hover {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.confirm-btn {
+    -fx-background-color: blue;
+    -fx-text-fill: orange;
+}
+
+.delete-btn {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+
+
+/* ----------------------------------------------------- Icons -------------------------------------------- */
+
+/* --------------------------------------------------- Frame -----------------------------------------------*/
+
+/* Header */
+#header > * {
+    -fx-border-color: rgba(0, 0, 0, 0.1);;
+    -fx-border-width: 0 0 0 2px;
+    -fx-border-style: solid;
+    -fx-padding: 0 10px 0 10px;
+}
+
+#question {
+    -fx-border-width: 0 0 0 0;
+}
+
+#avatar-bar {
+    -fx-background-radius: 20px;
+}
+
+.avatar-item {
+    -fx-pref-width: 250px;
+    -fx-pref-height: 60px;
+    -fx-background-color: none;
+    -fx-alignment: baseline-left;
+    -fx-padding: 0 0 0 20px;
+}
+
+#avatar-item-first {
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+#avatar-item-first:hover {
+    -fx-border-color: transparent transparent black transparent;
+}
+
+#avatar-item-last {
+    -fx-background-radius: 0 0 20px 20px;
+}
+
+#avatar-item-last:hover {
+    -fx-border-color: black transparent transparent transparent;
+
+}
+
+.avatar-item:hover {
+    -fx-background-color: #34ebcf;
+    -fx-border-color: black transparent black transparent;
+    -fx-border-width: 2px;
+    -fx-font-weight: 700;
+}
+
+#notice {
+    -fx-background-radius: 5px;
+}
+/* Sidebar */
+.sidebar {
+    -fx-background-color: none;
+    -fx-padding: 40px 0 0 0;
+}
+
+.sidebar-btn {
+    -fx-background-color: none;
+    -fx-border: none;
+    -fx-background-radius: none;
+    -fx-text-fill: #fafafa;
+    -fx-pref-width: 240px;
+    -fx-pref-height: 50px;
+    -fx-alignment: baseline-left;
+    -fx-font-weight: 700;
+    -fx-padding: 0 0 0 20px;
+}
+
+.sidebar-btn:hover{
+    -fx-background-color: #146886;
+    -fx-border-color: WHITE;
+    -fx-font-weight: 800;
+    -fx-border-width: 0px 0px 0px 7px;
+}
+
