@@ -114,8 +114,27 @@
     -fx-pref-height: 700px;
 }
 
-#test {
-    -fx-background-radius: 50%;
-    -fx-border-width: 5px ;
-    -fx-border-color: black;
+
+/* Breadcrumb */
+.breadcrumb {
+    -fx-pref-height: 80px;
+}
+
+.breadcrumb-btn, .breadcrumb-btn-first {
+    -fx-background-color: none;
+    -fx-pref-height: 60px;
+    -fx-font-size: 20px;
+}
+
+.breadcrumb-btn:hover {
+    -fx-background-color: white;
+}
+
+.breadcrumb-active {
+    -fx-font-weight: 700;
+}
+
+.breadcrumb-active > .breadcrumb-btn {
+    -fx-border-width: 0 0 3px 0;
+    -fx-border-color: #1f337b;
 }

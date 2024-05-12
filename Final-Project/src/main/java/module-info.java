@@ -18,5 +18,8 @@ module application {
     opens org.example.final_project to javafx.fxml;
     exports application;
     exports org.example.final_project;
+    exports fx;
+    exports fx.make_order;
+    opens fx.make_order to javafx.fxml;
 }
 
