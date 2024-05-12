@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,10 +18,23 @@ import java.net.URL;
 
 public class MainController {
 
-    private static final String IMAGE_PATH = "/images/avatar.jpg";
-    private static final String CONTENT_FXML_PATH = "/view/parts/sidebar/OrderPlacement.fxml";
+    private static final String avatarPath = "/images/avatar.jpg";
+    public String sidebarPath;
+    //= "/view/parts/sidebar/OrderPlacement.fxml";
+    public String contentPath;
     private boolean avatarStatus = false;
 
+    public MainController() {
+
+    }
+
+    public void setSidebarPath(String sidebarPath) {
+        this.sidebarPath = sidebarPath;
+    }
+
+    public void setContentPath(String contentPath) {
+        this.contentPath = contentPath;
+    }
 
     @FXML
     private Circle avatar;
@@ -37,45 +51,56 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        loadAvatar(avatarPath);
+        loadSidebar(sidebarPath);
+        loadContent(contentPath);
+        clickAvatar();
+    }
 
-        // Load và thiết lập hình ảnh cho avatar
+    // Load và thiết lập hình ảnh cho avatar
+    private void loadAvatar(String path) {
         try {
-            URL imageUrl = getClass().getResource(IMAGE_PATH);
+            URL imageUrl = getClass().getResource(path);
             if (imageUrl != null) {
                 Image avatarImage = new Image(imageUrl.toExternalForm());
                 avatar.setFill(new ImagePattern(avatarImage));
                 avatar.setEffect(new DropShadow(25, 0, 2, Color.DARKSEAGREEN));
             } else {
-                System.err.println("Image resource not found: " + IMAGE_PATH);
+                System.err.println("Image resource not found");
             }
         } catch (Exception e) {
             System.err.println("Error loading image: " + e.getMessage());
             e.printStackTrace();
         }
+    }
 
-        // Load và chèn nội dung vào sidebar
+    // Load và chèn nội dung vào sidebar
+    private void loadSidebar(String path) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(CONTENT_FXML_PATH));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             VBox sb = loader.load();
             sidebar.getChildren().add(sb);
         } catch (IOException e) {
-            System.err.println("Error loading content.fxml: " + e.getMessage());
+            System.err.println("Error loading sidebar: " + e.getMessage());
             e.printStackTrace();
         }
+    }
 
-        // Load và chèn nội dung vao content
+    // Load và chèn nội dung vao content
+    private  void loadContent(String path) {
         try {
-            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/content/content.fxml"));
-            Pane con = loader2.load();
+            FXMLLoader loader2 = new FXMLLoader(getClass().getResource(path));
+            AnchorPane con = loader2.load();
             content.getChildren().add(con);
         } catch (IOException e) {
             System.err.println("Error loading content.fxml: " + e.getMessage());
             e.printStackTrace();
         }
+    }
 
-        // Click avatar
+    // Click avatar
+    private void clickAvatar() {
         avatarBar.setTranslateX(300);
-
         avatar.setOnMouseClicked(event -> {
             if (!avatarStatus) {
                 transitionAvatarBar(0,300);
@@ -85,10 +110,10 @@ public class MainController {
                 transitionAvatarBar(300, 0);
                 avatarStatus = false;
             }
-
         });
     }
 
+    // Dịch chuyển thanh avatarbar
     private void transitionAvatarBar(int x, int y) {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
@@ -97,4 +122,7 @@ public class MainController {
         slide.play();
         avatarBar.setTranslateX(y);
     }
+
+
+
 }

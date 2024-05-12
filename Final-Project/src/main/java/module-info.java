@@ -1,4 +1,4 @@
-module org.example.final_project {
+module application {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -14,6 +14,9 @@ module org.example.final_project {
     requires java.desktop;
 
     opens fx to javafx.fxml;
+    opens application to javafx.fxml;
     opens org.example.final_project to javafx.fxml;
+    exports application;
     exports org.example.final_project;
 }
+
