@@ -1,8 +1,5 @@
 package fx;
 
-import java.util.ArrayList;
-
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.DropShadow;
@@ -11,7 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
+import solution.Transition;
 
 import java.io.IOException;
 import java.net.URL;
@@ -110,23 +107,14 @@ public class MainController {
         avatarBar.setTranslateX(300);
         avatar.setOnMouseClicked(event -> {
             if (!avatarStatus) {
-                transitionAvatarBar(0);
+                Transition.transitionXY(avatarBar, 0, 0, 0.4);
                 avatarStatus = true;
             } else {
-                transitionAvatarBar(300);
+                Transition.transitionXY(avatarBar, 300, 0, 0.4);
                 avatarStatus = false;
             }
         });
     }
 
-    // Dịch chuyển thanh avatarbar
-    private void transitionAvatarBar(int x) {
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(0.4));
-        slide.setNode(avatarBar);
-        slide.setToX(x);
-        slide.play();
-        //avatarBar.setTranslateX(y);
-    }
 
 }

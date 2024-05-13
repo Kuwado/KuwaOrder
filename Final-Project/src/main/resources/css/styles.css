@@ -3,28 +3,6 @@
     -fx-font-size: 18px;
 }
 
-/*----------------------------------------------- Button ---------------------------------------------------------*/
-
-.btn {
-    -fx-background-radius: 18px 0 18px 0;
-    -fx-background-color: none;
-}
-
-.btn:hover {
-    -fx-background-color: black;
-    -fx-text-fill: white;
-}
-
-.confirm-btn {
-    -fx-background-color: blue;
-    -fx-text-fill: orange;
-}
-
-.delete-btn {
-    -fx-background-color: red;
-    -fx-text-fill: white;
-}
-
 /* --------------------------------------------------- Frame -----------------------------------------------*/
 
 /* ------------------ Header --------------*/
@@ -206,6 +184,39 @@
     -fx-alignment: center;
 }
 
+/* -------------------------------------------- Pagination ---------------------------------------------*/
+.pagination .button, .pagination .toggle-button {
+    -fx-background-color: #00ccff;
+    -fx-text-fill: black;
+    -fx-font-weight: 600;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 5px;
+}
+
+.pagination .button .right-arrow {
+    -fx-background-color: #1b1b32; /* Áp dụng màu nền đỏ cho mũi tên bên trái */
+}
+
+.pagination .button .left-arrow {
+    -fx-background-color: #1b1b32; /* Áp dụng màu nền đỏ cho mũi tên bên trái */
+}
+
+.pagination .button:hover, .pagination .toggle-button:hover {
+    -fx-background-color: #1f337b;
+    -fx-text-fill: white;
+}
+
+.pagination .toggle-button:selected {
+    -fx-background-color: #1b1b32;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+}
+
+/* Định dạng hộp chứa phân trang */
+.pagination .control-box {
+    -fx-spacing: 7px;
+}
+
 /* ------------------------------------------- Privew Card -------------------------------------------- */
 .preview-card-area {
     -fx-pref-width: 330;
@@ -215,6 +226,9 @@
 .preview-card {
     -fx-background-radius: 50px 0 50px 0;
     -fx-padding: 0 15px 0 15px;
+    -fx-border-radius: 50px 0 50px 0;
+    -fx-border-width: 2px;
+    -fx-border-color: #1b1b32;
 }
 
 .preview-card-name {
@@ -276,4 +290,88 @@
 .preview-card-text {
     -fx-text-fill: #1f337b;
     -fx-font-size: 16px;
+}
+
+/*----------------------------------------------- Button ---------------------------------------------------------*/
+
+.btn {
+    -fx-background-radius: 15px 0 15px 0;
+    -fx-background-color: none;
+}
+
+.border-btn {
+    -fx-border-radius: 15px 0 15px 0;
+    -fx-border-color: #1b1b32;
+    -fx-boreder-width: 2px;
+}
+
+.confirm-btn {
+    -fx-background-color: blue;
+    -fx-text-fill: orange;
+}
+
+.delete-btn {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.view-all-btn {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.view-all-btn:hover {
+    -fx-background-color: #00ccff;
+    -fx-text-fill: black;
+}
+
+.action-button {
+    -fx-background-color: linear-gradient(to right, #d60a3b, #8c2fa1);
+    -fx-text-fill: #fef6f8;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 19px 0 19px 0;
+    -fx-border-radius: 15px 0 15px 0;
+    -fx-border-color: #fef6f8;
+    -fx-border-width: 4px;
+}
+
+.action-button:hover {
+    -fx-text-fill: #c42174;
+    -fx-background-color: #fef6f8;
+    -fx-border-color: #c42174;
+}
+
+.quick-button {
+    -fx-background-color: linear-gradient(to right, #fba710, #fed201);
+    -fx-text-fill: #1b1b32;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 19px 0 19px 0;
+    -fx-border-radius: 15px 0 15px 0;
+    -fx-border-color: #fef6f8;
+    -fx-border-width: 4px;
+}
+
+.quick-button:hover {
+    -fx-text-fill: #febf08;
+    -fx-background-color: #1b1b32;
+}
+
+.option-btn-active {
+    -fx-text-fill: #00ccff;
+    -fx-background-color: #1b337f;
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;
+    -fx-border-color: #fafafa;
+}
+
+.option-btn:hover {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;
+    -fx-background-color: #1b1b32;
+    -fx-border-color: #ffffff;
 }
