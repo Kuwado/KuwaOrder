@@ -3,7 +3,9 @@ package fx.make_order;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import model.Order;
 import model.Request;
 import solution.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RequestListController {
@@ -34,9 +37,18 @@ public class RequestListController {
     Request request2 = new Request(2, "Dat hang 2", 2, "11/05/2024", "Doing", orders2, "Chọn Site xịn xịn nhé");
     Request request3 = new Request(3, "Dat hang 3", 3, "10/05/2024", "Doing", orders3, "Hau quá");
     Request request4 = new Request(4, "Dat hang 4", 4, "12/05/2024", "Doing", orders4, "kakaka");
+    Request request10 = new Request(10, "Dat hang 1", 3, "12/05/2024", "Doing", orders1, "Mô tả công việc");
+    Request request12 = new Request(12, "Dat hang 2", 2, "11/05/2024", "Doing", orders2, "Chọn Site xịn xịn nhé");
+    Request request9 = new Request(9, "Dat hang 3", 3, "10/05/2024", "Doing", orders3, "Hau quá");
+    Request request11 = new Request(11, "Dat hang 4", 4, "12/05/2024", "Doing", orders4, "kakaka");
+    Request request8 = new Request(8, "Dat hang 1", 3, "12/05/2024", "Doing", orders1, "Mô tả công việc");
+    Request request7 = new Request(7, "Dat hang 2", 2, "11/05/2024", "Doing", orders2, "Chọn Site xịn xịn nhé");
+    Request request6 = new Request(6, "Dat hang 3", 3, "10/05/2024", "Doing", orders3, "Hau quá");
+    Request request5 = new Request(5, "Dat hang 4", 4, "12/05/2024", "Doing", orders4, "kakaka");
 
     // Thêm các yêu cầu vào danh sách requests
-    ObservableList<Request> requests = FXCollections.observableArrayList(request1, request2, request3, request4);
+    ObservableList<Request> requests = FXCollections.observableArrayList();
+
 
     private HBox hb;
 
@@ -89,30 +101,60 @@ public class RequestListController {
     private Label previewSendDate;
 
     @FXML
+    private Button viewAll;
+
+    @FXML
+    private Pane hidePagination;
+
+    private boolean viewAllStt = false;
+
+    @FXML
     void initialize() {
+        requests.add(request1);
+        requests.add(request2);
+        requests.add(request3);
+        requests.add(request4);
+        requests.add(request5);
+        requests.add(request6);
+        requests.add(request7);
+        requests.add(request8);
+        requests.add(request9);
+        requests.add(request10);
+        requests.add(request11);
+        requests.add(request12);
+
+        // Breadcrumbs
         MOBreadcrumbController.number = 2;
         MOBreadcrumbController moc = new MOBreadcrumbController();
         moc.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
+        // Thêm dữ liệu vào bảng
+        hidePagination.setVisible(false);
         insertToTable();
-        table.setItems(requests); // Thêm đối tượng Request vào TableView
+        //setPagination(5);
+        Paginator.setPagination(table, pagination, requests, 10);
 
 
+
+
+
+        // Preview card
         AtomicBoolean previewStt = new AtomicBoolean(false);
         previewCard.setTranslateY(800);
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 if (!previewStt.get()) {
-                    transitionPreviewCard(previewCard, 0, 0);
+                    Transition.transitionXY(previewCard, 0, 0, 0.7);
                     previewStt.set(true);
                 }
                 Request res = table.getSelectionModel().getSelectedItem();
                 if (res != null) {
                     insertToPreviewCard(res);
-                    System.out.println("Selected Person: ");
                 }
             }
         });
+
+
 
     }
 
@@ -123,15 +165,7 @@ public class RequestListController {
         send_date.setCellValueFactory(new PropertyValueFactory<Request, String>("send_date")); // Đặt lại tên thuộc tính
         status.setCellValueFactory(new PropertyValueFactory<Request, String>("status"));
         action.setCellValueFactory(new PropertyValueFactory<Request, HBox>("action"));
-    }
-
-    public static void transitionPreviewCard(AnchorPane ap, int x, int y) {
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(0.7));
-        slide.setNode(ap);
-        slide.setToX(x);
-        slide.setToY(y);
-        slide.play();
+        table.setItems(requests);
     }
 
     private void insertToPreviewCard(Request request) {
@@ -159,4 +193,19 @@ public class RequestListController {
         previewCategory.setText(String.valueOf(productList));
     }
 
+    @FXML
+    void viewAll(ActionEvent event) {
+        Button buttonClicked = (Button) event.getSource();
+        if (!viewAllStt) {
+            buttonClicked.setText("Phân trang");
+            hidePagination.setVisible(true);
+            table.setItems(requests);
+
+        } else {
+            buttonClicked.setText("Xem tất cả");
+            hidePagination.setVisible(false);
+            Paginator.setPagination(table, pagination, requests, 10);
+        }
+        viewAllStt = !viewAllStt;
+    }
 }
