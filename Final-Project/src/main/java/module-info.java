@@ -13,6 +13,8 @@ module application {
     requires com.almasb.fxgl.all;
     requires java.desktop;
 
+    opens fx.warehouse to javafx.fxml;
+
     opens fx to javafx.fxml;
     opens application to javafx.fxml;
     opens org.example.final_project to javafx.fxml;
