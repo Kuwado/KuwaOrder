@@ -25,12 +25,9 @@
     -fx-text-fill: white;
 }
 
-
-/* ----------------------------------------------------- Icons -------------------------------------------- */
-
 /* --------------------------------------------------- Frame -----------------------------------------------*/
 
-/* Header */
+/* ------------------ Header --------------*/
 #header > * {
     -fx-border-color: rgba(0, 0, 0, 0.1);;
     -fx-border-width: 0 0 0 2px;
@@ -82,7 +79,7 @@
     -fx-background-radius: 5px;
 }
 
-/* Sidebar */
+/* ------------------------------ Sidebar -----------------------*/
 .sidebar {
     -fx-background-color: none;
     -fx-padding: 40px 0 0 0;
@@ -107,7 +104,7 @@
     -fx-border-width: 0px 0px 0px 7px;
 }
 
-/* Content */
+/* ------------------------- Content ------------------------ */
 #content {
     -fx-pref-width: 1260px;
     -fx-pref-height: 700px;
@@ -138,12 +135,7 @@
     -fx-border-color: #1f337b;
 }
 
-/* Privew Card */
-.preview-card {
-    -fx-background-radius: 25px;
-}
-
-/* Table */
+/* ------------------------------------------------ Table ----------------------------------------------------*/
 
 .table-area {
     -fx-background-color: #ffffff;
@@ -185,20 +177,103 @@
     -fx-background-color: #F7F6FE;
 }
 
+.table-row-cell:hover {
+    -fx-background-color: #1f337b;
+}
+
+.table-row-cell:hover .table-column {
+    -fx-text-fill: white;
+}
+
 .table-row-cell:selected {
     -fx-background-color: #1b1b32;
-    -fx-background-insets: 0;
-    -fx-background-radius: 1;
+}
+
+.table-row-cell:selected .table-column {
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
 }
 
 .tb-col {
-    -fx-alignment: center-left; /* Căn trái */
+    -fx-alignment: center-left;
 }
 
 .tb-col-first {
-    -fx-alignment: center; /* Căn trái */
+    -fx-alignment: center;
 }
 
 .tb-col-first .label {
-    -fx-alignment: center; /* Căn trái */
+    -fx-alignment: center;
+}
+
+/* ------------------------------------------- Privew Card -------------------------------------------- */
+.preview-card-area {
+    -fx-pref-width: 330;
+    -fx-pref-height: 600;
+}
+
+.preview-card {
+    -fx-background-radius: 50px 0 50px 0;
+    -fx-padding: 0 15px 0 15px;
+}
+
+.preview-card-name {
+    -fx-pref-width: 330;
+    -fx-pref-height: 50;
+    -fx-alignment: center;
+}
+
+#preview-card-name {
+    -fx-font-size: 26px;
+    -fx-font-weight: 800;
+    -fx-border-color: #1b1b32;
+    -fx-border-width: 0 0 3px 0;
+    -fx-text-fill: #1f337b;
+}
+
+.preview-card-des, preview-card-table {
+    -fx-min-height: 50px;
+    -fx-max-height: 200px;
+    -fx-padding: 10px 0 0 0;
+}
+
+.preview-card-title {
+    -fx-text-fill: #1f337b;
+    -fx-font-size: 19px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-underline: true;
+}
+
+#preview-card-des {
+    -fx-min-height: 50px;
+    -fx-max-height: 200px;
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+    -fx-font-size: 16px;
+    -fx-text-fill: #1f337b;
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+    -fx-wrap-text: true;
+    -fx-viewport-border: transparent;
+}
+
+#preview-card-des .content {
+    -fx-background-color: transparent;
+}
+
+#preview-card-des .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+#preview-card-des .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.preview-card-text {
+    -fx-text-fill: #1f337b;
+    -fx-font-size: 16px;
 }

@@ -110,23 +110,23 @@ public class MainController {
         avatarBar.setTranslateX(300);
         avatar.setOnMouseClicked(event -> {
             if (!avatarStatus) {
-                transitionAvatarBar(0, 300);
+                transitionAvatarBar(0);
                 avatarStatus = true;
             } else {
-                transitionAvatarBar(300, 0);
+                transitionAvatarBar(300);
                 avatarStatus = false;
             }
         });
     }
 
     // Dịch chuyển thanh avatarbar
-    private void transitionAvatarBar(int x, int y) {
+    private void transitionAvatarBar(int x) {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(avatarBar);
         slide.setToX(x);
         slide.play();
-        avatarBar.setTranslateX(y);
+        //avatarBar.setTranslateX(y);
     }
 
 }
