@@ -44,18 +44,18 @@
                         <Insets left="50.0" />
                      </padding>
                   </HBox>
-                  <TableView fx:id="table" prefHeight="410.0" prefWidth="760.0" styleClass="tb">
-                     <columns>
-                        <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
-                        <TableColumn fx:id="name" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" styleClass="tb-col" text="Tên yêu cầu đặt hàng" />
-                        <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL đơn" />
-                        <TableColumn fx:id="send_date" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="tb-col" text="Ngày gửi" />
-                        <TableColumn fx:id="status" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="tb-col" text="Trạng thái" />
-                        <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="HĐ" />
-                     </columns>
-                  </TableView>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
+                  <VBox alignment="CENTER" prefHeight="510.0" prefWidth="760.0">
                      <children>
+                        <TableView fx:id="table" prefHeight="410.0" prefWidth="760.0" styleClass="tb">
+                           <columns>
+                              <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
+                              <TableColumn fx:id="name" maxWidth="270.0" minWidth="270.0" prefWidth="270.0" styleClass="tb-col" text="Tên yêu cầu đặt hàng" />
+                              <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL đơn" />
+                              <TableColumn fx:id="send_date" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Ngày gửi" />
+                              <TableColumn fx:id="status" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="tb-col" text="Trạng thái" />
+                              <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="HĐ" />
+                           </columns>
+                        </TableView>
                         <Pagination fx:id="pagination" maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
                      </children>
                   </VBox>
