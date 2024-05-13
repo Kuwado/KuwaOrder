@@ -24,7 +24,6 @@ public class DateConverter {
 
             return formattedDate;
         } catch (ParseException e) {
-            // Xảy ra lỗi khi không thể chuyển đổi ngày tháng từ chuỗi đầu vào
             System.err.println("Error parsing date: " + e.getMessage());
             return null;
         }

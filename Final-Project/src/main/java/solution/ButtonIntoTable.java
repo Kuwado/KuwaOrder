@@ -1,4 +1,4 @@
-package fx.other;
+package solution;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;

@@ -1,6 +1,5 @@
 package fx.make_order;
 
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,16 +8,14 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.fxml.FXML;
-import javafx.util.Duration;
 
 import model.Order;
 import model.Request;
 import solution.*;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class RequestListController {
+public class MORequestListController {
 
     // Khởi tạo các đơn hàng (Order)
     Order order1 = new Order(1, 5, 20, "cái", "15/05/2024", "Chưa tạo", "Tivi");
