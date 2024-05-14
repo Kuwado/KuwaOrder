@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.warehouse.WaitIntoWHListController">
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.warehouse.WaitIntoWHListController">
     <children>
         <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
@@ -46,9 +51,9 @@
                                 <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
                                 <TableColumn fx:id="maDonHang" maxWidth="250.0" minWidth="167.1999969482422" prefWidth="195.99998474121094" styleClass="tb-col" text="Mã đơn hàng" />
                                 <TableColumn fx:id="site" maxWidth="153.60003662109375" minWidth="70.0" prefWidth="100.0" styleClass="tb-col" text="Site" />
-                                <TableColumn fx:id="ngayNhanHang" maxWidth="176.0" minWidth="150.0" prefWidth="176.0" styleClass="tb-col" text="Ngày nhận hàng" />
-                                <TableColumn fx:id="trangThai" maxWidth="125.0" minWidth="111.2000732421875" prefWidth="120.0" styleClass="tb-col" text="Trạng thái" />
-                                <TableColumn fx:id="action" maxWidth="114.39990234375" minWidth="100.0" prefWidth="106.4000244140625" styleClass="tb-col" text="Hành Động" />
+                                <TableColumn fx:id="ngayNhanHang" maxWidth="501.0" minWidth="150.0" prefWidth="359.0" styleClass="tb-col" text="Ngày nhận hàng" />
+                                <TableColumn fx:id="trangThai" maxWidth="484.0" minWidth="111.2000732421875" prefWidth="301.0" styleClass="tb-col" text="Trạng thái" />
+                                <TableColumn fx:id="action" maxWidth="528.0" minWidth="100.0" prefWidth="164.0" styleClass="tb-col" text="Hành Động" />
                             </columns>
                         </TableView>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
