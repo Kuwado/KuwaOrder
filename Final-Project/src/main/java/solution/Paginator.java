@@ -2,24 +2,25 @@ package solution;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
 import javafx.scene.control.Pagination;
-
+import javafx.scene.control.TableView;
+import model.DataInterface;
+import model.Order;
 import model.Request;
 
 import java.util.List;
 
 public class Paginator {
-    public static void setPagination(TableView table, Pagination pagination, ObservableList<Request> requests, int number) {
-        int totalPages = (requests.size() + number - 1) / number;
+
+    public static <T extends DataInterface> void setPagination(TableView<T> table, Pagination pagination, ObservableList<T> items, int number) {
+        int totalPages = (items.size() + number - 1) / number;
         pagination.setPageCount(totalPages);
         pagination.setPageFactory(pageIndex -> {
             int fromIndex = pageIndex * number;
-            int toIndex = Math.min(fromIndex + number, requests.size());
-            List<Request> subList = requests.subList(fromIndex, toIndex);
-            ObservableList<Request> currentPageRequests = FXCollections.observableArrayList(subList);
-            //table.getItems().clear();
-            table.setItems(currentPageRequests);
+            int toIndex = Math.min(fromIndex + number, items.size());
+            List<T> subList = items.subList(fromIndex, toIndex);
+            ObservableList<T> currentPageItems = FXCollections.observableArrayList(subList);
+            table.setItems(currentPageItems);
             return table;
         });
     }

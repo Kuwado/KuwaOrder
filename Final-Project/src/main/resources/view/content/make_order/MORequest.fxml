@@ -23,6 +23,11 @@
       <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
          <children>
+            <Pane layoutX="930.4" layoutY="11.2" prefHeight="90.0" prefWidth="330.0" styleClass="bg-title-bab" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label fx:id="requestName" layoutX="65.0" layoutY="29.0" maxHeight="32.0" maxWidth="200.0" prefHeight="32.0" prefWidth="200.0" styleClass="title-bab" text="Request cua Hoan" />
+               </children>
+            </Pane>
             <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="590.0" prefWidth="800.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
@@ -77,7 +82,7 @@
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor></Pagination>
-                        <Pane fx:id="hidePagination" layoutX="142.0" layoutY="451.0" prefHeight="68.0" prefWidth="474.0" style="-fx-background-color: none;" />
+                        <Pane fx:id="hidePagination" layoutX="142.0" layoutY="460.0" prefHeight="63.0" prefWidth="474.0" style="-fx-background-color: white;" />
                      </children>
                   </Pane>
                </children>
@@ -90,11 +95,6 @@
             </VBox>
             <AnchorPane fx:id="previewCard" layoutX="656.0" layoutY="4.0" styleClass="preview-card-area" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <Pane layoutX="9.0" layoutY="20.0" prefHeight="90.0" prefWidth="330.0" styleClass="bg-title-bab" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-                     <children>
-                        <Label fx:id="requestName" layoutX="65.0" layoutY="29.0" maxHeight="32.0" maxWidth="200.0" prefHeight="32.0" prefWidth="200.0" styleClass="title-bab" text="Request cua Hoan" />
-                     </children>
-                  </Pane>
                   <VBox fx:id="previewContent" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: #00ccff;" styleClass="preview-card" AnchorPane.topAnchor="150.0">
                      <children>
                         <HBox alignment="CENTER" styleClass="preview-card-name">
@@ -124,7 +124,11 @@
                               <Insets top="10.0" />
                            </padding>
                            <children>
-                              <Label styleClass="preview-card-title" text="Tổng quan:" />
+                              <Label text="Tổng quan:">
+                                 <styleClass>
+                                    <String fx:value="preview-card-title" />
+                                    <String fx:value="under-line" />
+                                 </styleClass></Label>
                               <HBox alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
                                     <Label styleClass="preview-card-text" text="- Số lượng:">
@@ -163,7 +167,7 @@
                               <Insets top="10.0" />
                            </padding>
                            <children>
-                              <Button fx:id="quickMakeOrder" mnemonicParsing="false" styleClass="quick-button" text="Tạo đơn nhanh" />
+                              <Button fx:id="quickMakeOrderBtn" mnemonicParsing="false" styleClass="quick-button" text="Tạo đơn nhanh" />
                            </children>
                         </HBox>
                      </children>

@@ -13,9 +13,10 @@ import model.Order;
 import model.Request;
 import solution.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MORequestListController {
+public class MORequestListController extends MOController<Request>{
 
     // Khởi tạo các đơn hàng (Order)
     Order order1 = new Order(1, 5, 20, "cái", "15/05/2024", "Chưa tạo", "Tivi");
@@ -46,12 +47,6 @@ public class MORequestListController {
     // Thêm các yêu cầu vào danh sách requests
     ObservableList<Request> requests = FXCollections.observableArrayList();
 
-
-    private HBox hb;
-
-    @FXML
-    private HBox breadcrumb;
-
     @FXML
     private TableView<Request> table;
 
@@ -74,16 +69,8 @@ public class MORequestListController {
     private TableColumn<Request, HBox> action;
 
     @FXML
-    private Pagination pagination;
-
-    @FXML
-    private AnchorPane previewCard;
-
-    @FXML
     private TextArea previewCategory;
 
-    @FXML
-    private VBox previewContent;
 
     @FXML
     private TextArea previewDes;
@@ -97,13 +84,6 @@ public class MORequestListController {
     @FXML
     private Label previewSendDate;
 
-    @FXML
-    private Button viewAll;
-
-    @FXML
-    private Pane hidePagination;
-
-    private boolean viewAllStt = false;
 
     @FXML
     void initialize() {
@@ -121,41 +101,17 @@ public class MORequestListController {
         requests.add(request12);
 
         // Breadcrumbs
-        MOBreadcrumbController.number = 2;
-        MOBreadcrumbController moc = new MOBreadcrumbController();
-        moc.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/MakeOrder.fxml");
+        setBreadcrumb(2);
 
         // Thêm dữ liệu vào bảng
-        hidePagination.setVisible(false);
-        insertToTable();
-        //setPagination(5);
-        Paginator.setPagination(table, pagination, requests, 10);
-
-
-
-
+        startTable(table, requests);
 
         // Preview card
-        AtomicBoolean previewStt = new AtomicBoolean(false);
-        previewCard.setTranslateY(800);
-        table.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                if (!previewStt.get()) {
-                    Transition.transitionXY(previewCard, 0, 0, 0.7);
-                    previewStt.set(true);
-                }
-                Request res = table.getSelectionModel().getSelectedItem();
-                if (res != null) {
-                    insertToPreviewCard(res);
-                }
-            }
-        });
-
-
-
+        makeAppearPreviewCard(table);
     }
 
-    private void insertToTable() {
+    @Override
+    public void insertToTable() {
         id.setCellValueFactory(new PropertyValueFactory<Request, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Request, String>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<Request, Integer>("order_quantity")); // Đặt lại tên thuộc tính
@@ -165,9 +121,10 @@ public class MORequestListController {
         table.setItems(requests);
     }
 
-    private void insertToPreviewCard(Request request) {
+    @Override
+    public void insertToPreviewCard(Request request) {
         StringBuilder productList = new StringBuilder();
-        ObservableList<Order> orders = request.getOrders();
+        List<Order> orders = request.getOrders();
         String[] dates = new String[orders.size()];
         for (int i = 0; i < orders.size(); i++) {
             dates[i] = orders.get(i).getDesired_date();
@@ -192,17 +149,6 @@ public class MORequestListController {
 
     @FXML
     void viewAll(ActionEvent event) {
-        Button buttonClicked = (Button) event.getSource();
-        if (!viewAllStt) {
-            buttonClicked.setText("Phân trang");
-            hidePagination.setVisible(true);
-            table.setItems(requests);
-
-        } else {
-            buttonClicked.setText("Xem tất cả");
-            hidePagination.setVisible(false);
-            Paginator.setPagination(table, pagination, requests, 10);
-        }
-        viewAllStt = !viewAllStt;
+        viewAllTable(table, requests);
     }
 }

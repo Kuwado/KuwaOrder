@@ -15,6 +15,14 @@
     -fx-background-color: transparent;
 }
 
+.number-input:hover {
+    -fx-text-fill: white;
+}
+
+.number-input:selected {
+    -fx-text-fill: white;
+}
+
 #number-input {
     -fx-border-color: #1b1b32;
     -fx-border-width: 0 0 2px 0;
