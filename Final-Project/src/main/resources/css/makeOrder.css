@@ -1,0 +1,21 @@
+.bg-title-bab {
+    -fx-background-image: url("../images/background/pg-title-black-and-blue-mini.png");
+    -fx-background-size: cover; /* Phủ kín khu vực nút */
+    -fx-background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+    -fx-background-position: center; /* Canh giữa hình ảnh */
+}
+
+.title-bab {
+    -fx-font-size: 22px;
+    -fx-text-fill: #fafafa;
+    -fx-font-weight: bold;
+}
+
+.number-input {
+    -fx-background-color: transparent;
+}
+
+#number-input {
+    -fx-border-color: #1b1b32;
+    -fx-border-width: 0 0 2px 0;
+}
