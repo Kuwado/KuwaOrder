@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.make_order.RequestListController">
+   <children>
+      <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+         <children>
+            <Button mnemonicParsing="false" text="Chọn mặt hàng" AnchorPane.leftAnchor="1070.0" AnchorPane.topAnchor="300.0" />
+            <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="580.0" prefWidth="1000.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="table" prefHeight="410.0" prefWidth="760.0" styleClass="tb">
+                     <columns>
+                        <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
+                        <TableColumn fx:id="name" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="tb-col" text="Mã hàng" />
+                        <TableColumn fx:id="name1" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" styleClass="tb-col" text="Tên mặt hàng" />
+                        <TableColumn fx:id="quantity" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="Số lượng" />
+                        <TableColumn fx:id="send_date" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="Đơn vị" />
+                        <TableColumn fx:id="status" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" styleClass="tb-col" text="Ngày nhận hàng mong muốn" />
+                     </columns>
+                  </TableView>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Quay lại">
+                                 <HBox.margin>
+                                    <Insets left="300.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" text="Tạo">
+                                 <HBox.margin>
+                                    <Insets left="300.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Pagination fx:id="pagination" maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
