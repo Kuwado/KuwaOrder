@@ -14,7 +14,7 @@ public class HoanApplication extends Application {
     public void start(Stage stage) throws IOException {
         MainController mc = new MainController();
         mc.setSidebarPath("/view/parts/sidebar/OrderPlacement.fxml");
-        mc.setContentPath("/view/content/make_order/MORequest.fxml");
+        mc.setContentPath("/view/content/make_order/MORequestList.fxml");
         mc.setAvatarPath("/images/avatar.jpg");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);

@@ -292,11 +292,19 @@
     -fx-font-size: 16px;
 }
 
-/*----------------------------------------------- Button ---------------------------------------------------------*/
+/* ---------------------------------------------- Pop-up ---------------------------------------------------------*/
+.popup-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #fafafa;
+    -fx-font-weight: 700;
+}
 
+
+/*----------------------------------------------- Button ---------------------------------------------------------*/
 .btn {
     -fx-background-radius: 15px 0 15px 0;
     -fx-background-color: none;
+    -fx-padding: 5px 10px 5px 10px;
 }
 
 .border-btn {
@@ -306,8 +314,14 @@
 }
 
 .confirm-btn {
-    -fx-background-color: blue;
-    -fx-text-fill: orange;
+    -fx-background-color: #1f337b;
+    -fx-text-fill: #fafafa;
+    -fx-font-weight: 700;
+}
+
+.confirm-btn:hover {
+    -fx-background-color: #00ccff;
+    -fx-text-fill: #1f337b;
 }
 
 .delete-btn {
