@@ -14,7 +14,7 @@ public class ChosenSite implements DataInterface {
     private int ship_date;
     private int air_date;
     private int sold_quantity;
-    private TextField action;
+    private HBox action;
 
     public ChosenSite(int id, String name, int quantity, String unit, int ship_date, int air_date, int sold_quantity) {
         this.id = id;
@@ -61,7 +61,7 @@ public class ChosenSite implements DataInterface {
         return sold_quantity;
     }
 
-    public TextField getAction() {
+    public HBox getAction() {
         return action;
     }
 }

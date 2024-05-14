@@ -43,7 +43,7 @@ public class MOOrderController extends MOController<ChosenSite> {
     private TableColumn<ChosenSite, Integer> airDate;
 
     @FXML
-    private TableColumn<ChosenSite, TextField> numberInput;
+    private TableColumn<ChosenSite, HBox> numberInput;
 
     @FXML
     private Label productName;

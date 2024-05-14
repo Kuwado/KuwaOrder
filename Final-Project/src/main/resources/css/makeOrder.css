@@ -19,8 +19,9 @@
     -fx-text-fill: white;
 }
 
-.number-input:selected {
+.table-row-cell:selected .table-column .number-input {
     -fx-text-fill: white;
+    -fx-font-weight: 700;
 }
 
 #number-input {
