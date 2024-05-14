@@ -14,6 +14,7 @@ module application {
     requires java.desktop;
 
     opens fx.warehouse to javafx.fxml;
+    opens fx.order to javafx.fxml;
 
     opens fx to javafx.fxml;
     opens application to javafx.fxml;
