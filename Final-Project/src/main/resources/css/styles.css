@@ -96,6 +96,17 @@
     -fx-font-weight: 700;
     -fx-padding: 0 0 0 20px;
 }
+.user-btn {
+    -fx-background-color: none;
+    -fx-border: none;
+    -fx-background-radius: none;
+    -fx-text-fill: #fafafa;
+    -fx-pref-width: 240px;
+    -fx-pref-height: 50px;
+    -fx-alignment: baseline-left;
+    -fx-font-weight: 700;
+    -fx-padding: 0 0 0 20px;
+}
 
 .sidebar-btn:hover {
     -fx-background-color: #146886;
