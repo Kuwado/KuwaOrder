@@ -76,7 +76,7 @@
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor></Pagination>
-                        <Pane fx:id="hidePagination" layoutX="142.0" layoutY="451.0" prefHeight="68.0" prefWidth="474.0" style="-fx-background-color: none;" />
+                        <Pane fx:id="hidePagination" layoutX="142.0" layoutY="460.0" prefHeight="59.0" prefWidth="474.0" style="-fx-background-color: white;" />
                      </children>
                   </Pane>
                </children>

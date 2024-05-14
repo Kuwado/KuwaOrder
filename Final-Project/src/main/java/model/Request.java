@@ -7,18 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.util.List;
 
-public class Request {
+public class Request implements DataInterface{
     public int id;
     public String name;
     public int order_quantity;
     public String send_date;
     public String status;
-    public ObservableList<Order> orders = FXCollections.observableArrayList();
+    public List<Order> orders;
     public String description;
     public HBox action;
 
-    public Request(int id, String name, int order_quantity, String send_date, String status, ObservableList<Order> orders, String description) {
+    public Request(int id, String name, int order_quantity, String send_date, String status, List<Order> orders, String description) {
         this.id = id;
         this.name = name;
         this.order_quantity = order_quantity;
@@ -35,8 +36,6 @@ public class Request {
         };
 
     }
-
-
 
     public int getId() {
         return id;
@@ -58,7 +57,7 @@ public class Request {
         return status;
     }
 
-    public ObservableList<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 

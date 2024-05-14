@@ -3,6 +3,35 @@
     -fx-font-size: 18px;
 }
 
+/* ---------------------------------------------- Font size ----------------------------------------------*/
+.font-size-16 {
+    -fx-font-size: 16px !important;
+}
+
+.font-size-14 {
+    -fx-font-size: 14px !important;
+}
+
+.font-size-18 {
+    -fx-font-size: 18px !important;
+}
+
+.font-size-20 {
+    -fx-font-size: 20px !important;
+}
+
+.font-size-22 {
+    -fx-font-size: 22px !important;
+}
+
+.font-size-26 {
+    -fx-font-size: 26px !important;
+}
+
+.font-size-24 {
+    -fx-font-size: 24px !important;
+}
+
 /* --------------------------------------------------- Frame -----------------------------------------------*/
 
 /* ------------------ Header --------------*/
@@ -256,7 +285,7 @@
     -fx-font-size: 19px;
     -fx-font-style: italic;
     -fx-font-weight: bold;
-    -fx-underline: true;
+   /* -fx-underline: true;*/
 }
 
 #preview-card-des {
@@ -304,7 +333,7 @@
 .btn {
     -fx-background-radius: 15px 0 15px 0;
     -fx-background-color: none;
-    -fx-padding: 5px 10px 5px 10px;
+    -fx-padding: 8px 20px;
 }
 
 .border-btn {
@@ -322,6 +351,17 @@
 .confirm-btn:hover {
     -fx-background-color: #00ccff;
     -fx-text-fill: #1f337b;
+}
+
+.cancel-btn {
+    -fx-background-color: #a34824;
+    -fx-text-fill: #fafafa;
+    -fx-font-weight: 700;
+}
+
+.cancel-btn:hover {
+    -fx-background-color: #00ccff;
+    -fx-text-fill: #a34824;
 }
 
 .delete-btn {
@@ -342,7 +382,6 @@
 .action-button {
     -fx-background-color: linear-gradient(to right, #d60a3b, #8c2fa1);
     -fx-text-fill: #fef6f8;
-    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-padding: 10px 20px;
     -fx-background-radius: 19px 0 19px 0;
@@ -360,7 +399,6 @@
 .quick-button {
     -fx-background-color: linear-gradient(to right, #fba710, #fed201);
     -fx-text-fill: #1b1b32;
-    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-padding: 10px 20px;
     -fx-background-radius: 19px 0 19px 0;
@@ -378,7 +416,6 @@
     -fx-text-fill: #00ccff;
     -fx-background-color: #1b337f;
     -fx-font-weight: 700;
-    -fx-font-size: 16px;
     -fx-border-color: #fafafa;
 }
 
@@ -388,4 +425,23 @@
     -fx-font-size: 16px;
     -fx-background-color: #1b1b32;
     -fx-border-color: #ffffff;
+}
+
+/* ------------------------------------------- Other -------------------------------------------------*/
+.line-bottom {
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: rgba(27, 27, 50, 0.3);;
+
+}
+
+.under-line {
+    -fx-underline: true;
+}
+
+.text-wrap {
+    -fx-wrap-text: true;
+}
+
+.text-fill-white {
+    -fx-text-fill: white;
 }

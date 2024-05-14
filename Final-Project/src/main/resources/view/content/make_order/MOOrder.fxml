@@ -18,11 +18,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.make_order.MOOrdertController">
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.make_order.MOOrderController">
    <children>
       <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
          <children>
+            <Pane prefHeight="90.0" prefWidth="330.0" styleClass="bg-title-bab" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label fx:id="productName" layoutX="65.0" layoutY="29.0" maxHeight="32.0" maxWidth="200.0" prefHeight="32.0" prefWidth="200.0" styleClass="title-bab" text="Điện thoại Nokia" />
+               </children>
+            </Pane>
             <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="590.0" prefWidth="800.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
@@ -77,7 +82,7 @@
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor></Pagination>
-                        <Pane fx:id="hidePagination" layoutX="142.0" layoutY="451.0" prefHeight="68.0" prefWidth="474.0" style="-fx-background-color: none;" />
+                        <Pane fx:id="hidePagination" layoutX="142.0" layoutY="459.0" prefHeight="60.0" prefWidth="474.0" style="-fx-background-color: white;" />
                      </children>
                   </Pane>
                </children>
@@ -90,11 +95,6 @@
             </VBox>
             <AnchorPane fx:id="previewCard" layoutX="656.0" layoutY="4.0" styleClass="preview-card-area" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <Pane layoutX="9.0" layoutY="20.0" prefHeight="90.0" prefWidth="330.0" styleClass="bg-title-bab" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-                     <children>
-                        <Label fx:id="requestName" layoutX="65.0" layoutY="29.0" maxHeight="32.0" maxWidth="200.0" prefHeight="32.0" prefWidth="200.0" styleClass="title-bab" text="Điện thoại Nokia" />
-                     </children>
-                  </Pane>
                   <VBox fx:id="previewContent" prefHeight="350.0" prefWidth="330.0" style="-fx-background-color: #00ccff;" styleClass="preview-card" AnchorPane.topAnchor="150.0">
                      <children>
                         <HBox alignment="CENTER" styleClass="preview-card-name">
@@ -102,7 +102,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                            <children>
-                              <Label id="preview-card-name" fx:id="stieName" text="Kiki Para Shop" />
+                              <Label id="preview-card-name" fx:id="siteNameCard" text="Kiki Para Shop" />
                            </children>
                         </HBox>
                         <VBox prefHeight="60.0" prefWidth="297.0" styleClass="preview-card-table">
@@ -112,7 +112,11 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
-                                    <Label fx:id="airBtn" styleClass="preview-card-title" text="Số lượng đã bán:" />
+                                    <Label text="Số lượng đã bán:">
+                                       <styleClass>
+                                          <String fx:value="preview-card-title" />
+                                          <String fx:value="under-line" />
+                                       </styleClass></Label>
                                     <Label fx:id="soldQuantity" styleClass="preview-card-text" text="5">
                                        <HBox.margin>
                                           <Insets left="10.0" />
@@ -143,19 +147,21 @@
                                         <Button fx:id="shipBtn" mnemonicParsing="false" prefHeight="46.0" prefWidth="125.0" text="Đường thủy">
                                              <styleClass>
                                                 <String fx:value="btn" />
+                                                <String fx:value="font-size-14" />
                                                 <String fx:value="border-btn" />
                                                 <String fx:value="option-btn" />
                                                 <String fx:value="option-btn-active" />
                                              </styleClass>
                                              <font>
-                                                <Font size="16.0" />
+                                                <Font size="14.0" />
                                              </font>
                                           </Button>
-                                          <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Hàng không">
+                                          <Button fx:id="airBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Hàng không">
                                              <styleClass>
                                                 <String fx:value="border-btn" />
                                                 <String fx:value="btn" />
                                                 <String fx:value="option-btn" />
+                                                <String fx:value="font-size-14" />
                                              </styleClass>
                                              <font>
                                                 <Font size="16.0" />
@@ -177,7 +183,7 @@
                                     <Font name="System Bold Italic" size="5.0" />
                                  </font>
                               </Label>
-                              <TextField id="number-input" prefHeight="40.0" prefWidth="100.0" styleClass="number-input">
+                              <TextField id="number-input" fx:id="cardNumberInput" prefHeight="40.0" prefWidth="100.0" styleClass="number-input">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -193,7 +199,7 @@
                   </ImageView>
                   <HBox alignment="CENTER" layoutX="-2.0" layoutY="527.0" prefWidth="330.0" AnchorPane.bottomAnchor="20.0">
                      <children>
-                        <Button fx:id="quickMakeOrder" mnemonicParsing="false" styleClass="action-button" text="Tạo đơn" />
+                        <Button fx:id="makeOrderBtn" mnemonicParsing="false" styleClass="action-button" text="Tạo đơn" />
                      </children>
                   </HBox>
                </children>
