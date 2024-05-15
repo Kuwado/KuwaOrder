@@ -84,9 +84,9 @@
                         </Pane>
                         <TableView fx:id="detailTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="221.0" prefWidth="432.0" styleClass="tb">
                           <columns>
-                            <TableColumn prefWidth="209.0" styleClass="table-header" text="Tên sản phẩm" />
-                            <TableColumn prefWidth="75.0" styleClass="table-header" text="Đơn vị" />
-                              <TableColumn prefWidth="105.0" styleClass="table-header" text="Số lượng" />
+                            <TableColumn fx:id="productNameColumn" prefWidth="209.0" styleClass="table-header" text="Tên sản phẩm" />
+                              <TableColumn fx:id="quantityColumn" prefWidth="105.0" styleClass="table-header" text="Số lượng" />
+                            <TableColumn fx:id="unitColumn" prefWidth="75.0" styleClass="table-header" text="Đơn vị" />
                           </columns>
                            <padding>
                               <Insets top="10.0" />
