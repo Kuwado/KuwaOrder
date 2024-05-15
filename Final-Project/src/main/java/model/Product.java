@@ -18,6 +18,39 @@ public class Product {
         this.discount_price = discount_price;
         this.category = category;
     }
+
+    public Product(String name, String image) {
+        this.name = name;
+        this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getDiscount_price() {
+        return discount_price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
 }
 
 

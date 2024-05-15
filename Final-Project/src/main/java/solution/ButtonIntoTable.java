@@ -30,7 +30,7 @@ public class ButtonIntoTable {
 
     public static void actionView(HBox hb) {
         try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/button_into_table/view.fxml"));
+            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
             hb = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());

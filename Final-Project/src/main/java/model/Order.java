@@ -27,7 +27,7 @@ public class Order implements DataInterface {
         this.status = status;
         this.product_name = product_name;
         try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/button_into_table/view.fxml"));
+            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());
@@ -45,7 +45,7 @@ public class Order implements DataInterface {
         this.status = status;
         this.note = note;
         try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/button_into_table/view.fxml"));
+            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());
