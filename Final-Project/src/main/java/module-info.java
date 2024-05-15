@@ -30,5 +30,8 @@ module application {
     opens fx.site to javafx.fxml;
     exports fx.sale to javafx.fxml;
     opens fx.sale to javafx.fxml;
+    opens fx.product to javafx.fxml;
+    exports fx.product;
+
 }
 

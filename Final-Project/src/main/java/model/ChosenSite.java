@@ -1,8 +1,6 @@
 package model;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import solution.ButtonIntoTable;
 
 import java.io.IOException;
 
@@ -25,7 +23,7 @@ public class ChosenSite implements DataInterface {
         this.air_date = air_date;
         this.sold_quantity = sold_quantity;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/button_into_table/MOText.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insert_items/MOText.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());

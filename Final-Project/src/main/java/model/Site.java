@@ -29,7 +29,7 @@ public class Site implements DataInterface{
         this.sold_quantity = sold_quantity;
         this.products = products;
         try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/button_into_table/MOText.fxml"));
+            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/MOText.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());

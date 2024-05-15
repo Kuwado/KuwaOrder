@@ -1,8 +1,6 @@
 package model;
 
 import solution.ButtonIntoTable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 
@@ -28,7 +26,7 @@ public class Request implements DataInterface{
         this.description = description;
         this.orders = orders;
         try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/button_into_table/view.fxml"));
+            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());

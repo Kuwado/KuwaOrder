@@ -28,3 +28,56 @@
     -fx-border-color: #1b1b32;
     -fx-border-width: 0 0 2px 0;
 }
+
+/* ------------------------------------- Choose Product --------------------------------------------*/
+.preview-product {
+    -fx-background-radius: 50px 0 50px 0;
+
+}
+
+.mini-card-product {
+    -fx-background-radius: 40 0;
+    -fx-background-color: white;
+}
+
+.list-product {
+    -fx-background-color: transparent;
+}
+
+.product-card-item {
+    -fx-background-color: none;
+}
+
+.cp-search-box {
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 30 0 30 0;
+}
+
+.cp-search-btn {
+    -fx-background-color: #1b337f;
+    -fx-background-radius: 20 0 20 0;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.cp-search-btn:hover {
+    -fx-background-color: #00ccff;
+    -fx-text-fill: #1b337f;
+}
+
+.cp-content {
+    -fx-background-radius: 40 0;
+}
+
+.cp-product-name {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.pc-name-area {
+    -fx-background-radius: 30 0;
+    -fx-background-color: #1b337f;
+    -fx-padding: 8 10;
+}
+

@@ -5,8 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
 import model.DataInterface;
-import model.Order;
-import model.Request;
 
 import java.util.List;
 

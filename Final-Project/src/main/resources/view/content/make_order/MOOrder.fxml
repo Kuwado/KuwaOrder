@@ -70,7 +70,7 @@
                         <TableView fx:id="table" layoutY="-9.0" prefWidth="760.0" styleClass="tb">
                            <columns>
                               <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
-                              <TableColumn fx:id="siteName" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Tên Site" />
+                              <TableColumn fx:id="siteName" maxWidth="195.0" minWidth="195.0" prefWidth="195.0" styleClass="tb-col" text="Tên Site" />
                               <TableColumn fx:id="siteQuantity" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" styleClass="tb-col" text="SL kho" />
                               <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Đơn vị" />
                               <TableColumn fx:id="shipDate" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" styleClass="tb-col" text="Đường thủy" />

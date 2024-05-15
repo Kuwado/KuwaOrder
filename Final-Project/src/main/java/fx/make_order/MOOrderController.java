@@ -133,6 +133,7 @@ public class MOOrderController extends MOController<ChosenSite> {
                 if (siteProduct.getProduct_name().equals(order.getProduct_name())){
                     ChosenSite chosensite = new ChosenSite(i, site.getName(), siteProduct.getQuantity(), order.getUnit(), site.getShip_date(), site.getAir_date(), siteProduct.getSold_quantity());
                     sites.add(chosensite);
+                    i++;
                     break;
                 }
             }
