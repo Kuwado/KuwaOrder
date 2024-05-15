@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.make_order.MORequestController">
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.site.HandleSiteOrderController">
    <children>
       <HBox />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
@@ -52,15 +52,15 @@
                   </HBox>
                   <Pane prefHeight="200.0" prefWidth="751.0">
                      <children>
-                        <TableView prefWidth="760.0">
+                        <TableView fx:id="commonTable" prefWidth="760.0" styleClass="tb">
                           <columns>
-                            <TableColumn prefWidth="62.0" text="ID" />
-                            <TableColumn prefWidth="94.0" text="ID Order" />
-                              <TableColumn prefWidth="140.0" text="Mã sản phẩm" />
-                              <TableColumn minWidth="0.0" prefWidth="89.0" text="Đơn vị" />
-                              <TableColumn prefWidth="107.0" text="Số lượng" />
-                              <TableColumn prefWidth="145.0" text="Vận chuyển" />
-                              <TableColumn prefWidth="122.0" text="Trạng thái" />
+                            <TableColumn prefWidth="62.0" styleClass="table-header" text="STT" />
+                            <TableColumn prefWidth="94.0" styleClass="table-header" text="ID Order" />
+                              <TableColumn prefWidth="140.0" styleClass="table-header" text="Tên sản phẩm" />
+                              <TableColumn prefWidth="107.0" styleClass="table-header" text="Số lượng" />
+                              <TableColumn minWidth="0.0" prefWidth="89.0" styleClass="table-header" text="Đơn vị" />
+                              <TableColumn prefWidth="145.0" styleClass="table-header" text="Vận chuyển" />
+                              <TableColumn prefWidth="122.0" styleClass="table-header" text="Trạng thái" />
                           </columns>
                         </TableView>
                         <Pagination prefHeight="520.0" prefWidth="760.0" />
@@ -82,11 +82,11 @@
                               </Label>
                            </children>
                         </Pane>
-                        <TableView maxHeight="-Infinity" minHeight="-Infinity" prefHeight="221.0" prefWidth="432.0">
+                        <TableView fx:id="detailTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="221.0" prefWidth="432.0" styleClass="tb">
                           <columns>
-                            <TableColumn prefWidth="209.0" text="Tên sản phẩm" />
-                            <TableColumn prefWidth="75.0" text="Đơn vị" />
-                              <TableColumn prefWidth="105.0" text="Số lượng" />
+                            <TableColumn prefWidth="209.0" styleClass="table-header" text="Tên sản phẩm" />
+                            <TableColumn prefWidth="75.0" styleClass="table-header" text="Đơn vị" />
+                              <TableColumn prefWidth="105.0" styleClass="table-header" text="Số lượng" />
                           </columns>
                            <padding>
                               <Insets top="10.0" />
@@ -99,7 +99,7 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Hủy" />
+                              <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelSiteOrder" prefHeight="31.0" prefWidth="85.0" text="Hủy" />
                            </children>
                         </HBox>
                      </children>

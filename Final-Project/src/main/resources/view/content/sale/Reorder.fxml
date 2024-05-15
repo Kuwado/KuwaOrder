@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sale.ReOrderController">
+   <children>
+      <AnchorPane maxWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+         <children>
+            <VBox maxWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+               <children>
+                  <Label text="Sản phẩm cần đặt lại" />
+                  <TableView prefHeight="100.0" prefWidth="1260.0">
+                    <columns>
+                      <TableColumn prefWidth="512.0" text="Tên sản phẩm" />
+                      <TableColumn prefWidth="144.0" text="Số lượng" />
+                        <TableColumn prefWidth="168.0" text="Đơn vị" />
+                        <TableColumn prefWidth="255.0" text="Ngày nhận mong muốn" />
+                        <TableColumn prefWidth="180.0" text="Số lượng đã chọn" />
+                    </columns>
+                  </TableView>
+                  <Label text="Danh sách site" />
+                  <HBox prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextField alignment="CENTER" prefHeight="26.0" prefWidth="390.0" promptText="Nhập tên site muốn tìm kiếm" />
+                        <Button mnemonicParsing="false" prefWidth="135.0" text="Hủy đơn " />
+                        <Button mnemonicParsing="false" prefWidth="135.0" text="Đặt lại nhanh" />
+                     </children>
+                  </HBox>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="163.0" text="Mã site" />
+                      <TableColumn prefWidth="408.0" text="Tên site" />
+                        <TableColumn prefWidth="178.0" text="Vận chuyển" />
+                        <TableColumn minWidth="0.0" prefWidth="277.0" text="Ngày nhận dự kiến" />
+                        <TableColumn prefWidth="146.0" text="Số lượng" />
+                        <TableColumn prefWidth="88.0" text="Chọn" />
+                    </columns>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </TableView>
+                  <HBox alignment="TOP_RIGHT">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="135.0" text="Đặt lại" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets right="30.0" top="15.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

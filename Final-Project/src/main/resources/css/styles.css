@@ -224,6 +224,11 @@
     -fx-alignment: center;
 }
 
+.table-header {
+    -fx-alignment: center;
+}
+
+
 /* -------------------------------------------- Pagination ---------------------------------------------*/
 .pagination .button, .pagination .toggle-button {
     -fx-background-color: #00ccff;

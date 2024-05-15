@@ -26,5 +26,9 @@ module application {
     opens fx.make_order to javafx.fxml;
     exports model;
     exports solution;
+    exports fx.site to javafx.fxml;
+    opens fx.site to javafx.fxml;
+    exports fx.sale to javafx.fxml;
+    opens fx.sale to javafx.fxml;
 }
 
