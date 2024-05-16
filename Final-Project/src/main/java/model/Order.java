@@ -6,7 +6,7 @@ import solution.ButtonIntoTable;
 
 import java.io.IOException;
 
-public class Order implements DataInterface {
+public class Order implements TableData {
     public int id;
     public int product_id;
     public String product_name;

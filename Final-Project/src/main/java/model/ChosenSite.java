@@ -4,7 +4,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
-public class ChosenSite implements DataInterface {
+public class ChosenSite implements TableData {
     private int id;
     private String name;
     private int quantity;

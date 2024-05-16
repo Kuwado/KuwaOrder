@@ -36,7 +36,7 @@
 }
 
 .mini-card-product {
-    -fx-background-radius: 40 0;
+    -fx-background-radius: 30 0;
     -fx-background-color: white;
 }
 
@@ -55,7 +55,7 @@
 
 .cp-search-btn {
     -fx-background-color: #1b337f;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 21 0;
     -fx-text-fill: white;
     -fx-font-weight: 700;
 }
@@ -70,14 +70,33 @@
 }
 
 .cp-product-name {
-    -fx-text-fill: white;
+    -fx-text-fill: #1b1b32;
     -fx-font-size: 14px;
     -fx-font-weight: 700;
 }
 
 .pc-name-area {
-    -fx-background-radius: 30 0;
-    -fx-background-color: #1b337f;
+    -fx-background-radius: 20 0;
+    -fx-background-color: #00ccff;
     -fx-padding: 8 10;
 }
+
+.cp-number-input {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 2px 0;
+    -fx-text-fill: white;
+}
+
+.cp-note {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-text-fill: white;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+}
+
+
+
+
 

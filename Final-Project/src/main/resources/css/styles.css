@@ -467,6 +467,10 @@
     -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
 }
 
+.shadow-card{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.3), 0.0 , 0.0 , 10.0 ,10.0);
+}
+
 
 /* ------------------------------------------ Scroll & Grid Pane --------------------------------------*/
 .scroll-pane{
@@ -475,4 +479,47 @@
 
 .scroll-pane > .viewport {  //not .scrollpane but .scroll-pane
 -fx-background-color: transparent;
+}
+
+/* --------------------------------------------- Date picker -----------------------------------------*/
+/* Định nghĩa phong cách cho DatePicker */
+.date-picker {
+    -fx-background-color: lightblue;
+    -fx-border-color: darkblue;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+/* Định nghĩa phong cách cho các ngày trong DatePicker */
+.date-picker .text-field {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+
+/* Định nghĩa phong cách cho nút mở DatePicker */
+.date-picker .arrow-button {
+    -fx-background-color: darkblue;
+}
+
+.date-picker .arrow {
+    -fx-background-color: white;
+}
+
+/* Định nghĩa phong cách cho cửa sổ DatePicker */
+.date-picker-popup {
+    -fx-background-color: white;
+    -fx-border-color: darkblue;
+    -fx-border-radius: 5;
+}
+
+/* Định nghĩa phong cách cho các ngày được chọn */
+.date-picker-popup .today {
+    -fx-background-color: lightblue;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: darkblue;
+    -fx-text-fill: white;
 }

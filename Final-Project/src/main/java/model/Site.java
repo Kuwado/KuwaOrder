@@ -7,7 +7,7 @@ import solution.ButtonIntoTable;
 import java.io.IOException;
 import java.util.List;
 
-public class Site implements DataInterface{
+public class Site implements TableData {
     private int id;
     private String name;
     private int ship_date;

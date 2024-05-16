@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.List;
 
-public class Request implements DataInterface{
+public class Request implements TableData {
     public int id;
     public String name;
     public int order_quantity;

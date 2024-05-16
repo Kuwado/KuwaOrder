@@ -8,11 +8,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import model.DataInterface;
+import model.TableData;
 import solution.Paginator;
 import solution.Transition;
 
-public abstract class MOController<T extends DataInterface> {
+public abstract class MOController<T extends TableData> {
     @FXML
     public HBox breadcrumb;
     public boolean viewAllStt = false;

@@ -7,12 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import model.DataInterface;
 import model.Order;
 import model.Request;
-import model.Site;
-import solution.Paginator;
-import solution.Transition;
 
 public class MORequestController extends MOController<Order> {
 
