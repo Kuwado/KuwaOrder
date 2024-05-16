@@ -54,13 +54,13 @@
                      <children>
                         <TableView fx:id="commonTable" prefWidth="760.0" styleClass="tb">
                           <columns>
-                            <TableColumn prefWidth="62.0" styleClass="table-header" text="STT" />
-                            <TableColumn prefWidth="94.0" styleClass="table-header" text="ID Order" />
-                              <TableColumn prefWidth="140.0" styleClass="table-header" text="Tên sản phẩm" />
-                              <TableColumn prefWidth="107.0" styleClass="table-header" text="Số lượng" />
-                              <TableColumn minWidth="0.0" prefWidth="89.0" styleClass="table-header" text="Đơn vị" />
-                              <TableColumn prefWidth="145.0" styleClass="table-header" text="Vận chuyển" />
-                              <TableColumn prefWidth="122.0" styleClass="table-header" text="Trạng thái" />
+                            <TableColumn fx:id="commonIdColumn" prefWidth="62.0" styleClass="table-header" text="STT" />
+                            <TableColumn fx:id="commonOrderIdColumn" prefWidth="94.0" styleClass="table-header" text="ID Order" />
+                              <TableColumn fx:id="commonProductNameColumn" prefWidth="140.0" styleClass="table-header" text="Tên sản phẩm" />
+                              <TableColumn fx:id="commonQuantityColumn" prefWidth="107.0" styleClass="table-header" text="Số lượng" />
+                              <TableColumn fx:id="commonUnitColumn" minWidth="0.0" prefWidth="89.0" styleClass="table-header" text="Đơn vị" />
+                              <TableColumn fx:id="commonDeliveryColumn" prefWidth="145.0" styleClass="table-header" text="Vận chuyển" />
+                              <TableColumn fx:id="commonStatusColumn" prefWidth="122.0" styleClass="table-header" text="Trạng thái" />
                           </columns>
                         </TableView>
                         <Pagination prefHeight="520.0" prefWidth="760.0" />
@@ -84,9 +84,9 @@
                         </Pane>
                         <TableView fx:id="detailTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="221.0" prefWidth="432.0" styleClass="tb">
                           <columns>
-                            <TableColumn fx:id="productNameColumn" prefWidth="209.0" styleClass="table-header" text="Tên sản phẩm" />
-                              <TableColumn fx:id="quantityColumn" prefWidth="105.0" styleClass="table-header" text="Số lượng" />
-                            <TableColumn fx:id="unitColumn" prefWidth="75.0" styleClass="table-header" text="Đơn vị" />
+                            <TableColumn fx:id="detailProductNameColumn" prefWidth="209.0" styleClass="table-header" text="Tên sản phẩm" />
+                              <TableColumn fx:id="detailQuantityColumn" prefWidth="105.0" styleClass="table-header" text="Số lượng" />
+                            <TableColumn fx:id="detailUnitColumn" prefWidth="75.0" styleClass="table-header" text="Đơn vị" />
                           </columns>
                            <padding>
                               <Insets top="10.0" />
