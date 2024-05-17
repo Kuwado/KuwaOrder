@@ -1,6 +1,6 @@
 package fx.warehouse;
 
-import fx.BreadcrumbController;
+import fx.breadcrumb.BreadcrumbController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

@@ -38,11 +38,11 @@ public class OrderDetailController {
     public void setOrder(Order order) {
         this.order = order;
         idField.setText(String.valueOf(order.getId()));
-        product_idField.setText(String.valueOf(order.getProduct_id()));
-        product_nameField.setText(order.getProduct_name());
+        product_idField.setText(String.valueOf(order.getProductId()));
+        product_nameField.setText(order.getProductName());
         quantityField.setText(String.valueOf(order.getQuantity()));
         unitField.setText(order.getUnit());
-        desired_dateField.setText(order.getDesired_date());
+        desired_dateField.setText(order.getDesiredDate());
         statusField.setText(order.getStatus());
     }
 

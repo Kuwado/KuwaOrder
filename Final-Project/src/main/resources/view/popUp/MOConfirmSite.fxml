@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="450.0" minHeight="300.0" minWidth="-Infinity" prefHeight="450.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.make_order.MOConfirmSiteController">
+<BorderPane maxHeight="450.0" minHeight="300.0" minWidth="-Infinity" prefHeight="450.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MOConfirmSiteController">
    <center>
       <VBox alignment="TOP_CENTER" minHeight="250.0" BorderPane.alignment="CENTER">
          <children>

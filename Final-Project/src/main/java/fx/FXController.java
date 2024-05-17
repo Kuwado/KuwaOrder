@@ -1,5 +1,6 @@
-package fx.make_order;
+package fx;
 
+import fx.breadcrumb.MOBreadcrumbController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,11 +9,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import model.TableData;
+import model.tabledata.TableData;
 import solution.Paginator;
 import solution.Transition;
 
-public abstract class MOController<T extends TableData> {
+public abstract class FXController<T extends TableData> {
     @FXML
     public HBox breadcrumb;
     public boolean viewAllStt = false;
@@ -30,10 +31,10 @@ public abstract class MOController<T extends TableData> {
     @FXML
     public AnchorPane previewCard;
 
-    public void setBreadcrumb(int number) {
-        MOBreadcrumbController.number = 3;
+    public void setBreadcrumb(int number, String path) {
+        MOBreadcrumbController.number = number;
         MOBreadcrumbController moc = new MOBreadcrumbController();
-        moc.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/MakeOrder.fxml");
+        moc.loadBreadcrumb(breadcrumb, path);
     }
 
     public abstract void insertToTable();
@@ -74,4 +75,5 @@ public abstract class MOController<T extends TableData> {
             }
         });
     }
+
 }

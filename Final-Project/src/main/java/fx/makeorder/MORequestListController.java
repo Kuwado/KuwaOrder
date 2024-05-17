@@ -1,25 +1,22 @@
-package fx.order;
+package fx.makeorder;
 
-import fx.TestFX;
+import fx.FXController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import model.*;
+import javafx.scene.layout.*;
+import javafx.fxml.FXML;
 
-import java.io.IOException;
+import model.*;
+import model.tabledata.MORequest;
+import solution.*;
+
 import java.util.Arrays;
 import java.util.List;
 
-public class orderListController {
+public class MORequestListController extends FXController<MORequest> {
 
     // Data Product
     Product product1 = new Product(1, "Tivi", "Tivi thì để sờ em chứ còn làm gì", "../images/products/1-tivi.jpg", "Điện máy");
@@ -111,96 +108,101 @@ public class orderListController {
 
     List<Request> requests = Arrays.asList(request1, request2, request3, request4, request5, request6, request7, request8, request9, request10, request11, request12);
 
+    private ObservableList<MORequest> moRequests = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Order, String> tenSanPham;
+    private TableView<MORequest> table;
 
     @FXML
-    private TableColumn<Order, String> donVi;
+    private TableColumn<MORequest, Integer> id;
 
     @FXML
-    private Pagination pagination;
+    private TableColumn<MORequest, String> name;
 
     @FXML
-    private HBox breadcrumb;
+    private TableColumn<MORequest, Integer> quantity;
 
     @FXML
-    private TableColumn<Order, Integer> maSanPham;
+    private TableColumn<MORequest, String> send_date;
 
     @FXML
-    private TableColumn<Order, String> trangThai;
+    private TableColumn<MORequest, String> status;
 
     @FXML
-    private TableColumn<Order, Integer> id;
+    private TableColumn<MORequest, HBox> action;
 
     @FXML
-    private TableColumn<Order, String> ngayMongMuon;
+    private TextArea previewCategory;
 
     @FXML
-    private TableView<Order> table;
+    private TextArea previewDes;
 
     @FXML
-    private TableColumn<Order, Integer> soLuong;
+    private Label previewExpiredDate;
 
-    // tạo thêm một model implements DataTable gồm những gì cần push vào bảng
-    // Vì đơn giản như cái stt trong bảng thì khác id của order, mà trong order làm gì có stt
-    // Các bảng gồm nhiều model khác nhau thì không thêm vào bảng đc ( nó chỉ cho insert 1 loại dữ liệu )
-    // Lúc đấy sẽ thêm cái này private List<tên> têns;
-    // Khi dùng controller lấy dữ liệu -> trả về cho bạn 1 list order thì khi đấy nó là list order dưới đây
-    private List<Order> orders;
-    // Nhừ
+    @FXML
+    private Label previewName;
+
+    @FXML
+    private Label previewSendDate;
 
 
     @FXML
     void initialize() {
-        OBreadcrumbController.number = 1;
-        OBreadcrumbController ob = new OBreadcrumbController();
-        ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
 
-        // Khi lấy dữ liệu từ controller thì cái orders này đã đc full sẵn, mình cần làm là clone nó vào cái mà định thêm vào bảng
-        orders = Arrays.asList(order1, order5, order12, order3);
-
-        // Thực hiện lệnh clone dữ liệu vào model mới của bảng
-        // Ở đây giả sử là od
-        ObservableList<Order> od = FXCollections.observableList(orders);
-        // Khi tạo model mới thì type đổi từ Order -> mới
-
-        insertToTable();
-        table.setItems(od); // Thêm đối tượng Request vào TableView
-        table.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
-                Order selectedOrder = table.getSelectionModel().getSelectedItem();
-                showOrderDetails(selectedOrder);
-            }
-        });
-    }
-
-    private void insertToTable() {
-        id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
-        maSanPham.setCellValueFactory(new PropertyValueFactory<Order, Integer>("productId"));
-        soLuong.setCellValueFactory(new PropertyValueFactory<Order, Integer>("quantity"));
-        donVi.setCellValueFactory(new PropertyValueFactory<Order, String>("unit"));
-        ngayMongMuon.setCellValueFactory(new PropertyValueFactory<Order, String>("desiredDate"));
-        trangThai.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
-        tenSanPham.setCellValueFactory(new PropertyValueFactory<Order, String>("productName"));
-
-    }
-    private void showOrderDetails(Order order) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/orderDetail.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Chi tiết đơn hàng");
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(table.getScene().getWindow());
-            stage.setScene(new Scene(loader.load()));
-
-            OrderDetailController controller = loader.getController();
-            controller.setDialogStage(stage);
-            controller.setOrder(order);
-
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (Request request : requests) {
+            moRequests.add(new MORequest(request));
         }
+
+        // Breadcrumbs
+        setBreadcrumb(2, "/view/parts/breadcrumbs/MakeOrder.fxml");
+
+        // Thêm dữ liệu vào bảng
+        startTable(table, moRequests);
+
+        // Preview card
+        makeAppearPreviewCard(table);
+    }
+
+    @Override
+    public void insertToTable() {
+        id.setCellValueFactory(new PropertyValueFactory<MORequest, Integer>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<MORequest, String>("name"));
+        quantity.setCellValueFactory(new PropertyValueFactory<MORequest, Integer>("orderQuantity")); // Đặt lại tên thuộc tính
+        send_date.setCellValueFactory(new PropertyValueFactory<MORequest, String>("sendDate")); // Đặt lại tên thuộc tính
+        status.setCellValueFactory(new PropertyValueFactory<MORequest, String>("status"));
+        action.setCellValueFactory(new PropertyValueFactory<MORequest, HBox>("action"));
+        table.setItems(moRequests);
+    }
+
+    @Override
+    public void insertToPreviewCard(MORequest request) {
+        StringBuilder productList = new StringBuilder();
+        List<Order> orders = request.getOrders();
+        String[] dates = new String[orders.size()];
+        for (int i = 0; i < orders.size(); i++) {
+            dates[i] = orders.get(i).getDesiredDate();
+        }
+        DateConverter.sortDates(dates);
+        String exDate = dates[orders.size() - 1];
+
+        String[] products = new String[orders.size()];
+        for (int i = 0; i < orders.size(); i++) {
+            productList.append(orders.get(i).getProduct().getName());
+            if (i != orders.size() - 1) {
+                productList.append(", ");
+            }
+        }
+
+        previewName.setText(request.getName());
+        previewDes.setText(request.getDescription());
+        previewSendDate.setText(request.getSendDate());
+        previewExpiredDate.setText(exDate);
+        previewCategory.setText(String.valueOf(productList));
+    }
+
+    @FXML
+    void viewAll(ActionEvent event) {
+        viewAllTable(table, moRequests);
     }
 }

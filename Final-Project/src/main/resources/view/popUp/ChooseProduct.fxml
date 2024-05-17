@@ -78,7 +78,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true">
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../images/whUserAvartar.jpg" />
                            </image>
@@ -168,7 +168,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fx:id="productImage" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -371,7 +371,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage7" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fx:id="productImage7" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>

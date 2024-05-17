@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
-import model.TableData;
+import model.tabledata.TableData;
 
 import java.util.List;
 

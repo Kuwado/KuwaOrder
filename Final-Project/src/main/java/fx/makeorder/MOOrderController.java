@@ -1,25 +1,24 @@
-package fx.order;
+package fx.makeorder;
 
-import fx.TestFX;
+import fx.FXController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Pagination;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import model.*;
+import model.tabledata.ChosenSite;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class orderListController {
+public class MOOrderController extends FXController<ChosenSite> {
 
     // Data Product
     Product product1 = new Product(1, "Tivi", "Tivi thì để sờ em chứ còn làm gì", "../images/products/1-tivi.jpg", "Điện máy");
@@ -109,98 +108,105 @@ public class orderListController {
     Request request11 = new Request(6, "Dat hang 6",  "10/05/2024", "Doing", orders3, "Hau quá");
     Request request12 = new Request(5, "Dat hang 5",  "12/05/2024", "Doing", orders3, "kakaka");
 
-    List<Request> requests = Arrays.asList(request1, request2, request3, request4, request5, request6, request7, request8, request9, request10, request11, request12);
-
+    @FXML
+    private TableView<ChosenSite> table;
 
     @FXML
-    private TableColumn<Order, String> tenSanPham;
+    private TableColumn<ChosenSite, Integer> id;
 
     @FXML
-    private TableColumn<Order, String> donVi;
+    private TableColumn<ChosenSite, String> siteName;
 
     @FXML
-    private Pagination pagination;
+    private TableColumn<ChosenSite, Integer> siteQuantity;
 
     @FXML
-    private HBox breadcrumb;
+    private TableColumn<ChosenSite, String> unit;
 
     @FXML
-    private TableColumn<Order, Integer> maSanPham;
+    private TableColumn<ChosenSite, Integer> shipDate;
 
     @FXML
-    private TableColumn<Order, String> trangThai;
+    private TableColumn<ChosenSite, Integer> airDate;
 
     @FXML
-    private TableColumn<Order, Integer> id;
+    private TableColumn<ChosenSite, HBox> numberInput;
 
     @FXML
-    private TableColumn<Order, String> ngayMongMuon;
+    private Label productName;
 
     @FXML
-    private TableView<Order> table;
+    private Label siteNameCard;
 
     @FXML
-    private TableColumn<Order, Integer> soLuong;
+    private Label soldQuantity;
 
-    // tạo thêm một model implements DataTable gồm những gì cần push vào bảng
-    // Vì đơn giản như cái stt trong bảng thì khác id của order, mà trong order làm gì có stt
-    // Các bảng gồm nhiều model khác nhau thì không thêm vào bảng đc ( nó chỉ cho insert 1 loại dữ liệu )
-    // Lúc đấy sẽ thêm cái này private List<tên> têns;
-    // Khi dùng controller lấy dữ liệu -> trả về cho bạn 1 list order thì khi đấy nó là list order dưới đây
-    private List<Order> orders;
-    // Nhừ
+    @FXML
+    private Label orderUnit;
+
+    @FXML
+    private Button shipBtn;
+
+    @FXML
+    private Button airBtn;
+
+    @FXML
+    private TextField cardNumberInput;
+
+    @FXML
+    private Button makeOrderBtn;
+
+    @FXML
+    private Button viewAll;
+
+    @FXML
+    void viewAll(ActionEvent event) {
+        viewAllTable(table, chosenSites);
+    }
+
+    private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
+    private Order order;
+    private Product product;
+    private List<Site> sites;
+    private SiteProduct siteProduct;
 
 
     @FXML
     void initialize() {
-        OBreadcrumbController.number = 1;
-        OBreadcrumbController ob = new OBreadcrumbController();
-        ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
-
-        // Khi lấy dữ liệu từ controller thì cái orders này đã đc full sẵn, mình cần làm là clone nó vào cái mà định thêm vào bảng
-        orders = Arrays.asList(order1, order5, order12, order3);
-
-        // Thực hiện lệnh clone dữ liệu vào model mới của bảng
-        // Ở đây giả sử là od
-        ObservableList<Order> od = FXCollections.observableList(orders);
-        // Khi tạo model mới thì type đổi từ Order -> mới
-
-        insertToTable();
-        table.setItems(od); // Thêm đối tượng Request vào TableView
-        table.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
-                Order selectedOrder = table.getSelectionModel().getSelectedItem();
-                showOrderDetails(selectedOrder);
-            }
-        });
-    }
-
-    private void insertToTable() {
-        id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
-        maSanPham.setCellValueFactory(new PropertyValueFactory<Order, Integer>("productId"));
-        soLuong.setCellValueFactory(new PropertyValueFactory<Order, Integer>("quantity"));
-        donVi.setCellValueFactory(new PropertyValueFactory<Order, String>("unit"));
-        ngayMongMuon.setCellValueFactory(new PropertyValueFactory<Order, String>("desiredDate"));
-        trangThai.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
-        tenSanPham.setCellValueFactory(new PropertyValueFactory<Order, String>("productName"));
-
-    }
-    private void showOrderDetails(Order order) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/orderDetail.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Chi tiết đơn hàng");
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(table.getScene().getWindow());
-            stage.setScene(new Scene(loader.load()));
-
-            OrderDetailController controller = loader.getController();
-            controller.setDialogStage(stage);
-            controller.setOrder(order);
-
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
+        order = order1;
+        for (Site site : sites) {
+            chosenSites.add(new ChosenSite(order, product, site, siteProduct));
         }
+
+        // Set breadcrumbs
+        setBreadcrumb(4, "/view/parts/breadcrumbs/MakeOrder.fxml");
+
+        // Table
+        startTable(table, chosenSites);
+
+        // Preview card
+        productName.setText(order.getProductName());
+        makeAppearPreviewCard(table);
     }
+
+    @Override
+    public void insertToTable() {
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        siteName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        siteQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        shipDate.setCellValueFactory(new PropertyValueFactory<>("shipDate"));
+        airDate.setCellValueFactory(new PropertyValueFactory<>("airDate"));
+        numberInput.setCellValueFactory(new PropertyValueFactory<>("action"));
+        table.setItems(chosenSites);
+    }
+
+    @Override
+    public void insertToPreviewCard(ChosenSite site) {
+       siteNameCard.setText(site.getName());
+       soldQuantity.setText(String.valueOf(site.getSoldQuantity()));
+       orderUnit.setText(order.getUnit());
+       cardNumberInput.setText("10");
+    }
+
 }

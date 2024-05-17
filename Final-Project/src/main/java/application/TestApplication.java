@@ -18,7 +18,7 @@ public class TestApplication extends Application {
 
         // Get the controller and set the product
         ProductCardController controller = loader.getController();
-        controller.setProduct(new Product("Sample Product", "/images/avatar.jpg"));
+        //controller.setProduct(new Product("Sample Product", "/images/avatar.jpg"));
 
         Scene scene = new Scene(pane);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());

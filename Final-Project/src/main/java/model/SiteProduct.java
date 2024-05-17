@@ -1,31 +1,31 @@
 package model;
 
 public class SiteProduct {
-    private int product_id;
-    private String product_name;
+    private Product product;
+    private double price;
     private int quantity;
-    private int sold_quantity;
+    private int soldQuantity;
 
-    public SiteProduct(int product_id, String product_name, int quantity, int sold_quantity) {
-        this.product_id = product_id;
-        this.product_name = product_name;
+    public SiteProduct(Product product, double price, int quantity, int soldQuantity) {
+        this.product = product;
+        this.price = price;
         this.quantity = quantity;
-        this.sold_quantity = sold_quantity;
+        this.soldQuantity = soldQuantity;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public Product getProduct() {
+        return product;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public double getPrice() {
+        return price;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public int getSold_quantity() {
-        return sold_quantity;
+    public int getSoldQuantity() {
+        return soldQuantity;
     }
 }

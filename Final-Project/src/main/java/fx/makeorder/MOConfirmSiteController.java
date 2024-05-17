@@ -1,4 +1,4 @@
-package fx.make_order;
+package fx.makeorder;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
