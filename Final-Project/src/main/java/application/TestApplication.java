@@ -6,14 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Product;
 
 import java.util.Objects;
 
 public class TestApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insert_items/ProductCard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/ProductCard.fxml"));
         Pane pane = loader.load();
 
         // Get the controller and set the product

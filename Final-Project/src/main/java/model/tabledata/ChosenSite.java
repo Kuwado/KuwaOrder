@@ -36,7 +36,7 @@ public class ChosenSite implements TableData {
         this.airDate = site.getAirDate();
         this.soldQuantity = siteProduct.getSoldQuantity();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insert_items/MOText.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/MOText.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());

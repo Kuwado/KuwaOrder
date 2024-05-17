@@ -164,6 +164,9 @@ public class MOOrderController extends FXController<ChosenSite> {
         viewAllTable(table, chosenSites);
     }
 
+
+
+
     private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
     private Order order;
     private Product product;
@@ -182,6 +185,7 @@ public class MOOrderController extends FXController<ChosenSite> {
         setBreadcrumb(4, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Table
+        number = 9;
         startTable(table, chosenSites);
 
         // Preview card

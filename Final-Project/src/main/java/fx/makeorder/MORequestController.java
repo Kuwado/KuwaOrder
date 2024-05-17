@@ -156,14 +156,12 @@ public class MORequestController extends FXController<MOOrder> {
         viewAllTable(table, moOrders);
     }
 
-    private Request request;
+    private static Request request;
     private final ObservableList<MOOrder> moOrders = FXCollections.observableArrayList();
-
-
 
     @FXML
     void initialize() {
-        request = request1;
+        //request = request1;
         for (Order o : request.getOrders()) {
             moOrders.add(new MOOrder(o));
         }
@@ -172,11 +170,16 @@ public class MORequestController extends FXController<MOOrder> {
         setBreadcrumb(3, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Table
+        number = 9;
         startTable(table, moOrders);
 
         // Preview card
         requestName.setText(request.getName());
         makeAppearPreviewCard(table);
+    }
+
+    public static void setRequest(Request request) {
+        MORequestController.request = request;
     }
 
     @Override

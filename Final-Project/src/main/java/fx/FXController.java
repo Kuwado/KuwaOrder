@@ -31,6 +31,8 @@ public abstract class FXController<T extends TableData> {
     @FXML
     public AnchorPane previewCard;
 
+    public int number;
+
     public void setBreadcrumb(int number, String path) {
         MOBreadcrumbController.number = number;
         MOBreadcrumbController moc = new MOBreadcrumbController();
@@ -42,14 +44,14 @@ public abstract class FXController<T extends TableData> {
     public void startTable(TableView<T> table, ObservableList<T> items) {
         hidePagination.setVisible(false);
         insertToTable();
-        Paginator.setPagination(table, pagination, items, 10);
+        Paginator.setPagination(table, pagination, items, number);
     }
 
     public void viewAllTable(TableView<T> table, ObservableList<T> items) {
         if (viewAllStt) {
             viewAll.setText("Xem tất cả");
             hidePagination.setVisible(false);
-            Paginator.setPagination(table, pagination, items, 10);
+            Paginator.setPagination(table, pagination, items, number);
         } else {
             viewAll.setText("Phân trang");
             hidePagination.setVisible(true);

@@ -69,7 +69,7 @@
                               <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL đơn" />
                               <TableColumn fx:id="send_date" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Ngày gửi" />
                               <TableColumn fx:id="status" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="tb-col" text="Trạng thái" />
-                              <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="HĐ" />
+                              <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col-action" text="HĐ" />
                            </columns>
                         </TableView>
                         <Pagination fx:id="pagination" maxPageIndicatorCount="5" maxWidth="760.0" prefHeight="520.0" prefWidth="760.0">
@@ -119,7 +119,7 @@
                            </padding>
                            <children>
                               <Label styleClass="preview-card-title" text="Thời gian:" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="40.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                                  <children>
                                     <Label styleClass="preview-card-text" text="- Ngày gửi:">
                                        <HBox.margin>
@@ -132,7 +132,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="40.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                                  <children>
                                     <Label prefHeight="26.0" prefWidth="119.0" styleClass="preview-card-text" text="- Ngày hết hạn :">
                                        <HBox.margin>
@@ -142,12 +142,12 @@
                                     <Label fx:id="previewExpiredDate" styleClass="preview-card-text" text="16/05/2024" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets left="10.0" top="10.0" />
+                                    <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox maxHeight="80.0" prefHeight="80.0" prefWidth="300.0">
+                        <VBox maxHeight="90.0" prefHeight="90.0" prefWidth="300.0">
                            <children>
                               <Label styleClass="preview-card-title" text="Các hàng cần đặt:" />
                               <TextArea id="preview-card-des" fx:id="previewCategory" prefHeight="200.0" prefWidth="200.0" text="Tivi, tủ lạnh, giày ">
@@ -157,7 +157,7 @@
                               </TextArea>
                            </children>
                            <VBox.margin>
-                              <Insets top="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </VBox>
                      </children>

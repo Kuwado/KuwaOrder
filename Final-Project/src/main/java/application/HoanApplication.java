@@ -12,12 +12,7 @@ import java.util.Objects;
 public class HoanApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        MainController mc = new MainController();
-        mc.setSidebarPath("/view/parts/sidebar/OrderPlacement.fxml");
-        mc.setContentPath("/view/content/makeorder/MORequestList.fxml");
-        mc.setAvatarPath("/images/avatar.jpg");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
-        fxmlLoader.setController(mc);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());

@@ -1,20 +1,32 @@
 package fx.makeorder;
 
 import fx.FXController;
+import fx.LoginController;
+import fx.MainController;
+import fx.MyListener;
+import fx.insertitems.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.fxml.FXML;
 
+import javafx.stage.Stage;
 import model.*;
 import model.tabledata.MORequest;
 import solution.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MORequestListController extends FXController<MORequest> {
 
@@ -108,8 +120,6 @@ public class MORequestListController extends FXController<MORequest> {
 
     List<Request> requests = Arrays.asList(request1, request2, request3, request4, request5, request6, request7, request8, request9, request10, request11, request12);
 
-    private ObservableList<MORequest> moRequests = FXCollections.observableArrayList();
-
     @FXML
     private TableView<MORequest> table;
 
@@ -129,7 +139,7 @@ public class MORequestListController extends FXController<MORequest> {
     private TableColumn<MORequest, String> status;
 
     @FXML
-    private TableColumn<MORequest, HBox> action;
+    private TableColumn<MORequest, String> action;
 
     @FXML
     private TextArea previewCategory;
@@ -147,21 +157,61 @@ public class MORequestListController extends FXController<MORequest> {
     private Label previewSendDate;
 
 
+    private MyListener myListener;
+    private ObservableList<MORequest> moRequests = FXCollections.observableArrayList();
+
     @FXML
     void initialize() {
 
+
         for (Request request : requests) {
-            moRequests.add(new MORequest(request));
+            Button button = makeButton();
+            moRequests.add(new MORequest(request, button));
         }
 
         // Breadcrumbs
         setBreadcrumb(2, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Thêm dữ liệu vào bảng
+        number = 9;
         startTable(table, moRequests);
 
         // Preview card
         makeAppearPreviewCard(table);
+
+        // Xử lý sự kiện khi người dùng nhấp vào cột action
+
+    }
+
+    private Button makeButton() {
+        Button button = new Button();
+        button.getStyleClass().add("table-view-btn");
+        button.setOnAction(this::viewRequestDetail);
+        return button;
+    }
+
+    private void viewRequestDetail(ActionEvent event) {
+
+        try {
+            MORequest moRequest = table.getSelectionModel().getSelectedItem();
+            MORequestController.setRequest(moRequest.getRequest());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
+            MainController mc = new MainController();
+            mc.setContentPath("/view/content/makeorder/MORequest.fxml");
+            mc.setSidebarPath(LoginController.sidebarPath);
+            mc.setAvatarPath(LoginController.imagePath);
+            fxmlLoader.setController(mc);
+            Scene scene = new Scene(fxmlLoader.load());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -171,7 +221,7 @@ public class MORequestListController extends FXController<MORequest> {
         quantity.setCellValueFactory(new PropertyValueFactory<MORequest, Integer>("orderQuantity")); // Đặt lại tên thuộc tính
         send_date.setCellValueFactory(new PropertyValueFactory<MORequest, String>("sendDate")); // Đặt lại tên thuộc tính
         status.setCellValueFactory(new PropertyValueFactory<MORequest, String>("status"));
-        action.setCellValueFactory(new PropertyValueFactory<MORequest, HBox>("action"));
+        action.setCellValueFactory(new PropertyValueFactory<MORequest, String>("action"));
         table.setItems(moRequests);
     }
 

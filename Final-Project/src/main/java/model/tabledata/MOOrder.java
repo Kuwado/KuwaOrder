@@ -3,7 +3,6 @@ package model.tabledata;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import model.Order;
-import model.Product;
 import solution.ButtonIntoTable;
 
 import java.io.IOException;
@@ -28,7 +27,7 @@ public class MOOrder implements TableData {
         this.desiredDate = order.getDesiredDate();
         this.status = order.getStatus();
         try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
+            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insertitems/View.fxml"));
             this.action = loader.load();
         } catch (IOException e) {
             System.err.println("Error loading sidebar: " + e.getMessage());

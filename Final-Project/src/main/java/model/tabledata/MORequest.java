@@ -1,6 +1,7 @@
 package model.tabledata;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import model.Order;
 import model.Request;
@@ -19,9 +20,10 @@ public class MORequest  implements TableData {
     public String status;
     public List<Order> orders;
     public String description;
-    private HBox action;
+    private HBox action2;
+    private Button action;
 
-    public MORequest(Request request) {
+    public MORequest(Request request, Button button) {
         this.id = idCounter++;
         this.request = request;
         this.name = request.getName();
@@ -30,13 +32,7 @@ public class MORequest  implements TableData {
         this.status = request.getStatus();
         this.orders = request.getOrders();
         this.description = request.getDescription();
-        try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
+        this.action = button;
     }
 
     public int getId() {
@@ -71,11 +67,13 @@ public class MORequest  implements TableData {
         return description;
     }
 
-    public HBox getAction() {
+    public Button getAction() {
         return action;
     }
 
     public void resetIdCounter() {
         idCounter = 1;
     }
+
+
 }

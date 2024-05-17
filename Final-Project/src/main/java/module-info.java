@@ -36,4 +36,8 @@ module application {
     exports fx.breadcrumb;
     opens fx.breadcrumb to javafx.fxml;
 
+    opens fx.sidebar to javafx.fxml;
+    exports fx.sidebar;
+
+
 }
