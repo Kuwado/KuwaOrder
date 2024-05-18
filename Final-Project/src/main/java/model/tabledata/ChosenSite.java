@@ -8,7 +8,7 @@ import model.SiteProduct;
 
 import java.io.IOException;
 
-public class ChosenSite implements TableData {
+public class ChosenSite {
     private static int idCounter = 1;
     private int id;
     private Order order;

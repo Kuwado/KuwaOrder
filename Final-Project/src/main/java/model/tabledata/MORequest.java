@@ -10,7 +10,7 @@ import solution.ButtonIntoTable;
 import java.io.IOException;
 import java.util.List;
 
-public class MORequest  implements TableData {
+public class MORequest {
     private static int idCounter = 1;
     private int id;
     private Request request;
@@ -20,7 +20,6 @@ public class MORequest  implements TableData {
     public String status;
     public List<Order> orders;
     public String description;
-    private HBox action2;
     private Button action;
 
     public MORequest(Request request, Button button) {

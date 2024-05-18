@@ -1,11 +1,5 @@
 package model;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.HBox;
-import model.tabledata.TableData;
-import solution.ButtonIntoTable;
-
-import java.io.IOException;
 import java.util.List;
 
 public class Site {
