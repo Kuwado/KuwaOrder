@@ -2,7 +2,6 @@ package model.subsytem;
 
 import config.DbUtil;
 import model.Product;
-import model.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,14 +76,11 @@ public class ProductSystem implements DBInterface<Product> {
             ResultSet rs = (ResultSet) pst.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                int productId = rs.getInt("product_id");
-                int quantity = rs.getInt("quantity");
-                String unit = rs.getString("unit");
-                String desiredDate = rs.getString("desired_date");
-                String status = rs.getString("status");
-                String note = rs.getString("note");
-                int request_id = rs.getInt("request_id");
-                Product product = new Product(id, productId, quantity, unit, desiredDate, status, note, request_id);
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                String category = rs.getString("category");
+                String description = rs.getString("description");
+                Product product = new Product(id, name, image, category, description);
                 products.add(product);
             }
             DbUtil.closeConnection(con);
@@ -106,14 +102,11 @@ public class ProductSystem implements DBInterface<Product> {
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                int productId = rs.getInt("product_id");
-                int quantity = rs.getInt("quantity");
-                String unit = rs.getString("unit");
-                String desiredDate = rs.getString("desired_date");
-                String status = rs.getString("status");
-                String note = rs.getString("note");
-                int request_id = rs.getInt("request_id");
-                product = new Product(id, productId, quantity, unit, desiredDate, status, note, request_id);
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                String category = rs.getString("category");
+                String description = rs.getString("description");
+                product = new Product(id, name, image, category, description);
             }
 
             DbUtil.closeConnection(con);
@@ -121,62 +114,6 @@ public class ProductSystem implements DBInterface<Product> {
             System.out.println(e);
         }
         return product;
-    }
-
-    // Tìm bằng trạng thái
-    public ArrayList<Product> selectByStatus(String status) {
-        ArrayList<Product> products = new ArrayList<>();
-        try {
-            Connection con = (Connection) DbUtil.getConnection();
-            String sql = "SELECT * FROM products WHERE status = ?";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setString(1, status);
-            ResultSet rs = (ResultSet) pst.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                int productId = rs.getInt("product_id");
-                int quantity = rs.getInt("quantity");
-                String unit = rs.getString("unit");
-                String desiredDate = rs.getString("desired_date");
-                String note = rs.getString("note");
-                int request_id = rs.getInt("request_id");
-                Product product = new Product(id, productId, quantity, unit, desiredDate, status, note, request_id);
-                products.add(product);
-            }
-            DbUtil.closeConnection(con);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return products;
-    }
-
-    // Tìm bằng request id
-    public ArrayList<Product> selectByRequestId(int request_id) {
-        ArrayList<Product> products = new ArrayList<>();
-        try {
-            Connection con = DbUtil.getConnection();
-            String sql = "SELECT * FROM products WHERE request_id = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, request_id);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                int productId = rs.getInt("product_id");
-                int quantity = rs.getInt("quantity");
-                String unit = rs.getString("unit");
-                String desiredDate = rs.getString("desired_date");
-                String status = rs.getString("status");
-                String note = rs.getString("note");
-                Product product = new Product(id, productId, quantity, unit, desiredDate, status, note, request_id);
-                products.add(product);
-            }
-
-            DbUtil.closeConnection(con);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return products;
     }
 
 }

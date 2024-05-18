@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class OrderController {
     private final OrderSystem orderSystem = new OrderSystem();
-    public Request request;
     public ArrayList<Order> orders;
     public Order order;
 

@@ -14,7 +14,7 @@ public class QuanApplication extends Application {
     public void start(Stage stage) throws IOException {
         MainController mc = new MainController();
         mc.setSidebarPath("/view/parts/sidebar/MRsidebar.fxml");
-        mc.setContentPath("/view/content/make_request/MakeRequest.fxml");
+        mc.setContentPath("/view/content/makerequest/MakeRequest.fxml");
         mc.setAvatarPath("/images/avatar.jpg");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);

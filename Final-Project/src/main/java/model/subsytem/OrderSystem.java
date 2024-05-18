@@ -160,7 +160,7 @@ public class OrderSystem implements DBInterface<Order> {
             pst.setInt(1, request_id);
             ResultSet rs = pst.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 int productId = rs.getInt("product_id");
                 int quantity = rs.getInt("quantity");
