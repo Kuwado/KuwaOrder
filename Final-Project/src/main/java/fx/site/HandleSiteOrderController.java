@@ -1,80 +1,76 @@
 package fx.site;
 
+import eu.hansolo.tilesfx.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HandleSiteOrderController {
 
-    @FXML
-    public TableColumn commonIdColumn;
-    @FXML
-    public TableColumn commonOrderIdColumn;
-    @FXML
-    public TableColumn commonProductNameColumn;
-    @FXML
-    public TableColumn commonUnitColumn;
-    @FXML
-    public TableColumn commonQuantityColumn;
-    @FXML
-    public TableColumn commonDeliveryColumn;
-    @FXML
-    public TableColumn commonStatusColumn;
-    @FXML
-    private TableView<TestData> detailTable;
-    @FXML
-    private TableView<TestData> commonTable;
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private TableColumn<TestData, String> detailProductNameColumn;
-    @FXML
-    private TableColumn<TestData, String> detailUnitColumn;
-    @FXML
-    private TableColumn<TestData, Integer> detailQuantityColumn;
+
+    public TableView<TestData> siteOrderTable;
+    public TableColumn<TestData, Integer> idColumn;
+    public TableColumn<TestData, Integer> orderIdColumn;
+    public TableColumn<TestData, String> productNameColumn;
+    public TableColumn<TestData, Integer> quantityColumn;
+    public TableColumn<TestData, String> unitColumn;
+    public TableColumn<TestData, String> deliveryColumn;
+    public TableColumn<TestData, String> statusColumn;
+    public TableColumn<TestData, CheckBox> selectColumn;
+    public Button confirmButton;
+    public Button cancelButton;
 
     @FXML
     private void initialize() {
-        detailProductNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        detailUnitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
-        detailQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        commonIdColumn.setCellValueFactory(new PropertyValueFactory<>("siteOrderId"));
-        commonOrderIdColumn.setCellValueFactory(new PropertyValueFactory<>("orderId"));
-        commonProductNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        commonUnitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
-        commonDeliveryColumn.setCellValueFactory(new PropertyValueFactory<>("delivery"));
-        commonStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        loadDetailData();
-        loadCommonData();
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("siteOrderId"));
+        orderIdColumn.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        unitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        deliveryColumn.setCellValueFactory(new PropertyValueFactory<>("delivery"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
+        loadTableData();
     }
 
-    private void loadDetailData() {
+    private void loadTableData() {
         ObservableList<TestData> details = FXCollections.observableArrayList(
-                new TestData("Thùy Dung", "Điểm", 10),
-                new TestData("Lê Nhung", "Điểm", 10),
-                new TestData("Cao Phong", "Điểm", 10)
+                new TestData(1, 1, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(2, 2, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(3, 3, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(4, 4, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(5, 5, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(6, 6, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(7, 7, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(8, 9, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+                new TestData(9, 10, "Cao Phong", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox())
         );
-        detailTable.setItems(details);
-    }
-
-    private void loadCommonData() {
-        ObservableList<TestData> commons = FXCollections.observableArrayList(
-                new TestData(1, 1, "Thùy Dung", "Chị", 1, "Tay", "Chưa có ny"),
-                new TestData(2, 2, "Lê Nhung", "Chị", 1, "Tay", "Đoán xem"),
-                new TestData(3, 3, "Cao Phong", "Chị", 1, "None", "Ai quan tâm")
-        );
-        commonTable.setItems(commons);
+        siteOrderTable.setItems(details);
     }
 
     @FXML
-    private void cancelSiteOrder(ActionEvent actionEvent) {
-        System.out.println("Cancel this site order");
+    private List<Integer> cancelSiteOrder(ActionEvent e) {
+        ObservableList<TestData> items = siteOrderTable.getItems();
+        List<Integer> cancelSiteOrderIds = new ArrayList<>();
+        for (TestData item : items) {
+            if (item.getSelected().isSelected()) {
+                cancelSiteOrderIds.add(item.getSiteOrderId());
+            }
+        }
+        System.out.println("Cancel site order IDs: " + cancelSiteOrderIds);
+        return cancelSiteOrderIds;
     }
 }
