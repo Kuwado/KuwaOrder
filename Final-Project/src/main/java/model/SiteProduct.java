@@ -1,10 +1,15 @@
 package model;
 
 public class SiteProduct {
-    private Product product;
-    private double price;
+    private int id;
+    private int siteId;
+    private int productId;
     private int quantity;
     private int soldQuantity;
+    private double price;
+
+    private Product product;
+
 
     public SiteProduct(Product product, double price, int quantity, int soldQuantity) {
         this.product = product;
@@ -13,12 +18,28 @@ public class SiteProduct {
         this.soldQuantity = soldQuantity;
     }
 
-    public Product getProduct() {
-        return product;
+    public SiteProduct() {
     }
 
-    public double getPrice() {
-        return price;
+    public SiteProduct(int id, int siteId, int productId, int quantity, int soldQuantity, double price) {
+        this.id = id;
+        this.siteId = siteId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.soldQuantity = soldQuantity;
+        this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 
     public int getQuantity() {
@@ -27,5 +48,13 @@ public class SiteProduct {
 
     public int getSoldQuantity() {
         return soldQuantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

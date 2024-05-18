@@ -18,7 +18,6 @@ public class MORequest {
     public int orderQuantity;
     public String sendDate;
     public String status;
-    public List<Order> orders;
     public String description;
     private Button action;
 
@@ -29,7 +28,6 @@ public class MORequest {
         this.orderQuantity = request.getOrderQuantity();
         this.sendDate = request.getSendDate();
         this.status = request.getStatus();
-        this.orders = request.getOrders();
         this.description = request.getDescription();
         this.action = button;
     }
@@ -56,10 +54,6 @@ public class MORequest {
 
     public String getStatus() {
         return status;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
     }
 
     public String getDescription() {

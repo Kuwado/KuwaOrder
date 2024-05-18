@@ -9,11 +9,13 @@ public class Site {
     private int airDate;
     private double shipPrice;
     private double airPrice;
-    private List<SiteProduct> products;
     private int soldQuantity;
-    private String description;
+    private String information;
 
-    public Site(int id, String name, int shipDate, int airDate, double shipPrice, double airPrice, List<SiteProduct> products, String description) {
+    private List<SiteProduct> products;
+
+
+    public Site(int id, String name, int shipDate, int airDate, double shipPrice, double airPrice, List<SiteProduct> products, String information) {
         this.id = id;
         this.name = name;
         this.shipDate = shipDate;
@@ -21,12 +23,26 @@ public class Site {
         this.shipPrice = shipPrice;
         this.airPrice = airPrice;
         this.products = products;
-        this.description = description;
+        this.information = information;
         int quan = 0;
         for (SiteProduct product : products) {
             quan += product.getSoldQuantity();
         }
         this.soldQuantity = quan;
+    }
+
+    public Site() {
+    }
+
+    public Site(int id, String name, int shipDate, int airDate, double shipPrice, double airPrice, int soldQuantity, String information) {
+        this.id = id;
+        this.name = name;
+        this.shipDate = shipDate;
+        this.airDate = airDate;
+        this.shipPrice = shipPrice;
+        this.airPrice = airPrice;
+        this.soldQuantity = soldQuantity;
+        this.information = information;
     }
 
     public int getId() {
@@ -61,7 +77,7 @@ public class Site {
         return soldQuantity;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInformation() {
+        return information;
     }
 }

@@ -75,7 +75,7 @@
                               <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Đơn vị" />
                               <TableColumn fx:id="expired_date" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Ngày nhận " />
                               <TableColumn fx:id="status" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="tb-col" text="Trạng thái" />
-                              <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="HĐ" />
+                              <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col-action" text="HĐ" />
                            </columns>
                         </TableView>
                         <Pagination fx:id="pagination" maxPageIndicatorCount="3" maxWidth="760.0" prefHeight="520.0" prefWidth="760.0">

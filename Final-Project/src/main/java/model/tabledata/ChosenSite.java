@@ -1,5 +1,6 @@
 package model.tabledata;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import model.Order;
 import model.Product;
@@ -20,10 +21,32 @@ public class ChosenSite {
     private String unit;
     private int shipDate;
     private int airDate;
-    private int soldQuantity;
-    private HBox action;
+    //private int soldQuantity;
+    //private HBox action;
+    private TextField action;
 
-    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct) {
+//    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct) {
+//        this.id = idCounter++;
+//        this.order = order;
+//        this.product = product;
+//        this.site = site;
+//        this.siteProduct = siteProduct;
+//        this.name = site.getName();
+//        this.quantity = siteProduct.getQuantity();
+//        this.unit = order.getUnit();
+//        this.shipDate = site.getShipDate();
+//        this.airDate = site.getAirDate();
+//        this.soldQuantity = siteProduct.getSoldQuantity();
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/MOText.fxml"));
+//            this.action = loader.load();
+//        } catch (IOException e) {
+//            System.err.println("Error loading sidebar: " + e.getMessage());
+//            e.printStackTrace();
+//        };
+//    }
+
+    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct, TextField textfield) {
         this.id = idCounter++;
         this.order = order;
         this.product = product;
@@ -34,15 +57,10 @@ public class ChosenSite {
         this.unit = order.getUnit();
         this.shipDate = site.getShipDate();
         this.airDate = site.getAirDate();
-        this.soldQuantity = siteProduct.getSoldQuantity();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/MOText.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
+        this.action = textfield;
     }
+
+
 
     public int getId() {
         return id;
@@ -84,11 +102,16 @@ public class ChosenSite {
         return airDate;
     }
 
-    public int getSoldQuantity() {
-        return soldQuantity;
-    }
+//    public int getSoldQuantity() {
+//        return soldQuantity;
+//    }
+//
+////    public HBox getAction() {
+////        return action;
+////    }
 
-    public HBox getAction() {
+
+    public TextField getAction() {
         return action;
     }
 }

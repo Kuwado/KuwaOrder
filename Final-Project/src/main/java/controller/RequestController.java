@@ -1,5 +1,6 @@
 package controller;
 
+import model.Order;
 import model.subsytem.RequestSystem;
 import model.Request;
 
@@ -39,14 +40,12 @@ public class RequestController {
 
     public static  void main (String[] args) {
         RequestController rc = new RequestController();
-//        ArrayList<Request> ress = rc.getWaitRequests();
-//        for (Request r: ress) {
-//            System.out.println(r.getName());
-//        }
-//        Request res = rc.getRequestById(8);
-//        System.out.println(res.getName());
-        Request r = new Request("test", "ko coji");
-        rc.insert(r);
+        OrderController oc = new OrderController();
+        ArrayList<Order> orders = oc.getOrdersInRequest(1);
+        for (Order o : orders) {
+            System.out.println(o.getDesiredDate());
+        }
+
     }
 
 }
