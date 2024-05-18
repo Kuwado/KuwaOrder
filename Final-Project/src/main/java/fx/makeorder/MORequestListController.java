@@ -1,21 +1,18 @@
 package fx.makeorder;
 
+import controller.OrderController;
+import controller.RequestController;
 import fx.FXController;
 import fx.LoginController;
 import fx.MainController;
-import fx.MyListener;
-import fx.insertitems.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.fxml.FXML;
 
 import javafx.stage.Stage;
@@ -24,6 +21,7 @@ import model.tabledata.MORequest;
 import solution.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -118,7 +116,7 @@ public class MORequestListController extends FXController<MORequest> {
     Request request11 = new Request(6, "Dat hang 6",  "10/05/2024", "Doing", orders3, "Hau quá");
     Request request12 = new Request(5, "Dat hang 5",  "12/05/2024", "Doing", orders3, "kakaka");
 
-    List<Request> requests = Arrays.asList(request1, request2, request3, request4, request5, request6, request7, request8, request9, request10, request11, request12);
+    //List<Request> requests = Arrays.asList(request1, request2, request3, request4, request5, request6, request7, request8, request9, request10, request11, request12);
 
     @FXML
     private TableView<MORequest> table;
@@ -156,13 +154,15 @@ public class MORequestListController extends FXController<MORequest> {
     @FXML
     private Label previewSendDate;
 
-
-    private MyListener myListener;
-    private ObservableList<MORequest> moRequests = FXCollections.observableArrayList();
+    private final RequestController requestController = new RequestController();
+    private final OrderController orderController = new OrderController();
+    private final ObservableList<MORequest> moRequests = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
-
+        ArrayList<Request> requests = requestController.getWaitRequests();
+        Request res = requestController.getRequestById(5);
+        requests.add(res);
 
         for (Request request : requests) {
             Button button = makeButton();
@@ -226,19 +226,20 @@ public class MORequestListController extends FXController<MORequest> {
     }
 
     @Override
-    public void insertToPreviewCard(MORequest request) {
+    public void insertToPreviewCard(MORequest moRequest) {
+        Request request = moRequest.getRequest();
         StringBuilder productList = new StringBuilder();
-        List<Order> orders = request.getOrders();
+        List<Order> orders = orderController.getOrdersInRequest(request.getId());
         String[] dates = new String[orders.size()];
         for (int i = 0; i < orders.size(); i++) {
             dates[i] = orders.get(i).getDesiredDate();
         }
         DateConverter.sortDates(dates);
-        String exDate = dates[orders.size() - 1];
+        String exDate = dates[0];
 
         String[] products = new String[orders.size()];
         for (int i = 0; i < orders.size(); i++) {
-            productList.append(orders.get(i).getProduct().getName());
+            //productList.append(orders.get(i).getProduct().getName());
             if (i != orders.size() - 1) {
                 productList.append(", ");
             }

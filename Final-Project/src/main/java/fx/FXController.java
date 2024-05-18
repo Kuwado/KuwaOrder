@@ -9,11 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import model.tabledata.TableData;
 import solution.Paginator;
 import solution.Transition;
 
-public abstract class FXController<T extends TableData> {
+public abstract class FXController<T> {
     @FXML
     public HBox breadcrumb;
     public boolean viewAllStt = false;

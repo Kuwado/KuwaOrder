@@ -7,7 +7,7 @@ import solution.ButtonIntoTable;
 
 import java.io.IOException;
 
-public class MOOrder implements TableData {
+public class MOOrder {
     private static int idCounter = 1;
     private int id;
     private Order order;

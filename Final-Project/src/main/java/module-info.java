@@ -13,7 +13,9 @@ module application {
     requires com.almasb.fxgl.all;
     requires java.desktop;
 
+
     opens fx.warehouse to javafx.fxml;
+    requires java.sql;
     opens fx.order to javafx.fxml;
 
     opens fx to javafx.fxml;
