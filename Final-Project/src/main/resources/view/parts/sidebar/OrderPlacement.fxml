@@ -6,9 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="fx.sidebar.OrderPlacementController">
    <children>
-      <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Trang chủ " VBox.vgrow="ALWAYS">
+      <Button fx:id="btn1" mnemonicParsing="false" styleClass="sidebar-btn" text="Trang chủ " VBox.vgrow="ALWAYS">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -20,7 +20,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đặt hàng">
+      <Button fx:id="btn2" mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đặt hàng">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -32,7 +32,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
+      <Button fx:id="btn3" mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,7 +44,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Tạo đơn hàng">
+      <Button fx:id="btn4" mnemonicParsing="false" styleClass="sidebar-btn" text="Tạo đơn hàng">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -56,7 +56,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Xử lý đơn hủy">
+      <Button fx:id="btn5" mnemonicParsing="false" styleClass="sidebar-btn" text="Xử lý đơn hủy">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -102,6 +102,7 @@
     -fx-alignment: baseline-left;
     -fx-font-weight: 700;
     -fx-padding: 0 0 0 20px;
+    -fx-opacity: 0.8;
 }
 .user-btn {
     -fx-background-color: none;
@@ -120,6 +121,12 @@
     -fx-border-color: WHITE;
     -fx-font-weight: 800;
     -fx-border-width: 0px 0px 0px 7px;
+    -fx-opacity: 1;
+}
+
+.sidebar-active {
+    -fx-background-color: #00ccff;
+    -fx-opacity: 1;
 }
 
 /* ------------------------- Content ------------------------ */
@@ -216,12 +223,16 @@
     -fx-alignment: center-left;
 }
 
-.tb-col-first {
+.tb-col-first, .tb-col-action {
     -fx-alignment: center;
 }
 
-.tb-col-first .label {
+.tb-col-first .label, .tb-col-action .label {
     -fx-alignment: center;
+}
+
+.tb-col-action:hover {
+    -fx-background-color: #23a9b0;
 }
 
 .table-header {
@@ -443,6 +454,18 @@
     -fx-border-color: #ffffff;
 }
 
+/* --- Button in table --- */
+.table-view-btn {
+    -fx-background-color: transparent !important;
+    -fx-pref-width: 35;
+    -fx-background-image: url("../images/icons/file-view.png");
+    -fx-background-size: cover; /* điều chỉnh kích thước hình ảnh */
+    -fx-background-repeat: no-repeat; /* loại bỏ lặp lại */
+    -fx-background-position: center; /* căn chỉnh vị trí */
+}
+
+
+
 /* ------------------------------------------- Other -------------------------------------------------*/
 .line-bottom {
     -fx-border-width: 0 0 2px 0;
@@ -467,6 +490,10 @@
     -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
 }
 
+.shadow-card{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.3), 0.0 , 0.0 , 10.0 ,10.0);
+}
+
 
 /* ------------------------------------------ Scroll & Grid Pane --------------------------------------*/
 .scroll-pane{
@@ -475,4 +502,57 @@
 
 .scroll-pane > .viewport {  //not .scrollpane but .scroll-pane
 -fx-background-color: transparent;
+}
+
+/* --------------------------------------------- Date picker -----------------------------------------*/
+/* Định nghĩa phong cách cho DatePicker */
+.date-picker {
+    -fx-background-color: lightblue;
+    -fx-border-color: darkblue;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+/* Định nghĩa phong cách cho các ngày trong DatePicker */
+.date-picker .text-field {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+
+/* Định nghĩa phong cách cho nút mở DatePicker */
+.date-picker .arrow-button {
+    -fx-background-color: darkblue;
+}
+
+.date-picker .arrow {
+    -fx-background-color: white;
+}
+
+/* Định nghĩa phong cách cho cửa sổ DatePicker */
+.date-picker-popup {
+    -fx-background-color: white;
+    -fx-border-color: darkblue;
+    -fx-border-radius: 5;
+}
+
+/* Định nghĩa phong cách cho các ngày được chọn */
+.date-picker-popup .today {
+    -fx-background-color: lightblue;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: darkblue;
+    -fx-text-fill: white;
+}
+
+/* ---------------------------------------- text area --------------------------------------------------------*/
+.text-area .scroll-bar:horizontal,
+.text-area .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
 }

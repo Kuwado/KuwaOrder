@@ -2,39 +2,37 @@ package model;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
+import model.tabledata.TableData;
 import solution.ButtonIntoTable;
 
 import java.io.IOException;
 import java.util.List;
 
-public class Site implements DataInterface{
+public class Site {
     private int id;
     private String name;
-    private int ship_date;
-    private int air_date;
-    private int sold_quantity;
+    private int shipDate;
+    private int airDate;
+    private double shipPrice;
+    private double airPrice;
     private List<SiteProduct> products;
+    private int soldQuantity;
     private String description;
-    private HBox action;
 
-    public Site(int id, String name, int ship_date, int air_date, List<SiteProduct> products) {
-        int sold_quantity = 0;
+    public Site(int id, String name, int shipDate, int airDate, double shipPrice, double airPrice, List<SiteProduct> products, String description) {
         this.id = id;
         this.name = name;
-        this.ship_date = ship_date;
-        this.air_date = air_date;
-        for (SiteProduct s : products) {
-            sold_quantity += s.getSold_quantity();
-        }
-        this.sold_quantity = sold_quantity;
+        this.shipDate = shipDate;
+        this.airDate = airDate;
+        this.shipPrice = shipPrice;
+        this.airPrice = airPrice;
         this.products = products;
-        try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/MOText.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
+        this.description = description;
+        int quan = 0;
+        for (SiteProduct product : products) {
+            quan += product.getSoldQuantity();
+        }
+        this.soldQuantity = quan;
     }
 
     public int getId() {
@@ -45,27 +43,31 @@ public class Site implements DataInterface{
         return name;
     }
 
-    public int getShip_date() {
-        return ship_date;
+    public int getShipDate() {
+        return shipDate;
     }
 
-    public int getAir_date() {
-        return air_date;
+    public int getAirDate() {
+        return airDate;
     }
 
-    public int getSold_quantity() {
-        return sold_quantity;
+    public double getShipPrice() {
+        return shipPrice;
+    }
+
+    public double getAirPrice() {
+        return airPrice;
     }
 
     public List<SiteProduct> getProducts() {
         return products;
     }
 
-    public String getDescription() {
-        return description;
+    public int getSoldQuantity() {
+        return soldQuantity;
     }
 
-    public void setProducts(List<SiteProduct> products) {
-        this.products = products;
+    public String getDescription() {
+        return description;
     }
 }

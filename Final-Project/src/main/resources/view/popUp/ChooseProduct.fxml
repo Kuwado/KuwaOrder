@@ -18,11 +18,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="650.0" prefWidth="1250.0" style="-fx-background-color: #1b1b32;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox prefHeight="700.0" prefWidth="1250.0" style="-fx-background-color: #1b1b32;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="400.0" style="-fx-background-color: #00ccff;">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0">
+            <HBox alignment="CENTER" prefHeight="80.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="173.0" text="Products" textFill="#1b337f">
                      <font>
@@ -36,9 +36,9 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" maxWidth="340.0" prefHeight="65.0" prefWidth="350.0">
+            <HBox alignment="CENTER" maxWidth="360.0" prefHeight="65.0" prefWidth="360.0">
                <children>
-                  <TextField prefHeight="40.0" prefWidth="205.0" promptText="Bạn cần tìm gì?" styleClass="transparent" stylesheets="@../../../../../../../Fruits-Market/FruitMarket/src/values/style.css">
+                  <TextField fx:id="searchInput" prefHeight="40.0" prefWidth="244.0" promptText="Bạn cần tìm gì?" styleClass="transparent" stylesheets="@../../../../../../../Fruits-Market/FruitMarket/src/values/style.css">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -46,7 +46,7 @@
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="cp-search-btn" text="Tìm" textFill="WHITE">
+                  <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="cp-search-btn" text="Tìm" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -57,7 +57,7 @@
                   <String fx:value="shadow" />
                </styleClass>
             </HBox>
-            <VBox fx:id="priviewContent" maxWidth="300.0" prefHeight="430.0" prefWidth="300.0" style="-fx-background-color: yellow;" styleClass="cp-content">
+            <VBox fx:id="priviewContent" maxWidth="320.0" prefHeight="430.0" prefWidth="320.0" style="-fx-background-color: #1b337f;" styleClass="cp-content">
                <VBox.margin>
                   <Insets top="25.0" />
                </VBox.margin>
@@ -67,17 +67,18 @@
                         <Insets left="20.0" right="15.0" top="15.0" />
                      </VBox.margin>
                      <children>
-                        <Label text="Hai Nam ngon ngon">
+                        <Label text="Hai Nam ngon ngon" textFill="WHITE">
                            <styleClass>
                               <String fx:value="preview-card-title" />
                               <String fx:value="font-size-22" />
+                              <String fx:value="text-fill-white" />
                            </styleClass>
                         </Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true">
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../images/whUserAvartar.jpg" />
                            </image>
@@ -89,12 +90,15 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Label text="Số lượng: ">
+                        <Label styleClass="text-fill-white" text="Số lượng: ">
                            <HBox.margin>
-                              <Insets />
+                              <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="198.0" />
+                        <TextField fx:id="quantityInput" prefHeight="42.0" prefWidth="180.0" promptText="Số lượng cần đặt" styleClass="cp-number-input">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></TextField>
                      </children>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -105,8 +109,14 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Label text="Ngày nhận: " />
-                        <DatePicker prefHeight="40.0" prefWidth="182.0" />
+                        <Label prefHeight="27.0" prefWidth="97.0" styleClass="text-fill-white" text="Ngày nhận: ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Label>
+                        <DatePicker fx:id="date" prefHeight="42.0" prefWidth="163.0" styleClass="cp-date">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></DatePicker>
                      </children>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -117,16 +127,29 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextArea prefHeight="72.0" prefWidth="301.0" promptText="Ghi chú (nếu có )" />
+                        <TextArea fx:id="noteInput" prefHeight="60.0" prefWidth="271.0" promptText="Ghi chú (nếu có )" styleClass="cp-note">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="10.0" />
+                           </HBox.margin></TextArea>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin></HBox>
                </children>
             </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="actionBtn" mnemonicParsing="false" text="Thêm đơn đặt">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="action-button" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <ScrollPane maxHeight="600.0" prefHeight="600.0" prefWidth="820.0" styleClass="list-product">
+      <ScrollPane maxHeight="647.0" prefHeight="650.0" prefWidth="820.0" styleClass="list-product">
          <content>
             <GridPane fx:id="productList" prefHeight="720.0" prefWidth="800.0" styleClass="cp-grid">
                <columnConstraints>
@@ -145,12 +168,12 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fx:id="productImage" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
                               </ImageView>
-                              <VBox alignment="CENTER" prefHeight="60.0" styleClass="pc-name-area">
+                              <VBox alignment="CENTER" prefHeight="60.0">
                                  <children>
                                     <Label prefHeight="50.0" text="Hai babababab dd">
                                        <styleClass>
@@ -348,7 +371,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage7" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fx:id="productImage7" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>

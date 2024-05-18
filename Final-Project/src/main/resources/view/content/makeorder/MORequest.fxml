@@ -18,11 +18,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.make_order.MORequestListController">
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MORequestController">
    <children>
       <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
          <children>
+            <Pane layoutX="930.4" layoutY="11.2" prefHeight="90.0" prefWidth="330.0" styleClass="bg-title-bab" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label fx:id="requestName" layoutX="65.0" layoutY="29.0" maxHeight="32.0" maxWidth="200.0" prefHeight="32.0" prefWidth="200.0" styleClass="title-bab" text="Request cua Hoan" />
+               </children>
+            </Pane>
             <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="590.0" prefWidth="800.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
@@ -34,7 +39,7 @@
                                     <Image url="@../../../images/icons/magnifying-glass.png" />
                                  </image>
                               </ImageView>
-                              <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
+                              <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên hàng cần tìm" styleClass="search-input" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -62,17 +67,18 @@
                   </HBox>
                   <Pane prefHeight="520.0" prefWidth="760.0">
                      <children>
-                        <TableView fx:id="table" layoutY="-9.0" minWidth="760.0" styleClass="tb">
+                        <TableView fx:id="table" layoutY="-9.0" prefWidth="760.0" styleClass="tb">
                            <columns>
                               <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
-                              <TableColumn fx:id="name" maxWidth="270.0" minWidth="270.0" prefWidth="270.0" styleClass="tb-col" text="Tên yêu cầu đặt hàng" />
-                              <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL đơn" />
-                              <TableColumn fx:id="send_date" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Ngày gửi" />
+                              <TableColumn fx:id="productName" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Tên hàng cần đặt" />
+                              <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL " />
+                              <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Đơn vị" />
+                              <TableColumn fx:id="expired_date" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Ngày nhận " />
                               <TableColumn fx:id="status" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="tb-col" text="Trạng thái" />
                               <TableColumn fx:id="action" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="HĐ" />
                            </columns>
                         </TableView>
-                        <Pagination fx:id="pagination" maxPageIndicatorCount="5" maxWidth="760.0" prefHeight="520.0" prefWidth="760.0">
+                        <Pagination fx:id="pagination" maxPageIndicatorCount="3" maxWidth="760.0" prefHeight="520.0" prefWidth="760.0">
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor></Pagination>
@@ -89,24 +95,24 @@
             </VBox>
             <AnchorPane fx:id="previewCard" layoutX="656.0" layoutY="4.0" styleClass="preview-card-area" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <VBox fx:id="previewContent" prefHeight="500.0" prefWidth="330.0" style="-fx-background-color: #00ccff;" styleClass="preview-card" AnchorPane.topAnchor="50.0">
+                  <VBox fx:id="previewContent" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: #00ccff;" styleClass="preview-card" AnchorPane.topAnchor="150.0">
                      <children>
                         <HBox alignment="CENTER" styleClass="preview-card-name">
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>
                            <children>
-                              <Label id="preview-card-name" fx:id="previewName" text="Cong viec thu nghiem" />
+                              <Label id="preview-card-name" fx:id="orderName" text="Điện thoại Nokia" />
                            </children>
                         </HBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="preview-card-des">
+                        <VBox prefHeight="125.0" prefWidth="100.0" styleClass="preview-card-des">
                            <children>
-                              <Label id="preview-card-des-title" styleClass="preview-card-title" text="Mô tả:" underline="true">
+                              <Label id="preview-card-des-title" styleClass="preview-card-title" text="Ghi chú:" underline="true">
                                  <font>
                                     <Font name="System Bold Italic" size="5.0" />
                                  </font>
                               </Label>
-                              <TextArea id="preview-card-des" fx:id="previewDes" text="- Nếu là ai">
+                              <TextArea id="preview-card-des" fx:id="orderNote" prefWidth="276.0" text="- Nếu là ai">
                                  <VBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
@@ -118,15 +124,24 @@
                               <Insets top="10.0" />
                            </padding>
                            <children>
-                              <Label styleClass="preview-card-title" text="Thời gian:" />
+                              <Label text="Tổng quan:">
+                                 <styleClass>
+                                    <String fx:value="preview-card-title" />
+                                    <String fx:value="under-line" />
+                                 </styleClass></Label>
                               <HBox alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
-                                    <Label styleClass="preview-card-text" text="- Ngày gửi:">
+                                    <Label styleClass="preview-card-text" text="- Số lượng:">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="previewSendDate" styleClass="preview-card-text" text="11/05/2024" />
+                                    <Label fx:id="orderQuantity" styleClass="preview-card-text" text="15" />
+                                    <Label fx:id="orderUnit" styleClass="preview-card-text" text="Chiếc">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -134,12 +149,12 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
-                                    <Label prefHeight="26.0" prefWidth="119.0" styleClass="preview-card-text" text="- Ngày hết hạn :">
+                                    <Label prefHeight="26.0" prefWidth="189.0" styleClass="preview-card-text" text="- Ngày nhận mong muốn :">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="previewExpiredDate" styleClass="preview-card-text" text="16/05/2024" />
+                                    <Label fx:id="orderExpiredDate" styleClass="preview-card-text" text="16/05/2024" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" top="10.0" />
@@ -147,27 +162,17 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox maxHeight="80.0" prefHeight="80.0" prefWidth="300.0">
-                           <children>
-                              <Label styleClass="preview-card-title" text="Các hàng cần đặt:" />
-                              <TextArea id="preview-card-des" fx:id="previewCategory" prefHeight="200.0" prefWidth="200.0" text="Tivi, tủ lạnh, giày ">
-                                 <VBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </VBox.margin>
-                              </TextArea>
-                           </children>
-                           <VBox.margin>
+                        <HBox alignment="CENTER" prefHeight="80.0">
+                           <padding>
                               <Insets top="10.0" />
-                           </VBox.margin>
-                        </VBox>
+                           </padding>
+                           <children>
+                              <Button fx:id="quickMakeOrderBtn" mnemonicParsing="false" styleClass="quick-button" text="Tạo đơn nhanh" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="-10.0">
-                     <image>
-                        <Image url="@../../../images/icons/kẹp.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="-10.0">
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="90.0">
                      <image>
                         <Image url="@../../../images/icons/kẹp.png" />
                      </image>

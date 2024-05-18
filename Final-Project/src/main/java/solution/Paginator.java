@@ -4,13 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
-import model.DataInterface;
+import model.tabledata.TableData;
 
 import java.util.List;
 
 public class Paginator {
 
-    public static <T extends DataInterface> void setPagination(TableView<T> table, Pagination pagination, ObservableList<T> items, int number) {
+    public static <T extends TableData> void setPagination(TableView<T> table, Pagination pagination, ObservableList<T> items, int number) {
         int totalPages = (items.size() + number - 1) / number;
         pagination.setPageCount(totalPages);
         pagination.setPageFactory(pageIndex -> {

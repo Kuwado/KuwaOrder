@@ -2,63 +2,48 @@ package model;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
+import model.tabledata.TableData;
 import solution.ButtonIntoTable;
 
 import java.io.IOException;
 
-public class Order implements DataInterface {
-    public int id;
-    public int product_id;
-    public String product_name;
-    public int quantity;
-    public String unit;
-    public String desired_date;
-    public String status;
-    public String note;
-    public HBox action;
+public class Order {
+    private int id;
+    private Product product;
+    private int productId;
+    private String productName;
+    private int quantity;
+    private String unit;
+    private String desiredDate;
+    private String status;
+    private String note;
 
-
-    public Order(int id, int product_id, int quantity, String unit, String desired_date, String status, String product_name) {
+    public Order(int id, Product product, int quantity, String unit, String desiredDate, String status, String note) {
         this.id = id;
-        this.product_id = product_id;
+        this.product = product;
+        this.productId = product.getId();
+        this.productName = product.getName();
         this.quantity = quantity;
         this.unit = unit;
-        this.desired_date = desired_date;
-        this.status = status;
-        this.product_name = product_name;
-        try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
-    }
-
-    public Order(int id, int product_id, int quantity, String unit, String desired_date, String status, String product_name, String note) {
-        this.id = id;
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.quantity = quantity;
-        this.unit = unit;
-        this.desired_date = desired_date;
+        this.desiredDate = desiredDate;
         this.status = status;
         this.note = note;
-        try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insert_items/view.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
     }
 
     public int getId() {
         return id;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public int getQuantity() {
@@ -69,23 +54,15 @@ public class Order implements DataInterface {
         return unit;
     }
 
-    public String getDesired_date() {
-        return desired_date;
+    public String getDesiredDate() {
+        return desiredDate;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public String getProduct_name() {
-        return product_name;
-    }
-
     public String getNote() {
         return note;
-    }
-
-    public HBox getAction() {
-        return action;
     }
 }

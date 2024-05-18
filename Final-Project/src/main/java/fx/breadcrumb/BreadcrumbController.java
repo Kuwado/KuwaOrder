@@ -1,4 +1,4 @@
-package fx;
+package fx.breadcrumb;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

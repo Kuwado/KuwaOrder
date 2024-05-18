@@ -22,8 +22,8 @@ module application {
     exports application;
     exports org.example.final_project;
     exports fx;
-    exports fx.make_order;
-    opens fx.make_order to javafx.fxml;
+    exports fx.makeorder;
+    opens fx.makeorder to javafx.fxml;
     exports model;
     exports solution;
     exports fx.site;
@@ -32,5 +32,12 @@ module application {
     opens fx.sale to javafx.fxml;
     opens fx.product to javafx.fxml;
     exports fx.product;
+    exports model.tabledata;
+    exports fx.breadcrumb;
+    opens fx.breadcrumb to javafx.fxml;
+
+    opens fx.sidebar to javafx.fxml;
+    exports fx.sidebar;
+
 
 }
