@@ -86,4 +86,8 @@ public class ChosenSite {
     public void setAction(TextField action) {
         this.action = action;
     }
+
+    public static void setIdCounter(int idCounter) {
+        ChosenSite.idCounter = idCounter;
+    }
 }

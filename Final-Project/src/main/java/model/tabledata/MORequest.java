@@ -64,9 +64,7 @@ public class MORequest {
         return action;
     }
 
-    public void resetIdCounter() {
-        idCounter = 1;
+    public static void setIdCounter(int idCounter) {
+        MORequest.idCounter = idCounter;
     }
-
-
 }

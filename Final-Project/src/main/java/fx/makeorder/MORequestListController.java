@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXML;
 
 import model.*;
+import model.tabledata.MOOrder;
 import model.tabledata.MORequest;
 import solution.*;
 
@@ -73,14 +74,13 @@ public class MORequestListController extends MOController<MORequest> {
         setBreadcrumb(2, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Thêm dữ liệu vào bảng
-        number = 9;
         startTable(table, moRequests);
 
         // Preview card
         makeAppearPreviewCard(table);
 
-        // Xử lý sự kiện khi người dùng nhấp vào cột action
-
+        // Reset stt
+        MORequest.setIdCounter(1);
     }
 
     @Override
