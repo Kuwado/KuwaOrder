@@ -40,15 +40,17 @@ public abstract class MOController<T> {
     @FXML
     public AnchorPane previewCard;
 
-    public int number;
+    public int number = 9;
+
+    public abstract void insertToTable();
+    public abstract void insertToPreviewCard(T data);
+    public abstract void setDataToTrans(T data);
 
     public void setBreadcrumb(int number, String path) {
         MOBreadcrumbController.number = number;
         MOBreadcrumbController moc = new MOBreadcrumbController();
         moc.loadBreadcrumb(breadcrumb, path);
     }
-
-    public abstract void insertToTable();
 
     public void startTable(TableView<T> table, ObservableList<T> items) {
         hidePagination.setVisible(false);
@@ -68,8 +70,6 @@ public abstract class MOController<T> {
         }
         viewAllStt = !viewAllStt;
     }
-
-    public abstract void insertToPreviewCard(T data);
 
     public void makeAppearPreviewCard(TableView<T> table) {
         previewCard.setTranslateY(800);
@@ -96,8 +96,6 @@ public abstract class MOController<T> {
         });
         return button;
     }
-
-    public abstract void setDataToTrans(T data);
 
     public void viewRequestDetail(T data, ActionEvent event, String path) {
         try {

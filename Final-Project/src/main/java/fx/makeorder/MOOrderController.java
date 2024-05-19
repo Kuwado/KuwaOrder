@@ -7,18 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import model.*;
+import model.tabledata.ChosenQuantity;
 import model.tabledata.ChosenSite;
 import model.SiteProduct;
+import model.tabledata.ConfirmSite;
+import solution.DateConverter;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class MOOrderController extends MOController<ChosenSite> {
     @FXML
@@ -67,10 +67,19 @@ public class MOOrderController extends MOController<ChosenSite> {
     private TextField cardNumberInput;
 
     @FXML
-    private Button makeOrderBtn;
+    private Label airPrice;
 
     @FXML
-    private Button viewAll;
+    private Label shipPrice;
+
+    @FXML
+    private Label slcm;
+
+    @FXML
+    private Label slcc;
+
+    @FXML
+    private Button makeOrderBtn;
 
     @FXML
     void viewAll(ActionEvent event) {
@@ -81,21 +90,25 @@ public class MOOrderController extends MOController<ChosenSite> {
     private final SiteController siteController = new SiteController();
     private final ProductController productController = new ProductController();
     private final SiteProductController siteProductController = new SiteProductController();
+    private ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
     private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
+    private int  needQuantity = order.getQuantity();
+    private boolean sttQuantity;
+    private int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
 
 
 
     @FXML
     void initialize() {
+        // Load dữ liệu
         ArrayList<SiteProduct> siteProducts = siteProductController.getSiteproductsByProduct(order.getProductId());
         ArrayList<Site> sites = siteProductController.getSitesFromSiteProduct(order.getProductId());
         Product product = productController.getProductById(order.getProductId());
 
+        // Thêm input vào data table
         for (SiteProduct sp : siteProducts) {
             TextField tf = new TextField();
             tf.getStyleClass().add("number-input");
-            tf.setId("tfInput");
-
             Site site = siteController.getSiteById(sp.getSiteId());
             chosenSites.add(new ChosenSite(order, product, site, sp, tf));
         }
@@ -104,17 +117,19 @@ public class MOOrderController extends MOController<ChosenSite> {
         setBreadcrumb(4, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Table
-        number = 9;
         startTable(table, chosenSites);
 
         // Preview card
+        cardNumberInput.setEditable(false);
+        slcm.setText(String.valueOf(order.getQuantity()));
+        slcc.setText(String.valueOf(order.getQuantity()));
         productName.setText(productController.getProductById(order.getProductId()).getName());
+        insertDataToChosenQuantities();
         makeAppearPreviewCard(table);
     }
 
     @Override
     public void setDataToTrans(ChosenSite chosenSite) {
-
     }
 
     public static void setOrder(Order order) {
@@ -140,8 +155,142 @@ public class MOOrderController extends MOController<ChosenSite> {
         SiteProduct siteProduct = siteProductController.getSiteproductFromProductAndSite(product.getId(), site.getId());
         siteNameCard.setText(site.getName());
         soldQuantity.setText(String.valueOf(siteProduct.getSoldQuantity()));
+        airPrice.setText(String.format("%,d", Math.round(site.getAirPrice())));
+        shipPrice.setText(String.format("%,d", Math.round(site.getShipPrice())));
         orderUnit.setText(order.getUnit());
         cardNumberInput.setText(chosenSite.getAction().getText());
+
+        if (chosenSite.getShipDate() > date) {
+            shipBtn.getStyleClass().remove("option-btn");
+            shipBtn.getStyleClass().add("hidden-option-btn");
+        } else {
+            //Gán sự kiện nhấn cho nút Ship
+            shipBtn.setOnAction(event -> {
+                shipBtn.getStyleClass().add("option-btn-active");
+                airBtn.getStyleClass().remove("option-btn-active");
+                String shipDeli = "Đường thủy";
+                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli));
+            });
+        }
+        if (chosenSite.getAirDate() > date) {
+            airBtn.getStyleClass().remove("option-btn");
+            airBtn.getStyleClass().add("hidden-option-btn");
+        } else {
+            // Gán sự kiện nhấn cho nút Air
+            airBtn.setOnAction(event -> {
+                airBtn.getStyleClass().add("option-btn-active");
+                shipBtn.getStyleClass().remove("option-btn-active");
+                String airDeli = "Hàng không";
+                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli));
+            });
+        }
     }
+
+    private void insertDataToChosenQuantities() {
+        for (ChosenSite chosenSite : chosenSites) {
+            chosenSite.getAction().textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*")) {
+                    chosenSite.getAction().setText(newValue.replaceAll("[^\\d]", ""));
+                }
+
+                if (checkQuantitySite(chosenSite)) {
+                    cardNumberInput.setText(chosenSite.getAction().getText());
+                    updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), ""));
+                    if (!sttQuantity) {
+                        chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
+                    }
+                    slcc.setText(String.valueOf(needQuantity));
+                } else {
+                    quantityError2();
+                    chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
+                }
+            });
+        }
+    }
+
+    private int changeFromTextIntoInteger(ChosenSite chosenSite) {
+        String text = chosenSite.getAction().getText(); // Trim để loại bỏ khoảng trắng
+        if (text.isEmpty()) {
+            return 0;
+        } else
+            return Integer.parseInt(text);
+    }
+
+    private boolean checkQuantitySite(ChosenSite chosenSite) {
+        int quan = changeFromTextIntoInteger(chosenSite);
+        if (quan > chosenSite.getQuantity()) {
+            return false;
+        } else
+            return true;
+    }
+
+    private void updateChosenQuantities(ChosenQuantity chosenQuantity) {
+        Optional<ChosenQuantity> existingCq = chosenQuantities.stream()
+                .filter(cq -> cq.getSiteId() == chosenQuantity.getSiteId())
+                .findFirst();
+
+        int bu = needQuantity;
+
+        if (chosenQuantity.getQuantity() > 0) {
+            if (existingCq.isPresent()) {
+                needQuantity = needQuantity - chosenQuantity.getQuantity() + existingCq.get().getQuantity();
+            } else {
+                needQuantity -= chosenQuantity.getQuantity();
+            }
+        } else {
+            if (existingCq.isPresent()) {
+                needQuantity += existingCq.get().getQuantity();
+            }
+        }
+
+        if (needQuantity >= 0) {
+            if (chosenQuantity.getQuantity() > 0) {
+                if (existingCq.isPresent()) {
+                    existingCq.get().setQuantity(chosenQuantity.getQuantity());
+                    if (!chosenQuantity.getDeliveryType().isEmpty()) {
+                        existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
+                    }
+                } else {
+                    chosenQuantities.add(chosenQuantity);
+                }
+            } else if (existingCq.isPresent()) {
+                chosenQuantities.remove(existingCq.get());
+            }
+            sttQuantity = true;
+        } else {
+            quantityError();
+            needQuantity = bu;
+            if (existingCq.isPresent()) {
+                needQuantity = bu + existingCq.get().getQuantity();
+                chosenQuantities.remove(existingCq.get());
+            } else {
+                needQuantity = bu;
+
+            }
+            sttQuantity = false;
+        }
+    }
+
+    private void quantityError() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Số lượng quá lớn");
+        alert.setHeaderText(null);
+        alert.setContentText("Số lượng bạn nhập vượt quá số lượng còn thiếu! Vui lòng nhập lại");
+        alert.showAndWait();
+    }
+
+    private void quantityError2() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Số lượng quá lớn");
+        alert.setHeaderText(null);
+        alert.setContentText("Số lượng bạn nhập vượt quá số lượng còn trong kho của site! Vui lòng nhập lại");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void makeSiteOrder(ActionEvent event) {
+
+    }
+
 
 }

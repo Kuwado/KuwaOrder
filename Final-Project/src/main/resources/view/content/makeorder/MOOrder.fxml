@@ -28,6 +28,22 @@
                   <Label fx:id="productName" layoutX="65.0" layoutY="29.0" maxHeight="32.0" maxWidth="200.0" prefHeight="32.0" prefWidth="200.0" styleClass="title-bab" text="Điện thoại Nokia" />
                </children>
             </Pane>
+            <AnchorPane prefHeight="50.0" prefWidth="330.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="105.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="50.0" prefWidth="130.0" AnchorPane.leftAnchor="0.0">
+                     <children>
+                        <Label styleClass="preview-card-title" text="SL cần chọn" />
+                        <Label fx:id="slcc" styleClass="preview-card-text" text="50" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="50.0" prefWidth="130.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label styleClass="preview-card-title" text="SL cần mua" />
+                        <Label fx:id="slcm" styleClass="preview-card-text" text="100" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
             <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="590.0" prefWidth="800.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
@@ -116,11 +132,13 @@
                                        <styleClass>
                                           <String fx:value="preview-card-title" />
                                           <String fx:value="under-line" />
-                                       </styleClass></Label>
+                                       </styleClass>
+                                    </Label>
                                     <Label fx:id="soldQuantity" styleClass="preview-card-text" text="5">
                                        <HBox.margin>
                                           <Insets left="10.0" />
-                                       </HBox.margin></Label>
+                                       </HBox.margin>
+                                    </Label>
                                     <Label fx:id="orderUnit" styleClass="preview-card-text" text="Chiếc">
                                        <HBox.margin>
                                           <Insets left="5.0" />
@@ -133,7 +151,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox prefHeight="125.0" prefWidth="100.0" styleClass="preview-card-des">
+                        <VBox prefHeight="135.0" prefWidth="100.0" styleClass="preview-card-des">
                            <children>
                               <Label id="preview-card-des-title" styleClass="preview-card-title" text="Phương thức vận chuyển:" underline="true">
                                  <font>
@@ -150,7 +168,6 @@
                                                 <String fx:value="font-size-14" />
                                                 <String fx:value="border-btn" />
                                                 <String fx:value="option-btn" />
-                                                <String fx:value="option-btn-active" />
                                              </styleClass>
                                              <font>
                                                 <Font size="14.0" />
@@ -174,6 +191,20 @@
                                     </ButtonBar>
                                  </children>
                               </HBox>
+                              <HBox prefHeight="40.0" prefWidth="300.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0">
+                                       <children>
+                                          <Label fx:id="shipPrice" styleClass="preview-card-text" text="3.000.000" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0">
+                                       <children>
+                                          <Label fx:id="airPrice" styleClass="preview-card-text" text="5.000.000" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="297.0">
@@ -183,7 +214,7 @@
                                     <Font name="System Bold Italic" size="5.0" />
                                  </font>
                               </Label>
-                              <TextField id="number-input" fx:id="cardNumberInput" prefHeight="40.0" prefWidth="100.0" styleClass="number-input">
+                              <TextField id="number-input" fx:id="cardNumberInput" minWidth="100.0" prefHeight="42.0" prefWidth="100.0" styleClass="number-input">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -197,13 +228,13 @@
                         <Image url="@../../../images/icons/kẹp.png" />
                      </image>
                   </ImageView>
-                  <HBox alignment="CENTER" layoutX="-2.0" layoutY="527.0" prefWidth="330.0" AnchorPane.bottomAnchor="20.0">
-                     <children>
-                        <Button fx:id="makeOrderBtn" mnemonicParsing="false" styleClass="action-button" text="Tạo đơn" />
-                     </children>
-                  </HBox>
                </children>
             </AnchorPane>
+            <HBox alignment="CENTER" prefWidth="330.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="42.0">
+               <children>
+                  <Button fx:id="makeOrderBtn" mnemonicParsing="false" onAction="#makeSiteOrder" styleClass="action-button" text="Tạo đơn" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>

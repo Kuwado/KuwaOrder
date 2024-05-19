@@ -21,30 +21,7 @@ public class ChosenSite {
     private String unit;
     private int shipDate;
     private int airDate;
-    //private int soldQuantity;
-    //private HBox action;
     private TextField action;
-
-//    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct) {
-//        this.id = idCounter++;
-//        this.order = order;
-//        this.product = product;
-//        this.site = site;
-//        this.siteProduct = siteProduct;
-//        this.name = site.getName();
-//        this.quantity = siteProduct.getQuantity();
-//        this.unit = order.getUnit();
-//        this.shipDate = site.getShipDate();
-//        this.airDate = site.getAirDate();
-//        this.soldQuantity = siteProduct.getSoldQuantity();
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/MOText.fxml"));
-//            this.action = loader.load();
-//        } catch (IOException e) {
-//            System.err.println("Error loading sidebar: " + e.getMessage());
-//            e.printStackTrace();
-//        };
-//    }
 
     public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct, TextField textfield) {
         this.id = idCounter++;
@@ -102,16 +79,11 @@ public class ChosenSite {
         return airDate;
     }
 
-//    public int getSoldQuantity() {
-//        return soldQuantity;
-//    }
-//
-////    public HBox getAction() {
-////        return action;
-////    }
-
-
     public TextField getAction() {
         return action;
+    }
+
+    public void setAction(TextField action) {
+        this.action = action;
     }
 }
