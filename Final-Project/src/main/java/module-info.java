@@ -12,7 +12,10 @@ module application {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    exports fx.wh;
 
+    // Add this line to open the package to javafx.fxml
+    opens fx.wh to javafx.fxml;
 
     opens fx.warehouse to javafx.fxml;
     requires java.sql;

@@ -2,7 +2,6 @@ package model.subsytem;
 
 import config.DbUtil;
 import model.SiteOrder;
-import model.SiteOrder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,32 +12,32 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SiteOrderSystem implements DBInterface<SiteOrder> {
-    // Thêm
+    // Add new SiteOrder
     @Override
     public void insert(SiteOrder siteOrder) {
-//        try {
-//            Connection con = DbUtil.getConnection();
-//            String sql = "INSERT INTO siteOrders (siteOrder_id, quantity, unit, desired_date, note, request_id) VALUES (?, ?, ?, ?, ?, ?)";
-//            PreparedStatement pst = con.prepareStatement(sql);
-//            pst.setInt(1, siteOrder.getSiteOrderId());
-//            pst.setInt(2, siteOrder.getQuantity());
-//            pst.setString(3, siteOrder.getUnit());
-//            pst.setString(4, siteOrder.getDesiredDate());
-//            pst.setString(5, siteOrder.getNote());
-//            pst.setInt(6, siteOrder.getRequestId());
-//            pst.executeUpdate();
-//            DbUtil.closeConnection(con);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "INSERT INTO siteOrders (order_id, site_id, delivery_type, price, status, note) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, siteOrder.getOrderId());
+            pst.setInt(2, siteOrder.getSiteId());
+            pst.setString(3, siteOrder.getDeliveryType());
+            pst.setDouble(4, siteOrder.getPrice());
+            pst.setString(5, siteOrder.getStatus());
+            pst.setString(6, siteOrder.getNote());
+            pst.executeUpdate();
+            DbUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    // Xóa
+    // Delete SiteOrder by ID
     @Override
     public void delete(int id) {
         try {
-            Connection con = (Connection) DbUtil.getConnection();
-            String sql = "DELETE FROM siteOrders WHERE `id` = ?";
+            Connection con = DbUtil.getConnection();
+            String sql = "DELETE FROM siteOrders WHERE id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
             pst.executeUpdate();
@@ -48,33 +47,36 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
         }
     }
 
-    // Sửa
+    // Update SiteOrder
     @Override
     public void update(SiteOrder siteOrder) {
-//        try {
-//            Connection con = (Connection) DbUtil.getConnection();
-//            String sql = "UPDATE siteOrders SET quantity = ?, unit = ?, desired_date = ?, note = ? WHERE id = ?";
-//            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-//            pst.setInt(1, siteOrder.getQuantity());
-//            pst.setString(2, siteOrder.getUnit());
-//            pst.setString(3, siteOrder.getDesiredDate());
-//            pst.setString(4, siteOrder.getNote());
-//            pst.executeUpdate();
-//            DbUtil.closeConnection(con);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "UPDATE siteOrders SET order_id = ?, site_id = ?, delivery_type = ?, price = ?, status = ?, note = ? WHERE id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, siteOrder.getOrderId());
+            pst.setInt(2, siteOrder.getSiteId());
+            pst.setString(3, siteOrder.getDeliveryType());
+            pst.setDouble(4, siteOrder.getPrice());
+            pst.setString(5, siteOrder.getStatus());
+            pst.setString(6, siteOrder.getNote());
+            pst.setInt(7, siteOrder.getId());
+            pst.executeUpdate();
+            DbUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    // Tìm tất cả
+    // Retrieve all SiteOrders
     @Override
     public ArrayList<SiteOrder> selectAll() {
         ArrayList<SiteOrder> siteOrders = new ArrayList<>();
         try {
-            Connection con = (Connection) DbUtil.getConnection();
+            Connection con = DbUtil.getConnection();
             String sql = "SELECT * FROM siteOrders";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            ResultSet rs = (ResultSet) pst.executeQuery();
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int orderId = rs.getInt("order_id");
@@ -88,12 +90,12 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
             }
             DbUtil.closeConnection(con);
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, e);
         }
         return siteOrders;
     }
 
-    // Tìm bằng ID
+    // Retrieve a SiteOrder by ID
     @Override
     public SiteOrder selectById(int id) {
         SiteOrder siteOrder = null;
@@ -103,7 +105,6 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-
             if (rs.next()) {
                 int orderId = rs.getInt("order_id");
                 int siteId = rs.getInt("site_id");
@@ -113,12 +114,10 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
                 String note = rs.getString("note");
                 siteOrder = new SiteOrder(id, orderId, siteId, deliveryType, price, status, note);
             }
-
             DbUtil.closeConnection(con);
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, e);
         }
         return siteOrder;
     }
-
 }
