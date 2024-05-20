@@ -44,9 +44,9 @@
                                 <TableColumn fx:id="quantity" maxWidth="284.734375" minWidth="49.5281982421875" prefWidth="58.297607421875" styleClass="tb-col" text="Số lượng" />
                                 <TableColumn fx:id="unit" maxWidth="401.245361328125" minWidth="46.68829345703125" prefWidth="46.68829345703125" styleClass="tb-col" text="Đơn vị" />
                                 <TableColumn fx:id="productPrice" maxWidth="370.49969482421875" minWidth="29.754638671875" prefWidth="84.95709228515625" styleClass="tb-col" text="Giá sản phẩm" />
-                        <TableColumn fx:id="deliveryType" maxWidth="650.0731201171875" minWidth="29.754638671875" prefWidth="127.835205078125" styleClass="tb-col" text="Hình thức vận chuyển" />
-                        <TableColumn fx:id="deliveryPrice" maxWidth="1244.164794921875" minWidth="29.754638671875" prefWidth="94.5003662109375" styleClass="tb-col" text="Giá vận chuyển" />
-                        <TableColumn fx:id="status" maxWidth="2397.2442626953125" minWidth="29.754638671875" prefWidth="2396.4998779296875" styleClass="tb-col" text="Trạng thái" />
+                                <TableColumn fx:id="deliveryType" maxWidth="650.0731201171875" minWidth="29.754638671875" prefWidth="127.835205078125" styleClass="tb-col" text="Hình thức vận chuyển" />
+                                <TableColumn fx:id="deliveryPrice" maxWidth="1244.164794921875" minWidth="29.754638671875" prefWidth="94.5003662109375" styleClass="tb-col" text="Giá vận chuyển" />
+                                <TableColumn fx:id="status" maxWidth="2397.2442626953125" minWidth="29.754638671875" prefWidth="2396.4998779296875" styleClass="tb-col" text="Trạng thái" />
                             </columns>
                         </TableView>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
