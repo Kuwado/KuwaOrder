@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.tabledata.SiteOrdersList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,16 @@ import java.util.List;
 public class HandleSiteOrderController {
 
 
-    public TableView<TestData> siteOrderTable;
-    public TableColumn<TestData, Integer> idColumn;
-    public TableColumn<TestData, Integer> orderIdColumn;
-    public TableColumn<TestData, String> productNameColumn;
-    public TableColumn<TestData, Integer> quantityColumn;
-    public TableColumn<TestData, String> unitColumn;
-    public TableColumn<TestData, String> deliveryColumn;
-    public TableColumn<TestData, String> statusColumn;
-    public TableColumn<TestData, CheckBox> selectColumn;
+    public TableView<SiteOrdersList> siteOrderTable;
+    public TableColumn<SiteOrdersList, Integer> idColumn;
+    public TableColumn<SiteOrdersList, Integer> orderIdColumn;
+    public TableColumn<SiteOrdersList, Integer> siteIdColumn;
+    public TableColumn<SiteOrdersList, String> productNameColumn;
+    public TableColumn<SiteOrdersList, Integer> quantityColumn;
+    public TableColumn<SiteOrdersList, String> unitColumn;
+    public TableColumn<SiteOrdersList, String> deliveryColumn;
+    public TableColumn<SiteOrdersList, String> statusColumn;
+    public TableColumn<SiteOrdersList, CheckBox> selectColumn;
     public Button confirmButton;
     public Button cancelButton;
 
@@ -37,6 +39,7 @@ public class HandleSiteOrderController {
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("siteOrderId"));
         orderIdColumn.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        siteIdColumn.setCellValueFactory(new PropertyValueFactory<>("siteId"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -47,25 +50,25 @@ public class HandleSiteOrderController {
     }
 
     private void loadTableData() {
-        ObservableList<TestData> details = FXCollections.observableArrayList(
-                new TestData(1, 1, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(2, 2, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(3, 3, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(4, 4, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(5, 5, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(6, 6, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(7, 7, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(8, 9, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
-                new TestData(9, 10, "Cao Phong", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox())
-        );
-        siteOrderTable.setItems(details);
+//        ObservableList<TestData> details = FXCollections.observableArrayList(
+//                new TestData(1, 1, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(2, 2, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(3, 3, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(4, 4, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(5, 5, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(6, 6, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(7, 7, "Thùy Dung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(8, 9, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
+//                new TestData(9, 10, "Cao Phong", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox())
+//        );
+        siteOrderTable.setItems(SiteOrdersList.siteOrdersListsData());
     }
 
     @FXML
     private List<Integer> cancelSiteOrder(ActionEvent e) {
-        ObservableList<TestData> items = siteOrderTable.getItems();
+        ObservableList<SiteOrdersList> items = siteOrderTable.getItems();
         List<Integer> cancelSiteOrderIds = new ArrayList<>();
-        for (TestData item : items) {
+        for (SiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 cancelSiteOrderIds.add(item.getSiteOrderId());
             }
