@@ -16,8 +16,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.tabledata.ChosenQuantity;
 import model.tabledata.ConfirmSite;
-import model.tabledata.MOOrder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -57,7 +57,7 @@ public class MOConfirmSiteController {
 
         for (ChosenQuantity q : chosenQuantities) {
             String name = siteController.getSiteById(q.getSiteId()).getName();
-            confirmSites.add(new ConfirmSite(name, q.getDeliveryType(), q.getQuantity(), date));
+            confirmSites.add(new ConfirmSite(name, q.getDeliveryType(), q.getChosenQuantity(), date));
         }
 
         // Chèn vào table
@@ -95,7 +95,13 @@ public class MOConfirmSiteController {
     }
 
     @FXML
-    void confirm(ActionEvent event) {
+    void confirm(ActionEvent event) throws IOException {
+        // Lấy Stage hiện tại từ ActionEvent
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
 
+        // Đóng Stage (popup)
+        stage.close();
+        MOOrderController.runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 620, 700);
     }
 }

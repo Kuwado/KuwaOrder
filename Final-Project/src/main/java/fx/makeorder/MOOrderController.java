@@ -105,10 +105,11 @@ public class MOOrderController extends MOController<ChosenSite> {
     private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
     private int needQuantity = order.getQuantity();
     private boolean sttQuantity;
-    private final int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
+    private int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
 
     @FXML
     void initialize() {
+
         // Load dữ liệu
         ArrayList<SiteProduct> siteProducts = siteProductController.getSiteproductsByProduct(order.getProductId());
         ArrayList<Site> sites = siteProductController.getSitesFromSiteProduct(order.getProductId());
@@ -156,6 +157,12 @@ public class MOOrderController extends MOController<ChosenSite> {
         table.setItems(chosenSites);
     }
 
+    private void addActiveClass(Button button, String name) {
+        if (!button.getStyleClass().contains(name)) {
+            button.getStyleClass().add(name);
+        }
+    }
+
     @Override
     public void insertToPreviewCard(ChosenSite chosenSite) {
         Site site = chosenSite.getSite();
@@ -167,28 +174,47 @@ public class MOOrderController extends MOController<ChosenSite> {
         shipPrice.setText(String.format("%,d", Math.round(site.getShipPrice())));
         orderUnit.setText(order.getUnit());
         cardNumberInput.setText(chosenSite.getAction().getText());
+        // Setup button delivery khi chọn
+        addActiveClass(shipBtn, "option-btn");
+        shipBtn.getStyleClass().remove("hidden-option-btn");
+        shipBtn.getStyleClass().remove("option-btn-active");
+        addActiveClass(airBtn, "option-btn");
+        airBtn.getStyleClass().remove("hidden-option-btn");
+        airBtn.getStyleClass().remove("option-btn-active");
+        // Check điều kiện các button
+        if (chosenSite.getDeliveryStt() != null && chosenSite.getDeliveryStt().equals("Đường thủy")) {
+            addActiveClass(shipBtn, "option-btn-active");
+            airBtn.getStyleClass().remove("option-btn-active");
+        }
+        else if (chosenSite.getDeliveryStt() != null && chosenSite.getDeliveryStt().equals("Hàng không")) {
+            addActiveClass(airBtn, "option-btn-active");
+            shipBtn.getStyleClass().remove("option-btn-active");
+        }
 
         if (chosenSite.getShipDate() > date) {
             shipBtn.getStyleClass().remove("option-btn");
-            shipBtn.getStyleClass().add("hidden-option-btn");
+            addActiveClass(shipBtn, "hidden-option-btn");
         } else {
             //Gán sự kiện nhấn cho nút Ship
             shipBtn.setOnAction(event -> {
-                shipBtn.getStyleClass().add("option-btn-active");
+                addActiveClass(shipBtn, "option-btn-active");
                 airBtn.getStyleClass().remove("option-btn-active");
                 String shipDeli = "Đường thủy";
-                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli));
+                chosenSite.setDeliveryStt(shipDeli);
+                updateChosenQuantities(
+                        new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli));
             });
         }
-        if (chosenSite.getAirDate() > date) {
+        if (chosenSite.getAirDate() > date ) {
             airBtn.getStyleClass().remove("option-btn");
-            airBtn.getStyleClass().add("hidden-option-btn");
+            addActiveClass(airBtn, "hidden-option-btn");
         } else {
             // Gán sự kiện nhấn cho nút Air
             airBtn.setOnAction(event -> {
-                airBtn.getStyleClass().add("option-btn-active");
+                addActiveClass(airBtn, "option-btn-active");
                 shipBtn.getStyleClass().remove("option-btn-active");
                 String airDeli = "Hàng không";
+                chosenSite.setDeliveryStt(airDeli);
                 updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli));
             });
         }
@@ -239,22 +265,22 @@ public class MOOrderController extends MOController<ChosenSite> {
 
         int bu = needQuantity;
 
-        if (chosenQuantity.getQuantity() > 0) {
+        if (chosenQuantity.getChosenQuantity() > 0) {
             if (existingCq.isPresent()) {
-                needQuantity = needQuantity - chosenQuantity.getQuantity() + existingCq.get().getQuantity();
+                needQuantity = needQuantity - chosenQuantity.getChosenQuantity() + existingCq.get().getChosenQuantity();
             } else {
-                needQuantity -= chosenQuantity.getQuantity();
+                needQuantity -= chosenQuantity.getChosenQuantity();
             }
         } else {
             if (existingCq.isPresent()) {
-                needQuantity += existingCq.get().getQuantity();
+                needQuantity += existingCq.get().getChosenQuantity();
             }
         }
 
         if (needQuantity >= 0) {
-            if (chosenQuantity.getQuantity() > 0) {
+            if (chosenQuantity.getChosenQuantity() > 0) {
                 if (existingCq.isPresent()) {
-                    existingCq.get().setQuantity(chosenQuantity.getQuantity());
+                    existingCq.get().setChosenQuantity(chosenQuantity.getChosenQuantity());
                     if (!chosenQuantity.getDeliveryType().isEmpty()) {
                         existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
                     }
@@ -269,7 +295,7 @@ public class MOOrderController extends MOController<ChosenSite> {
             quantityError();
             needQuantity = bu;
             if (existingCq.isPresent()) {
-                needQuantity = bu + existingCq.get().getQuantity();
+                needQuantity = bu + existingCq.get().getChosenQuantity();
                 chosenQuantities.remove(existingCq.get());
             } else {
                 needQuantity = bu;
@@ -296,12 +322,15 @@ public class MOOrderController extends MOController<ChosenSite> {
 
     @FXML
     void makeSiteOrder(ActionEvent event) throws IOException {
+        MOExpectedSiteOrderController.setDate(date);
+        MOExpectedSiteOrderController.setOrder(order);
         if (!chosenQuantities.isEmpty()) {
+            MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
             MOConfirmSiteController.setChosenQuantities(chosenQuantities);
             MOConfirmSiteController.setDate(order.getDesiredDate());
             runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
         } else {
-
+            runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 620, 700);
         }
     }
 
@@ -309,8 +338,8 @@ public class MOOrderController extends MOController<ChosenSite> {
     public void setDataToTrans(ChosenSite chosenSite) {
     }
 
-    private void runPopUp(String path, double width, double height) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+    public static void runPopUp(String path, double width, double height) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MOOrderController.class.getResource(path));
         Stage primaryStage = new Stage();
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -327,8 +356,8 @@ public class MOOrderController extends MOController<ChosenSite> {
         double popupY = (screenHeight - height) / 2;
 
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(MOOrderController.class.getResource("/css/styles.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(MOOrderController.class.getResource("/css/makeOrder.css")).toExternalForm());
         primaryStage.setScene(scene);
 
         // Đặt vị trí cho pop-up
@@ -337,6 +366,7 @@ public class MOOrderController extends MOController<ChosenSite> {
 
         primaryStage.show();
     }
+
 
 
 }

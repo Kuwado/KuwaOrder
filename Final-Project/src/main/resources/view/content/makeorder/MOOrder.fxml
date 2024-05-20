@@ -167,7 +167,6 @@
                                                 <String fx:value="btn" />
                                                 <String fx:value="font-size-14" />
                                                 <String fx:value="border-btn" />
-                                                <String fx:value="option-btn" />
                                              </styleClass>
                                              <font>
                                                 <Font size="14.0" />
@@ -177,7 +176,6 @@
                                              <styleClass>
                                                 <String fx:value="border-btn" />
                                                 <String fx:value="btn" />
-                                                <String fx:value="option-btn" />
                                                 <String fx:value="font-size-14" />
                                              </styleClass>
                                              <font>
