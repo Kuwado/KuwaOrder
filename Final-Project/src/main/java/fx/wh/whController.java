@@ -50,11 +50,11 @@ public abstract class whController<T> {
         button.getStyleClass().add("table-view-btn");
         button.setOnAction(event -> {
             T data = table.getItems().get(index);
-            viewRequestDetail(data, event, path);
+            viewDetail(data, event, path);
         });
         return button;
     }
-    public void viewRequestDetail(T data, ActionEvent event, String path) {
+    public void viewDetail(T data, ActionEvent event, String path) {
         try {
             setDataToTrans(data);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

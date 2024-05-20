@@ -111,12 +111,12 @@ public class MOOrderController extends MOController<ChosenSite> {
     void initialize() {
 
         // Load dữ liệu
-        ArrayList<SiteProduct> siteProducts = siteProductController.getSiteproductsByProduct(order.getProductId());
+        ArrayList<ChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
         ArrayList<Site> sites = siteProductController.getSitesFromSiteProduct(order.getProductId());
         Product product = productController.getProductById(order.getProductId());
 
         // Thêm input vào data table
-        for (SiteProduct sp : siteProducts) {
+        for (ChosenQuantity sp : siteProducts) {
             TextField tf = new TextField();
             tf.getStyleClass().add("number-input");
             Site site = siteController.getSiteById(sp.getSiteId());
@@ -201,8 +201,7 @@ public class MOOrderController extends MOController<ChosenSite> {
                 airBtn.getStyleClass().remove("option-btn-active");
                 String shipDeli = "Đường thủy";
                 chosenSite.setDeliveryStt(shipDeli);
-                updateChosenQuantities(
-                        new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli));
+                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli, chosenSite.getSite().getShipPrice()));
             });
         }
         if (chosenSite.getAirDate() > date ) {
@@ -215,7 +214,7 @@ public class MOOrderController extends MOController<ChosenSite> {
                 shipBtn.getStyleClass().remove("option-btn-active");
                 String airDeli = "Hàng không";
                 chosenSite.setDeliveryStt(airDeli);
-                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli));
+                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli, chosenSite.getSite().getAirPrice()));
             });
         }
     }
@@ -229,7 +228,7 @@ public class MOOrderController extends MOController<ChosenSite> {
 
                 if (checkQuantitySite(chosenSite)) {
                     cardNumberInput.setText(chosenSite.getAction().getText());
-                    updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), ""));
+                    updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), chosenSite.getDeliveryStt(), 50));
                     if (!sttQuantity) {
                         chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
                     }
@@ -281,8 +280,9 @@ public class MOOrderController extends MOController<ChosenSite> {
             if (chosenQuantity.getChosenQuantity() > 0) {
                 if (existingCq.isPresent()) {
                     existingCq.get().setChosenQuantity(chosenQuantity.getChosenQuantity());
-                    if (!chosenQuantity.getDeliveryType().isEmpty()) {
+                    if (chosenQuantity.getDeliveryType() != null) {
                         existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
+                        existingCq.get().setDeliveryPrice(chosenQuantity.getDeliveryPrice());
                     }
                 } else {
                     chosenQuantities.add(chosenQuantity);
@@ -324,8 +324,8 @@ public class MOOrderController extends MOController<ChosenSite> {
     void makeSiteOrder(ActionEvent event) throws IOException {
         MOExpectedSiteOrderController.setDate(date);
         MOExpectedSiteOrderController.setOrder(order);
+        MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
         if (!chosenQuantities.isEmpty()) {
-            MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
             MOConfirmSiteController.setChosenQuantities(chosenQuantities);
             MOConfirmSiteController.setDate(order.getDesiredDate());
             runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);

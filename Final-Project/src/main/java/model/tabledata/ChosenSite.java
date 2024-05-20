@@ -15,7 +15,6 @@ public class ChosenSite {
     private Order order;
     private Product product;
     private Site site;
-    private SiteProduct siteProduct;
     private String name;
     private int quantity;
     private String unit;
@@ -24,14 +23,13 @@ public class ChosenSite {
     private TextField action;
     private String deliveryStt;
 
-    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct, TextField textfield) {
+    public ChosenSite(Order order, Product product, Site site, ChosenQuantity chosenQuantity, TextField textfield) {
         this.id = idCounter++;
         this.order = order;
         this.product = product;
         this.site = site;
-        this.siteProduct = siteProduct;
         this.name = site.getName();
-        this.quantity = siteProduct.getQuantity();
+        this.quantity = chosenQuantity.getQuantity();
         this.unit = order.getUnit();
         this.shipDate = site.getShipDate();
         this.airDate = site.getAirDate();
@@ -54,10 +52,6 @@ public class ChosenSite {
 
     public Site getSite() {
         return site;
-    }
-
-    public SiteProduct getSiteProduct() {
-        return siteProduct;
     }
 
     public String getName() {
@@ -85,7 +79,10 @@ public class ChosenSite {
     }
 
     public String getDeliveryStt() {
-        return deliveryStt;
+        if(deliveryStt != null)
+            return deliveryStt;
+        else
+            return null;
     }
 
     public void setDeliveryStt(String deliveryStt) {

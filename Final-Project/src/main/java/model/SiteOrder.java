@@ -25,6 +25,14 @@ public class SiteOrder {
         this.note = note;
     }
 
+    public SiteOrder(int orderId, int siteId, int quantity, String deliveryType, double price) {
+        this.orderId = orderId;
+        this.siteId = siteId;
+        this.quantity = quantity;
+        this.deliveryType = deliveryType;
+        this.price = price;
+    }
+
     public SiteOrder(int id, int siteId, String deliveryType, String status) {
         this.id = id;
         this.siteId = siteId;
