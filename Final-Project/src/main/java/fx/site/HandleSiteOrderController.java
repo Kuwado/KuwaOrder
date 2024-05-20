@@ -66,7 +66,7 @@ public class HandleSiteOrderController {
     }
 
     @FXML
-    private List<Integer> cancelSiteOrder(ActionEvent e) {
+    public List<Integer> cancelSiteOrder(ActionEvent e) {
         ObservableList<SiteOrdersList> items = siteOrderTable.getItems();
         List<Integer> cancelSiteOrderIds = new ArrayList<>();
         for (SiteOrdersList item : items) {
@@ -75,6 +75,41 @@ public class HandleSiteOrderController {
             }
         }
         System.out.println("Cancel site order IDs: " + cancelSiteOrderIds);
+        SiteOrdersList.updateStatus(cancelSiteOrderIds, "Đang hủy");
+
+        for (SiteOrdersList item : items) {
+            if (item.getSelected().isSelected()) {
+                item.setStatus("Đang hủy");
+                item.getSelected().setDisable(true);
+            }
+        }
+        siteOrderTable.refresh();
+
+
         return cancelSiteOrderIds;
+    }
+
+    @FXML
+    public List<Integer> confirmSiteOrder(ActionEvent e) {
+        ObservableList<SiteOrdersList> items = siteOrderTable.getItems();
+        List<Integer> confirmSiteOrderIds = new ArrayList<>();
+        for (SiteOrdersList item : items) {
+            if (item.getSelected().isSelected()) {
+                confirmSiteOrderIds.add(item.getSiteOrderId());
+            }
+        }
+
+        SiteOrdersList.updateStatus(confirmSiteOrderIds, "Đã xác nhận");
+        System.out.println("Confirm site order IDs: " + confirmSiteOrderIds);
+
+        for (SiteOrdersList item : items) {
+            if (item.getSelected().isSelected()) {
+                item.setStatus("Đã xác nhận");
+                item.getSelected().setDisable(true);
+            }
+        }
+        siteOrderTable.refresh();
+
+        return confirmSiteOrderIds;
     }
 }

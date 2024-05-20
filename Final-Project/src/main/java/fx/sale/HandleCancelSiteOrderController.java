@@ -9,21 +9,23 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.tabledata.CancelSiteOrderList;
 
 import java.sql.Date;
 
 
 public class HandleCancelSiteOrderController {
 
-    public TableView<ThucTestData> cancelSiteOrderIdTable;
-    public TableColumn<ThucTestData, Integer> siteOrderIdColumn;
-    public TableColumn<ThucTestData, String> siteNameColumn;
-    public TableColumn<ThucTestData, String> productNameColumn;
-    public TableColumn<ThucTestData, Integer> quantityColumn;
-    public TableColumn<ThucTestData, String> unitColumn;
-    public TableColumn<ThucTestData, String> deliveryColumn;
-    public TableColumn<ThucTestData, Date> desiredDateColumn;
-    public TableColumn<ThucTestData, CheckBox> selectedColumn;
+    public TableView<CancelSiteOrderList> cancelSiteOrderIdTable;
+    public TableColumn<CancelSiteOrderList, Integer> siteOrderIdColumn;
+    public TableColumn<CancelSiteOrderList, String> siteNameColumn;
+    public TableColumn<CancelSiteOrderList, String> productNameColumn;
+    public TableColumn<CancelSiteOrderList, Integer> quantityColumn;
+    public TableColumn<CancelSiteOrderList, String> unitColumn;
+    public TableColumn<CancelSiteOrderList, String> deliveryColumn;
+    public TableColumn<CancelSiteOrderList, Date> desiredDateColumn;
+    public TableColumn<CancelSiteOrderList, String> statusColumn;
+    public TableColumn<CancelSiteOrderList, CheckBox> selectedColumn;
     public Button reorderButton;
     public Button cancelButton;
 
@@ -36,15 +38,17 @@ public class HandleCancelSiteOrderController {
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
         deliveryColumn.setCellValueFactory(new PropertyValueFactory<>("delivery"));
         desiredDateColumn.setCellValueFactory(new PropertyValueFactory<>("desiredDate"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         selectedColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
         loadTableData();
     }
 
     private void loadTableData() {
-        ObservableList<ThucTestData> data = FXCollections.observableArrayList(
-                new ThucTestData(1, "Nhà sách Nhã Nam", "Đại dương đen", 10, "Cuốn", "Tàu", Date.valueOf("2025-12-25"), new CheckBox())
-        );
-        cancelSiteOrderIdTable.setItems(data);
+//        ObservableList<ThucTestData> data = FXCollections.observableArrayList(
+//                new ThucTestData(1, "Nhà sách Nhã Nam", "Đại dương đen", 10, "Cuốn", "Tàu", Date.valueOf("2025-12-25"), new CheckBox())
+//        );
+        cancelSiteOrderIdTable.setItems(CancelSiteOrderList.cancelSiteOrderListsData());
     }
+
 
 }

@@ -105,6 +105,36 @@ public class SiteOrdersList {
         return list;
     }
 
+    public static void updateStatus(int siteOrderId, String newStatus) {
+        String sqlQuery = "UPDATE siteorders SET status = ? WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+
+            preparedStatement.setString(1, newStatus);
+            preparedStatement.setInt(2, siteOrderId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateStatus(List<Integer> siteOrderIds, String newStatus) {
+        String sqlQuery = "UPDATE siteorders SET status = ? WHERE id = ?";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+
+            for (int siteOrderId : siteOrderIds) {
+                preparedStatement.setString(1, newStatus);
+                preparedStatement.setInt(2, siteOrderId);
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
