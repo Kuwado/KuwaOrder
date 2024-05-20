@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MOExpectedSiteOrderController">
+<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MOExpectedSiteOrderController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="620.0" style="-fx-background-color: #1b1b32;" BorderPane.alignment="BOTTOM_LEFT">
          <children>
@@ -46,7 +46,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="580.0" styleClass="line-bottom">
                <children>
-                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="310.0">
+                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="330.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="140.0" text="Mã yêu cầu:">
                            <font>
@@ -71,7 +71,7 @@
                         <Insets right="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="BOTTOM_LEFT" maxHeight="30.0" prefHeight="30.0" prefWidth="310.0">
+                  <HBox alignment="BOTTOM_LEFT" maxHeight="30.0" prefHeight="30.0" prefWidth="330.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="140.0" text="Mã đơn đặt:">
                            <font>
@@ -98,9 +98,9 @@
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="580.0" styleClass="line-bottom">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="660.0" styleClass="line-bottom">
                <children>
-                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="620.0">
+                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="660.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="153.0" text="Tên sản phẩm:">
                            <font>
@@ -129,7 +129,7 @@
             </HBox>
             <HBox alignment="CENTER" maxHeight="580.0" prefHeight="50.0" prefWidth="611.0" styleClass="line-bottom">
                <children>
-                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="290.0">
+                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="330.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="140.0" text="Số lượng mua:">
                            <font>
@@ -140,9 +140,27 @@
                               <String fx:value="font-size-20" />
                            </styleClass>
                         </Label>
+                        <Label fx:id="boughtQuantity" prefHeight="30.0" text="123">
+                           <padding>
+                              <Insets left="10.0" right="2.0" />
+                           </padding>
+                           <styleClass>
+                              <String fx:value="preview-card-text" />
+                              <String fx:value="font-size-16" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="orderQuantity2" prefHeight="30.0" text="/">
+                           <padding>
+                              <Insets right="2.0" />
+                           </padding>
+                           <styleClass>
+                              <String fx:value="preview-card-text" />
+                              <String fx:value="font-size-16" />
+                           </styleClass>
+                        </Label>
                         <Label fx:id="orderQuantity" prefHeight="30.0" text="123">
                            <padding>
-                              <Insets left="10.0" right="5.0" />
+                              <Insets right="5.0" />
                            </padding>
                            <styleClass>
                               <String fx:value="preview-card-text" />
@@ -160,7 +178,7 @@
                         <Insets right="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="290.0">
+                  <HBox alignment="BOTTOM_LEFT" maxHeight="35.0" prefHeight="35.0" prefWidth="330.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="97.0" text="Hạn giao:">
                            <font>
@@ -212,8 +230,8 @@
                         <TableColumn fx:id="siteName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="tb-col" text="Tên Site" />
                         <TableColumn fx:id="delivery" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" styleClass="tb-col" text="Phương thức" />
                         <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL" />
-                        <TableColumn fx:id="price" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Giá" />
-                        <TableColumn fx:id="takeDate" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" styleClass="tb-col" text="DK giao" />
+                        <TableColumn fx:id="price" maxWidth="135.0" minWidth="135.0" prefWidth="135.0" text="Giá" />
+                        <TableColumn fx:id="takeDate" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" styleClass="tb-col" text="DK giao" />
                      </columns>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -226,7 +244,7 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="80.0">
                <children>
-                  <Button fx:id="cancelBtn" mnemonicParsing="false" text="Hủy">
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancel" text="Hủy">
                      <styleClass>
                         <String fx:value="cancel-btn" />
                         <String fx:value="btn" />
@@ -235,7 +253,7 @@
                         <Insets right="200.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="makeOrderBtn" mnemonicParsing="false" text="Tạo đơn">
+                  <Button fx:id="makeOrderBtn" mnemonicParsing="false" onAction="#confirm" text="Tạo đơn">
                      <styleClass>
                         <String fx:value="confirm-btn" />
                         <String fx:value="btn" />

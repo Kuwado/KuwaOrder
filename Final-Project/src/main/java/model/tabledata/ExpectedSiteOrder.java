@@ -10,7 +10,7 @@ public class ExpectedSiteOrder {
     private String name;
     private String deliveryType;
     private int quantity;
-    private double price;
+    private String price;
     private String expectedDate;
 
     private SiteController siteController = new SiteController();
@@ -20,7 +20,7 @@ public class ExpectedSiteOrder {
         this.name = siteController.getSiteById(siteOrder.getSiteId()).getName();
         this.deliveryType = siteOrder.getDeliveryType();
         this.quantity = siteOrder.getQuantity();
-        this.price = siteOrder.getPrice();
+        this.price = String.format("%,d", Math.round(siteOrder.getPrice()));
         this.expectedDate = DateConverter.addDaysToDate(date);
     }
 
@@ -40,7 +40,7 @@ public class ExpectedSiteOrder {
         return quantity;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 

@@ -26,8 +26,8 @@ public class OrderController {
     }
 
     // Lấy order bằng id
-    public Order getOrderById(int res_id) {
-        order = orderSystem.selectById(res_id);
+    public Order getOrderById(int id) {
+        order = orderSystem.selectById(id);
         return order;
     }
 
@@ -43,6 +43,9 @@ public class OrderController {
         return orders;
     }
 
-
+    // Update status
+    public void updateStatus(int id, String status) {
+        orderSystem.updateStatus(id, status);
+    }
 
 }

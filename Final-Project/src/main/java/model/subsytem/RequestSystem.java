@@ -133,5 +133,20 @@ public class RequestSystem implements DBInterface<Request> {
         return requests;
     }
 
+    // Update status
+    public void updateStatus(int id, String status) {
+        try {
+            Connection con = (Connection) DbUtil.getConnection();
+            String sql = "UPDATE requests SET status = ? WHERE id = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.setString(2, status);
+            pst.executeUpdate();
+            DbUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 }

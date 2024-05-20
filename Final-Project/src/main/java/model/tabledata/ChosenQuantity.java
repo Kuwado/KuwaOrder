@@ -14,14 +14,6 @@ public class ChosenQuantity {
 
     private final SiteController siteController = new SiteController();
 
-
-    public ChosenQuantity(int siteId, int chosenQuantity, String deliveryType) {
-        this.siteId = siteId;
-        this.chosenQuantity = chosenQuantity;
-        this.deliveryType = deliveryType;
-        this.stt = true;
-    }
-
     public ChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice) {
         this.siteId = siteId;
         this.chosenQuantity = chosenQuantity;

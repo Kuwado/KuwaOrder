@@ -9,6 +9,7 @@ import solution.TotalPriceComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class SiteOrderController {
     private final SiteOrderSystem siteOrderSystem = new SiteOrderSystem();
@@ -38,14 +39,19 @@ public class SiteOrderController {
     public  ArrayList<SiteOrder> getExpectedSiteOrders(ArrayList<ChosenQuantity> sites, Order order) {
         ArrayList<SiteOrder> makeSiteOrders = new ArrayList<>();
         int number = order.getQuantity();
+        List<ChosenQuantity> sitesToRemove = new ArrayList<>();
         // Lọc những site đã được chọn
         for(ChosenQuantity chosenQuantity : sites) {
             if (chosenQuantity.isStt()) {
                 number -= chosenQuantity.getChosenQuantity();
                 double price = chosenQuantity.getProductPrice()*chosenQuantity.getChosenQuantity() + chosenQuantity.getDeliveryPrice();
                 makeSiteOrders.add(new SiteOrder(order.getId(), chosenQuantity.getSiteId(), chosenQuantity.getChosenQuantity(), chosenQuantity.getDeliveryType(), price));
-                sites.remove(chosenQuantity);
+                sitesToRemove.add(chosenQuantity);
             }
+        }
+
+        if (!sitesToRemove.isEmpty()) {
+            sites.removeAll(sitesToRemove);
         }
 
         if (number > 0) {
@@ -65,6 +71,11 @@ public class SiteOrderController {
             }
         }
         return makeSiteOrders;
+    }
+
+    // Update status
+    public void updateStatus(int id, String status) {
+        siteOrderSystem.updateStatus(id, status);
     }
 
 }

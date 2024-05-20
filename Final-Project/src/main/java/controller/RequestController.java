@@ -45,7 +45,11 @@ public class RequestController {
         for (Order o : orders) {
             System.out.println(o.getDesiredDate());
         }
+    }
 
+    // Update status
+    public void updateStatus(int id, String status) {
+        requestSystem.updateStatus(id, status);
     }
 
 }

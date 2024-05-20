@@ -327,7 +327,7 @@ public class MOOrderController extends MOController<ChosenSite> {
         MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
         if (!chosenQuantities.isEmpty()) {
             MOConfirmSiteController.setChosenQuantities(chosenQuantities);
-            MOConfirmSiteController.setDate(order.getDesiredDate());
+            MOConfirmSiteController.setsDate(order.getDesiredDate());
             runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
         } else {
             runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 620, 700);

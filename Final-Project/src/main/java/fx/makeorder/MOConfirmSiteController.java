@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.stage.Stage;
+import model.Order;
 import model.tabledata.ChosenQuantity;
 import model.tabledata.ConfirmSite;
 
@@ -48,8 +49,8 @@ public class MOConfirmSiteController {
     private Button backBtn;
 
     private final ObservableList<ConfirmSite> confirmSites = FXCollections.observableArrayList();
-    private static ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
-    private static String date;
+    private static ArrayList<ChosenQuantity> chosenQuantities;
+    private static String sDate;
     private final SiteController siteController = new SiteController();
 
     @FXML
@@ -57,7 +58,7 @@ public class MOConfirmSiteController {
 
         for (ChosenQuantity q : chosenQuantities) {
             String name = siteController.getSiteById(q.getSiteId()).getName();
-            confirmSites.add(new ConfirmSite(name, q.getDeliveryType(), q.getChosenQuantity(), date));
+            confirmSites.add(new ConfirmSite(name, q.getDeliveryType(), q.getChosenQuantity(), sDate));
         }
 
         // Chèn vào table
@@ -80,8 +81,8 @@ public class MOConfirmSiteController {
         MOConfirmSiteController.chosenQuantities = chosenQuantities;
     }
 
-    public static void setDate(String date) {
-        MOConfirmSiteController.date = date;
+    public static void setsDate(String sDate) {
+        MOConfirmSiteController.sDate = sDate;
     }
 
     @FXML
@@ -102,6 +103,6 @@ public class MOConfirmSiteController {
 
         // Đóng Stage (popup)
         stage.close();
-        MOOrderController.runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 620, 700);
+        MOOrderController.runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 700, 700);
     }
 }
