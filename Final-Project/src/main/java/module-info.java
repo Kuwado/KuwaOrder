@@ -42,6 +42,10 @@ module application {
 
     opens fx.sidebar to javafx.fxml;
     exports fx.sidebar;
+
+    exports fx.makerequest;
+    opens fx.makerequest to javafx.fxml;
+
     exports fx.wh;
 
 }
