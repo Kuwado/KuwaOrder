@@ -1,9 +1,11 @@
 package controller;
 
+import model.ChosingSite;
 import model.Product;
 import model.Site;
 import model.SiteProduct;
 import model.subsytem.SiteProductSystem;
+import model.tabledata.ChosenQuantity;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class SiteProductController {
     public ArrayList<Site> sites;
     public ArrayList<Product> products;
     public ArrayList<SiteProduct> siteproducts;
+    public ArrayList<ChosenQuantity> chosingSites;
     public SiteProduct siteproduct;
 
     public SiteProductController() {
@@ -63,6 +66,11 @@ public class SiteProductController {
     public SiteProduct getSiteproductFromProductAndSite(int product_id, int site_id) {
         siteproduct = siteproductSystem.selectByProductAndSite(product_id, site_id);
         return siteproduct;
+    }
+
+    public ArrayList<ChosenQuantity> getSiteToMakeOrder(int product_id, int date) {
+        chosingSites = siteproductSystem.selectChosingSite(product_id, date);
+        return  chosingSites;
     }
 
 }

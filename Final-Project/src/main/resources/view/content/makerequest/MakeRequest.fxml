@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MORequestController">
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makerequest.MakeRequestController">
    <children>
       <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" minHeight="80.0" styleClass="breadcrumb" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
@@ -25,7 +25,7 @@
                      <children>
                         <HBox alignment="CENTER" maxHeight="40.0" prefHeight="40.0" prefWidth="340.0" styleClass="search-bar">
                            <children>
-                              <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
+                              <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -63,11 +63,11 @@
                               <TableView fx:id="table" maxHeight="350.0" minHeight="350.0" prefWidth="700.0" styleClass="tb">
                                  <columns>
                                     <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
-                                    <TableColumn fx:id="productName" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="Mã hàng" />
-                                    <TableColumn fx:id="productName1" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Tên mặt hàng" />
+                                    <TableColumn fx:id="productID" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="tb-col" text="Mã hàng" />
+                                    <TableColumn fx:id="productName" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Tên mặt hàng" />
                                     <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="Số lượng" />
-                                    <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Đơn vị" />
-                                    <TableColumn fx:id="expired_date" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Ngày nhận hàng mong muốn" />
+                                    <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="Đơn vị" />
+                                    <TableColumn fx:id="desired_date" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Ngày nhận hàng mong muốn" />
                                  </columns>
                                  <VBox.margin>
                                     <Insets top="15.0" />
@@ -172,7 +172,7 @@
                               <Insets top="10.0" />
                            </padding>
                            <children>
-                              <Button fx:id="quickMakeOrderBtn" mnemonicParsing="false" styleClass="quick-button" text="Thêm đơn" />
+                              <Button fx:id="makeOrderBtn" mnemonicParsing="false" styleClass="quick-button" text="Thêm đơn" />
                            </children>
                         </HBox>
                      </children>

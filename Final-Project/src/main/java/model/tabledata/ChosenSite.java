@@ -22,6 +22,7 @@ public class ChosenSite {
     private int shipDate;
     private int airDate;
     private TextField action;
+    private String deliveryStt;
 
     public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct, TextField textfield) {
         this.id = idCounter++;
@@ -81,6 +82,14 @@ public class ChosenSite {
 
     public TextField getAction() {
         return action;
+    }
+
+    public String getDeliveryStt() {
+        return deliveryStt;
+    }
+
+    public void setDeliveryStt(String deliveryStt) {
+        this.deliveryStt = deliveryStt;
     }
 
     public void setAction(TextField action) {

@@ -1,9 +1,11 @@
 package model.subsytem;
 
 import config.DbUtil;
+import model.ChosingSite;
 import model.Site;
 import model.SiteProduct;
 import model.Product;
+import model.tabledata.ChosenQuantity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -182,7 +184,7 @@ public class SiteProductSystem implements DBInterface<SiteProduct> {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("sites.id");
                 String name = rs.getString("name");
                 int shipDate = rs.getInt("ship_date");
                 int airDate = rs.getInt("air_date");
@@ -212,7 +214,7 @@ public class SiteProductSystem implements DBInterface<SiteProduct> {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("products.id");
                 String name = rs.getString("name");
                 String image = rs.getString("image");
                 String category = rs.getString("category");
@@ -252,6 +254,52 @@ public class SiteProductSystem implements DBInterface<SiteProduct> {
             System.out.println(e);
         }
         return siteproduct;
+    }
+
+    // Lấy các site đủ điều kiện để tạo đơn
+    public ArrayList<ChosenQuantity> selectChosingSite(int productId, int date) {
+        ArrayList<ChosenQuantity> chosingSites = new ArrayList<>();
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "SELECT * FROM sites JOIN siteproducts ON sites.id = siteproducts.site_id WHERE product_id = ? AND siteproducts.quantity > 0 AND (sites.air_date <= ? OR sites.ship_date <= ?)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, productId);
+            pst.setInt(2, date);
+            pst.setInt(3, date);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                int siteId = rs.getInt("sites.id");
+                double productPrice = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                // Tìm phương tiện rẻ nhất đáp ứng
+                double deliveryPrice;
+                String deliveryType;
+                int shipDate = rs.getInt("ship_date");
+                int airDate = rs.getInt("air_date");
+                double shipPrice = rs.getDouble("ship_price");
+                double airPrice = rs.getDouble("air_price");
+                if (airDate > date) {
+                    airPrice = Integer.MAX_VALUE;
+                }
+                if (shipDate > date) {
+                    shipPrice = Integer.MAX_VALUE;
+                }
+                if (shipPrice < airPrice) {
+                    deliveryPrice = shipPrice;
+                    deliveryType = "Đường thủy";
+                } else {
+                    deliveryPrice = airPrice;
+                    deliveryType = "Hàng không";
+                }
+                ChosenQuantity chosingSite = new ChosenQuantity(siteId, 0, deliveryType, deliveryPrice, productPrice, quantity);
+                chosingSites.add(chosingSite);
+            }
+            DbUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return chosingSites;
     }
 
 
