@@ -3,64 +3,67 @@
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.order.OrderDetailController">
+<VBox stylesheets="@../../../css/orderDetail.css" xmlns:fx="hthàngtp://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fx.order.OrderDetailController">
     <children>
-        <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+        <Label styleClass="title" text="Chi tiết đơn hàng" />
+        <GridPane hgap="10" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" minWidth="200.0" />
+            <ColumnConstraints />
+            </columnConstraints>
             <children>
-                <VBox alignment="TOP_CENTER" layoutX="291.0" layoutY="20.0" prefHeight="580.0" prefWidth="800.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="20.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
-                            <children>
-                                <HBox alignment="CENTER" maxHeight="40.0" prefHeight="40.0" prefWidth="340.0" styleClass="search-bar">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../images/icons/magnifying-glass.png" />
-                                            </image>
-                                        </ImageView>
-                                        <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                    <padding>
-                                        <Insets left="10.0" />
-                                    </padding>
-                                </HBox>
-                            </children>
-                            <padding>
-                                <Insets left="50.0" />
-                            </padding>
-                        </HBox>
-                        <TableView fx:id="table" prefHeight="410.0" prefWidth="871.0" styleClass="tb">
-                            <columns>
-                                <TableColumn fx:id="id" maxWidth="60.0" minWidth="47.0" prefWidth="47.0" styleClass="tb-col-first" text="STT" />
-                                <TableColumn fx:id="maSanPham" maxWidth="250.0" minWidth="103.23150634765625" prefWidth="122.0" styleClass="tb-col" text="Mã sản phẩm" />
-                                <TableColumn fx:id="tenSanPham" maxWidth="192.76846313476562" minWidth="70.0" prefWidth="138.0" styleClass="tb-col" text="Tên sản phẩm" />
-                                <TableColumn fx:id="soLuong" maxWidth="227.72552490234375" minWidth="62.265625" prefWidth="82.47320556640625" styleClass="tb-col" text="Số lượng" />
-                                <TableColumn fx:id="donVi" maxWidth="284.734375" minWidth="49.5281982421875" prefWidth="81.455810546875" styleClass="tb-col" text="Đơn vị" />
-                                <TableColumn fx:id="ngayMongMuon" maxWidth="401.245361328125" minWidth="100.0" prefWidth="170.47174072265625" styleClass="tb-col" text="Ngày giao dự kiến" />
-                                <TableColumn fx:id="trangThai" maxWidth="303.0843505859375" minWidth="29.754638671875" prefWidth="119.52825927734375" styleClass="tb-col" text="Trạng thái" />
-                            </columns>
-                        </TableView>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
-                            <children>
-                                <Pagination fx:id="pagination" maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
-                            </children>
-                        </VBox>
-                    </children>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <padding>
-                        <Insets left="20.0" right="20.0" />
-                    </padding>
-                </VBox>
+                <Label text="Order ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="orderId" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Tên sản phẩm:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="productName" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Số lượng:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="quantity" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Đơn vị:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label fx:id="unit" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label text="Ngày mong muốn:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="desiredDate" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label text="Trạng thái:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label fx:id="status" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <Label text="Note:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <TextArea fx:id="note" editable="false" prefColumnCount="20" prefRowCount="3" styleClass="text-area" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
             </children>
-        </AnchorPane>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+           <children>
+               <Button onAction="#handleClose" styleClass="button" text="Close" />
+           </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+        </HBox>
     </children>
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
 </VBox>
