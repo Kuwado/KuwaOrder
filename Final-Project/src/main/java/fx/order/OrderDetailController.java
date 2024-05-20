@@ -1,32 +1,33 @@
 package fx.order;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import model.Order;
 
 public class OrderDetailController {
 
     @FXML
-    private TextField idField;
+    private Label orderId;
 
     @FXML
-    private TextField product_idField;
+    private Label productName;
 
     @FXML
-    private TextField product_nameField;
+    private Label quantity;
 
     @FXML
-    private TextField quantityField;
+    private Label unit;
 
     @FXML
-    private TextField unitField;
+    private Label desiredDate;
 
     @FXML
-    private TextField desired_dateField;
+    private Label status;
 
     @FXML
-    private TextField statusField;
+    private TextArea note;
 
     private Stage dialogStage;
     private Order order;
@@ -37,13 +38,14 @@ public class OrderDetailController {
 
     public void setOrder(Order order) {
         this.order = order;
-        idField.setText(String.valueOf(order.getId()));
-        product_idField.setText(String.valueOf(order.getProductId()));
-        product_nameField.setText(order.getProductName());
-        quantityField.setText(String.valueOf(order.getQuantity()));
-        unitField.setText(order.getUnit());
-        desired_dateField.setText(order.getDesiredDate());
-        statusField.setText(order.getStatus());
+
+        orderId.setText(String.valueOf(order.getId()));
+        productName.setText(order.getProductName());
+        quantity.setText(String.valueOf(order.getQuantity()));
+        unit.setText(order.getUnit());
+        desiredDate.setText(order.getDesiredDate());
+        status.setText(order.getStatus());
+        note.setText(order.getNote());
     }
 
     @FXML

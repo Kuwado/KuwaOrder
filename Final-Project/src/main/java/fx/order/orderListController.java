@@ -124,9 +124,6 @@ public class orderListController {
     private HBox breadcrumb;
 
     @FXML
-    private TableColumn<Order, Integer> maSanPham;
-
-    @FXML
     private TableColumn<Order, String> trangThai;
 
     @FXML
@@ -156,16 +153,11 @@ public class orderListController {
         OBreadcrumbController ob = new OBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
 
-        // Khi lấy dữ liệu từ controller thì cái orders này đã đc full sẵn, mình cần làm là clone nó vào cái mà định thêm vào bảng
         orders = Arrays.asList(order1, order5, order12, order3);
-
-        // Thực hiện lệnh clone dữ liệu vào model mới của bảng
-        // Ở đây giả sử là od
         ObservableList<Order> od = FXCollections.observableList(orders);
-        // Khi tạo model mới thì type đổi từ Order -> mới
 
         insertToTable();
-        table.setItems(od); // Thêm đối tượng Request vào TableView
+        table.setItems(od);
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
                 Order selectedOrder = table.getSelectionModel().getSelectedItem();
@@ -174,16 +166,6 @@ public class orderListController {
         });
     }
 
-    private void insertToTable() {
-        id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
-        maSanPham.setCellValueFactory(new PropertyValueFactory<Order, Integer>("productId"));
-        soLuong.setCellValueFactory(new PropertyValueFactory<Order, Integer>("quantity"));
-        donVi.setCellValueFactory(new PropertyValueFactory<Order, String>("unit"));
-        ngayMongMuon.setCellValueFactory(new PropertyValueFactory<Order, String>("desiredDate"));
-        trangThai.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
-        tenSanPham.setCellValueFactory(new PropertyValueFactory<Order, String>("productName"));
-
-    }
     private void showOrderDetails(Order order) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/orderDetail.fxml"));
@@ -202,4 +184,15 @@ public class orderListController {
             e.printStackTrace();
         }
     }
+
+    private void insertToTable() {
+        id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
+        soLuong.setCellValueFactory(new PropertyValueFactory<Order, Integer>("quantity"));
+        donVi.setCellValueFactory(new PropertyValueFactory<Order, String>("unit"));
+        ngayMongMuon.setCellValueFactory(new PropertyValueFactory<Order, String>("desiredDate"));
+        trangThai.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
+        tenSanPham.setCellValueFactory(new PropertyValueFactory<Order, String>("productName"));
+
+    }
 }
+
