@@ -185,13 +185,41 @@ public class OrderSystem implements DBInterface<Order> {
             Connection con = (Connection) DbUtil.getConnection();
             String sql = "UPDATE orders SET status = ? WHERE id = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.setString(2, status);
+            pst.setInt(2, id);
+            pst.setString(1, status);
             pst.executeUpdate();
             DbUtil.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(OrderSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    // Tìm bằng trạng thái
+    public ArrayList<Order> selectByStatusInRequest(int request_id, String status) {
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            Connection con = (Connection) DbUtil.getConnection();
+            String sql = "SELECT * FROM orders WHERE status = ? AND request_id = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, status);
+            pst.setInt(2, request_id);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int productId = rs.getInt("product_id");
+                int quantity = rs.getInt("quantity");
+                String unit = rs.getString("unit");
+                String desiredDate = rs.getString("desired_date");
+                String note = rs.getString("note");
+                Order order = new Order(id, productId, quantity, unit, desiredDate, status, note, request_id);
+                orders.add(order);
+            }
+            DbUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return orders;
+    }
+
 
 }

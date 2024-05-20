@@ -71,7 +71,7 @@ public class MORequestController extends MOController<MOOrder> {
 
     @FXML
     void initialize() {
-        ArrayList<Order> orders = orderController.getOrdersInRequest(request.getId());
+        ArrayList<Order> orders = orderController.getWaitOrdersInRequest(request.getId());
 
         for (int i = 0; i < orders.size(); i++) {
             Button button = makeButton(table, i, "/view/content/makeorder/MOOrder.fxml");

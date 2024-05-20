@@ -98,6 +98,7 @@ public class MOOrderController extends MOController<ChosenSite> {
     }
 
     private static Order order;
+    private static boolean backStt = false;
     private final SiteController siteController = new SiteController();
     private final ProductController productController = new ProductController();
     private final SiteProductController siteProductController = new SiteProductController();
@@ -139,10 +140,20 @@ public class MOOrderController extends MOController<ChosenSite> {
 
         // Reset stt
         ChosenSite.setIdCounter(1);
+        if (backStt) {
+            backStt = false;
+            ActionEvent event = new ActionEvent();
+            ChosenSite cs = null;
+            viewRequestDetail(cs, event,"/view/content/makeorder/MORequest.fxml");
+        }
     }
 
     public static void setOrder(Order order) {
         MOOrderController.order = order;
+    }
+
+    public static void setBackStt(boolean backStt) {
+        MOOrderController.backStt = backStt;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package fx.makeorder;
 
+import controller.OrderController;
 import controller.ProductController;
 import controller.SiteOrderController;
 import controller.SiteProductController;
@@ -18,6 +19,7 @@ import model.tabledata.ConfirmSite;
 import model.tabledata.ExpectedSiteOrder;
 import model.tabledata.ExpectedSiteOrder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -74,11 +76,13 @@ public class MOExpectedSiteOrderController {
     private final SiteProductController siteProductController = new SiteProductController();
     private final SiteOrderController siteOrderController = new SiteOrderController();
     private final ProductController productController = new ProductController();
+    private final OrderController orderController = new OrderController();
 
     private ObservableList<ExpectedSiteOrder> expectedSiteOrders = FXCollections.observableArrayList();
     private ArrayList<ChosenQuantity> chosingSites;
     private ArrayList<SiteOrder> siteOrders;
     private int chosenNumber;
+    private String status;
 
     private static ArrayList<ChosenQuantity> chosenSites;
     private static int date;
@@ -130,6 +134,9 @@ public class MOExpectedSiteOrderController {
         // Nếu thiếu hàng
         if (chosenNumber < order.getQuantity()) {
             quantityError();
+            status = "Tạo đơn thiếu";
+        } else {
+            status = "Đã tạo đơn";
         }
     }
 
@@ -165,20 +172,23 @@ public class MOExpectedSiteOrderController {
 
     @FXML
     void cancel(ActionEvent event) {
-        // Lấy Stage hiện tại từ ActionEvent
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-
-        // Đóng Stage (popup)
         stage.close();
     }
 
     @FXML
-    void confirm(ActionEvent event) {
+    void confirm(ActionEvent event) throws IOException {
         // insert to database
         for (SiteOrder siteOrder: siteOrders) {
             siteOrderController.insert(siteOrder);
         }
+        orderController.updateStatus(order.getId(), status);
+
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+        MOOrderController.runPopUp("/view/popUp/MOSuccess.fxml", 500, 216);
     }
 
 }

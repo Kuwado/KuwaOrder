@@ -31,8 +31,8 @@ public class OrderController {
         return order;
     }
 
-    // Lấy các orders đang chờ xử lý
-    public ArrayList<Order> getWaitOrders() {
+    // Lấy tất cả các orders đang chờ xử lý
+    public ArrayList<Order> getAllWaitOrders() {
         orders = orderSystem.selectByStatus("Chờ xử lý");
         return orders;
     }
@@ -48,4 +48,9 @@ public class OrderController {
         orderSystem.updateStatus(id, status);
     }
 
+    // Lấy tất cả order trong request có status là chờ xử lý
+    public ArrayList<Order> getWaitOrdersInRequest(int request_id) {
+        orders = orderSystem.selectByStatusInRequest(request_id, "Chờ xử lý");
+        return orders;
+    }
 }

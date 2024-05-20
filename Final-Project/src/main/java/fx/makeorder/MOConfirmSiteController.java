@@ -97,11 +97,8 @@ public class MOConfirmSiteController {
 
     @FXML
     void confirm(ActionEvent event) throws IOException {
-        // Lấy Stage hiện tại từ ActionEvent
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-
-        // Đóng Stage (popup)
         stage.close();
         MOOrderController.runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 700, 700);
     }
