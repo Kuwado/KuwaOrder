@@ -1,5 +1,6 @@
 package fx.order;
 
+import controller.SiteOrderController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +14,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.*;
+import model.tabledata.VOSiteOrder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -112,10 +115,10 @@ public class orderListController {
 
 
     @FXML
-    private TableColumn<Order, String> tenSanPham;
+    private TableColumn<VOSiteOrder, String> unit;
 
     @FXML
-    private TableColumn<Order, String> donVi;
+    private TableColumn<VOSiteOrder, Integer> quantity;
 
     @FXML
     private Pagination pagination;
@@ -124,19 +127,28 @@ public class orderListController {
     private HBox breadcrumb;
 
     @FXML
-    private TableColumn<Order, String> trangThai;
+    private TableColumn<VOSiteOrder, String> deliveryType;
 
     @FXML
-    private TableColumn<Order, Integer> id;
+    private TableColumn<VOSiteOrder, String> siteName;
 
     @FXML
-    private TableColumn<Order, String> ngayMongMuon;
+    private TableColumn<VOSiteOrder, Integer> id;
 
     @FXML
-    private TableView<Order> table;
+    private TableColumn<VOSiteOrder, Double> deliveryPrice;
 
     @FXML
-    private TableColumn<Order, Integer> soLuong;
+    private TableView<VOSiteOrder> table;
+
+    @FXML
+    private TableColumn<VOSiteOrder, String> productName;
+
+    @FXML
+    private TableColumn<VOSiteOrder, Double> productPrice;
+
+    @FXML
+    private TableColumn<VOSiteOrder, String> status;
 
     // tạo thêm một model implements DataTable gồm những gì cần push vào bảng
     // Vì đơn giản như cái stt trong bảng thì khác id của order, mà trong order làm gì có stt
@@ -144,29 +156,34 @@ public class orderListController {
     // Lúc đấy sẽ thêm cái này private List<tên> têns;
     // Khi dùng controller lấy dữ liệu -> trả về cho bạn 1 list order thì khi đấy nó là list order dưới đây
     private List<Order> orders;
-    // Nhừ
 
+    private final ObservableList<VOSiteOrder> voSiteOrders = FXCollections.observableArrayList();
+    // Nhừ
+    private final SiteOrderController siteOrderController = new SiteOrderController();
 
     @FXML
     void initialize() {
         OBreadcrumbController.number = 1;
         OBreadcrumbController ob = new OBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
+        ArrayList<SiteOrder> siteOrders = siteOrderController.getAllSiteOrders();
 
-        orders = Arrays.asList(order1, order5, order12, order3);
-        ObservableList<Order> od = FXCollections.observableList(orders);
+        for (SiteOrder site : siteOrders){
+            voSiteOrders.add(new VOSiteOrder(site));
+        }
 
         insertToTable();
-        table.setItems(od);
+        table.setItems(voSiteOrders);
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
-                Order selectedOrder = table.getSelectionModel().getSelectedItem();
-                showOrderDetails(selectedOrder);
+                VOSiteOrder selectedSiteOrder = table.getSelectionModel().getSelectedItem();
+                showOrderDetails(selectedSiteOrder);
             }
         });
+        VOSiteOrder.setiDCounter(1);
     }
 
-    private void showOrderDetails(Order order) {
+    private void showOrderDetails(VOSiteOrder SiteOrder) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/orderDetail.fxml"));
             Stage stage = new Stage();
@@ -177,7 +194,7 @@ public class orderListController {
 
             OrderDetailController controller = loader.getController();
             controller.setDialogStage(stage);
-            controller.setOrder(order);
+            controller.setOrder(SiteOrder);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -186,12 +203,16 @@ public class orderListController {
     }
 
     private void insertToTable() {
-        id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
-        soLuong.setCellValueFactory(new PropertyValueFactory<Order, Integer>("quantity"));
-        donVi.setCellValueFactory(new PropertyValueFactory<Order, String>("unit"));
-        ngayMongMuon.setCellValueFactory(new PropertyValueFactory<Order, String>("desiredDate"));
-        trangThai.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
-        tenSanPham.setCellValueFactory(new PropertyValueFactory<Order, String>("productName"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("productPrice"));
+        deliveryPrice.setCellValueFactory(new PropertyValueFactory<>("deliveryPrice"));
+        deliveryType.setCellValueFactory(new PropertyValueFactory<>("deliveryType"));
+        siteName.setCellValueFactory(new PropertyValueFactory<>("siteName"));
+
 
     }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../../../css/orderDetail.css" xmlns:fx="hthàngtp://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fx.order.OrderDetailController">
+<VBox stylesheets="@../../../css/orderDetail.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.order.OrderDetailController">
     <children>
         <Label styleClass="title" text="Chi tiết đơn hàng" />
         <GridPane hgap="10" vgap="10">
@@ -23,8 +23,8 @@
             <ColumnConstraints />
             </columnConstraints>
             <children>
-                <Label text="Order ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label fx:id="orderId" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Tên site:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="siteName" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                 <Label text="Tên sản phẩm:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label fx:id="productName" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -35,14 +35,18 @@
                 <Label text="Đơn vị:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label fx:id="unit" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Ngày mong muốn:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <Label fx:id="desiredDate" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Giá sản phẩm:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="productPrice" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                <Label text="Trạng thái:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                <Label fx:id="status" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label text="Hình thức vận chuyển:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label fx:id="deliveryType" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                <Label text="Note:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                <TextArea fx:id="note" editable="false" prefColumnCount="20" prefRowCount="3" styleClass="text-area" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                <Label text="Note:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <TextArea fx:id="note" editable="false" prefColumnCount="20" prefRowCount="3" styleClass="text-area" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+            <Label text="Giá vận chuyển:" GridPane.rowIndex="6" />
+            <Label text="Trạng thái:" GridPane.rowIndex="7" />
+            <Label fx:id="deliveryPrice" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="status" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             </children>
          <rowConstraints>
             <RowConstraints />
@@ -51,12 +55,14 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
-            <RowConstraints />
+            <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" />
+            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="24.0" />
+            <RowConstraints maxHeight="78.0" minHeight="68.0" prefHeight="76.0" />
          </rowConstraints>
         </GridPane>
         <HBox alignment="CENTER_RIGHT" spacing="10">
            <children>
-               <Button onAction="#handleClose" styleClass="button" text="Close" />
+               <Button onAction="#handleClose" styleClass="button" text="Quay lại" />
            </children>
          <padding>
             <Insets top="20.0" />

@@ -63,4 +63,18 @@ public class SiteOrder {
     public String getNote() {
         return note;
     }
+
+    @Override
+    public String toString() {
+        return "SiteOrder{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", siteId=" + siteId +
+                ", quantity=" + quantity +
+                ", deliveryType='" + deliveryType + '\'' +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
