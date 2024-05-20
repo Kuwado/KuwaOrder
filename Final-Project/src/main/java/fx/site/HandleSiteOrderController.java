@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.DAO.SiteOrdersListDAO;
 import model.tabledata.SiteOrdersList;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class HandleSiteOrderController {
 //                new TestData(8, 9, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
 //                new TestData(9, 10, "Cao Phong", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox())
 //        );
-        siteOrderTable.setItems(SiteOrdersList.siteOrdersListsData());
+        siteOrderTable.setItems(SiteOrdersListDAO.siteOrdersListsData());
     }
 
     @FXML
