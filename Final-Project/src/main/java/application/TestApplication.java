@@ -1,5 +1,7 @@
 package application;
 
+import fx.LoginController;
+import fx.MainController;
 import fx.product.ProductCardController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,18 +14,14 @@ import java.util.Objects;
 public class TestApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/ProductCard.fxml"));
-        Pane pane = loader.load();
-
-        // Get the controller and set the product
-        ProductCardController controller = loader.getController();
-        //controller.setProduct(new Product("Sample Product", "/images/avatar.jpg"));
-
-        Scene scene = new Scene(pane);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/popUp/MOConfirmSite.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {

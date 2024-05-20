@@ -13,6 +13,8 @@
 
 .number-input {
     -fx-background-color: transparent;
+    -fx-pref-width: 50;
+    -fx-alignment: center;
 }
 
 .number-input:hover {

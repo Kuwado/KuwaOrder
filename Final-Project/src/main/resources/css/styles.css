@@ -454,14 +454,28 @@
     -fx-border-color: #ffffff;
 }
 
+.option-btn {
+    -fx-cursor: hand;
+}
+
+.hidden-option-btn {
+    -fx-opacity: 0.5;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-background-color: #1b1b32;
+    -fx-border-color: #ffffff;
+    -fx-cursor: none !important;
+}
+
 /* --- Button in table --- */
 .table-view-btn {
     -fx-background-color: transparent !important;
     -fx-pref-width: 35;
     -fx-background-image: url("../images/icons/file-view.png");
-    -fx-background-size: cover; /* điều chỉnh kích thước hình ảnh */
-    -fx-background-repeat: no-repeat; /* loại bỏ lặp lại */
-    -fx-background-position: center; /* căn chỉnh vị trí */
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cursor: hand;
 }
 
 

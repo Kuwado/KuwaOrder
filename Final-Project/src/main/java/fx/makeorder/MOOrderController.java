@@ -1,113 +1,37 @@
 package fx.makeorder;
 
-import fx.FXController;
+import controller.ProductController;
+import controller.SiteController;
+import controller.SiteProductController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.*;
+import model.tabledata.ChosenQuantity;
 import model.tabledata.ChosenSite;
+import model.SiteProduct;
+import model.tabledata.ConfirmSite;
+import model.tabledata.MOOrder;
+import solution.DateConverter;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 
-public class MOOrderController extends FXController<ChosenSite> {
-
-    // Data Product
-    Product product1 = new Product(1, "Tivi", "Tivi thì để sờ em chứ còn làm gì", "../images/products/1-tivi.jpg", "Điện máy");
-    Product product2 = new Product(2, "Tủ lạnh", "Trời nóng thì vào nằm cho mát", "../images/products/2-tulanh.jpg", "Điện máy");
-    Product product3 = new Product(3, "Máy giặt", "Nhân cách bẩn quá thì vào để reset", "../images/products/3-maygiat.png", "Điện máy");
-    Product product4 = new Product(4, "Máy hút bụi", "Dùng nhiều không biết nhà có sạch không nhưng ít ra nó đỡ bẩn hơn không dùng", "../images/products/4-mayhutbui.jpg", "Điện máy");
-    Product product5 = new Product(5, "Laptop", "Phương tiện đưa bạn lên thách đấu", "../images/products/5-laptop.jpg", "Công nghệ");
-    Product product6 = new Product(6, "Iphone", "Không phải Android", "../images/products/6-iphone.png", "Công nghệ");
-    Product product7 = new Product(7, "Lò nướng", "Khoai nướng siêu ngon, đảm bảo nương khoái", "../images/products/7-lonuong.jpg", "Điện máy");
-    Product product8 = new Product(8, "Kẹo mút", "Mút mút mút", "../images/products/8-keomut.jpg", "Thực phẩm");
-    Product product9 = new Product(9, "Nước ngọt", "Uống kèm với thuốc cho đỡ đắng", "../images/products/9-nuocngot.jpg", "Thực phẩm");
-    Product product10 = new Product(10, "Tai nghe", "Đm tai không để nghe thì để làm mịa gì", "../images/products/10-tainghe.jpg", "Công nghệ");
-    Product product11 = new Product(11, "Chuột mickey", "Để bắt Doraemon", "../images/products/11-chuotkhongday.jpg", "Công nghệ");
-    Product product12 = new Product(12, "Cái nịt", ":)", "../images/products/12-cainit.jpg", "Vật phẩm quý hiếm");
-
-    // Data List Product
-    List<Product> products1 = Arrays.asList(product1, product2, product3, product4, product7);
-    List<Product> products2 = Arrays.asList(product5, product6, product10, product11);
-    List<Product> products3 = Arrays.asList(product8, product9, product12);
-
-    // Data SiteProduct
-    List<SiteProduct> siteproducts1 = Arrays.asList(
-            new SiteProduct(product1, 15000000, 120, 15),
-            new SiteProduct(product2, 12000000, 100, 8),
-            new SiteProduct(product3, 14500000, 235, 100),
-            new SiteProduct(product4, 8000000, 1358, 155),
-            new SiteProduct(product7, 7500000, 201, 102)
-    );
-    List<SiteProduct> siteproducts2 = Arrays.asList(
-            new SiteProduct(product5, 25000000, 120, 15),
-            new SiteProduct(product6, 30000000, 100, 8),
-            new SiteProduct(product10, 1500000, 235, 100),
-            new SiteProduct(product11, 800000, 1358, 155)
-    );
-    List<SiteProduct> siteproducts3 = Arrays.asList(
-            new SiteProduct(product8, 1000, 12000, 1523),
-            new SiteProduct(product9, 10000, 12345, 812),
-            new SiteProduct(product12, 999999999, 1, 0)
-    );
-
-    // Data Site
-    Site site1 = new Site(1, "Site 01", 5, 3, 1000000, 2500000, siteproducts1, "Site tao bao xịn");
-    Site site5 = new Site(5, "Site 05", 3, 2, 1200000, 3600000, siteproducts1, "Chất lượng là số 1, nhưng site tao không có số 1");
-    Site site8 = new Site(8, "Site 08", 2, 1, 1500000, 4200000, siteproducts1, "Site tao đươc cái giá đắt nhưng mà sản phẩm cũng kém chất lượng");
-    Site site10 = new Site(10, "Site 10", 6, 4, 900000, 2000000, siteproducts1, "Site sight size side sai");
-
-    Site site2 = new Site(2, "Site 02", 4, 2, 1100000, 3200000, siteproducts2, "Site tao bao xịn" );
-    Site site3 = new Site(3, "Site 03", 4, 3, 1000000, 3000000, siteproducts2, "Site tao bao xịn" );
-    Site site12 = new Site(12, "Site 12", 3, 2, 1300000, 3800000, siteproducts2, "Site tao bao xịn" );
-    Site site6 = new Site(6, "Site 06", 2, 1, 1600000, 4500000, siteproducts2, "Site tao bao xịn" );
-
-    Site site4 = new Site(4, "Site 04", 5, 3, 1000000, 3500000, siteproducts3, "Site tao bao xịn" );
-    Site site7 = new Site(7, "Site 07", 3, 2, 1500000, 4200000, siteproducts3, "Site tao bao xịn" );
-    Site site9 = new Site(9, "Site 09", 5, 2, 1200000, 4000000, siteproducts3, "Site tao bao xịn" );
-    Site site11 = new Site(11, "Site 11", 4, 1, 1400000, 5000000, siteproducts3, "Site tao bao xịn" );
-
-    // Data Order
-    Order order1 = new Order(1, product1, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua tivi");
-    Order order2 = new Order(2, product2, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua tủ lạnh");
-    Order order3 = new Order(3, product3, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua máy giặt");
-    Order order4 = new Order(4, product4, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua máy hút bụi");
-    Order order5 = new Order(5, product5, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua laptop");
-    Order order6 = new Order(6, product6, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua iphone");
-    Order order7 = new Order(7, product7, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua lò nướng");
-    Order order8 = new Order(8, product8, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua kẹo mút");
-    Order order9 = new Order(9, product9, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua nước ngọt");
-    Order order10 = new Order(10, product10, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua tai nghe");
-    Order order11 = new Order(11, product11, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua chuột");
-    Order order12 = new Order(12, product12, 300, "Cái", "23/05/2024", "Chưa tạo", "Mua nịt");
-
-    // Data OrderList
-    List<Order> orders1 = Arrays.asList(order1, order5, order12, order3);
-    List<Order> orders2 = Arrays.asList(order4, order6, order7, order10);
-    List<Order> orders3 = Arrays.asList(order2, order8, order9, order11);
-
-    // Data Request
-    Request request1 = new Request(1, "Dat hang 1", "20/05/2024", "Doing", orders1, "Mô tả công việc");
-    Request request2 = new Request(2, "Dat hang 2",  "21/05/2024", "Doing", orders2, "Chọn Site xịn xịn nhé");
-    Request request3 = new Request(3, "Dat hang 3",  "20/05/2024", "Doing", orders3, "Hau quá");
-    Request request4 = new Request(4, "Dat hang 4",  "20/05/2024", "Doing", orders2, "kakaka");
-    Request request5 = new Request(10, "Dat hang 10",  "12/05/2024", "Doing", orders1, "Mô tả công việc");
-    Request request6 = new Request(12, "Dat hang 12",  "11/05/2024", "Doing", orders2, "Chọn Site xịn xịn nhé");
-    Request request7 = new Request(9, "Dat hang 9",  "10/05/2024", "Doing", orders3, "Hau quá");
-    Request request8 = new Request(11, "Dat hang 11",  "12/05/2024", "Doing", orders1, "kakaka");
-    Request request9 = new Request(8, "Dat hang 8", "12/05/2024", "Doing", orders1, "Mô tả công việc");
-    Request request10 = new Request(7, "Dat hang 7",  "11/05/2024", "Doing", orders2, "Chọn Site xịn xịn nhé");
-    Request request11 = new Request(6, "Dat hang 6",  "10/05/2024", "Doing", orders3, "Hau quá");
-    Request request12 = new Request(5, "Dat hang 5",  "12/05/2024", "Doing", orders3, "kakaka");
-
+public class MOOrderController extends MOController<ChosenSite> {
     @FXML
     private TableView<ChosenSite> table;
 
@@ -130,7 +54,7 @@ public class MOOrderController extends FXController<ChosenSite> {
     private TableColumn<ChosenSite, Integer> airDate;
 
     @FXML
-    private TableColumn<ChosenSite, HBox> numberInput;
+    private TableColumn<ChosenSite, String> numberInput;
 
     @FXML
     private Label productName;
@@ -154,43 +78,70 @@ public class MOOrderController extends FXController<ChosenSite> {
     private TextField cardNumberInput;
 
     @FXML
-    private Button makeOrderBtn;
+    private Label airPrice;
 
     @FXML
-    private Button viewAll;
+    private Label shipPrice;
+
+    @FXML
+    private Label slcm;
+
+    @FXML
+    private Label slcc;
+
+    @FXML
+    private Button makeOrderBtn;
 
     @FXML
     void viewAll(ActionEvent event) {
         viewAllTable(table, chosenSites);
     }
 
-
-
-
+    private static Order order;
+    private final SiteController siteController = new SiteController();
+    private final ProductController productController = new ProductController();
+    private final SiteProductController siteProductController = new SiteProductController();
+    private ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
     private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
-    private Order order;
-    private Product product;
-    private List<Site> sites;
-    private SiteProduct siteProduct;
-
+    private int needQuantity = order.getQuantity();
+    private boolean sttQuantity;
+    private final int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
 
     @FXML
     void initialize() {
-        order = order1;
-        for (Site site : sites) {
-            chosenSites.add(new ChosenSite(order, product, site, siteProduct));
+        // Load dữ liệu
+        ArrayList<SiteProduct> siteProducts = siteProductController.getSiteproductsByProduct(order.getProductId());
+        ArrayList<Site> sites = siteProductController.getSitesFromSiteProduct(order.getProductId());
+        Product product = productController.getProductById(order.getProductId());
+
+        // Thêm input vào data table
+        for (SiteProduct sp : siteProducts) {
+            TextField tf = new TextField();
+            tf.getStyleClass().add("number-input");
+            Site site = siteController.getSiteById(sp.getSiteId());
+            chosenSites.add(new ChosenSite(order, product, site, sp, tf));
         }
 
         // Set breadcrumbs
         setBreadcrumb(4, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Table
-        number = 9;
         startTable(table, chosenSites);
 
         // Preview card
-        productName.setText(order.getProductName());
+        cardNumberInput.setEditable(false);
+        slcm.setText(String.valueOf(order.getQuantity()));
+        slcc.setText(String.valueOf(order.getQuantity()));
+        productName.setText(productController.getProductById(order.getProductId()).getName());
+        insertDataToChosenQuantities();
         makeAppearPreviewCard(table);
+
+        // Reset stt
+        ChosenSite.setIdCounter(1);
+    }
+
+    public static void setOrder(Order order) {
+        MOOrderController.order = order;
     }
 
     @Override
@@ -206,11 +157,183 @@ public class MOOrderController extends FXController<ChosenSite> {
     }
 
     @Override
-    public void insertToPreviewCard(ChosenSite site) {
-       siteNameCard.setText(site.getName());
-       soldQuantity.setText(String.valueOf(site.getSoldQuantity()));
-       orderUnit.setText(order.getUnit());
-       cardNumberInput.setText("10");
+    public void insertToPreviewCard(ChosenSite chosenSite) {
+        Site site = chosenSite.getSite();
+        Product product = chosenSite.getProduct();
+        SiteProduct siteProduct = siteProductController.getSiteproductFromProductAndSite(product.getId(), site.getId());
+        siteNameCard.setText(site.getName());
+        soldQuantity.setText(String.valueOf(siteProduct.getSoldQuantity()));
+        airPrice.setText(String.format("%,d", Math.round(site.getAirPrice())));
+        shipPrice.setText(String.format("%,d", Math.round(site.getShipPrice())));
+        orderUnit.setText(order.getUnit());
+        cardNumberInput.setText(chosenSite.getAction().getText());
+
+        if (chosenSite.getShipDate() > date) {
+            shipBtn.getStyleClass().remove("option-btn");
+            shipBtn.getStyleClass().add("hidden-option-btn");
+        } else {
+            //Gán sự kiện nhấn cho nút Ship
+            shipBtn.setOnAction(event -> {
+                shipBtn.getStyleClass().add("option-btn-active");
+                airBtn.getStyleClass().remove("option-btn-active");
+                String shipDeli = "Đường thủy";
+                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli));
+            });
+        }
+        if (chosenSite.getAirDate() > date) {
+            airBtn.getStyleClass().remove("option-btn");
+            airBtn.getStyleClass().add("hidden-option-btn");
+        } else {
+            // Gán sự kiện nhấn cho nút Air
+            airBtn.setOnAction(event -> {
+                airBtn.getStyleClass().add("option-btn-active");
+                shipBtn.getStyleClass().remove("option-btn-active");
+                String airDeli = "Hàng không";
+                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli));
+            });
+        }
     }
+
+    private void insertDataToChosenQuantities() {
+        for (ChosenSite chosenSite : chosenSites) {
+            chosenSite.getAction().textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*")) {
+                    chosenSite.getAction().setText(newValue.replaceAll("[^\\d]", ""));
+                }
+
+                if (checkQuantitySite(chosenSite)) {
+                    cardNumberInput.setText(chosenSite.getAction().getText());
+                    updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), ""));
+                    if (!sttQuantity) {
+                        chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
+                    }
+                    slcc.setText(String.valueOf(needQuantity));
+                } else {
+                    quantityError2();
+                    chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
+                }
+            });
+        }
+    }
+
+    private int changeFromTextIntoInteger(ChosenSite chosenSite) {
+        String text = chosenSite.getAction().getText(); // Trim để loại bỏ khoảng trắng
+        if (text.isEmpty()) {
+            return 0;
+        } else
+            return Integer.parseInt(text);
+    }
+
+    private boolean checkQuantitySite(ChosenSite chosenSite) {
+        int quan = changeFromTextIntoInteger(chosenSite);
+        if (quan > chosenSite.getQuantity()) {
+            return false;
+        } else
+            return true;
+    }
+
+    private void updateChosenQuantities(ChosenQuantity chosenQuantity) {
+        Optional<ChosenQuantity> existingCq = chosenQuantities.stream()
+                .filter(cq -> cq.getSiteId() == chosenQuantity.getSiteId())
+                .findFirst();
+
+        int bu = needQuantity;
+
+        if (chosenQuantity.getQuantity() > 0) {
+            if (existingCq.isPresent()) {
+                needQuantity = needQuantity - chosenQuantity.getQuantity() + existingCq.get().getQuantity();
+            } else {
+                needQuantity -= chosenQuantity.getQuantity();
+            }
+        } else {
+            if (existingCq.isPresent()) {
+                needQuantity += existingCq.get().getQuantity();
+            }
+        }
+
+        if (needQuantity >= 0) {
+            if (chosenQuantity.getQuantity() > 0) {
+                if (existingCq.isPresent()) {
+                    existingCq.get().setQuantity(chosenQuantity.getQuantity());
+                    if (!chosenQuantity.getDeliveryType().isEmpty()) {
+                        existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
+                    }
+                } else {
+                    chosenQuantities.add(chosenQuantity);
+                }
+            } else if (existingCq.isPresent()) {
+                chosenQuantities.remove(existingCq.get());
+            }
+            sttQuantity = true;
+        } else {
+            quantityError();
+            needQuantity = bu;
+            if (existingCq.isPresent()) {
+                needQuantity = bu + existingCq.get().getQuantity();
+                chosenQuantities.remove(existingCq.get());
+            } else {
+                needQuantity = bu;
+
+            }
+            sttQuantity = false;
+        }
+    }
+
+    private void quantityError() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Số lượng quá lớn");
+        alert.setHeaderText(null);
+        alert.setContentText("Số lượng bạn nhập vượt quá số lượng còn thiếu! Vui lòng nhập lại");
+        alert.showAndWait();
+    }
+
+    private void quantityError2() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Số lượng quá lớn");
+        alert.setHeaderText(null);
+        alert.setContentText("Số lượng bạn nhập vượt quá số lượng còn trong kho của site! Vui lòng nhập lại");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void makeSiteOrder(ActionEvent event) throws IOException {
+        MOConfirmSiteController.setChosenQuantities(chosenQuantities);
+        MOConfirmSiteController.setDate(order.getDesiredDate());
+        runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
+    }
+
+    @Override
+    public void setDataToTrans(ChosenSite chosenSite) {
+    }
+
+    private void runPopUp(String path, double width, double height) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Stage primaryStage = new Stage();
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
+
+        BorderPane pane = loader.load();
+
+        // Lấy kích thước của màn hình
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+
+        // Tính toán vị trí để pop-up được hiển thị chính giữa màn hình
+        double popupX = (screenWidth - width) / 2;
+        double popupY = (screenHeight - height) / 2;
+
+        Scene scene = new Scene(pane);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
+        primaryStage.setScene(scene);
+
+        // Đặt vị trí cho pop-up
+        primaryStage.setX(popupX);
+        primaryStage.setY(popupY);
+
+        primaryStage.show();
+    }
+
 
 }

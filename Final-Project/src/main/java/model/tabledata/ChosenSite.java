@@ -1,5 +1,6 @@
 package model.tabledata;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import model.Order;
 import model.Product;
@@ -8,7 +9,7 @@ import model.SiteProduct;
 
 import java.io.IOException;
 
-public class ChosenSite implements TableData {
+public class ChosenSite {
     private static int idCounter = 1;
     private int id;
     private Order order;
@@ -20,10 +21,9 @@ public class ChosenSite implements TableData {
     private String unit;
     private int shipDate;
     private int airDate;
-    private int soldQuantity;
-    private HBox action;
+    private TextField action;
 
-    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct) {
+    public ChosenSite(Order order, Product product, Site site, SiteProduct siteProduct, TextField textfield) {
         this.id = idCounter++;
         this.order = order;
         this.product = product;
@@ -34,15 +34,10 @@ public class ChosenSite implements TableData {
         this.unit = order.getUnit();
         this.shipDate = site.getShipDate();
         this.airDate = site.getAirDate();
-        this.soldQuantity = siteProduct.getSoldQuantity();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/parts/insertitems/MOText.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
+        this.action = textfield;
     }
+
+
 
     public int getId() {
         return id;
@@ -84,11 +79,15 @@ public class ChosenSite implements TableData {
         return airDate;
     }
 
-    public int getSoldQuantity() {
-        return soldQuantity;
+    public TextField getAction() {
+        return action;
     }
 
-    public HBox getAction() {
-        return action;
+    public void setAction(TextField action) {
+        this.action = action;
+    }
+
+    public static void setIdCounter(int idCounter) {
+        ChosenSite.idCounter = idCounter;
     }
 }

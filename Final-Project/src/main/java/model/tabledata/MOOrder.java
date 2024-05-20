@@ -1,13 +1,17 @@
 package model.tabledata;
 
+import controller.OrderController;
+import controller.ProductController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import model.Order;
+import model.Product;
 import solution.ButtonIntoTable;
 
 import java.io.IOException;
 
-public class MOOrder implements TableData {
+public class MOOrder {
     private static int idCounter = 1;
     private int id;
     private Order order;
@@ -16,23 +20,21 @@ public class MOOrder implements TableData {
     private String unit;
     private String desiredDate;
     private String status;
-    private HBox action;
+    private Button action;
 
-    public MOOrder(Order order) {
+    private final OrderController orderController = new OrderController();
+    private final ProductController productController = new ProductController();
+
+    public MOOrder(Order order, Button button) {
         this.order = order;
         this.id = idCounter++;
-        this.productName = order.getProduct().getName();
+        Product product = productController.getProductById(order.getProductId());
+        this.productName = product.getName();
         this.quantity = order.getQuantity();
         this.unit = order.getUnit();
         this.desiredDate = order.getDesiredDate();
         this.status = order.getStatus();
-        try {
-            FXMLLoader loader = new FXMLLoader(ButtonIntoTable.class.getResource("/view/parts/insertitems/View.fxml"));
-            this.action = loader.load();
-        } catch (IOException e) {
-            System.err.println("Error loading sidebar: " + e.getMessage());
-            e.printStackTrace();
-        };
+        this.action = button;
     }
 
     public int getId() {
@@ -63,7 +65,11 @@ public class MOOrder implements TableData {
         return status;
     }
 
-    public HBox getAction() {
+    public Button getAction() {
         return action;
+    }
+
+    public static void setIdCounter(int idCounter) {
+        MOOrder.idCounter = idCounter;
     }
 }

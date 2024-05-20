@@ -1,11 +1,5 @@
 package model;
 
-import model.tabledata.TableData;
-import solution.ButtonIntoTable;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.HBox;
-
-import java.io.IOException;
 import java.util.List;
 
 public class Request{
@@ -13,9 +7,9 @@ public class Request{
     public String name;
     public int orderQuantity;
     public String sendDate;
-    public String status;
     public List<Order> orders;
     public String description;
+    public String status;
 
     public Request(int id, String name, String sendDate, String status, List<Order> orders, String description) {
         this.id = id;
@@ -25,6 +19,23 @@ public class Request{
         this.status = status;
         this.orders = orders;
         this.description = description;
+    }
+
+    public Request() {
+    }
+
+    public Request(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Request(int id, String name, int orderQuantity, String sendDate, String description, String status) {
+        this.id = id;
+        this.name = name;
+        this.orderQuantity = orderQuantity;
+        this.sendDate = sendDate;
+        this.description = description;
+        this.status = status;
     }
 
     public int getId() {

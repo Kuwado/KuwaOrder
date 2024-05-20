@@ -10,7 +10,7 @@ import solution.ButtonIntoTable;
 import java.io.IOException;
 import java.util.List;
 
-public class MORequest  implements TableData {
+public class MORequest {
     private static int idCounter = 1;
     private int id;
     private Request request;
@@ -18,9 +18,7 @@ public class MORequest  implements TableData {
     public int orderQuantity;
     public String sendDate;
     public String status;
-    public List<Order> orders;
     public String description;
-    private HBox action2;
     private Button action;
 
     public MORequest(Request request, Button button) {
@@ -30,7 +28,6 @@ public class MORequest  implements TableData {
         this.orderQuantity = request.getOrderQuantity();
         this.sendDate = request.getSendDate();
         this.status = request.getStatus();
-        this.orders = request.getOrders();
         this.description = request.getDescription();
         this.action = button;
     }
@@ -59,10 +56,6 @@ public class MORequest  implements TableData {
         return status;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -71,9 +64,7 @@ public class MORequest  implements TableData {
         return action;
     }
 
-    public void resetIdCounter() {
-        idCounter = 1;
+    public static void setIdCounter(int idCounter) {
+        MORequest.idCounter = idCounter;
     }
-
-
 }
