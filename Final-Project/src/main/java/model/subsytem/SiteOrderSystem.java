@@ -79,11 +79,12 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
                 int id = rs.getInt("id");
                 int orderId = rs.getInt("order_id");
                 int siteId = rs.getInt("site_id");
+                int quantity = rs.getInt("quantity");
                 String deliveryType = rs.getString("delivery_type");
                 double price = rs.getDouble("price");
                 String status = rs.getString("status");
                 String note = rs.getString("note");
-                SiteOrder siteOrder = new SiteOrder(id, orderId, siteId, deliveryType, price, status, note);
+                SiteOrder siteOrder = new SiteOrder(id, orderId, siteId, quantity, deliveryType, price, status, note);
                 siteOrders.add(siteOrder);
             }
             DbUtil.closeConnection(con);
@@ -107,11 +108,12 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
             if (rs.next()) {
                 int orderId = rs.getInt("order_id");
                 int siteId = rs.getInt("site_id");
+                int quantity = rs.getInt("quantity");
                 String deliveryType = rs.getString("delivery_type");
                 double price = rs.getDouble("price");
                 String status = rs.getString("status");
                 String note = rs.getString("note");
-                siteOrder = new SiteOrder(id, orderId, siteId, deliveryType, price, status, note);
+                siteOrder = new SiteOrder(id, orderId, siteId, quantity, deliveryType, price, status, note);
             }
 
             DbUtil.closeConnection(con);
