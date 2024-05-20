@@ -26,7 +26,6 @@ public class NamDepTrai extends Application {
     }
 
     public static void main(String[] args) {
-
         launch();
     }
 }
