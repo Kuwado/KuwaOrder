@@ -12,6 +12,7 @@ module application {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
 
     opens fx.warehouse to javafx.fxml;
     opens fx.order to javafx.fxml;

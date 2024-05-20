@@ -1,74 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sale.HandleCancelSiteOrderController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sale.HandleCancelSiteOrderController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
                <children>
-                  <AnchorPane layoutX="750.0" layoutY="100.0" prefHeight="400.0" prefWidth="428.0">
+                  <VBox prefHeight="620.0" prefWidth="1260.0">
                      <children>
-                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="381.0" prefWidth="389.0">
-                           <children>
-                              <Pane prefHeight="71.0" prefWidth="420.0">
-                                 <children>
-                                    <Label text="Chi tiết đơn hàng">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                              <TableView fx:id="detailTable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="221.0" prefWidth="432.0" styleClass="tb">
-                                 <columns>
-                                    <TableColumn prefWidth="209.0" styleClass="table-header" text="Tên sản phẩm" />
-                                    <TableColumn prefWidth="75.0" styleClass="table-header" text="Đơn vị" />
-                                    <TableColumn prefWidth="105.0" styleClass="table-header" text="Số lượng" />
-                                 </columns>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </TableView>
-                              <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" text="Đặt lại">
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelSiteOrder" prefHeight="31.0" prefWidth="85.0" text="Hủy" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-                  <VBox prefHeight="620.0" prefWidth="600.0">
-                     <children>
-                        <HBox maxWidth="-Infinity" prefHeight="60.0" prefWidth="600.0">
+                        <HBox maxWidth="-Infinity" prefHeight="60.0" prefWidth="1478.0">
                            <children>
                               <Label text="Danh sách đơn hàng bị hủy" />
                            </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" top="10.0" />
+                           </padding>
                         </HBox>
-                        <AnchorPane prefHeight="340.0" prefWidth="513.0">
+                        <TableView fx:id="cancelSiteOrderIdTable" prefHeight="560.0" prefWidth="1260.0">
+                           <columns>
+                              <TableColumn fx:id="siteOrderIdColumn" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="siteNameColumn" prefWidth="177.0" text="Tên site" />
+                              <TableColumn fx:id="productNameColumn" prefWidth="338.0" text="Tên sản phẩm" />
+                              <TableColumn fx:id="quantityColumn" prefWidth="125.0" text="Số lượng" />
+                              <TableColumn fx:id="unitColumn" prefWidth="85.0" text="Đơn vị" />
+                              <TableColumn fx:id="deliveryColumn" prefWidth="159.0" text="Vận chuyển" />
+                              <TableColumn fx:id="desiredDateColumn" prefWidth="220.0" text="Ngày nhận mong muốn" />
+                              <TableColumn fx:id="selectedColumn" text="Chọn" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <TableView prefHeight="560.0" prefWidth="600.0">
-                                <columns>
-                                  <TableColumn prefWidth="75.0" text="STT" />
-                                    <TableColumn prefWidth="83.0" text="Tên site" />
-                                  <TableColumn prefWidth="154.0" text="Tên sản phẩm" />
-                                    <TableColumn prefWidth="117.19998168945312" text="Số lượng" />
-                                    <TableColumn prefWidth="71.4000244140625" text="Đơn vị" />
-                                    <TableColumn prefWidth="99.60000610351562" text="Vận chuyển" />
-                                </columns>
-                              </TableView>
+                              <Button fx:id="reorderButton" mnemonicParsing="false" prefWidth="100.0" text="Đặt lại" />
+                              <Button fx:id="cancelButton" mnemonicParsing="false" prefWidth="100.0" text="Hủy" />
                            </children>
-                        </AnchorPane>
+                           <padding>
+                              <Insets right="40.0" top="15.0" />
+                           </padding>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
