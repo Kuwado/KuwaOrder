@@ -7,17 +7,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.*;
 import model.tabledata.ChosenQuantity;
 import model.tabledata.ChosenSite;
 import model.SiteProduct;
 import model.tabledata.ConfirmSite;
+import model.tabledata.MOOrder;
 import solution.DateConverter;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MOOrderController extends MOController<ChosenSite> {
@@ -92,11 +103,9 @@ public class MOOrderController extends MOController<ChosenSite> {
     private final SiteProductController siteProductController = new SiteProductController();
     private ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
     private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
-    private int  needQuantity = order.getQuantity();
+    private int needQuantity = order.getQuantity();
     private boolean sttQuantity;
-    private int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
-
-
+    private final int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
 
     @FXML
     void initialize() {
@@ -126,10 +135,9 @@ public class MOOrderController extends MOController<ChosenSite> {
         productName.setText(productController.getProductById(order.getProductId()).getName());
         insertDataToChosenQuantities();
         makeAppearPreviewCard(table);
-    }
 
-    @Override
-    public void setDataToTrans(ChosenSite chosenSite) {
+        // Reset stt
+        ChosenSite.setIdCounter(1);
     }
 
     public static void setOrder(Order order) {
@@ -265,7 +273,6 @@ public class MOOrderController extends MOController<ChosenSite> {
                 chosenQuantities.remove(existingCq.get());
             } else {
                 needQuantity = bu;
-
             }
             sttQuantity = false;
         }
@@ -288,8 +295,47 @@ public class MOOrderController extends MOController<ChosenSite> {
     }
 
     @FXML
-    void makeSiteOrder(ActionEvent event) {
+    void makeSiteOrder(ActionEvent event) throws IOException {
+        if (!chosenQuantities.isEmpty()) {
+            MOConfirmSiteController.setChosenQuantities(chosenQuantities);
+            MOConfirmSiteController.setDate(order.getDesiredDate());
+            runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
+        } else {
 
+        }
+    }
+
+    @Override
+    public void setDataToTrans(ChosenSite chosenSite) {
+    }
+
+    private void runPopUp(String path, double width, double height) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Stage primaryStage = new Stage();
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
+
+        BorderPane pane = loader.load();
+
+        // Lấy kích thước của màn hình
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+
+        // Tính toán vị trí để pop-up được hiển thị chính giữa màn hình
+        double popupX = (screenWidth - width) / 2;
+        double popupY = (screenHeight - height) / 2;
+
+        Scene scene = new Scene(pane);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
+        primaryStage.setScene(scene);
+
+        // Đặt vị trí cho pop-up
+        primaryStage.setX(popupX);
+        primaryStage.setY(popupY);
+
+        primaryStage.show();
     }
 
 

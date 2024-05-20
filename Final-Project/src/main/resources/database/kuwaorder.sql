@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 19, 2024 lúc 12:33 AM
+-- Thời gian đã tạo: Th5 20, 2024 lúc 06:48 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -157,6 +157,7 @@ CREATE TABLE `siteorders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `site_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
   `delivery_type` varchar(5) NOT NULL DEFAULT 'ship',
   `price` double NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'Chờ xác nhận',

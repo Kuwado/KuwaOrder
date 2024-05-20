@@ -4,6 +4,7 @@ public class SiteOrder {
     private int id;
     private int orderId;
     private int siteId;
+    private int quantity;
     private String deliveryType;
     private double price;
     private String status;
@@ -12,14 +13,23 @@ public class SiteOrder {
     public SiteOrder() {
     }
 
-    public SiteOrder(int id, int orderId, int siteId, String deliveryType, double price, String status, String note) {
+
+    public SiteOrder(int id, int orderId, int siteId, int quantity, String deliveryType, double price, String status, String note) {
         this.id = id;
         this.orderId = orderId;
         this.siteId = siteId;
+        this.quantity = quantity;
         this.deliveryType = deliveryType;
         this.price = price;
         this.status = status;
         this.note = note;
+    }
+
+    public SiteOrder(int id, int siteId, String deliveryType, String status) {
+        this.id = id;
+        this.siteId = siteId;
+        this.deliveryType = deliveryType;
+        this.status = status;
     }
 
     public int getId() {
@@ -32,6 +42,10 @@ public class SiteOrder {
 
     public int getSiteId() {
         return siteId;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getDeliveryType() {
