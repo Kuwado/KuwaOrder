@@ -88,6 +88,9 @@ public class MORequestController extends MOController<MOOrder> {
         // Preview card
         requestName.setText(request.getName());
         makeAppearPreviewCard(table);
+
+        // Reset stt
+        MOOrder.setIdCounter(1);
     }
 
     @Override

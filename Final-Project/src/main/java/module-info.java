@@ -12,7 +12,6 @@ module application {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
-    exports fx.wh;
 
     // Add this line to open the package to javafx.fxml
     opens fx.wh to javafx.fxml;
@@ -43,6 +42,6 @@ module application {
 
     opens fx.sidebar to javafx.fxml;
     exports fx.sidebar;
-
+    exports fx.wh;
 
 }

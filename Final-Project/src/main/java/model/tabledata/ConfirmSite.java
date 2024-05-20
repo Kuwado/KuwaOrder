@@ -35,4 +35,8 @@ public class ConfirmSite {
     public String getExpectedDate() {
         return expectedDate;
     }
+
+    public static void setIdCounter(int idCounter) {
+        ConfirmSite.idCounter = idCounter;
+    }
 }

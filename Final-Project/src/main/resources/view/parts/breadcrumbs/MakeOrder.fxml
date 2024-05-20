@@ -24,7 +24,7 @@
                   <Image url="@../../../images/icons/breadcrumb-next.png" />
                </image>
             </ImageView>
-            <Button fx:id="requestList" mnemonicParsing="false" styleClass="breadcrumb-btn" text="Danh sách yêu cầu ">
+            <Button fx:id="requestList" mnemonicParsing="false" onAction="#requestList" styleClass="breadcrumb-btn" text="Danh sách yêu cầu ">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -38,7 +38,7 @@
                   <Image url="@../../../images/icons/breadcrumb-next.png" />
                </image>
             </ImageView>
-            <Button fx:id="request" mnemonicParsing="false" styleClass="breadcrumb-btn" text="Chi tiết yêu cầu">
+            <Button fx:id="request" mnemonicParsing="false" onAction="#request" styleClass="breadcrumb-btn" text="Chi tiết yêu cầu">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -52,21 +52,7 @@
                   <Image url="@../../../images/icons/breadcrumb-next.png" />
                </image>
             </ImageView>
-            <Button fx:id="order" mnemonicParsing="false" styleClass="breadcrumb-btn" text="Chi tiết đơn đặt hàng">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="80.0" styleClass="breadcrumb-item">
-         <children>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="breadcrumb-img">
-               <image>
-                  <Image url="@../../../images/icons/breadcrumb-next.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="site" mnemonicParsing="false" styleClass="breadcrumb-btn" text="Lựa chọn Site">
+            <Button fx:id="order" mnemonicParsing="false" onAction="#order" styleClass="breadcrumb-btn" text="Chi tiết đơn đặt hàng">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

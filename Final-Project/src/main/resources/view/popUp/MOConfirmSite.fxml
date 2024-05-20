@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="450.0" minHeight="300.0" minWidth="-Infinity" prefHeight="450.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MOConfirmSiteController">
+<BorderPane maxHeight="450.0" maxWidth="-Infinity" minHeight="300.0" minWidth="-Infinity" prefHeight="450.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makeorder.MOConfirmSiteController">
    <center>
       <VBox alignment="TOP_CENTER" minHeight="250.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,7 +30,7 @@
             </TableView>
             <HBox alignment="CENTER" prefHeight="60.0">
                <children>
-                  <Button fx:id="backBtn" mnemonicParsing="false" text="Quay lại">
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" text="Quay lại">
                      <styleClass>
                         <String fx:value="cancel-btn" />
                         <String fx:value="btn" />
@@ -39,7 +39,7 @@
                         <Insets right="200.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="confirmBtn" mnemonicParsing="false" text="Xác nhận">
+                  <Button fx:id="confirmBtn" mnemonicParsing="false" onAction="#confirm" text="Xác nhận">
                      <styleClass>
                         <String fx:value="confirm-btn" />
                         <String fx:value="btn" />

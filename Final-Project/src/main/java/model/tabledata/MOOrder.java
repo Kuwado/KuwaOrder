@@ -68,4 +68,8 @@ public class MOOrder {
     public Button getAction() {
         return action;
     }
+
+    public static void setIdCounter(int idCounter) {
+        MOOrder.idCounter = idCounter;
+    }
 }
