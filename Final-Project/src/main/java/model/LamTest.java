@@ -2,21 +2,24 @@ package model;
 
 import javafx.scene.layout.HBox;
 
+import java.util.List;
+
 public class LamTest {
     private int stt;
     private String maDonHang;
     private String site;
     private String ngayNhanHang;
     private String trangThai;
-    public HBox action;
 
+    private List<SanPham> danhSachSanPham;
     // Constructor
-    public LamTest(int stt, String maDonHang, String site, String ngayNhanHang, String trangThai) {
+    public LamTest(int stt, String maDonHang, String site, String ngayNhanHang, String trangThai, List<SanPham> danhSachSanPham) {
         this.stt = stt;
         this.maDonHang = maDonHang;
         this.site = site;
         this.ngayNhanHang = ngayNhanHang;
         this.trangThai = trangThai;
+        this.danhSachSanPham = danhSachSanPham;
     }
 
     // Getters and setters
@@ -59,9 +62,15 @@ public class LamTest {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-    public HBox getAction() {
-        return action;
+
+    public List<SanPham> getDanhSachSanPham() {
+        return danhSachSanPham;
     }
+
+    public void setDanhSachSanPham(List<SanPham> danhSachSanPham) {
+        this.danhSachSanPham = danhSachSanPham;
+    }
+
 
 }
 
