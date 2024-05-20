@@ -273,7 +273,6 @@ public class MOOrderController extends MOController<ChosenSite> {
                 chosenQuantities.remove(existingCq.get());
             } else {
                 needQuantity = bu;
-
             }
             sttQuantity = false;
         }
@@ -297,9 +296,13 @@ public class MOOrderController extends MOController<ChosenSite> {
 
     @FXML
     void makeSiteOrder(ActionEvent event) throws IOException {
-        MOConfirmSiteController.setChosenQuantities(chosenQuantities);
-        MOConfirmSiteController.setDate(order.getDesiredDate());
-        runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
+        if (!chosenQuantities.isEmpty()) {
+            MOConfirmSiteController.setChosenQuantities(chosenQuantities);
+            MOConfirmSiteController.setDate(order.getDesiredDate());
+            runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
+        } else {
+
+        }
     }
 
     @Override

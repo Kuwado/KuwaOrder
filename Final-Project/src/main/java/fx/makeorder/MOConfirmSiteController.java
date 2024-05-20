@@ -52,10 +52,6 @@ public class MOConfirmSiteController {
     private static String date;
     private final SiteController siteController = new SiteController();
 
-
-
-
-
     @FXML
     void initialize() {
 

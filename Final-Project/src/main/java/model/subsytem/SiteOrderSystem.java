@@ -17,14 +17,15 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
     public void insert(SiteOrder siteOrder) {
         try {
             Connection con = DbUtil.getConnection();
-            String sql = "INSERT INTO siteOrders (order_id, site_id, delivery_type, price, status, note) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO siteOrders (order_id, site_id, quantity, delivery_type, price, status, note) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, siteOrder.getOrderId());
             pst.setInt(2, siteOrder.getSiteId());
-            pst.setString(3, siteOrder.getDeliveryType());
-            pst.setDouble(4, siteOrder.getPrice());
-            pst.setString(5, siteOrder.getStatus());
-            pst.setString(6, siteOrder.getNote());
+            pst.setInt(3, siteOrder.getQuantity());
+            pst.setString(4, siteOrder.getDeliveryType());
+            pst.setDouble(5, siteOrder.getPrice());
+            pst.setString(6, siteOrder.getStatus());
+            pst.setString(7, siteOrder.getNote());
             pst.executeUpdate();
             DbUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -52,15 +53,16 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
     public void update(SiteOrder siteOrder) {
         try {
             Connection con = DbUtil.getConnection();
-            String sql = "UPDATE siteOrders SET order_id = ?, site_id = ?, delivery_type = ?, price = ?, status = ?, note = ? WHERE id = ?";
+            String sql = "UPDATE siteOrders SET order_id = ?, site_id = ?, quantity = ?, delivery_type = ?, price = ?, status = ?, note = ? WHERE id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, siteOrder.getOrderId());
             pst.setInt(2, siteOrder.getSiteId());
-            pst.setString(3, siteOrder.getDeliveryType());
-            pst.setDouble(4, siteOrder.getPrice());
-            pst.setString(5, siteOrder.getStatus());
-            pst.setString(6, siteOrder.getNote());
-            pst.setInt(7, siteOrder.getId());
+            pst.setInt(3, siteOrder.getQuantity());
+            pst.setString(4, siteOrder.getDeliveryType());
+            pst.setDouble(5, siteOrder.getPrice());
+            pst.setString(6, siteOrder.getStatus());
+            pst.setString(7, siteOrder.getNote());
+            pst.setInt(8, siteOrder.getId());
             pst.executeUpdate();
             DbUtil.closeConnection(con);
         } catch (SQLException ex) {
