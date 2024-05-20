@@ -1,5 +1,7 @@
 package fx.makeorder;
 
+import controller.ProductController;
+import controller.SiteOrderController;
 import controller.SiteProductController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,6 +69,8 @@ public class MOExpectedSiteOrderController {
     private TableColumn<ExpectedSiteOrder, String> takeDate;
 
     private final SiteProductController siteProductController = new SiteProductController();
+    private final SiteOrderController siteOrderController = new SiteOrderController();
+    private final ProductController productController = new ProductController();
 
     private ObservableList<ExpectedSiteOrder> expectedSiteOrders = FXCollections.observableArrayList();
     private ArrayList<ChosenQuantity> chosingSites = new ArrayList<>();
@@ -88,23 +92,35 @@ public class MOExpectedSiteOrderController {
                         .findFirst();
                 if (existingCq.isPresent()) {
                     existingCq.get().setChosenQuantity(chosenQuantity.getChosenQuantity());
-                    existingCq.get().setDeliveryPrice(chosenQuantity.getDeliveryPrice());
-                    existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
+                    if (chosenQuantity.getDeliveryType().equals("Đường thủy") || chosenQuantity.getDeliveryType().equals("Hàng không")) {
+                        existingCq.get().setDeliveryPrice(chosenQuantity.getDeliveryPrice());
+                        existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
+                    }
                     existingCq.get().setStt(true);
                 }
             }
         }
 
-        for (ChosenQuantity cq : chosingSites) {
-            if (cq.isStt()) {
-                System.out.println(cq.getChosenQuantity());
-            }
+        // Tạo siteorder thử nghiệm
+        siteOrders = siteOrderController.getExpectedSiteOrders(chosingSites, order);
+
+        // Chèn vào kiểu dữ liệu cho bảng
+        for (SiteOrder siteOrder: siteOrders) {
+            System.out.println(siteOrder.getSiteId());
+            expectedSiteOrders.add(new ExpectedSiteOrder(siteOrder, date));
         }
-
-
 
         // Chèn vào table
         insertToTable();
+
+        // Thêm các thông tin phụ
+        requestId.setText(String.valueOf(order.getRequestId()));
+        orderId.setText(String.valueOf(order.getId()));
+        productName.setText(String.valueOf(productController.getProductById(order.getProductId()).getName()));
+        orderQuantity.setText(String.valueOf(order.getQuantity()));
+        orderUnit.setText(String.valueOf(order.getUnit()));
+        orderExpiredDate.setText(String.valueOf(order.getDesiredDate()));
+
 
         // Reset stt
         ConfirmSite.setIdCounter(1);

@@ -1,6 +1,7 @@
 package model.tabledata;
 
 import controller.SiteController;
+import model.Site;
 
 public class ChosenQuantity {
     private int siteId;
@@ -18,14 +19,17 @@ public class ChosenQuantity {
         this.siteId = siteId;
         this.chosenQuantity = chosenQuantity;
         this.deliveryType = deliveryType;
-        if (deliveryType.equals("Đường thủy")) {
-            this.deliveryPrice = siteController.getSiteById(siteId).getShipPrice();
-        }
-        else if (deliveryType.equals("Hàng không")) {
-            this.deliveryPrice = siteController.getSiteById(siteId).getAirPrice();
-        }
         this.stt = true;
     }
+
+    public ChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice) {
+        this.siteId = siteId;
+        this.chosenQuantity = chosenQuantity;
+        this.deliveryType = deliveryType;
+        this.deliveryPrice = deliveryPrice;
+        this.stt = true;
+    }
+
 
     public ChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice, double productPrice, int quantity) {
         this.siteId = siteId;

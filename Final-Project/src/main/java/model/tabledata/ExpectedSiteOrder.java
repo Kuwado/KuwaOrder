@@ -1,5 +1,9 @@
 package model.tabledata;
 
+import controller.SiteController;
+import model.SiteOrder;
+import solution.DateConverter;
+
 public class ExpectedSiteOrder {
     private static int idCounter = 1;
     private  int id;
@@ -9,13 +13,15 @@ public class ExpectedSiteOrder {
     private double price;
     private String expectedDate;
 
-    public ExpectedSiteOrder(String name, String deliveryType, int quantity, double price, String expectedDate) {
+    private SiteController siteController = new SiteController();
+
+    public ExpectedSiteOrder(SiteOrder siteOrder, int date) {
         this.id = idCounter++;
-        this.name = name;
-        this.deliveryType = deliveryType;
-        this.quantity = quantity;
-        this.price = price;
-        this.expectedDate = expectedDate;
+        this.name = siteController.getSiteById(siteOrder.getSiteId()).getName();
+        this.deliveryType = siteOrder.getDeliveryType();
+        this.quantity = siteOrder.getQuantity();
+        this.price = siteOrder.getPrice();
+        this.expectedDate = DateConverter.addDaysToDate(date);
     }
 
     public int getId() {

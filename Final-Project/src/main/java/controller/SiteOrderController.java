@@ -1,9 +1,14 @@
 package controller;
 
+import model.Order;
 import model.SiteOrder;
 import model.subsytem.SiteOrderSystem;
+import model.tabledata.ChosenQuantity;
+import solution.TotalPriceComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SiteOrderController {
     private final SiteOrderSystem siteOrderSystem = new SiteOrderSystem();
@@ -29,4 +34,37 @@ public class SiteOrderController {
         siteOrder = siteOrderSystem.selectById(siteOrder_id);
         return siteOrder;
     }
+
+    public  ArrayList<SiteOrder> getExpectedSiteOrders(ArrayList<ChosenQuantity> sites, Order order) {
+        ArrayList<SiteOrder> makeSiteOrders = new ArrayList<>();
+        int number = order.getQuantity();
+        // Lọc những site đã được chọn
+        for(ChosenQuantity chosenQuantity : sites) {
+            if (chosenQuantity.isStt()) {
+                number -= chosenQuantity.getChosenQuantity();
+                double price = chosenQuantity.getProductPrice()*chosenQuantity.getChosenQuantity() + chosenQuantity.getDeliveryPrice();
+                makeSiteOrders.add(new SiteOrder(order.getId(), chosenQuantity.getSiteId(), chosenQuantity.getChosenQuantity(), chosenQuantity.getDeliveryType(), price));
+                sites.remove(chosenQuantity);
+            }
+        }
+
+        if (number > 0) {
+            // Sắp xếp lại những site còn lại
+            Comparator<ChosenQuantity> totalPriceComparator = new TotalPriceComparator(number);
+            sites.sort(totalPriceComparator);
+            for (ChosenQuantity chosenQuantity : sites) {
+                if (chosenQuantity.getQuantity() >= number) {
+                    double price = chosenQuantity.getProductPrice()*number + chosenQuantity.getDeliveryPrice();
+                    makeSiteOrders.add(new SiteOrder(order.getId(), chosenQuantity.getSiteId(), number, chosenQuantity.getDeliveryType(), price));
+                    break;
+                } else {
+                    double price = chosenQuantity.getProductPrice()*chosenQuantity.getQuantity() + chosenQuantity.getDeliveryPrice();
+                    makeSiteOrders.add(new SiteOrder(order.getId(), chosenQuantity.getSiteId(), chosenQuantity.getQuantity(), chosenQuantity.getDeliveryType(), price));
+                    number -= chosenQuantity.getQuantity();
+                }
+            }
+        }
+        return makeSiteOrders;
+    }
+
 }

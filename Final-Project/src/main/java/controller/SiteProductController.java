@@ -72,5 +72,4 @@ public class SiteProductController {
         chosingSites = siteproductSystem.selectChosingSite(product_id, date);
         return  chosingSites;
     }
-
 }

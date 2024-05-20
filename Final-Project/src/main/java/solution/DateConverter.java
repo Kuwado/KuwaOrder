@@ -64,6 +64,18 @@ public class DateConverter {
         }
     }
 
+    // Hàm tính ngày nhận dự kiến
+    public static String addDaysToDate(int daysToAdd) {
+        // Lấy ngày hiện tại
+        LocalDate currentDate = LocalDate.now();
+        // Cộng thêm số ngày được chỉ định
+        LocalDate newDate = currentDate.plusDays(daysToAdd);
+        // Định dạng lại ngày thành chuỗi "dd/mm/yyyy"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = newDate.format(formatter);
+        return formattedDate;
+    }
+
     public static void main(String[] args) {
         // Sử dụng hàm convertToStandardFormat để chuyển đổi ngày tháng
         String inputDate = "25/05/2024";
