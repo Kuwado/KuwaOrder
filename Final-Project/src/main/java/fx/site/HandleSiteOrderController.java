@@ -62,7 +62,7 @@ public class HandleSiteOrderController {
 //                new TestData(8, 9, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
 //                new TestData(9, 10, "Cao Phong", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox())
 //        );
-        siteOrderTable.setItems(SiteOrdersListDAO.siteOrdersListsData());
+        siteOrderTable.setItems(SiteOrdersList.siteOrdersListsData());
     }
 
     @FXML
