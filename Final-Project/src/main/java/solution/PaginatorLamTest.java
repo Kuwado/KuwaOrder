@@ -4,22 +4,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
-import model.LamTest;
-
-import java.util.List;
+import model.tabledata.LamTestOrder;
 
 public class PaginatorLamTest {
-    public static void setPagination(TableView table, Pagination pagination, ObservableList<LamTest> lamT, int number) {
-        int totalPages = (lamT.size() + number - 1) / number;
-        pagination.setPageCount(totalPages);
-        pagination.setPageFactory(pageIndex -> {
-            int fromIndex = pageIndex * number;
-            int toIndex = Math.min(fromIndex + number, lamT.size());
-            List<LamTest> subList = lamT.subList(fromIndex, toIndex);
-            ObservableList<LamTest> currentPageLamTest = FXCollections.observableArrayList(subList);
-            //table.getItems().clear();
-            table.setItems(currentPageLamTest);
+
+    public static void setPagination(TableView<LamTestOrder> table, Pagination pagination, ObservableList<LamTestOrder> data, int rowsPerPage) {
+        int pageCount = (int) Math.ceil((double) data.size() / rowsPerPage);
+        pagination.setPageCount(pageCount);
+
+        pagination.setPageFactory((pageIndex) -> {
+            int fromIndex = pageIndex * rowsPerPage;
+            int toIndex = Math.min(fromIndex + rowsPerPage, data.size());
+            table.setItems(FXCollections.observableArrayList(data.subList(fromIndex, toIndex)));
             return table;
         });
+
+        if (pageCount > 0) {
+            pagination.setCurrentPageIndex(0);
+            int fromIndex = 0;
+            int toIndex = Math.min(rowsPerPage, data.size());
+            table.setItems(FXCollections.observableArrayList(data.subList(fromIndex, toIndex)));
+        } else {
+            table.setItems(FXCollections.observableArrayList());
+        }
     }
 }

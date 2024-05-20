@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="content" maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.warehouse.WaitIntoWHListController">
+    <children>
+        <HBox fx:id="breadcrumb" styleClass="breadcrumb" />
+        <!-- Product Details Section -->
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+            <children>
+                <VBox alignment="TOP_CENTER" layoutX="360.0" prefHeight="520.0" prefWidth="882.0" styleClass="table-area" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+                            <children>
+                                <HBox alignment="CENTER" maxHeight="40.0" prefHeight="40.0" prefWidth="340.0" styleClass="search-bar">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/icons/magnifying-glass.png" />
+                                            </image>
+                                        </ImageView>
+                                        <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên sản phẩm" styleClass="search-input" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <padding>
+                                <Insets left="50.0" />
+                            </padding>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="800.0">
+                            <children>
+                                <TableView fx:id="table" prefHeight="410.0" styleClass="tb">
+                                    <columns>
+                                        <TableColumn fx:id="productId" maxWidth="172.79998397827148" minWidth="60.0" prefWidth="172.79998397827148" styleClass="tb-col-first" text="ID" />
+                                        <TableColumn fx:id="productName" maxWidth="490.40000915527344" minWidth="167.1999969482422" prefWidth="358.40000915527344" styleClass="tb-col" text="Tên sản phẩm" />
+                                        <TableColumn fx:id="productQuantity" maxWidth="528.800048828125" minWidth="4.79998779296875" prefWidth="260.79998779296875" styleClass="tb-col" text="Số lượng" />
+                                        <TableColumn fx:id="productPrice" maxWidth="537.5999755859375" minWidth="103.199951171875" prefWidth="388.80001220703116" styleClass="tb-col" text="Giá" />
+                                    </columns>
+                                </TableView>
+                                <Pagination fx:id="pagination" maxWidth="1283.0" prefHeight="875.0" prefWidth="1283.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </VBox>
+                <VBox layoutX="11.0" layoutY="39.0" prefHeight="126.0" prefWidth="340.0" styleClass="table-area">
+                    <children>
+                        <HBox spacing="10.0">
+                            <Label styleClass="order-label" text="Mã đơn hàng:">
+                        <HBox.margin>
+                           <Insets top="12.0" />
+                        </HBox.margin></Label>
+                            <Label fx:id="labelMaDonHang" prefHeight="27.0" prefWidth="164.0" styleClass="order-value" text="">
+                        <HBox.margin>
+                           <Insets top="12.0" />
+                        </HBox.margin></Label>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Label styleClass="order-label" text="Site:" />
+                            <Label fx:id="labelSite" prefHeight="27.0" prefWidth="171.0" styleClass="order-value" text="" />
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Label styleClass="order-label" text="Ngày nhận hàng:" />
+                            <Label fx:id="labelNgayNhanHang" prefHeight="27.0" prefWidth="138.0" styleClass="order-value" text="" />
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Label styleClass="order-label" text="Trạng thái:" />
+                            <Label fx:id="labelTrangThai" prefHeight="27.0" prefWidth="168.0" styleClass="order-value" text="" />
+                        </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Note:" />
+                        <Label prefHeight="100.0" prefWidth="340.0" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="128.0" prefWidth="340.0">
+                     <children>
+                        <Button mnemonicParsing="false" styleClass="confirm-btn" text="Nhập kho" />
+                        <Button mnemonicParsing="false" styleClass="cancel-btn" text="Quay lại">
+                           <HBox.margin>
+                              <Insets left="12.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="12.0" />
+                     </VBox.margin>
+                  </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
