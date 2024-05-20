@@ -38,7 +38,7 @@
             </HBox>
             <HBox alignment="CENTER" maxWidth="360.0" prefHeight="65.0" prefWidth="360.0">
                <children>
-                  <TextField fx:id="searchInput" prefHeight="40.0" prefWidth="244.0" promptText="Bạn cần tìm gì?" styleClass="transparent" stylesheets="@../../../../../../../Fruits-Market/FruitMarket/src/values/style.css">
+                  <TextField fx:id="searchInput" prefHeight="40.0" prefWidth="244.0" promptText="Bạn cần tìm gì?" styleClass="transparent">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
