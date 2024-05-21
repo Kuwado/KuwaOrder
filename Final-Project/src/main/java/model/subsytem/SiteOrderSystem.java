@@ -138,4 +138,30 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
             Logger.getLogger(OrderSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    // retrieve a siteorder by siteID
+    public ArrayList<SiteOrder> selectBySiteId(int siteId) {
+        ArrayList<SiteOrder> siteOrders = new ArrayList<>();
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "SELECT * FROM siteOrders WHERE site_id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, siteId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int orderId = rs.getInt("order_id");
+                int quantity = rs.getInt("quantity");
+                String deliveryType = rs.getString("delivery_type");
+                double price = rs.getDouble("price");
+                String status = rs.getString("status");
+                String note = rs.getString("note");
+                SiteOrder siteOrder = new SiteOrder(id, orderId, siteId, quantity, deliveryType, price, status, note);
+                siteOrders.add(siteOrder);
+            }
+            DbUtil.closeConnection(con);
+        } catch (SQLException e) {
+            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return siteOrders;
+    }
 }

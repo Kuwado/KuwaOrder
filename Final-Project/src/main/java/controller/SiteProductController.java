@@ -71,4 +71,14 @@ public class SiteProductController {
         chosingSites = siteproductSystem.selectChosingSite(product_id, date);
         return  chosingSites;
     }
+    public void updateQuantityAndSoldQuantity(int siteProductId, int deliveredQuantity) {
+        SiteProduct siteProduct = getSiteProductById(siteProductId);
+        if (siteProduct != null) {
+            int newQuantity = siteProduct.getQuantity() - deliveredQuantity;
+            int newSoldQuantity = siteProduct.getSoldQuantity() + deliveredQuantity;
+            siteProduct.setQuantity(newQuantity);
+            siteProduct.setSoldQuantity(newSoldQuantity);
+            siteproductSystem.update2(siteProduct);
+        }
+    }
 }

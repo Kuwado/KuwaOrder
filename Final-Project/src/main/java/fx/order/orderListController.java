@@ -1,6 +1,8 @@
 package fx.order;
 
+import controller.OrderController;
 import controller.SiteOrderController;
+import controller.SiteProductController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -160,18 +162,22 @@ public class orderListController {
     private final ObservableList<VOSiteOrder> voSiteOrders = FXCollections.observableArrayList();
     // Nhừ
     private final SiteOrderController siteOrderController = new SiteOrderController();
+    private final SiteProductController siteProductController = new SiteProductController();
 
+    private final OrderController orderController = new OrderController();
     @FXML
     void initialize() {
         OBreadcrumbController.number = 1;
         OBreadcrumbController ob = new OBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
         ArrayList<SiteOrder> siteOrders = siteOrderController.getAllSiteOrders();
-
-        for (SiteOrder site : siteOrders){
-            voSiteOrders.add(new VOSiteOrder(site));
+        ArrayList<SiteProduct> siteProducts = new ArrayList<>();
+        for (SiteOrder siteOrder : siteOrders) {
+            siteProducts = siteProductController.getSiteproductsByProduct(orderController.getOrderById(siteOrder.getOrderId()).getProductId());
         }
-
+        for (int i = 0; i <= siteOrders.size(); i++){
+            voSiteOrders.add(new VOSiteOrder(siteOrders.get(i),siteProducts.get(i)));
+        }
         insertToTable();
         table.setItems(voSiteOrders);
         table.setOnMouseClicked(event -> {
