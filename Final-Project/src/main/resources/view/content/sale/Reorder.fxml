@@ -1,52 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sale.ReOrderController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sale.ReOrderController">
    <children>
       <AnchorPane maxWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
          <children>
             <VBox maxWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
                <children>
                   <Label text="Sản phẩm cần đặt lại" />
-                  <TableView prefHeight="158.0" prefWidth="1260.0">
+                  <TableView fx:id="productTable" prefHeight="90.0" prefWidth="1260.0">
                     <columns>
-                      <TableColumn prefWidth="512.0" text="Tên sản phẩm" />
-                      <TableColumn prefWidth="144.0" text="Số lượng" />
-                        <TableColumn prefWidth="168.0" text="Đơn vị" />
-                        <TableColumn prefWidth="255.0" text="Ngày nhận mong muốn" />
-                        <TableColumn prefWidth="180.0" text="Số lượng đã chọn" />
+                        <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="productNameColumn" prefWidth="512.0" text="Tên sản phẩm" />
+                      <TableColumn fx:id="productQuantityColumn" prefWidth="144.0" text="Số lượng" />
+                        <TableColumn fx:id="unitColumn" prefWidth="168.0" text="Đơn vị" />
+                        <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Trạng thái" />
+                        <TableColumn fx:id="desiredDateColumn" prefWidth="255.0" text="Ngày nhận mong muốn" />
+                        <TableColumn fx:id="selectedQuantityColumn" prefWidth="180.0" text="Số lượng đã chọn" />
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <Label text="Danh sách site" />
                   <HBox prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                        <TextField alignment="CENTER" prefHeight="26.0" prefWidth="390.0" promptText="Nhập tên site muốn tìm kiếm" />
-                        <Button mnemonicParsing="false" prefWidth="135.0" text="Hủy đơn " />
-                        <Button mnemonicParsing="false" prefWidth="135.0" text="Đặt lại nhanh" />
+                        <TextField alignment="CENTER" prefHeight="26.0" prefWidth="390.0" promptText="Nhập mã site muốn tìm kiếm" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" prefWidth="135.0" text="Hủy đơn " />
+                        <Button fx:id="fastReorderButton" mnemonicParsing="false" onAction="#fastReorder" prefWidth="135.0" text="Đặt lại nhanh" />
                      </children>
                   </HBox>
-                  <TableView prefHeight="327.0" prefWidth="1260.0">
+                  <TableView fx:id="sitesTable" prefHeight="415.0" prefWidth="1260.0">
                     <columns>
-                      <TableColumn prefWidth="163.0" text="Mã site" />
-                      <TableColumn prefWidth="408.0" text="Tên site" />
-                        <TableColumn prefWidth="178.0" text="Vận chuyển" />
-                        <TableColumn minWidth="0.0" prefWidth="277.0" text="Ngày nhận dự kiến" />
-                        <TableColumn prefWidth="146.0" text="Số lượng" />
-                        <TableColumn prefWidth="88.0" text="Chọn" />
+                      <TableColumn fx:id="siteIdColumn" prefWidth="163.0" text="Mã site" />
+                      <TableColumn fx:id="siteNameColumn" prefWidth="408.0" text="Tên site" />
+                        <TableColumn fx:id="deliveryColumn" prefWidth="178.0" text="Vận chuyển" />
+                        <TableColumn fx:id="expectedDateColumn" minWidth="0.0" prefWidth="277.0" text="Ngày nhận dự kiến" />
+                        <TableColumn fx:id="quantityInStockColumn" prefWidth="75.0" text="Số lượng trong kho" />
+                        <TableColumn fx:id="quantityColumn" prefWidth="146.0" text="Số lượng" />
+                        <TableColumn fx:id="selectedColumn" prefWidth="88.0" text="Chọn" />
                     </columns>
                      <padding>
                         <Insets top="10.0" />
                      </padding>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <HBox alignment="TOP_RIGHT">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="135.0" text="Đặt lại" textAlignment="CENTER" />
+                        <Button fx:id="reorderButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#reorder" prefWidth="135.0" text="Đặt lại" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" top="15.0" />
