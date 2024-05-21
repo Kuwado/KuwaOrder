@@ -15,8 +15,7 @@ public class Paginator<T> {
         pagination.setPageFactory(pageIndex -> {
             int fromIndex = pageIndex * number;
             int toIndex = Math.min(fromIndex + number, items.size());
-            List<T> subList = items.subList(fromIndex, toIndex);
-            ObservableList<T> currentPageItems = FXCollections.observableArrayList(subList);
+            ObservableList<T> currentPageItems = FXCollections.observableArrayList(items.subList(fromIndex, toIndex));
             table.setItems(currentPageItems);
             return table;
         });

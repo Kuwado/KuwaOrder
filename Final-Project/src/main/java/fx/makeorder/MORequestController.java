@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.*;
-import model.tabledata.ChosenQuantity;
+import model.tabledata.MOChosenQuantity;
 import model.tabledata.MOOrder;
 import solution.DateConverter;
 import solution.Transition;
@@ -80,9 +80,15 @@ public class MORequestController extends MOController<MOOrder> {
     void initialize() {
         ArrayList<Order> orders = orderController.getWaitOrdersInRequest(request.getId());
 
-        for (int i = 0; i < orders.size(); i++) {
-            Button button = makeButton(table, i, "/view/content/makeorder/MOOrder.fxml");
-            moOrders.add(new MOOrder(orders.get(i), button));
+        String buttonPath = "/view/content/makeorder/MOOrder.fxml";
+        for (Order order : orders) {
+            Button button = new Button();
+            button.getStyleClass().add("table-view-btn");
+            MOOrder moOrder = new MOOrder(order, button);
+            button.setOnAction(event -> {
+                viewRequestDetail(moOrder, event, buttonPath);
+            });
+            moOrders.add(moOrder);
         }
 
         // Set breadcrumbs
@@ -106,7 +112,7 @@ public class MORequestController extends MOController<MOOrder> {
                     insertToPreviewCard(item);
                     order = orderController.getOrderById(item.getOrder().getId());
                     date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
-                    ArrayList<ChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
+                    ArrayList<MOChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
                     if (siteProducts.isEmpty()) {
                         quickMakeOrderBtn.setDisable(true);
                     }
@@ -119,8 +125,16 @@ public class MORequestController extends MOController<MOOrder> {
     }
 
     @Override
-    public void setDataToTrans(MOOrder moOrder) {
-        MOOrderController.setOrder(orderController.getOrderById(moOrder.getOrder().getId()));
+    public boolean setDataToTrans(MOOrder moOrder) {
+        Order od = orderController.getOrderById(moOrder.getOrder().getId());
+        int dateNumber = DateConverter.roundedDaysDifferenceFromToday(od.getDesiredDate());
+        ArrayList<MOChosenQuantity> ss = siteProductController.getSiteToMakeOrder(od.getProductId(), dateNumber);
+        if (ss.isEmpty()) {
+            return false;
+        } else {
+            MOOrderController.setOrder(od);
+            return true;
+        }
     }
 
     public static void setRequest(Request request) {
@@ -151,7 +165,7 @@ public class MORequestController extends MOController<MOOrder> {
 
     @FXML
     void makeQuicklyOrder(ActionEvent event) throws IOException {
-        ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
+        ArrayList<MOChosenQuantity> chosenQuantities = new ArrayList<>();
         MOExpectedSiteOrderController.setDate(date);
         MOExpectedSiteOrderController.setOrder(order);
         MOExpectedSiteOrderController.setChosenSites(chosenQuantities);

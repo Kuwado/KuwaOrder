@@ -1,7 +1,5 @@
 package fx.makeorder;
 
-import controller.OrderController;
-import controller.ProductController;
 import controller.SiteController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,9 +12,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.stage.Stage;
-import model.Order;
-import model.tabledata.ChosenQuantity;
-import model.tabledata.ConfirmSite;
+import model.tabledata.MOChosenQuantity;
+import model.tabledata.MOConfirmSite;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,22 +22,22 @@ import java.util.ArrayList;
 public class MOConfirmSiteController {
 
     @FXML
-    private TableView<ConfirmSite> chosenSiteTable;
+    private TableView<MOConfirmSite> chosenSiteTable;
 
     @FXML
-    private TableColumn<ConfirmSite, Integer> stt;
+    private TableColumn<MOConfirmSite, Integer> stt;
 
     @FXML
-    private TableColumn<ConfirmSite, String> siteName;
+    private TableColumn<MOConfirmSite, String> siteName;
 
     @FXML
-    private TableColumn<ConfirmSite, String> delivery;
+    private TableColumn<MOConfirmSite, String> delivery;
 
     @FXML
-    private TableColumn<ConfirmSite, Integer> quantity;
+    private TableColumn<MOConfirmSite, Integer> quantity;
 
     @FXML
-    private TableColumn<ConfirmSite, String> takeDate;
+    private TableColumn<MOConfirmSite, String> takeDate;
 
     @FXML
     private Button confirmBtn;
@@ -48,36 +45,36 @@ public class MOConfirmSiteController {
     @FXML
     private Button backBtn;
 
-    private final ObservableList<ConfirmSite> confirmSites = FXCollections.observableArrayList();
-    private static ArrayList<ChosenQuantity> chosenQuantities;
+    private final ObservableList<MOConfirmSite> confirmSites = FXCollections.observableArrayList();
+    private static ArrayList<MOChosenQuantity> chosenQuantities;
     private static String sDate;
     private final SiteController siteController = new SiteController();
 
     @FXML
     void initialize() {
 
-        for (ChosenQuantity q : chosenQuantities) {
+        for (MOChosenQuantity q : chosenQuantities) {
             String name = siteController.getSiteById(q.getSiteId()).getName();
-            confirmSites.add(new ConfirmSite(name, q.getDeliveryType(), q.getChosenQuantity(), sDate));
+            confirmSites.add(new MOConfirmSite(name, q.getDeliveryType(), q.getChosenQuantity(), sDate));
         }
 
         // Chèn vào table
         insertToTable();
 
         // Reset stt
-        ConfirmSite.setIdCounter(1);
+        MOConfirmSite.setIdCounter(1);
     }
 
     public void insertToTable() {
-        stt.setCellValueFactory(new PropertyValueFactory<ConfirmSite, Integer>("id"));
-        siteName.setCellValueFactory(new PropertyValueFactory<ConfirmSite, String>("name"));
-        delivery.setCellValueFactory(new PropertyValueFactory<ConfirmSite, String>("deliveryType")); // Đặt lại tên thuộc tính
-        quantity.setCellValueFactory(new PropertyValueFactory<ConfirmSite, Integer>("quantity")); // Đặt lại tên thuộc tính
-        takeDate.setCellValueFactory(new PropertyValueFactory<ConfirmSite, String>("expectedDate"));
+        stt.setCellValueFactory(new PropertyValueFactory<MOConfirmSite, Integer>("id"));
+        siteName.setCellValueFactory(new PropertyValueFactory<MOConfirmSite, String>("name"));
+        delivery.setCellValueFactory(new PropertyValueFactory<MOConfirmSite, String>("deliveryType")); // Đặt lại tên thuộc tính
+        quantity.setCellValueFactory(new PropertyValueFactory<MOConfirmSite, Integer>("quantity")); // Đặt lại tên thuộc tính
+        takeDate.setCellValueFactory(new PropertyValueFactory<MOConfirmSite, String>("expectedDate"));
         chosenSiteTable.setItems(confirmSites);
     }
 
-    public static void setChosenQuantities(ArrayList<ChosenQuantity> chosenQuantities) {
+    public static void setChosenQuantities(ArrayList<MOChosenQuantity> chosenQuantities) {
         MOConfirmSiteController.chosenQuantities = chosenQuantities;
     }
 

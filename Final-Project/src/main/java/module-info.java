@@ -12,40 +12,34 @@ module application {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
-
-    // Add this line to open the package to javafx.fxml
-    opens fx.wh to javafx.fxml;
-
-    opens fx.warehouse to javafx.fxml;
     requires java.sql;
-    opens fx.order to javafx.fxml;
 
+    // opens
     opens fx to javafx.fxml;
-    opens application to javafx.fxml;
-    opens org.example.final_project to javafx.fxml;
-    exports application;
-    exports org.example.final_project;
-    exports fx;
-    exports fx.makeorder;
+    opens fx.wh to javafx.fxml;
+    opens fx.warehouse to javafx.fxml;
+    opens fx.order to javafx.fxml;
     opens fx.makeorder to javafx.fxml;
-    exports model;
-    exports solution;
-    exports fx.site;
     opens fx.site to javafx.base, javafx.fxml;
-    exports fx.sale;
     opens fx.sale to javafx.fxml;
     opens fx.product to javafx.fxml;
-    exports fx.product;
-    exports model.tabledata;
-    exports fx.breadcrumb;
     opens fx.breadcrumb to javafx.fxml;
-
     opens fx.sidebar to javafx.fxml;
-    exports fx.sidebar;
-
-    exports fx.makerequest;
     opens fx.makerequest to javafx.fxml;
+    opens application to javafx.fxml;
 
+    // export
+    exports fx;
+    exports fx.makeorder;
+    exports fx.breadcrumb;
+    exports fx.sidebar;
+    exports fx.makerequest;
     exports fx.wh;
-
+    exports fx.site;
+    exports fx.sale;
+    exports fx.product;
+    exports application;
+    exports model;
+    exports solution;
+    exports model.tabledata;
 }

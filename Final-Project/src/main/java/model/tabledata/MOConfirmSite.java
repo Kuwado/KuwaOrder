@@ -1,6 +1,6 @@
 package model.tabledata;
 
-public class ConfirmSite {
+public class MOConfirmSite {
     private static int idCounter = 1;
     private int id;
     private String name;
@@ -8,7 +8,7 @@ public class ConfirmSite {
     private int quantity;
     private String expectedDate;
 
-    public ConfirmSite(String name, String deliveryType, int quantity, String expectedDate) {
+    public MOConfirmSite(String name, String deliveryType, int quantity, String expectedDate) {
         this.id = idCounter++;
         this.name = name;
         this.deliveryType = deliveryType;
@@ -37,6 +37,6 @@ public class ConfirmSite {
     }
 
     public static void setIdCounter(int idCounter) {
-        ConfirmSite.idCounter = idCounter;
+        MOConfirmSite.idCounter = idCounter;
     }
 }

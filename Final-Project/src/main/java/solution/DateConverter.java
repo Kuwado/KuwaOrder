@@ -3,6 +3,7 @@ package solution;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
@@ -45,20 +46,14 @@ public class DateConverter {
 
     // Hàm tính toán hiệu số ngày
     public static int roundedDaysDifferenceFromToday(String date) {
-        // Định dạng ngày
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
-            // Chuyển đổi chuỗi thành LocalDate
             LocalDate inputDate = LocalDate.parse(date, formatter);
-            // Lấy ngày hiện tại
             LocalDate currentDate = LocalDate.now();
-            // Tính hiệu số ngày
             long daysDifference = ChronoUnit.DAYS.between(currentDate, inputDate);
-            // Làm tròn hiệu số ngày lên và chuyển thành int
             int roundedDifference = (int) Math.ceil(daysDifference);
             return roundedDifference;
         } catch (Exception e) {
-            // Xảy ra ngoại lệ khi không thể chuyển đổi hoặc tính toán
             System.out.println("Lỗi: " + e.getMessage());
             return 0;
         }
@@ -66,14 +61,19 @@ public class DateConverter {
 
     // Hàm tính ngày nhận dự kiến
     public static String addDaysToDate(int daysToAdd) {
-        // Lấy ngày hiện tại
         LocalDate currentDate = LocalDate.now();
-        // Cộng thêm số ngày được chỉ định
         LocalDate newDate = currentDate.plusDays(daysToAdd);
-        // Định dạng lại ngày thành chuỗi "dd/mm/yyyy"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = newDate.format(formatter);
         return formattedDate;
+    }
+
+    // Hàm convert từ yyyy-MM-dd HH:mm:ss sang dd/mm/yyyy
+    public static String convertDateTime(String timeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(timeString, formatter);
+        DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dateTime.format(newFormatter);
     }
 
     public static void main(String[] args) {

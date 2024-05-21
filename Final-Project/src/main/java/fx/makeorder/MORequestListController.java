@@ -62,9 +62,14 @@ public class MORequestListController extends MOController<MORequest> {
         ArrayList<Request> requests = requestController.getWaitRequests();
 
         String buttonPath = "/view/content/makeorder/MORequest.fxml";
-        for (int i = 0; i < requests.size(); i++) {
-            Button button = makeButton(table, i, buttonPath);
-            moRequests.add(new MORequest(requests.get(i), button));
+        for (Request request : requests) {
+            Button button = new Button();
+            button.getStyleClass().add("table-view-btn");
+            MORequest moRequest = new MORequest(request, button);
+            button.setOnAction(event -> {
+                viewRequestDetail(moRequest, event, buttonPath);
+            });
+            moRequests.add(moRequest);
         }
 
         // Breadcrumbs
@@ -81,8 +86,14 @@ public class MORequestListController extends MOController<MORequest> {
     }
 
     @Override
-    public void setDataToTrans(MORequest moRequest) {
-        MORequestController.setRequest(requestController.getRequestById(moRequest.getRequest().getId()));
+    public boolean setDataToTrans(MORequest moRequest) {
+        Request res = requestController.getRequestById(moRequest.getRequest().getId());
+        ArrayList<Order> resOrders = orderController.getWaitOrdersInRequest(res.getId());
+        if (resOrders.size() > 0) {
+            MORequestController.setRequest(res);
+            return true;
+        } else
+            return false;
     }
 
     @Override
@@ -101,12 +112,17 @@ public class MORequestListController extends MOController<MORequest> {
         Request request = moRequest.getRequest();
         StringBuilder productList = new StringBuilder();
         List<Order> orders = orderController.getOrdersInRequest(request.getId());
-        String[] dates = new String[orders.size()];
-        for (int i = 0; i < orders.size(); i++) {
-            dates[i] = orders.get(i).getDesiredDate();
+        String exDate;
+        if (orders.size() > 0) {
+            String[] dates = new String[orders.size()];
+            for (int i = 0; i < orders.size(); i++) {
+                dates[i] = orders.get(i).getDesiredDate();
+            }
+            DateConverter.sortDates(dates);
+            exDate = dates[0];
+        } else {
+            exDate = "Chưa có";
         }
-        DateConverter.sortDates(dates);
-        String exDate = dates[0];
 
         for (int i = 0; i < orders.size(); i++) {
             productList.append(productController.getProductById(orders.get(i).getProductId()).getName());

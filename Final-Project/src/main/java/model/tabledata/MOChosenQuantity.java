@@ -1,9 +1,8 @@
 package model.tabledata;
 
 import controller.SiteController;
-import model.Site;
 
-public class ChosenQuantity {
+public class MOChosenQuantity {
     private int siteId;
     private int chosenQuantity;
     private String deliveryType;
@@ -14,7 +13,7 @@ public class ChosenQuantity {
 
     private final SiteController siteController = new SiteController();
 
-    public ChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice) {
+    public MOChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice) {
         this.siteId = siteId;
         this.chosenQuantity = chosenQuantity;
         this.deliveryType = deliveryType;
@@ -23,7 +22,7 @@ public class ChosenQuantity {
     }
 
 
-    public ChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice, double productPrice, int quantity) {
+    public MOChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice, double productPrice, int quantity) {
         this.siteId = siteId;
         this.chosenQuantity = chosenQuantity;
         this.deliveryType = deliveryType;

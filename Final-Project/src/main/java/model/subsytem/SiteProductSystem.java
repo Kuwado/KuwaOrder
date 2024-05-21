@@ -1,11 +1,10 @@
 package model.subsytem;
 
 import config.DbUtil;
-import model.ChosingSite;
 import model.Site;
 import model.SiteProduct;
 import model.Product;
-import model.tabledata.ChosenQuantity;
+import model.tabledata.MOChosenQuantity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -257,8 +256,8 @@ public class SiteProductSystem implements DBInterface<SiteProduct> {
     }
 
     // Lấy các site đủ điều kiện để tạo đơn
-    public ArrayList<ChosenQuantity> selectChosingSite(int productId, int date) {
-        ArrayList<ChosenQuantity> chosingSites = new ArrayList<>();
+    public ArrayList<MOChosenQuantity> selectChosingSite(int productId, int date) {
+        ArrayList<MOChosenQuantity> chosingSites = new ArrayList<>();
         try {
             Connection con = DbUtil.getConnection();
             String sql = "SELECT * FROM sites JOIN siteproducts ON sites.id = siteproducts.site_id WHERE product_id = ? AND siteproducts.quantity > 0 AND (sites.air_date <= ? OR sites.ship_date <= ?)";
@@ -292,7 +291,7 @@ public class SiteProductSystem implements DBInterface<SiteProduct> {
                     deliveryPrice = airPrice;
                     deliveryType = "Hàng không";
                 }
-                ChosenQuantity chosingSite = new ChosenQuantity(siteId, 0, deliveryType, deliveryPrice, productPrice, quantity);
+                MOChosenQuantity chosingSite = new MOChosenQuantity(siteId, 0, deliveryType, deliveryPrice, productPrice, quantity);
                 chosingSites.add(chosingSite);
             }
             DbUtil.closeConnection(con);

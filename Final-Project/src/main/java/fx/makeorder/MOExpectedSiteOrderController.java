@@ -14,10 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Order;
 import model.SiteOrder;
-import model.tabledata.ChosenQuantity;
-import model.tabledata.ConfirmSite;
-import model.tabledata.ExpectedSiteOrder;
-import model.tabledata.ExpectedSiteOrder;
+import model.tabledata.MOChosenQuantity;
+import model.tabledata.MOConfirmSite;
+import model.tabledata.MOExpectedSiteOrder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,38 +52,38 @@ public class MOExpectedSiteOrderController {
     private Label boughtQuantity;
 
     @FXML
-    private TableView<ExpectedSiteOrder> table;
+    private TableView<MOExpectedSiteOrder> table;
 
     @FXML
-    private TableColumn<ExpectedSiteOrder, String> delivery;
+    private TableColumn<MOExpectedSiteOrder, String> delivery;
 
     @FXML
-    private TableColumn<ExpectedSiteOrder, Integer> quantity;
+    private TableColumn<MOExpectedSiteOrder, Integer> quantity;
 
     @FXML
-    private TableColumn<ExpectedSiteOrder, String> siteName;
+    private TableColumn<MOExpectedSiteOrder, String> siteName;
 
     @FXML
-    private TableColumn<ExpectedSiteOrder, Integer> stt;
+    private TableColumn<MOExpectedSiteOrder, Integer> stt;
 
     @FXML
-    private TableColumn<ExpectedSiteOrder, String> price;
+    private TableColumn<MOExpectedSiteOrder, String> price;
 
     @FXML
-    private TableColumn<ExpectedSiteOrder, String> takeDate;
+    private TableColumn<MOExpectedSiteOrder, String> takeDate;
 
     private final SiteProductController siteProductController = new SiteProductController();
     private final SiteOrderController siteOrderController = new SiteOrderController();
     private final ProductController productController = new ProductController();
     private final OrderController orderController = new OrderController();
 
-    private ObservableList<ExpectedSiteOrder> expectedSiteOrders = FXCollections.observableArrayList();
-    private ArrayList<ChosenQuantity> chosingSites;
+    private ObservableList<MOExpectedSiteOrder> expectedSiteOrders = FXCollections.observableArrayList();
+    private ArrayList<MOChosenQuantity> chosingSites;
     private ArrayList<SiteOrder> siteOrders;
     private int chosenNumber;
     private String status;
 
-    private static ArrayList<ChosenQuantity> chosenSites;
+    private static ArrayList<MOChosenQuantity> chosenSites;
     private static int date;
     private static Order order;
 
@@ -92,8 +91,8 @@ public class MOExpectedSiteOrderController {
     void initialize() {
         chosingSites = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
         if (!chosenSites.isEmpty()) {
-            for (ChosenQuantity chosenQuantity : chosenSites) {
-                Optional<ChosenQuantity> existingCq = chosingSites.stream()
+            for (MOChosenQuantity chosenQuantity : chosenSites) {
+                Optional<MOChosenQuantity> existingCq = chosingSites.stream()
                         .filter(cq -> cq.getSiteId() == chosenQuantity.getSiteId())
                         .findFirst();
                 if (existingCq.isPresent()) {
@@ -112,7 +111,7 @@ public class MOExpectedSiteOrderController {
 
         // Chèn vào kiểu dữ liệu cho bảng
         for (SiteOrder siteOrder: siteOrders) {
-            expectedSiteOrders.add(new ExpectedSiteOrder(siteOrder, date));
+            expectedSiteOrders.add(new MOExpectedSiteOrder(siteOrder, date));
             chosenNumber += siteOrder.getQuantity();
         }
 
@@ -129,7 +128,7 @@ public class MOExpectedSiteOrderController {
         boughtQuantity.setText(String.valueOf((chosenNumber)));
 
         // Reset stt
-        ConfirmSite.setIdCounter(1);
+        MOConfirmSite.setIdCounter(1);
 
         // Nếu thiếu hàng
         if (chosenNumber < order.getQuantity()) {
@@ -148,7 +147,7 @@ public class MOExpectedSiteOrderController {
         alert.showAndWait();
     }
 
-    public static void setChosenSites(ArrayList<ChosenQuantity> chosenSites) {
+    public static void setChosenSites(ArrayList<MOChosenQuantity> chosenSites) {
         MOExpectedSiteOrderController.chosenSites = chosenSites;
     }
 
@@ -161,12 +160,12 @@ public class MOExpectedSiteOrderController {
     }
 
     public void insertToTable() {
-        stt.setCellValueFactory(new PropertyValueFactory<ExpectedSiteOrder, Integer>("id"));
-        siteName.setCellValueFactory(new PropertyValueFactory<ExpectedSiteOrder, String>("name"));
-        delivery.setCellValueFactory(new PropertyValueFactory<ExpectedSiteOrder, String>("deliveryType")); // Đặt lại tên thuộc tính
-        quantity.setCellValueFactory(new PropertyValueFactory<ExpectedSiteOrder, Integer>("quantity")); // Đặt lại tên thuộc tính
-        takeDate.setCellValueFactory(new PropertyValueFactory<ExpectedSiteOrder, String>("expectedDate"));
-        price.setCellValueFactory(new PropertyValueFactory<ExpectedSiteOrder, String>("price"));
+        stt.setCellValueFactory(new PropertyValueFactory<MOExpectedSiteOrder, Integer>("id"));
+        siteName.setCellValueFactory(new PropertyValueFactory<MOExpectedSiteOrder, String>("name"));
+        delivery.setCellValueFactory(new PropertyValueFactory<MOExpectedSiteOrder, String>("deliveryType")); // Đặt lại tên thuộc tính
+        quantity.setCellValueFactory(new PropertyValueFactory<MOExpectedSiteOrder, Integer>("quantity")); // Đặt lại tên thuộc tính
+        takeDate.setCellValueFactory(new PropertyValueFactory<MOExpectedSiteOrder, String>("expectedDate"));
+        price.setCellValueFactory(new PropertyValueFactory<MOExpectedSiteOrder, String>("price"));
         table.setItems(expectedSiteOrders);
     }
 

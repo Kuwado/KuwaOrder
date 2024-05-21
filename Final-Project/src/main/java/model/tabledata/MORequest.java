@@ -1,14 +1,8 @@
 package model.tabledata;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import model.Order;
 import model.Request;
-import solution.ButtonIntoTable;
-
-import java.io.IOException;
-import java.util.List;
+import solution.DateConverter;
 
 public class MORequest {
     private static int idCounter = 1;
@@ -26,7 +20,7 @@ public class MORequest {
         this.request = request;
         this.name = request.getName();
         this.orderQuantity = request.getOrderQuantity();
-        this.sendDate = request.getSendDate();
+        this.sendDate = DateConverter.convertDateTime(request.getSendDate());
         this.status = request.getStatus();
         this.description = request.getDescription();
         this.action = button;

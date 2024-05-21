@@ -1,15 +1,10 @@
 package model.tabledata;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import model.Order;
 import model.Product;
 import model.Site;
-import model.SiteProduct;
 
-import java.io.IOException;
-
-public class ChosenSite {
+public class MOChosenSite {
     private static int idCounter = 1;
     private int id;
     private Order order;
@@ -23,7 +18,7 @@ public class ChosenSite {
     private TextField action;
     private String deliveryStt;
 
-    public ChosenSite(Order order, Product product, Site site, ChosenQuantity chosenQuantity, TextField textfield) {
+    public MOChosenSite(Order order, Product product, Site site, MOChosenQuantity chosenQuantity, TextField textfield) {
         this.id = idCounter++;
         this.order = order;
         this.product = product;
@@ -35,8 +30,6 @@ public class ChosenSite {
         this.airDate = site.getAirDate();
         this.action = textfield;
     }
-
-
 
     public int getId() {
         return id;
@@ -94,6 +87,6 @@ public class ChosenSite {
     }
 
     public static void setIdCounter(int idCounter) {
-        ChosenSite.idCounter = idCounter;
+        MOChosenSite.idCounter = idCounter;
     }
 }

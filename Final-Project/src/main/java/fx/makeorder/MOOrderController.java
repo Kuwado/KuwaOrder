@@ -19,11 +19,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.*;
-import model.tabledata.ChosenQuantity;
-import model.tabledata.ChosenSite;
+import model.tabledata.MOChosenQuantity;
+import model.tabledata.MOChosenSite;
 import model.SiteProduct;
-import model.tabledata.ConfirmSite;
-import model.tabledata.MOOrder;
 import solution.DateConverter;
 
 import java.io.IOException;
@@ -31,27 +29,27 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
-public class MOOrderController extends MOController<ChosenSite> {
+public class MOOrderController extends MOController<MOChosenSite> {
     @FXML
-    private TableView<ChosenSite> table;
+    private TableView<MOChosenSite> table;
 
     @FXML
-    private TableColumn<ChosenSite, Integer> id;
+    private TableColumn<MOChosenSite, Integer> id;
 
     @FXML
-    private TableColumn<ChosenSite, Integer> siteQuantity;
+    private TableColumn<MOChosenSite, Integer> siteQuantity;
 
     @FXML
-    private TableColumn<ChosenSite, String> unit;
+    private TableColumn<MOChosenSite, String> unit;
 
     @FXML
-    private TableColumn<ChosenSite, Integer> shipDate;
+    private TableColumn<MOChosenSite, Integer> shipDate;
 
     @FXML
-    private TableColumn<ChosenSite, Integer> airDate;
+    private TableColumn<MOChosenSite, Integer> airDate;
 
     @FXML
-    private TableColumn<ChosenSite, String> numberInput;
+    private TableColumn<MOChosenSite, String> numberInput;
 
     @FXML
     private Label productName;
@@ -98,8 +96,8 @@ public class MOOrderController extends MOController<ChosenSite> {
     private final SiteController siteController = new SiteController();
     private final ProductController productController = new ProductController();
     private final SiteProductController siteProductController = new SiteProductController();
-    private ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
-    private ObservableList<ChosenSite> chosenSites = FXCollections.observableArrayList();
+    private ArrayList<MOChosenQuantity> chosenQuantities = new ArrayList<>();
+    private ObservableList<MOChosenSite> chosenSites = FXCollections.observableArrayList();
     private int needQuantity = order.getQuantity();
     private boolean sttQuantity;
     private int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
@@ -108,22 +106,23 @@ public class MOOrderController extends MOController<ChosenSite> {
     void initialize() {
 
         // Load dữ liệu
-        ArrayList<ChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
+        ArrayList<MOChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
         ArrayList<Site> sites = siteProductController.getSitesFromSiteProduct(order.getProductId());
         Product product = productController.getProductById(order.getProductId());
 
         // Thêm input vào data table
-        for (ChosenQuantity sp : siteProducts) {
+        for (MOChosenQuantity sp : siteProducts) {
             TextField tf = new TextField();
             tf.getStyleClass().add("number-input");
             Site site = siteController.getSiteById(sp.getSiteId());
-            chosenSites.add(new ChosenSite(order, product, site, sp, tf));
+            chosenSites.add(new MOChosenSite(order, product, site, sp, tf));
         }
 
         // Set breadcrumbs
         setBreadcrumb(4, "/view/parts/breadcrumbs/MakeOrder.fxml");
 
         // Table
+        number = 8;
         startTable(table, chosenSites);
 
         // Nếu không có site phù hợp -> ẩn nút tạo đơn
@@ -140,7 +139,7 @@ public class MOOrderController extends MOController<ChosenSite> {
         makeAppearPreviewCard(table);
 
         // Reset stt
-        ChosenSite.setIdCounter(1);
+        MOChosenSite.setIdCounter(1);
     }
 
     public static void setOrder(Order order) {
@@ -148,7 +147,7 @@ public class MOOrderController extends MOController<ChosenSite> {
     }
 
     @Override
-    public void insertToTable(ObservableList<ChosenSite> css) {
+    public void insertToTable(ObservableList<MOChosenSite> css) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         siteQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -166,7 +165,7 @@ public class MOOrderController extends MOController<ChosenSite> {
     }
 
     @Override
-    public void insertToPreviewCard(ChosenSite chosenSite) {
+    public void insertToPreviewCard(MOChosenSite chosenSite) {
         Site site = chosenSite.getSite();
         Product product = chosenSite.getProduct();
         SiteProduct siteProduct = siteProductController.getSiteproductFromProductAndSite(product.getId(), site.getId());
@@ -203,7 +202,7 @@ public class MOOrderController extends MOController<ChosenSite> {
                 airBtn.getStyleClass().remove("option-btn-active");
                 String shipDeli = "Đường thủy";
                 chosenSite.setDeliveryStt(shipDeli);
-                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli, chosenSite.getSite().getShipPrice()));
+                updateChosenQuantities(new MOChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli, chosenSite.getSite().getShipPrice()));
             });
         }
         if (chosenSite.getAirDate() > date ) {
@@ -216,13 +215,13 @@ public class MOOrderController extends MOController<ChosenSite> {
                 shipBtn.getStyleClass().remove("option-btn-active");
                 String airDeli = "Hàng không";
                 chosenSite.setDeliveryStt(airDeli);
-                updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli, chosenSite.getSite().getAirPrice()));
+                updateChosenQuantities(new MOChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli, chosenSite.getSite().getAirPrice()));
             });
         }
     }
 
     private void insertDataToChosenQuantities() {
-        for (ChosenSite chosenSite : chosenSites) {
+        for (MOChosenSite chosenSite : chosenSites) {
             chosenSite.getAction().textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue.matches("\\d*")) {
                     chosenSite.getAction().setText(newValue.replaceAll("[^\\d]", ""));
@@ -230,7 +229,7 @@ public class MOOrderController extends MOController<ChosenSite> {
 
                 if (checkQuantitySite(chosenSite)) {
                     cardNumberInput.setText(chosenSite.getAction().getText());
-                    updateChosenQuantities(new ChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), chosenSite.getDeliveryStt(), 50));
+                    updateChosenQuantities(new MOChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), chosenSite.getDeliveryStt(), 50));
                     if (!sttQuantity) {
                         chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
                     }
@@ -243,7 +242,7 @@ public class MOOrderController extends MOController<ChosenSite> {
         }
     }
 
-    private int changeFromTextIntoInteger(ChosenSite chosenSite) {
+    private int changeFromTextIntoInteger(MOChosenSite chosenSite) {
         String text = chosenSite.getAction().getText(); // Trim để loại bỏ khoảng trắng
         if (text.isEmpty()) {
             return 0;
@@ -251,7 +250,7 @@ public class MOOrderController extends MOController<ChosenSite> {
             return Integer.parseInt(text);
     }
 
-    private boolean checkQuantitySite(ChosenSite chosenSite) {
+    private boolean checkQuantitySite(MOChosenSite chosenSite) {
         int quan = changeFromTextIntoInteger(chosenSite);
         if (quan > chosenSite.getQuantity()) {
             return false;
@@ -259,8 +258,8 @@ public class MOOrderController extends MOController<ChosenSite> {
             return true;
     }
 
-    private void updateChosenQuantities(ChosenQuantity chosenQuantity) {
-        Optional<ChosenQuantity> existingCq = chosenQuantities.stream()
+    private void updateChosenQuantities(MOChosenQuantity chosenQuantity) {
+        Optional<MOChosenQuantity> existingCq = chosenQuantities.stream()
                 .filter(cq -> cq.getSiteId() == chosenQuantity.getSiteId())
                 .findFirst();
 
@@ -340,7 +339,8 @@ public class MOOrderController extends MOController<ChosenSite> {
     }
 
     @Override
-    public void setDataToTrans(ChosenSite chosenSite) {
+    public boolean setDataToTrans(MOChosenSite chosenSite) {
+        return true;
     }
 
     public static void runPopUp(String path, double width, double height) throws IOException {

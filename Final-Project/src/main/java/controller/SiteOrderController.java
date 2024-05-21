@@ -3,11 +3,10 @@ package controller;
 import model.Order;
 import model.SiteOrder;
 import model.subsytem.SiteOrderSystem;
-import model.tabledata.ChosenQuantity;
+import model.tabledata.MOChosenQuantity;
 import solution.TotalPriceComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,12 +35,12 @@ public class SiteOrderController {
         return siteOrder;
     }
 
-    public  ArrayList<SiteOrder> getExpectedSiteOrders(ArrayList<ChosenQuantity> sites, Order order) {
+    public  ArrayList<SiteOrder> getExpectedSiteOrders(ArrayList<MOChosenQuantity> sites, Order order) {
         ArrayList<SiteOrder> makeSiteOrders = new ArrayList<>();
         int number = order.getQuantity();
-        List<ChosenQuantity> sitesToRemove = new ArrayList<>();
+        List<MOChosenQuantity> sitesToRemove = new ArrayList<>();
         // Lọc những site đã được chọn
-        for(ChosenQuantity chosenQuantity : sites) {
+        for(MOChosenQuantity chosenQuantity : sites) {
             if (chosenQuantity.isStt()) {
                 number -= chosenQuantity.getChosenQuantity();
                 double price = chosenQuantity.getProductPrice()*chosenQuantity.getChosenQuantity() + chosenQuantity.getDeliveryPrice();
@@ -56,9 +55,9 @@ public class SiteOrderController {
 
         if (number > 0) {
             // Sắp xếp lại những site còn lại
-            Comparator<ChosenQuantity> totalPriceComparator = new TotalPriceComparator(number);
+            Comparator<MOChosenQuantity> totalPriceComparator = new TotalPriceComparator(number);
             sites.sort(totalPriceComparator);
-            for (ChosenQuantity chosenQuantity : sites) {
+            for (MOChosenQuantity chosenQuantity : sites) {
                 if (chosenQuantity.getQuantity() >= number) {
                     double price = chosenQuantity.getProductPrice()*number + chosenQuantity.getDeliveryPrice();
                     makeSiteOrders.add(new SiteOrder(order.getId(), chosenQuantity.getSiteId(), number, chosenQuantity.getDeliveryType(), price));

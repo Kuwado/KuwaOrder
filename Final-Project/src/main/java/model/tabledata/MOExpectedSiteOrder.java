@@ -4,7 +4,7 @@ import controller.SiteController;
 import model.SiteOrder;
 import solution.DateConverter;
 
-public class ExpectedSiteOrder {
+public class MOExpectedSiteOrder {
     private static int idCounter = 1;
     private  int id;
     private String name;
@@ -15,7 +15,7 @@ public class ExpectedSiteOrder {
 
     private SiteController siteController = new SiteController();
 
-    public ExpectedSiteOrder(SiteOrder siteOrder, int date) {
+    public MOExpectedSiteOrder(SiteOrder siteOrder, int date) {
         this.id = idCounter++;
         this.name = siteController.getSiteById(siteOrder.getSiteId()).getName();
         this.deliveryType = siteOrder.getDeliveryType();
@@ -49,6 +49,6 @@ public class ExpectedSiteOrder {
     }
 
     public static void setIdCounter(int idCounter) {
-        ExpectedSiteOrder.idCounter = idCounter;
+        MOExpectedSiteOrder.idCounter = idCounter;
     }
 }

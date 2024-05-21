@@ -2,14 +2,9 @@ package model.tabledata;
 
 import controller.OrderController;
 import controller.ProductController;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import model.Order;
 import model.Product;
-import solution.ButtonIntoTable;
-
-import java.io.IOException;
 
 public class MOOrder {
     private static int idCounter = 1;
