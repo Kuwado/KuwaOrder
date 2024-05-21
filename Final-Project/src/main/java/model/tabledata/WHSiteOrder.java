@@ -1,7 +1,9 @@
 package model.tabledata;
 
+import controller.*;
 import javafx.scene.control.Button;
 import model.SiteOrder;
+import model.Site;
 
 public class WHSiteOrder {
     private static int idCounter = 1;
@@ -16,11 +18,15 @@ public class WHSiteOrder {
     private Button action;
 
 
+//    SiteOrder sod = siteOrderController.getSiteOrderById(selectedOrder.getId());
+    private final SiteController siteController = new SiteController();
+    private final SiteOrderController siteOrderController = new SiteOrderController();
     public WHSiteOrder(SiteOrder siteOrder, Button action) {
+        Site s = siteController.getSiteById(siteOrder.getSiteId());
         this.id = idCounter++;
         this.siteOrder = siteOrder;
         this.maDonHang = String.valueOf(siteOrder.getId());
-        this.site = String.valueOf(siteOrder.getSiteId());
+        this.site = String.valueOf(s.getName());
         this.phuongThuc = siteOrder.getDeliveryType();
         this.trangThai = siteOrder.getStatus();
         this.action = action;
