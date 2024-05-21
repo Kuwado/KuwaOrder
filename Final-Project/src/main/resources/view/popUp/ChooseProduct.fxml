@@ -76,7 +76,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="preview-card">
                      <children>
                         <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
                            <image>
@@ -166,7 +166,7 @@
                <children>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product1" alignment="TOP_CENTER" onMouseClicked="#chooseProd" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -195,7 +195,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product7" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage1" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -224,7 +224,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.rowIndex="2">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product8" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage2" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -253,7 +253,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product6" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage3" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -282,7 +282,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.columnIndex="3">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product4" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage4" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -311,7 +311,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.columnIndex="2">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product3" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage5" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -340,7 +340,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.rowIndex="1">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product5" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage6" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
@@ -369,7 +369,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.columnIndex="1">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product2" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
                               <ImageView fx:id="productImage7" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
