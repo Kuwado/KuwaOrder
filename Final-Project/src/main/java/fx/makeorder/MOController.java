@@ -3,19 +3,22 @@ package fx.makeorder;
 import fx.LoginController;
 import fx.MainController;
 import fx.breadcrumb.MOBreadcrumbController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.tabledata.ChosenSite;
+import model.tabledata.MOOrder;
 import solution.Paginator;
 import solution.Transition;
 
@@ -40,9 +43,19 @@ public abstract class MOController<T> {
     @FXML
     public AnchorPane previewCard;
 
+    @FXML
+    private TextField searchInput;
+
+    @FXML
+    public TableColumn<T, String> name;
+
+    public void getName(TableColumn<T, String> name) {
+        this.name = name;
+    }
+
     public int number = 9;
 
-    public abstract void insertToTable();
+    public abstract void insertToTable(ObservableList<T> datas);
     public abstract void insertToPreviewCard(T data);
     public abstract void setDataToTrans(T data);
 
@@ -54,9 +67,32 @@ public abstract class MOController<T> {
 
     public void startTable(TableView<T> table, ObservableList<T> items) {
         hidePagination.setVisible(false);
-        insertToTable();
+        ObservableList<T> filters = FXCollections.observableArrayList(); // Tạo một danh sách mới để lưu trữ các mục lọc
+
+        // Bắt sự kiện thay đổi trên ô tìm kiếm
+        searchInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            filters.clear(); // Xóa danh sách lọc để bắt đầu một lọc mới
+            if (!newValue.isEmpty()) {
+                // Lặp qua tất cả các mục và thêm vào danh sách lọc nếu trường 'name' chứa giá trị mới
+                for (T t : items) {
+                    String nameValue = name.getCellData(t); // Lấy giá trị của trường 'name'
+                    if (nameValue != null && nameValue.toLowerCase().contains(newValue.toLowerCase())) {
+                        filters.add(t);
+                    }
+                }
+            } else {
+                filters.setAll(items); // Nếu ô tìm kiếm trống, hiển thị lại tất cả các mục
+            }
+            // Cập nhật bảng với danh sách lọc mới
+            insertToTable(filters);
+            Paginator.setPagination(table, pagination, filters, number);
+        });
+
+        // Ban đầu, hiển thị tất cả các mục
+        insertToTable(items);
         Paginator.setPagination(table, pagination, items, number);
     }
+
 
     public void viewAllTable(TableView<T> table, ObservableList<T> items) {
         if (viewAllStt) {

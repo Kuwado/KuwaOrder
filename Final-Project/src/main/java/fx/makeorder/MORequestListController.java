@@ -26,9 +26,6 @@ public class MORequestListController extends MOController<MORequest> {
     private TableColumn<MORequest, Integer> id;
 
     @FXML
-    private TableColumn<MORequest, String> name;
-
-    @FXML
     private TableColumn<MORequest, Integer> quantity;
 
     @FXML
@@ -89,14 +86,14 @@ public class MORequestListController extends MOController<MORequest> {
     }
 
     @Override
-    public void insertToTable() {
+    public void insertToTable(ObservableList<MORequest> mos) {
         id.setCellValueFactory(new PropertyValueFactory<MORequest, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<MORequest, String>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<MORequest, Integer>("orderQuantity")); // Đặt lại tên thuộc tính
         send_date.setCellValueFactory(new PropertyValueFactory<MORequest, String>("sendDate")); // Đặt lại tên thuộc tính
         status.setCellValueFactory(new PropertyValueFactory<MORequest, String>("status"));
         action.setCellValueFactory(new PropertyValueFactory<MORequest, String>("action"));
-        table.setItems(moRequests);
+        table.setItems(mos);
     }
 
     @Override

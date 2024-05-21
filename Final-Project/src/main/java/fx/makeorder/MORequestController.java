@@ -2,15 +2,22 @@ package fx.makeorder;
 
 import controller.OrderController;
 import controller.ProductController;
+import controller.SiteProductController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.*;
+import model.tabledata.ChosenQuantity;
 import model.tabledata.MOOrder;
+import solution.DateConverter;
+import solution.Transition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MORequestController extends MOController<MOOrder> {
@@ -19,9 +26,6 @@ public class MORequestController extends MOController<MOOrder> {
 
     @FXML
     private TableColumn<MOOrder, Integer> id;
-
-    @FXML
-    private TableColumn<MOOrder, String> productName;
 
     @FXML
     private TableColumn<MOOrder, Integer> quantity;
@@ -67,7 +71,10 @@ public class MORequestController extends MOController<MOOrder> {
     private static Request request;
     private final OrderController orderController = new OrderController();
     private final ProductController productController = new ProductController();
+    private final SiteProductController siteProductController = new SiteProductController();
     private final ObservableList<MOOrder> moOrders = FXCollections.observableArrayList();
+    private Order order;
+    private int date;
 
     @FXML
     void initialize() {
@@ -87,7 +94,25 @@ public class MORequestController extends MOController<MOOrder> {
 
         // Preview card
         requestName.setText(request.getName());
-        makeAppearPreviewCard(table);
+        previewCard.setTranslateY(800);
+        table.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                if (!previewStt) {
+                    Transition.transitionXY(previewCard, 0, 0, 0.7);
+                    previewStt = true;
+                }
+                MOOrder item = table.getSelectionModel().getSelectedItem();
+                if (item != null) {
+                    insertToPreviewCard(item);
+                    order = orderController.getOrderById(item.getOrder().getId());
+                    date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
+                    ArrayList<ChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
+                    if (siteProducts.isEmpty()) {
+                        quickMakeOrderBtn.setDisable(true);
+                    }
+                }
+            }
+        });
 
         // Reset stt
         MOOrder.setIdCounter(1);
@@ -103,15 +128,15 @@ public class MORequestController extends MOController<MOOrder> {
     }
 
     @Override
-    public void insertToTable() {
+    public void insertToTable(ObservableList<MOOrder> mos) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        name.setCellValueFactory(new PropertyValueFactory<>("productName"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         expired_date.setCellValueFactory(new PropertyValueFactory<>("desiredDate"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         action.setCellValueFactory(new PropertyValueFactory<>("action"));
-        table.setItems(moOrders);
+        table.setItems(mos);
     }
 
     @Override
@@ -122,6 +147,19 @@ public class MORequestController extends MOController<MOOrder> {
         orderQuantity.setText(String.valueOf(order.getQuantity()));
         orderUnit.setText(order.getUnit());
         orderExpiredDate.setText(order.getDesiredDate());
+    }
+
+    @FXML
+    void makeQuicklyOrder(ActionEvent event) throws IOException {
+        ArrayList<ChosenQuantity> chosenQuantities = new ArrayList<>();
+        MOExpectedSiteOrderController.setDate(date);
+        MOExpectedSiteOrderController.setOrder(order);
+        MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
+        // Gửi stage đến success
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MOSuccessController.setStageOrder(stage);
+        MOOrderController.runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 700, 700);
+
     }
 
 }
