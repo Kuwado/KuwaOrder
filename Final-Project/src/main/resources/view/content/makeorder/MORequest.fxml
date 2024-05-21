@@ -39,7 +39,7 @@
                                     <Image url="@../../../images/icons/magnifying-glass.png" />
                                  </image>
                               </ImageView>
-                              <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên hàng cần tìm" styleClass="search-input" />
+                              <TextField fx:id="searchInput" prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên hàng cần tìm" styleClass="search-input" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -70,7 +70,7 @@
                         <TableView fx:id="table" layoutY="-9.0" prefWidth="760.0" styleClass="tb">
                            <columns>
                               <TableColumn fx:id="id" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
-                              <TableColumn fx:id="productName" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Tên hàng cần đặt" />
+                              <TableColumn fx:id="name" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Tên hàng cần đặt" />
                               <TableColumn fx:id="quantity" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="SL " />
                               <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Đơn vị" />
                               <TableColumn fx:id="expired_date" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Ngày nhận " />
@@ -167,7 +167,7 @@
                               <Insets top="10.0" />
                            </padding>
                            <children>
-                              <Button fx:id="quickMakeOrderBtn" mnemonicParsing="false" styleClass="quick-button" text="Tạo đơn nhanh" />
+                              <Button fx:id="quickMakeOrderBtn" mnemonicParsing="false" onAction="#makeQuicklyOrder" styleClass="quick-button" text="Tạo đơn nhanh" />
                            </children>
                         </HBox>
                      </children>

@@ -130,8 +130,8 @@ public class SiteOrderSystem implements DBInterface<SiteOrder> {
             Connection con = (Connection) DbUtil.getConnection();
             String sql = "UPDATE siteorders SET status = ? WHERE id = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.setString(2, status);
+            pst.setInt(2, id);
+            pst.setString(1, status);
             pst.executeUpdate();
             DbUtil.closeConnection(con);
         } catch (SQLException ex) {

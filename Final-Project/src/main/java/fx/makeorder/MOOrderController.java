@@ -39,9 +39,6 @@ public class MOOrderController extends MOController<ChosenSite> {
     private TableColumn<ChosenSite, Integer> id;
 
     @FXML
-    private TableColumn<ChosenSite, String> siteName;
-
-    @FXML
     private TableColumn<ChosenSite, Integer> siteQuantity;
 
     @FXML
@@ -98,7 +95,6 @@ public class MOOrderController extends MOController<ChosenSite> {
     }
 
     private static Order order;
-    private static boolean backStt = false;
     private final SiteController siteController = new SiteController();
     private final ProductController productController = new ProductController();
     private final SiteProductController siteProductController = new SiteProductController();
@@ -130,6 +126,11 @@ public class MOOrderController extends MOController<ChosenSite> {
         // Table
         startTable(table, chosenSites);
 
+        // Nếu không có site phù hợp -> ẩn nút tạo đơn
+        if (siteProducts.isEmpty()) {
+            makeOrderBtn.setDisable(true);
+        }
+
         // Preview card
         cardNumberInput.setEditable(false);
         slcm.setText(String.valueOf(order.getQuantity()));
@@ -140,32 +141,22 @@ public class MOOrderController extends MOController<ChosenSite> {
 
         // Reset stt
         ChosenSite.setIdCounter(1);
-        if (backStt) {
-            backStt = false;
-            ActionEvent event = new ActionEvent();
-            ChosenSite cs = null;
-            viewRequestDetail(cs, event,"/view/content/makeorder/MORequest.fxml");
-        }
     }
 
     public static void setOrder(Order order) {
         MOOrderController.order = order;
     }
 
-    public static void setBackStt(boolean backStt) {
-        MOOrderController.backStt = backStt;
-    }
-
     @Override
-    public void insertToTable() {
+    public void insertToTable(ObservableList<ChosenSite> css) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        siteName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
         siteQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         shipDate.setCellValueFactory(new PropertyValueFactory<>("shipDate"));
         airDate.setCellValueFactory(new PropertyValueFactory<>("airDate"));
         numberInput.setCellValueFactory(new PropertyValueFactory<>("action"));
-        table.setItems(chosenSites);
+        table.setItems(css);
     }
 
     private void addActiveClass(Button button, String name) {
@@ -336,12 +327,15 @@ public class MOOrderController extends MOController<ChosenSite> {
         MOExpectedSiteOrderController.setDate(date);
         MOExpectedSiteOrderController.setOrder(order);
         MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
+        // Gửi stage đến success
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MOSuccessController.setStageOrder(stage);
         if (!chosenQuantities.isEmpty()) {
             MOConfirmSiteController.setChosenQuantities(chosenQuantities);
             MOConfirmSiteController.setsDate(order.getDesiredDate());
             runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
         } else {
-            runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 620, 700);
+            runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 700, 700);
         }
     }
 
