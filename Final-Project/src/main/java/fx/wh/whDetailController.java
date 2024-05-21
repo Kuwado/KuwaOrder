@@ -13,6 +13,9 @@ public class whDetailController {
     private Button cancelBtn;
 
     @FXML
+    private Button changeQuantity;
+
+    @FXML
     private Label deBy;
 
     @FXML
