@@ -26,7 +26,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="user-btn" text="Bộ phận Đặt hàng quốc tế">
+        <Button fx:id="userName" contentDisplay="TOP" mnemonicParsing="false" styleClass="user-btn" text="Bộ phận Đặt hàng quốc tế">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <image>

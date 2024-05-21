@@ -57,4 +57,11 @@ public class SiteProduct {
     public Product getProduct() {
         return product;
     }
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
+    public void setSoldQuantity(int soldQuantity){
+        this.soldQuantity = soldQuantity;
+    }
+
 }

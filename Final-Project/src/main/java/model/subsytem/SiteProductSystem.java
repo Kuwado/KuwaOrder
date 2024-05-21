@@ -301,6 +301,21 @@ public class SiteProductSystem implements DBInterface<SiteProduct> {
         }
         return chosingSites;
     }
-
-
+    public void update2(SiteProduct siteproduct) {
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "UPDATE siteproducts SET quantity = ?, sold_quantity = ?, price = ? WHERE id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, siteproduct.getQuantity());
+            pst.setInt(2, siteproduct.getSoldQuantity());
+            pst.setDouble(3, siteproduct.getPrice());
+            pst.setInt(4, siteproduct.getId());
+            pst.executeUpdate();
+            DbUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(SiteProductSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
+
+

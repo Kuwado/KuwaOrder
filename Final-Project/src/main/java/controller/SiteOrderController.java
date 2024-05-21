@@ -15,6 +15,7 @@ public class SiteOrderController {
     private final SiteOrderSystem siteOrderSystem = new SiteOrderSystem();
     public ArrayList<SiteOrder> siteOrders;
     public SiteOrder siteOrder;
+    public ArrayList<SiteOrder> siteOrderID;
 
     public SiteOrderController() {
 
@@ -78,4 +79,8 @@ public class SiteOrderController {
         siteOrderSystem.updateStatus(id, status);
     }
 
+    // Get all site orders by siteID
+    public ArrayList<SiteOrder> getAllSiteOrdersBySiteID(int siteID) {
+        return siteOrderSystem.selectBySiteId(siteID);
+    }
 }
