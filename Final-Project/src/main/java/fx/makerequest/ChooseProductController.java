@@ -1,4 +1,5 @@
 package fx.makerequest;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -7,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class ChooseProductController {
 
@@ -58,6 +61,33 @@ public class ChooseProductController {
     @FXML
     private TextField searchInput;
 
-    
+    @FXML
+    private VBox product1;
+
+    @FXML
+    private VBox product2;
+
+    @FXML
+    private VBox product3;
+
+    @FXML
+    private VBox product4;
+
+    @FXML
+    private VBox product5;
+
+    @FXML
+    private VBox product6;
+
+    @FXML
+    private VBox product7;
+
+    @FXML
+    private VBox product8;
+
+    @FXML
+    void chooseProd(ActionEvent event) throws IOException {
+
+    }
 }
 
