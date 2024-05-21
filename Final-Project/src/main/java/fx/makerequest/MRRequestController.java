@@ -96,7 +96,7 @@ public class MRRequestController extends oldMOController<MROrder> {
         mrOrders.add(new MROrder(product1, order1));
         mrOrders.add(new MROrder(product1, order1));
 
-        setBreadcrumb(1, "/view/content/makerequest/MRbreadcrumb.fxml");
+        setBreadcrumb(1, "/view/parts/breadcrumbs/MRbreadcrumb.fxml");
         insertToTable();
         makeAppearPreviewCard(table);
 
