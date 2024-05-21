@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.tabledata.CancelSiteOrderList;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HandleCancelSiteOrderController {
@@ -48,6 +50,52 @@ public class HandleCancelSiteOrderController {
 //                new ThucTestData(1, "Nhà sách Nhã Nam", "Đại dương đen", 10, "Cuốn", "Tàu", Date.valueOf("2025-12-25"), new CheckBox())
 //        );
         cancelSiteOrderIdTable.setItems(CancelSiteOrderList.cancelSiteOrderListsData());
+    }
+
+    @FXML
+    public void reorder(ActionEvent e) {
+        ObservableList<CancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
+        List<Integer> reorderIds = new ArrayList<>();
+        for (CancelSiteOrderList item : items) {
+            if(item.getSelected().isSelected()) {
+                reorderIds.add(item.getSiteOrderId());
+            }
+        }
+        System.out.println("Reorder IDs: " + reorderIds);
+        CancelSiteOrderList.updateStatus(reorderIds, "Đang đặt lại");
+
+        for (CancelSiteOrderList item : items) {
+            if(item.getSelected().isSelected()) {
+                item.setStatus("Đang đặt lại");
+                item.getSelected().setSelected(false);
+                item.getSelected().setDisable(true);
+            }
+        }
+        cancelSiteOrderIdTable.refresh();
+    }
+
+    @FXML
+    public void cancel() {
+        ObservableList<CancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
+        List<Integer> cancelIds = new ArrayList<>();
+        for (CancelSiteOrderList item : items) {
+            if(item.getSelected().isSelected()) {
+                cancelIds.add(item.getSiteOrderId());
+            }
+        }
+
+        CancelSiteOrderList.updateStatus(cancelIds, "Đã hủy");
+        System.out.println("Cancel site order IDs: " + cancelIds);
+
+        for (CancelSiteOrderList item : items) {
+            if(item.getSelected().isSelected()) {
+                item.setStatus("Đã hủy");
+                item.getSelected().setSelected(false);
+                item.getSelected().setDisable(true);
+            }
+        }
+
+        cancelSiteOrderIdTable.refresh();
     }
 
 

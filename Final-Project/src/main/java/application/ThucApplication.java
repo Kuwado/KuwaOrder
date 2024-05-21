@@ -15,7 +15,9 @@ public class ThucApplication extends Application {
     public void start(Stage stage) throws IOException {
         MainController mc = new MainController();
         mc.setSidebarPath("/view/parts/sidebar/OrderPlacement.fxml");
-        mc.setContentPath("/view/content/sale/HandleCancelSiteOrder.fxml");
+        //mc.setContentPath("/view/content/site/HandleSiteOrderForm.fxml");
+        mc.setContentPath("/view/content/sale/Reorder.fxml");
+        //mc.setContentPath("/view/content/sale/HandleCancelSiteOrder.fxml");
         mc.setAvatarPath("/images/thuc.jpg");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);

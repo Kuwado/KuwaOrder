@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import model.DAO.SiteOrdersListDAO;
 import model.tabledata.SiteOrdersList;
 
 import java.util.ArrayList;
@@ -80,6 +79,7 @@ public class HandleSiteOrderController {
         for (SiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 item.setStatus("Đang hủy");
+                item.getSelected().setSelected(false);
                 item.getSelected().setDisable(true);
             }
         }
@@ -105,6 +105,7 @@ public class HandleSiteOrderController {
         for (SiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 item.setStatus("Đã xác nhận");
+                item.getSelected().setSelected(false);
                 item.getSelected().setDisable(true);
             }
         }
