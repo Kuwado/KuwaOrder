@@ -75,12 +75,12 @@ public abstract class MRMOController<T> {
         previewCard.setTranslateY(800);
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                if (!previewStt) {
-                    Transition.transitionXY(previewCard, 0, 0, 0.7);
-                    previewStt = true;
-                }
                 T item = table.getSelectionModel().getSelectedItem();
                 if (item != null) {
+                    if (!previewStt) {
+                        Transition.transitionXY(previewCard, 0, 0, 0.7);
+                        previewStt = true;
+                    }
                     insertToPreviewCard(item);
                 }
             }
