@@ -42,15 +42,21 @@ public class OrderPlacementController {
     }
 
     @FXML
-    void makeOder(ActionEvent event) {
-        activeIndex = 3;
-        changeUC(event, "/view/content/makeorder/MORequestList.fxml");
-    }
-
-    @FXML
     void backHome(ActionEvent event) {
         activeIndex = 0;
         changeUC(event, "/view/parts/sidebar/OrderPlacementHome.fxml");
+    }
+
+    @FXML
+    void viewSiteOrder(ActionEvent event) {
+        activeIndex = 2;
+        changeUC(event, "/view/content/order/VOorderList.fxml");
+    }
+
+    @FXML
+    void makeOder(ActionEvent event) {
+        activeIndex = 3;
+        changeUC(event, "/view/content/makeorder/MORequestList.fxml");
     }
 
     private void changeUC(ActionEvent event, String path) {

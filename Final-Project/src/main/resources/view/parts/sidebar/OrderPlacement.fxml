@@ -32,7 +32,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btn3" mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
+      <Button fx:id="btn3" mnemonicParsing="false" onAction="#viewSiteOrder" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>

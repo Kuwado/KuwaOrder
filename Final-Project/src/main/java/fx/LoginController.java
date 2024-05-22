@@ -54,6 +54,10 @@ public class LoginController {
                      sidebarPath = "/view/parts/sidebar/WarehouseManage.fxml";
                      contentPath = "/view/content/wh/WHList.fxml";
                      break;
+                 case "sitehn":
+                     sidebarPath = "/view/parts/sidebar/siteOrderList.fxml";
+                     contentPath = "/view/content/order/VOsiteOrder.fxml";
+                     break;
                  // Thêm các trường hợp case khác nếu cần thiết
                  default:
                      // Thực hiện các lệnh nếu không có trường hợp nào khớp với giá trị của biểu thức
