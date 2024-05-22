@@ -8,5 +8,4 @@ public interface DBInterface<T> {
     public void delete(int id);
     public T selectById(int id);
     public ArrayList<T> selectAll();
-    //public ArrayList<T> selectByOther(T t);
 }

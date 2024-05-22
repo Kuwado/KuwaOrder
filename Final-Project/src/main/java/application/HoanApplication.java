@@ -1,6 +1,5 @@
 package application;
 
-import fx.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,8 +14,7 @@ public class HoanApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
-        stage.setTitle("Hello!");
+        stage.setTitle("KuwaOrder");
         stage.setScene(scene);
         stage.show();
     }

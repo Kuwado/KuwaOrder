@@ -1,10 +1,10 @@
 package fx;
 
+import controller.UserController;
 import fx.sidebar.OrderPlacementController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -29,8 +29,8 @@ public class LoginController {
     public static String sidebarPath;
     public String contentPath;
     public static String imagePath;
-
-    private List<User> users;
+    private User user;
+    private final UserController userController = new UserController();
 
     @FXML
     public void initialize() {
@@ -39,15 +39,29 @@ public class LoginController {
 
     @FXML
     private void login() {
+        String email = userInput.getText();
+        String password = passwordInput.getText();
+        user = userController.getUserByEmailAndPassword(email, password);
+         if (user != null) {
+             imagePath = user.getImage();
+             switch (user.getType()) {
+                 case "op":
+                     sidebarPath = "/view/parts/sidebar/OrderPlacement.fxml";
+                     contentPath = "/view/content/makeorder/MORequestList.fxml";
+                     break;
+                 case "wh":
+                     sidebarPath = "/view/parts/sidebar/WarehouseManage.fxml";
+                     contentPath = "/view/content/wh/WHList.fxml";
 
+                     break;
+                 // Thêm các trường hợp case khác nếu cần thiết
+                 default:
+                     // Thực hiện các lệnh nếu không có trường hợp nào khớp với giá trị của biểu thức
+             }
+             OrderPlacementController.activeIndex = 3;
+             login(sidebarPath, contentPath, imagePath);
 
-//        if (checkUser(userInput.getText(), passwordInput.getText()).equals("bophandathang")){
-            sidebarPath = "/view/parts/sidebar/OrderPlacement.fxml";
-            contentPath = "/view/content/makeorder/MORequestList.fxml";
-            imagePath= "/images/avatar.jpg";
-//        }
-        OrderPlacementController.activeIndex = 3;
-        login(sidebarPath, contentPath, imagePath);
+         }
     }
 
     private void login(String sb, String ct, String img) {
@@ -60,7 +74,7 @@ public class LoginController {
             fxmlLoader.setController(mc);
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/lam.css")).toExternalForm());
             Stage stage = new Stage();
             stage.setTitle("Hello!");
             stage.setScene(scene);
@@ -71,17 +85,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
-    private String checkUser(String name, String pass) {
-        for (User user : users) {
-            if(user.getName().equals(name) && user.getPassword().equals(pass)) {
-                if(user.getType().equals("1")){
-                    return "bophandathang";
-                }
-                break;
-            }
-        }
-        return "bophandathang";
-    }
-
 }
