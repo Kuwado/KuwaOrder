@@ -1,17 +1,20 @@
 package fx.makerequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import model.Product;
 
 import java.io.IOException;
 
 public class ChooseProductController {
+
+    @FXML
+    private Label name;
 
     @FXML
     private Button actionBtn;
@@ -24,6 +27,9 @@ public class ChooseProductController {
 
     @FXML
     private VBox previewContent;
+
+    @FXML
+    private ImageView image;
 
     @FXML
     private ImageView productImage;
@@ -61,33 +67,32 @@ public class ChooseProductController {
     @FXML
     private TextField searchInput;
 
-    @FXML
-    private VBox product1;
+
+    private Product product;
+    private MyListener myListener;
 
     @FXML
-    private VBox product2;
+    private void chooseProd(MouseEvent mouseEvent) throws IOException {
+        if (myListener != null) {
+            myListener.onClickListener(product);
+        }
+    }
 
-    @FXML
-    private VBox product3;
+//    private void setProduct(Product product) {
+//        name.setText(product.getName());
+//        fruitPriceLabel.setText(Main.CURRENCY + fruit.getPrice());
+//        image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
+//        fruitImg.setImage(image);
+//        chosenFruitCard.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
+//                "    -fx-background-radius: 30;");
+//    }
 
-    @FXML
-    private VBox product4;
-
-    @FXML
-    private VBox product5;
-
-    @FXML
-    private VBox product6;
-
-    @FXML
-    private VBox product7;
-
-    @FXML
-    private VBox product8;
-
-    @FXML
-    void chooseProd(ActionEvent event) throws IOException {
-
+    public void setData(Product product, MyListener myListener){
+        this.product = product;
+        this.myListener = myListener;
+        name.setText(product.getName());
+        Image image = new Image(getClass().getResourceAsStream(product.getImage()));
+            
     }
 }
 
