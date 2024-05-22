@@ -117,7 +117,7 @@ public class WHListController extends WHController<WHSiteOrder> {
         // Implement if needed
     }
 
-    private void runPopUp(String path, double width, double height) throws IOException {
+    public void runPopUp(String path, double width, double height) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         BorderPane pane = loader.load();
         // Lấy controller của cửa sổ pop-up

@@ -23,7 +23,8 @@ import java.io.IOException;
 public class WHDetailController {
 
     @FXML private ImageView imagePd; // ImageView cho hình ảnh sản phẩm
-    @FXML private Button cancelBtn;
+    @FXML
+    public Button cancelBtn;
     @FXML private Label deBy;
     @FXML private Button makeOrderBtn;
     @FXML private Label note;
@@ -33,11 +34,12 @@ public class WHDetailController {
     @FXML private Label price;
     @FXML private Label productName;
     @FXML private Label requestId;
-    @FXML private Label status;
+    @FXML
+    public Label status;
 
-    private int productId;
-    private int quantity;
-    private int siteOrderId;
+    public int productId;
+    public int quantity;
+    public int siteOrderId;
     private WHListController whListController;
 
     public void setWHListController(WHListController whListController) {
@@ -55,13 +57,13 @@ public class WHDetailController {
         makeOrderBtn.setOnAction(event -> handleMakeOrder());
     }
 
-    private void handleCancel() {
+    public void handleCancel() {
         // Xử lý sự kiện khi nhấn nút "Quay Lại"
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
-    private void handleMakeOrder() {
+    public void handleMakeOrder() {
         // Xử lý sự kiện khi nhấn nút "Nhập Kho"
 
         // Thực hiện các hành động khác liên quan đến nhập kho
