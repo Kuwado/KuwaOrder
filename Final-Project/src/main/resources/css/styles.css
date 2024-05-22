@@ -675,3 +675,45 @@
     -fx-border-width: 2px;
     -fx-border-color: white;
 }
+#deliverOrderButton{
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+#confirmOrderButton{
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+#cancelOrderButton{
+    -fx-background-color: #ff4545;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+#deliverOrderButton:hover{
+    -fx-background-color: #45a049;
+}
+#confirmOrderButton:hover{
+    -fx-background-color: #45a049;
+}
+#cancelOrderButton:hover{
+    -fx-background-color: #ff0f0f;
+}
+#deliverOrderButton:pressed{
+    -fx-background-color: #3e8e41;
+}
+#confirmOrderButton:pressed{
+    -fx-background-color: #3e8e41;
+}
+#cancelOrderButton:pressed{
+    -fx-background-color: #3e8e41;
+}

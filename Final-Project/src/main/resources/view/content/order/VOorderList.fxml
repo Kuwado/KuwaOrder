@@ -22,7 +22,7 @@
                                                 <Image url="@../../../images/icons/magnifying-glass.png" />
                                             </image>
                                         </ImageView>
-                                        <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
+                                        <TextField fx:id="searchField" prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
                                     </children>
                                     <HBox.margin>
                                         <Insets />
@@ -52,11 +52,7 @@
                         <Insets />
                      </VBox.margin>
                         </TableView>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="1000.0">
-                            <children>
-                                <Pagination fx:id="pagination" maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
-                            </children>
-                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="1000.0" />
                     </children>
                     <opaqueInsets>
                         <Insets />

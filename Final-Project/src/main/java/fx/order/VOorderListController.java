@@ -6,12 +6,14 @@ import controller.SiteProductController;
 import fx.breadcrumb.VOBreadcrumbController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -152,6 +154,8 @@ public class VOorderListController {
 
     @FXML
     private TableColumn<VOSiteOrder, String> status;
+    @FXML
+    private TextField searchField;
 
     // tạo thêm một model implements DataTable gồm những gì cần push vào bảng
     // Vì đơn giản như cái stt trong bảng thì khác id của order, mà trong order làm gì có stt
@@ -177,6 +181,23 @@ public class VOorderListController {
         }
         insertToTable();
         table.setItems(voSiteOrders);
+        FilteredList<VOSiteOrder> filteredData = new FilteredList<>(voSiteOrders, p -> true);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(voSiteOrder -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (voSiteOrder.getProductName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (voSiteOrder.getSiteName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        table.setItems(filteredData);
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
                 VOSiteOrder selectedSiteOrder = table.getSelectionModel().getSelectedItem();
