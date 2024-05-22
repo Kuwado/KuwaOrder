@@ -172,12 +172,8 @@ public class VOorderListController {
         VOBreadcrumbController ob = new VOBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
         ArrayList<SiteOrder> siteOrders = siteOrderController.getAllSiteOrders();
-        ArrayList<SiteProduct> siteProducts = new ArrayList<>();
-        for (SiteOrder siteOrder : siteOrders) {
-            siteProducts = siteProductController.getSiteproductsByProduct(orderController.getOrderById(siteOrder.getOrderId()).getProductId());
-        }
-        for (int i = 0; i <= siteOrders.size(); i++){
-            voSiteOrders.add(new VOSiteOrder(siteOrders.get(i),siteProducts.get(i)));
+        for (SiteOrder siteOrder : siteOrders){
+            voSiteOrders.add(new VOSiteOrder(siteOrder));
         }
         insertToTable();
         table.setItems(voSiteOrders);
