@@ -718,5 +718,11 @@
     -fx-background-color: #3e8e41;
 }
 
-
-
+/** ----------------------------------- login -----------------------------------------*/
+.login-input {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15 0 15 0;
+    -fx-border-radius: 15 0 15 0;
+    -fx-border-width: 2;
+    -fx-border-color: #1b337f;
+}

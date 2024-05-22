@@ -37,16 +37,6 @@ public class RequestController {
         requestSystem.insert(request);
     }
 
-
-    public static  void main (String[] args) {
-        RequestController rc = new RequestController();
-        OrderController oc = new OrderController();
-        ArrayList<Order> orders = oc.getOrdersInRequest(1);
-        for (Order o : orders) {
-            System.out.println(o.getDesiredDate());
-        }
-    }
-
     // Update status
     public void updateStatus(int id, String status) {
         requestSystem.updateStatus(id, status);
