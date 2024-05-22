@@ -12,9 +12,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sidebar.siteOrderListSidebarController">
     <children>
-        <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
+        <Button mnemonicParsing="false" onAction="#siteOrderPressed" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -26,7 +26,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách sản phẩm">
+      <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#siteProductPressed" styleClass="sidebar-btn" text="Danh sách sản phẩm">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -37,6 +37,9 @@
                </image>
             </ImageView>
          </graphic>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
       </Button>
         <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="user-btn" text="Site 1">
             <graphic>

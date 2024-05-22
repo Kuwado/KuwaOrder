@@ -185,7 +185,7 @@ public class VOsiteOrderListController {
         VOSiteOrder selectedOrder = table.getSelectionModel().getSelectedItem();
         if (selectedOrder != null) {
             selectedOrder.setStatus("Đang hủy");
-            siteOrderController.updateStatus(selectedOrder.getId(), "Đang hủy");
+            siteOrderController.updateStatus(selectedOrder.getSiteOrderID(), "Đang hủy");
             table.refresh();
         }
     }
