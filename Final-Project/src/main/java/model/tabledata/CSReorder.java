@@ -3,13 +3,11 @@ package model.tabledata;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 
 
 import java.sql.*;
 
-public class Reorder {
+public class CSReorder {
 
     private int siteOrderId;
     private int productId;
@@ -21,7 +19,7 @@ public class Reorder {
     private int selectedQuantity;
     private CheckBox productSelected;
 
-    public Reorder(int siteOrderId, int productId, String productName, int productQuantity, String unit, String status, String desiredDate, int selectedQuantity, CheckBox productSelected) {
+    public CSReorder(int siteOrderId, int productId, String productName, int productQuantity, String unit, String status, String desiredDate, int selectedQuantity, CheckBox productSelected) {
         this.siteOrderId = siteOrderId;
         this.productId = productId;
         this.productName = productName;
@@ -44,7 +42,7 @@ public class Reorder {
     private int quantity;
     private CheckBox selected;
 
-    public Reorder(int siteId, String siteName, int siteProductId, String delivery, String expectedDate, int quantityInStock, int quantity, CheckBox selected) {
+    public CSReorder(int siteId, String siteName, int siteProductId, String delivery, String expectedDate, int quantityInStock, int quantity, CheckBox selected) {
         this.siteId = siteId;
         this.siteName = siteName;
         this.siteProductId = siteProductId;
@@ -55,8 +53,8 @@ public class Reorder {
         this.selected = selected;
     }
 
-    public static ObservableList<Reorder> productData() {
-        ObservableList<Reorder> list = FXCollections.observableArrayList();
+    public static ObservableList<CSReorder> productData() {
+        ObservableList<CSReorder> list = FXCollections.observableArrayList();
         String sqlQuery = "SELECT so.id AS siteOrderId, p.id, p.name, so.quantity, o.unit, o.desired_date, so.status " +
                 "FROM products AS p " +
                 "JOIN orders AS o ON p.id = o.product_id " +
@@ -78,7 +76,7 @@ public class Reorder {
                 int selectedQuantity = 0;
                 CheckBox productSelected = new CheckBox();
 
-                list.add(new Reorder(siteOrderId, productId, productName, quantity, unit, status, desiredDate, selectedQuantity, productSelected));
+                list.add(new CSReorder(siteOrderId, productId, productName, quantity, unit, status, desiredDate, selectedQuantity, productSelected));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,8 +86,8 @@ public class Reorder {
 
     }
 
-    public static ObservableList<Reorder> siteData() {
-        ObservableList<Reorder> list = FXCollections.observableArrayList();
+    public static ObservableList<CSReorder> siteData() {
+        ObservableList<CSReorder> list = FXCollections.observableArrayList();
         String sqlQuery = "SELECT sp.site_id, s.name, o.product_id, s.ship_date, s.air_date, sp.quantity - sp.sold_quantity as quantity_in_stock " +
                 "FROM siteorders AS so " +
                 "JOIN orders AS o on so.order_id = o.id " +
@@ -110,7 +108,7 @@ public class Reorder {
                 int airdate = resultSet.getInt("air_date");
                 int quantityInStock = resultSet.getInt("quantity_in_stock");
 
-                list.add(new Reorder(siteId, siteName, siteProductId, shipDate, airdate, quantityInStock));
+                list.add(new CSReorder(siteId, siteName, siteProductId, shipDate, airdate, quantityInStock));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,7 +117,7 @@ public class Reorder {
         return list;
     }
 
-    public Reorder(int siteId, String siteName, int siteProductId, int shipDate, int airDate, int quantityInStock) {
+    public CSReorder(int siteId, String siteName, int siteProductId, int shipDate, int airDate, int quantityInStock) {
         this.siteId = siteId;
         this.siteName = siteName;
         this.siteProductId = siteProductId;

@@ -1,46 +1,81 @@
 package model.tabledata;
 
-import config.DbUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CancelSiteOrderList {
+public class CSSiteOrdersList {
 
     private int siteOrderId;
-    private String siteName;
+    private int orderId;
+    private int siteId;
     private String productName;
     private int quantity;
     private String unit;
     private String delivery;
-    private String desiredDate;
     private String status;
     private CheckBox selected;
 
-    public CancelSiteOrderList(int siteOrderId, String siteName, String productName, int quantity, String unit, String delivery, String desiredDate, String status, CheckBox selected) {
+    public CSSiteOrdersList(int siteOrderId, int orderId, int siteId, String productName, int quantity, String unit, String delivery, String status, CheckBox selected) {
         this.siteOrderId = siteOrderId;
-        this.siteName = siteName;
+        this.orderId = orderId;
+        this.siteId = siteId;
         this.productName = productName;
         this.quantity = quantity;
         this.unit = unit;
         this.delivery = delivery;
-        this.desiredDate = desiredDate;
         this.status = status;
         this.selected = selected;
     }
 
-    public static ObservableList<CancelSiteOrderList> cancelSiteOrderListsData() {
-        ObservableList<CancelSiteOrderList> list = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT so.id, s.name, p.name, so.quantity, o.unit, so.delivery_type, o.desired_date, so.status " +
+//    public static ObservableList<SiteOrdersList> siteOrdersListsData() {
+////        ObservableList<SiteOrdersList> list = FXCollections.observableArrayList(
+////                new SiteOrdersList(1, 1, 1, "Thùy Dung", 10, "Điểm", "Hàng Không", "Đang xử lý", new CheckBox()),
+////                new SiteOrdersList(1, 1, 1, "Meo Meo", 10, "Điểm", "Hàng Không", "Đang xử lý", new CheckBox())
+////        );
+////        return list;
+//        ObservableList<SiteOrdersList> list = FXCollections.observableArrayList();
+//
+//        try {
+//            Connection connection = DbUtil.getConnection();
+//            String sqlQuery = "SELECT so.id, so.order_id, so.site_id, p.name, so.quantity, o.unit, so.delivery_type, so.status " +
+//                    "FROM siteorders AS so " +
+//                    "JOIN orders AS o ON so.order_id = o.id " +
+//                    "JOIN products AS p ON o.product_id = p.id;";
+//
+//            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            while(resultSet.next()) {
+//                int siteOrderId = resultSet.getInt("id");
+//                int orderId = resultSet.getInt("order_id");
+//                int siteId = resultSet.getInt("site_id");
+//                String productName = resultSet.getString("name");
+//                int quantity = resultSet.getInt("quantity");
+//                String unit = resultSet.getString("unit");
+//                String delivery = resultSet.getString("delivery_type");
+//                String status = resultSet.getString("status");
+//                CheckBox selected = new CheckBox();
+//            }
+//            DbUtil.closeConnection(connection);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return list;
+//    }
+
+    public static ObservableList<CSSiteOrdersList> siteOrdersListsData() {
+        ObservableList<CSSiteOrdersList> list = FXCollections.observableArrayList();
+        String sqlQuery = "SELECT so.id, so.order_id, so.site_id, p.name, so.quantity, o.unit, so.delivery_type, so.status " +
                 "FROM siteorders AS so " +
-                "JOIN sites as s ON so.site_id = s.id " +
                 "JOIN orders AS o ON so.order_id = o.id " +
                 "JOIN products AS p ON o.product_id = p.id " +
-                "WHERE so.status = 'Đang hủy'";
+                "ORDER BY CASE " +
+                "    WHEN so.status = 'Chờ xác nhận' THEN 0 " +
+                "    ELSE 1 " +
+                "END, so.status";
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
              Statement statement = connection.createStatement();
@@ -48,18 +83,18 @@ public class CancelSiteOrderList {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String siteName = resultSet.getString("s.name");
-                String productName = resultSet.getString("p.name");
+                int orderId = resultSet.getInt("order_id");
+                int siteId = resultSet.getInt("site_id");
+                String productName = resultSet.getString("name");
                 int quantity = resultSet.getInt("quantity");
                 String unit = resultSet.getString("unit");
-                String delivery = resultSet.getString("delivery_type");
-                String desiredDate = resultSet.getString("desired_date");
+                String deliveryType = resultSet.getString("delivery_type");
                 String status = resultSet.getString("status");
                 CheckBox selected = new CheckBox();
-                if (!"Đang hủy".equals(status)) {
+                if(!"Chờ xác nhận".equals(status)) {
                     selected.setDisable(true);
                 }
-                list.add(new CancelSiteOrderList(id, siteName, productName, quantity, unit, delivery, desiredDate, status, selected));
+                list.add(new CSSiteOrdersList(id, orderId, siteId, productName, quantity, unit, deliveryType, status, selected));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,6 +135,7 @@ public class CancelSiteOrderList {
     }
 
 
+
     public int getSiteOrderId() {
         return siteOrderId;
     }
@@ -108,12 +144,20 @@ public class CancelSiteOrderList {
         this.siteOrderId = siteOrderId;
     }
 
-    public String getSiteName() {
-        return siteName;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setSiteName(String siteName) {
-        this.siteName = siteName;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
     }
 
     public String getProductName() {
@@ -148,12 +192,12 @@ public class CancelSiteOrderList {
         this.delivery = delivery;
     }
 
-    public String getDesiredDate() {
-        return desiredDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDesiredDate(String desiredDate) {
-        this.desiredDate = desiredDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public CheckBox getSelected() {
@@ -162,13 +206,5 @@ public class CancelSiteOrderList {
 
     public void setSelected(CheckBox selected) {
         this.selected = selected;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

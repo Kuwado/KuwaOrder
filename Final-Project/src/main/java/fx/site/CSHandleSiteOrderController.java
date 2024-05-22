@@ -1,7 +1,5 @@
 package fx.site;
 
-import eu.hansolo.tilesfx.Test;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,27 +8,24 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import model.tabledata.SiteOrdersList;
+import model.tabledata.CSSiteOrdersList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandleSiteOrderController {
+public class CSHandleSiteOrderController {
 
 
-    public TableView<SiteOrdersList> siteOrderTable;
-    public TableColumn<SiteOrdersList, Integer> idColumn;
-    public TableColumn<SiteOrdersList, Integer> orderIdColumn;
-    public TableColumn<SiteOrdersList, Integer> siteIdColumn;
-    public TableColumn<SiteOrdersList, String> productNameColumn;
-    public TableColumn<SiteOrdersList, Integer> quantityColumn;
-    public TableColumn<SiteOrdersList, String> unitColumn;
-    public TableColumn<SiteOrdersList, String> deliveryColumn;
-    public TableColumn<SiteOrdersList, String> statusColumn;
-    public TableColumn<SiteOrdersList, CheckBox> selectColumn;
+    public TableView<CSSiteOrdersList> siteOrderTable;
+    public TableColumn<CSSiteOrdersList, Integer> idColumn;
+    public TableColumn<CSSiteOrdersList, Integer> orderIdColumn;
+    public TableColumn<CSSiteOrdersList, Integer> siteIdColumn;
+    public TableColumn<CSSiteOrdersList, String> productNameColumn;
+    public TableColumn<CSSiteOrdersList, Integer> quantityColumn;
+    public TableColumn<CSSiteOrdersList, String> unitColumn;
+    public TableColumn<CSSiteOrdersList, String> deliveryColumn;
+    public TableColumn<CSSiteOrdersList, String> statusColumn;
+    public TableColumn<CSSiteOrdersList, CheckBox> selectColumn;
     public Button confirmButton;
     public Button cancelButton;
 
@@ -61,22 +56,22 @@ public class HandleSiteOrderController {
 //                new TestData(8, 9, "Lê Nhung", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox()),
 //                new TestData(9, 10, "Cao Phong", "Điểm", 10 , "Hàng Không", "Đang xử lý", new CheckBox())
 //        );
-        siteOrderTable.setItems(SiteOrdersList.siteOrdersListsData());
+        siteOrderTable.setItems(CSSiteOrdersList.siteOrdersListsData());
     }
 
     @FXML
     public List<Integer> cancelSiteOrder(ActionEvent e) {
-        ObservableList<SiteOrdersList> items = siteOrderTable.getItems();
+        ObservableList<CSSiteOrdersList> items = siteOrderTable.getItems();
         List<Integer> cancelSiteOrderIds = new ArrayList<>();
-        for (SiteOrdersList item : items) {
+        for (CSSiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 cancelSiteOrderIds.add(item.getSiteOrderId());
             }
         }
         System.out.println("Cancel site order IDs: " + cancelSiteOrderIds);
-        SiteOrdersList.updateStatus(cancelSiteOrderIds, "Đang hủy");
+        CSSiteOrdersList.updateStatus(cancelSiteOrderIds, "Đang hủy");
 
-        for (SiteOrdersList item : items) {
+        for (CSSiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 item.setStatus("Đang hủy");
                 item.getSelected().setSelected(false);
@@ -91,18 +86,18 @@ public class HandleSiteOrderController {
 
     @FXML
     public List<Integer> confirmSiteOrder(ActionEvent e) {
-        ObservableList<SiteOrdersList> items = siteOrderTable.getItems();
+        ObservableList<CSSiteOrdersList> items = siteOrderTable.getItems();
         List<Integer> confirmSiteOrderIds = new ArrayList<>();
-        for (SiteOrdersList item : items) {
+        for (CSSiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 confirmSiteOrderIds.add(item.getSiteOrderId());
             }
         }
 
-        SiteOrdersList.updateStatus(confirmSiteOrderIds, "Đã xác nhận");
+        CSSiteOrdersList.updateStatus(confirmSiteOrderIds, "Đã xác nhận");
         System.out.println("Confirm site order IDs: " + confirmSiteOrderIds);
 
-        for (SiteOrdersList item : items) {
+        for (CSSiteOrdersList item : items) {
             if (item.getSelected().isSelected()) {
                 item.setStatus("Đã xác nhận");
                 item.getSelected().setSelected(false);

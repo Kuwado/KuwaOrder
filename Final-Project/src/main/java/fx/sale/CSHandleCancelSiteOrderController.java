@@ -1,6 +1,5 @@
 package fx.sale;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,25 +8,25 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.tabledata.CancelSiteOrderList;
+import model.tabledata.CSCancelSiteOrderList;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HandleCancelSiteOrderController {
+public class CSHandleCancelSiteOrderController {
 
-    public TableView<CancelSiteOrderList> cancelSiteOrderIdTable;
-    public TableColumn<CancelSiteOrderList, Integer> siteOrderIdColumn;
-    public TableColumn<CancelSiteOrderList, String> siteNameColumn;
-    public TableColumn<CancelSiteOrderList, String> productNameColumn;
-    public TableColumn<CancelSiteOrderList, Integer> quantityColumn;
-    public TableColumn<CancelSiteOrderList, String> unitColumn;
-    public TableColumn<CancelSiteOrderList, String> deliveryColumn;
-    public TableColumn<CancelSiteOrderList, Date> desiredDateColumn;
-    public TableColumn<CancelSiteOrderList, String> statusColumn;
-    public TableColumn<CancelSiteOrderList, CheckBox> selectedColumn;
+    public TableView<CSCancelSiteOrderList> cancelSiteOrderIdTable;
+    public TableColumn<CSCancelSiteOrderList, Integer> siteOrderIdColumn;
+    public TableColumn<CSCancelSiteOrderList, String> siteNameColumn;
+    public TableColumn<CSCancelSiteOrderList, String> productNameColumn;
+    public TableColumn<CSCancelSiteOrderList, Integer> quantityColumn;
+    public TableColumn<CSCancelSiteOrderList, String> unitColumn;
+    public TableColumn<CSCancelSiteOrderList, String> deliveryColumn;
+    public TableColumn<CSCancelSiteOrderList, Date> desiredDateColumn;
+    public TableColumn<CSCancelSiteOrderList, String> statusColumn;
+    public TableColumn<CSCancelSiteOrderList, CheckBox> selectedColumn;
     public Button reorderButton;
     public Button cancelButton;
 
@@ -49,22 +48,22 @@ public class HandleCancelSiteOrderController {
 //        ObservableList<ThucTestData> data = FXCollections.observableArrayList(
 //                new ThucTestData(1, "Nhà sách Nhã Nam", "Đại dương đen", 10, "Cuốn", "Tàu", Date.valueOf("2025-12-25"), new CheckBox())
 //        );
-        cancelSiteOrderIdTable.setItems(CancelSiteOrderList.cancelSiteOrderListsData());
+        cancelSiteOrderIdTable.setItems(CSCancelSiteOrderList.cancelSiteOrderListsData());
     }
 
     @FXML
     public void reorder(ActionEvent e) {
-        ObservableList<CancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
+        ObservableList<CSCancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
         List<Integer> reorderIds = new ArrayList<>();
-        for (CancelSiteOrderList item : items) {
+        for (CSCancelSiteOrderList item : items) {
             if(item.getSelected().isSelected()) {
                 reorderIds.add(item.getSiteOrderId());
             }
         }
         System.out.println("Reorder IDs: " + reorderIds);
-        CancelSiteOrderList.updateStatus(reorderIds, "Đang đặt lại");
+        CSCancelSiteOrderList.updateStatus(reorderIds, "Đang đặt lại");
 
-        for (CancelSiteOrderList item : items) {
+        for (CSCancelSiteOrderList item : items) {
             if(item.getSelected().isSelected()) {
                 item.setStatus("Đang đặt lại");
                 item.getSelected().setSelected(false);
@@ -76,18 +75,18 @@ public class HandleCancelSiteOrderController {
 
     @FXML
     public void cancel() {
-        ObservableList<CancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
+        ObservableList<CSCancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
         List<Integer> cancelIds = new ArrayList<>();
-        for (CancelSiteOrderList item : items) {
+        for (CSCancelSiteOrderList item : items) {
             if(item.getSelected().isSelected()) {
                 cancelIds.add(item.getSiteOrderId());
             }
         }
 
-        CancelSiteOrderList.updateStatus(cancelIds, "Đã hủy");
+        CSCancelSiteOrderList.updateStatus(cancelIds, "Đã hủy");
         System.out.println("Cancel site order IDs: " + cancelIds);
 
-        for (CancelSiteOrderList item : items) {
+        for (CSCancelSiteOrderList item : items) {
             if(item.getSelected().isSelected()) {
                 item.setStatus("Đã hủy");
                 item.getSelected().setSelected(false);
