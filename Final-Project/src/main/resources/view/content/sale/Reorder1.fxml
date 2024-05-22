@@ -36,7 +36,7 @@
                   </TableView>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="sumProduct" alignment="CENTER" prefWidth="250.0" promptText="Tổng sổ sản phẩm đã chọn" />
+                        <TextField fx:id="sumProduct" alignment="CENTER" editable="false" prefWidth="250.0" promptText="Tổng sổ sản phẩm đã chọn" />
                         <Button fx:id="updateButton" mnemonicParsing="false" onAction="#update" prefWidth="135.0" text="Cập nhật" />
                      </children>
                      <padding>

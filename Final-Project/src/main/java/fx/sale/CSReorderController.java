@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.tabledata.CSCancelSiteOrderList;
 import model.tabledata.CSReorder;
 
 import java.util.HashSet;
@@ -157,6 +158,44 @@ public class CSReorderController {
     }
 
     public void reorder() {
+        update();
+        ObservableList<CSReorder> items = productTable.getItems();
+        CSReorder tmp = null;
+        int quantity = -1;
+
+        for(CSReorder item : items) {
+            if(item.getProductSelected().isSelected()) {
+                quantity = item.getProductQuantity();
+                tmp = item;
+            }
+        }
+
+        if(quantity == -1) return;
+        System.out.println("quantity = " + quantity);
+
+        if(quantity != Integer.parseInt(sumProduct.getText())) {
+            System.out.println("Vui lòng chọn số lượng phù hợp");
+            return;
+        }
+
+        ObservableList<CSReorder> sites = sitesTable.getItems();
+        for (CSReorder site : sites) {
+            String quantityText = site.getQuantity().getText();
+            if (quantityText != null && !quantityText.isEmpty()) {
+                try {
+                    int qtt = Integer.parseInt(quantityText);
+                    CSReorder.reorder(CSReorder.getOrderId(tmp.getSiteOrderId()), site.getSiteId(), quantity, site.getDelivery());
+                    CSCancelSiteOrderList.updateStatus(tmp.getSiteOrderId(), "Đã đặt lại");
+                    loadProductTableData();
+                    loadProductIdComboBoxData();
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid quantity value: " + quantityText);
+                }
+            }
+        }
+
+        //CSReorder.reorder(orderId, siteId, quantity, delivery);
+
 
     }
 

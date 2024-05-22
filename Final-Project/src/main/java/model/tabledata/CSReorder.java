@@ -1,15 +1,19 @@
 package model.tabledata;
 
+import config.DbUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import model.subsytem.SiteOrderSystem;
 import net.synedra.validatorfx.Check;
 
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CSReorder {
 
@@ -55,6 +59,43 @@ public class CSReorder {
         this.quantityInStock = quantityInStock;
         this.quantity = quantity;
         this.selected = selected;
+    }
+
+    public static void reorder(int orderId, int siteId, int quantity, String delivery) {
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "INSERT INTO `siteorders` (`id`, `order_id`, `site_id`, `quantity`, `delivery_type`, `price`, `status`, `note`) VALUES (NULL, ?, ?, ?, ?, 0, 'Chờ xác nhận', NULL)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, orderId);
+            pst.setInt(2, siteId);
+            pst.setInt(3, quantity);
+            pst.setString(4, delivery);
+            pst.executeUpdate();
+            System.out.println("Add thành công");
+            DbUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(SiteOrderSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    public static int getOrderId(int siteOrderId) {
+        ObservableList<Integer> list = FXCollections.observableArrayList();
+        String sqlQuery = "SELECT so.order_id FROM siteorders AS so WHERE so.id = " + siteOrderId;
+        int orderId = 0;
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+
+            while (resultSet.next()) {
+                orderId = resultSet.getInt("order_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderId;
     }
 
 
