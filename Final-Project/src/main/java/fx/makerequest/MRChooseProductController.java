@@ -1,5 +1,4 @@
 package fx.makerequest;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -11,7 +10,7 @@ import model.Product;
 
 import java.io.IOException;
 
-public class ChooseProductController {
+public class MRChooseProductController {
 
     @FXML
     private Label name;
@@ -69,12 +68,12 @@ public class ChooseProductController {
 
 
     private Product product;
-    private MyListener myListener;
+    private MRMyListener MRMyListener;
 
     @FXML
     private void chooseProd(MouseEvent mouseEvent) throws IOException {
-        if (myListener != null) {
-            myListener.onClickListener(product);
+        if (MRMyListener != null) {
+            MRMyListener.onClickListener(product);
         }
     }
 
@@ -87,12 +86,12 @@ public class ChooseProductController {
 //                "    -fx-background-radius: 30;");
 //    }
 
-    public void setData(Product product, MyListener myListener){
+    public void setData(Product product, MRMyListener MRMyListener){
         this.product = product;
-        this.myListener = myListener;
+        this.MRMyListener = MRMyListener;
         name.setText(product.getName());
         Image image = new Image(getClass().getResourceAsStream(product.getImage()));
-            
+
     }
 }
 
