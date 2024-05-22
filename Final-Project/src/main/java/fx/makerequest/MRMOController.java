@@ -22,7 +22,7 @@ import solution.Transition;
 import java.io.IOException;
 import java.util.Objects;
 
-public abstract class oldMOController<T> {
+public abstract class MRMOController<T> {
     @FXML
     public HBox breadcrumb;
     public boolean viewAllStt = false;

@@ -76,6 +76,19 @@ public class DateConverter {
         return dateTime.format(newFormatter);
     }
 
+    // Hàm convert từ yyyy-mm-dd sang dd/mm/yyyy
+    public static String convertDateFormat2(String inputDate) {
+        // Định nghĩa định dạng của ngày tháng
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Parse ngày tháng từ chuỗi đầu vào
+        LocalDate date = LocalDate.parse(inputDate, inputFormatter);
+
+        // Chuyển đổi sang định dạng mới và trả về
+        return outputFormatter.format(date);
+    }
+
     public static void main(String[] args) {
         // Sử dụng hàm convertToStandardFormat để chuyển đổi ngày tháng
         String inputDate = "25/05/2024";

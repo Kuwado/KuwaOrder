@@ -2,11 +2,14 @@ package fx.makerequest;
 
 import controller.OrderController;
 import controller.ProductController;
+import controller.RequestController;
+import fx.MainController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,14 +20,17 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Request;
 import model.tabledata.MROrder;
 import model.Product;
 import model.Order;
+import solution.DateConverter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class MRRequestController extends oldMOController<MROrder> {
+public class MRRequestController extends MRMOController<MROrder> {
 
     @FXML
     private HBox breadcrumb;
@@ -78,23 +84,41 @@ public class MRRequestController extends oldMOController<MROrder> {
     private TableColumn<MROrder, String> unit;
 
     @FXML
+    private TextField requestName;
+
+    @FXML
+    private TextArea requestDes;
+
+    @FXML
     void chooseProduct(ActionEvent event) throws IOException {
-        runPopUp("view/popUp/ChooseProduct.fxml", 1250, 700);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MRChooseProductController.setStage(stage);
+        if (orders != null) {
+            MRChooseProductController.setOrders(orders);
+        } else {
+            MRChooseProductController.setOrders(new ArrayList<>());
+        }
+        runPopUp("view/content/makerequest/MRChooseProduct.fxml", 1250, 700);
     }
 
     private final ObservableList<MROrder> mrOrders = FXCollections.observableArrayList();
     private final ProductController productController = new ProductController();
     private final OrderController orderController = new OrderController();
+    private final RequestController requestController = new RequestController();
+    private static ArrayList<Order> orders;
+
+    public static void setOrders(ArrayList<Order> orders) {
+        MRRequestController.orders = orders;
+    }
+
     @FXML
     void initialize() {
         orderNote.setEditable(false);
-        Product product1 = productController.getProductById(3);
-        Order order1 = orderController.getOrderById(1);
-        mrOrders.add(new MROrder(product1, order1));
-        mrOrders.add(new MROrder(product1, order1));
-        mrOrders.add(new MROrder(product1, order1));
-        mrOrders.add(new MROrder(product1, order1));
-        mrOrders.add(new MROrder(product1, order1));
+        if (orders != null) {
+            for (Order o : orders) {
+                mrOrders.add(new MROrder(productController.getProductById(o.getProductId()), o));
+            }
+        }
 
         setBreadcrumb(1, "/view/parts/breadcrumbs/MRbreadcrumb.fxml");
         insertToTable();
@@ -129,7 +153,7 @@ public class MRRequestController extends oldMOController<MROrder> {
     }
 
     private void runPopUp(String path, double width, double height) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popUp/ChooseProduct.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/makerequest/MRChooseProduct.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -155,4 +179,33 @@ public class MRRequestController extends oldMOController<MROrder> {
 
         primaryStage.show();
     };
+
+    @FXML
+    void makeRequest(ActionEvent event) throws IOException {
+        Request request = new Request(requestName.getText(), requestDes.getText());
+        requestController.insert(request);
+        request = requestController.getLastRequest();
+        for (Order o : orders) {
+            Order od = new Order(o.getProductId(), o.getQuantity(), DateConverter.convertDateFormat2(o.getDesiredDate()), o.getNote(), request.getId());
+            orderController.insert(od);
+        }
+
+        orders = new ArrayList<>();
+
+        Node source = (Node) event.getSource();
+        Stage stage2 = (Stage) source.getScene().getWindow();
+        stage2.close();
+        MainController mc = new MainController();
+        mc.setSidebarPath("/view/parts/sidebar/MRsidebar.fxml");
+        mc.setContentPath("/view/content/makerequest/MakeRequest.fxml");
+        mc.setAvatarPath("/images/avatar.jpg");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
+        fxmlLoader.setController(mc);
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
+        stage2.setTitle("Hello!");
+        stage2.setScene(scene);
+        stage2.show();
+
+    }
 }

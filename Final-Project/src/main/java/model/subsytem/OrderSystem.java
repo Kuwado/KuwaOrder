@@ -18,14 +18,13 @@ public class OrderSystem implements DBInterface<Order> {
     public void insert(Order order) {
         try {
             Connection con = DbUtil.getConnection();
-            String sql = "INSERT INTO orders (product_id, quantity, unit, desired_date, note, request_id) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO orders (product_id, quantity, desired_date, note, request_id) VALUES ( ?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, order.getProductId());
             pst.setInt(2, order.getQuantity());
-            pst.setString(3, order.getUnit());
-            pst.setString(4, order.getDesiredDate());
-            pst.setString(5, order.getNote());
-            pst.setInt(6, order.getRequestId());
+            pst.setString(3, order.getDesiredDate());
+            pst.setString(4, order.getNote());
+            pst.setInt(5, order.getRequestId());
             pst.executeUpdate();
             DbUtil.closeConnection(con);
         } catch (SQLException ex) {

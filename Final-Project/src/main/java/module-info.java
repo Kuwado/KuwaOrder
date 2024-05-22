@@ -21,7 +21,6 @@ module application {
     opens fx.makeorder to javafx.fxml;
     opens fx.site to javafx.base, javafx.fxml;
     opens fx.sale to javafx.fxml;
-    opens fx.product to javafx.fxml;
     opens fx.breadcrumb to javafx.fxml;
     opens fx.sidebar to javafx.fxml;
     opens fx.makerequest to javafx.fxml;
@@ -36,7 +35,6 @@ module application {
     exports fx.wh;
     exports fx.site;
     exports fx.sale;
-    exports fx.product;
     exports application;
     exports model;
     exports solution;

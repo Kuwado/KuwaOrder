@@ -52,4 +52,10 @@ public class RequestController {
         requestSystem.updateStatus(id, status);
     }
 
+    // Get the last request
+    public Request getLastRequest() {
+        request = requestSystem.selectLast();
+        return request;
+    }
+
 }
