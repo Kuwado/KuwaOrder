@@ -37,7 +37,6 @@ public class MOSuccessController {
             fxmlLoader.setController(mc);
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
             stageOrder.setTitle("KuwaOrder");
             stageOrder.setScene(scene);
             stageOrder.show();

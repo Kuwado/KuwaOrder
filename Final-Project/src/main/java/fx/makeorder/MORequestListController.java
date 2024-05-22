@@ -111,7 +111,7 @@ public class MORequestListController extends MOController<MORequest> {
     public void insertToPreviewCard(MORequest moRequest) {
         Request request = moRequest.getRequest();
         StringBuilder productList = new StringBuilder();
-        List<Order> orders = orderController.getOrdersInRequest(request.getId());
+        List<Order> orders = orderController.getWaitOrdersInRequest(request.getId());
         String exDate;
         if (orders.size() > 0) {
             String[] dates = new String[orders.size()];

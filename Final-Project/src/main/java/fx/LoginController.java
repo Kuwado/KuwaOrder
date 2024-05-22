@@ -47,18 +47,17 @@ public class LoginController {
              switch (user.getType()) {
                  case "op":
                      sidebarPath = "/view/parts/sidebar/OrderPlacement.fxml";
-                     contentPath = "/view/content/makeorder/MORequestList.fxml";
+                     contentPath = "/view/parts/sidebar/OrderPlacementHome.fxml";
+                     OrderPlacementController.activeIndex = 0;
                      break;
                  case "wh":
                      sidebarPath = "/view/parts/sidebar/WarehouseManage.fxml";
                      contentPath = "/view/content/wh/WHList.fxml";
-
                      break;
                  // Thêm các trường hợp case khác nếu cần thiết
                  default:
                      // Thực hiện các lệnh nếu không có trường hợp nào khớp với giá trị của biểu thức
              }
-             OrderPlacementController.activeIndex = 3;
              login(sidebarPath, contentPath, imagePath);
 
          }
