@@ -3,7 +3,6 @@ package fx.wh;
 import controller.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -62,7 +61,7 @@ public class WHListController extends WHController<WHSiteOrder> {
 
     @FXML
     public void initialize() {
-        setBreadcrumb(1, "/view/parts/breadcrumbs/warehousee.fxml");
+        setBreadcrumb(1, "/view/parts/breadcrumbs/Warehouse.fxml");
         loadData();
         number = 7;
         startTable(table, whSiteOrders);
@@ -77,7 +76,7 @@ public class WHListController extends WHController<WHSiteOrder> {
             button.setOnAction(event -> {
                 try {
                     selectedOrder = whSiteOrder;  // Đặt giá trị cho selectedOrder trước khi mở pop-up
-                    runPopUp("/view/popUp/whDetail.fxml", 620, 438);
+                    runPopUp("/view/popUp/WHDetail.fxml", 620, 438);
                     printOrderDetails(whSiteOrder);
                 } catch (IOException e) {
                     e.printStackTrace();
