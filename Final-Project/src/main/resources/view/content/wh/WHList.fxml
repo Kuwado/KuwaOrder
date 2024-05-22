@@ -32,7 +32,7 @@
                                                 <Image url="@../../../images/icons/magnifying-glass.png" />
                                             </image>
                                         </ImageView>
-                                        <TextField prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
+                                        <TextField fx:id="searchInput" prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
                                     </children>
                                     <HBox.margin>
                                         <Insets />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 22, 2024 lúc 06:02 PM
+-- Thời gian đã tạo: Th5 22, 2024 lúc 06:43 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -232,16 +232,16 @@ CREATE TABLE `siteorders` (
 --
 
 INSERT INTO `siteorders` (`id`, `order_id`, `site_id`, `quantity`, `delivery_type`, `price`, `status`, `note`) VALUES
-(1, 10, 10, 2, 'Đường thủy', 16900000, 'Đã nhập kho', NULL),
-(2, 10, 4, 44, 'Đường thủy', 320750000, 'Chờ lấy hàng', NULL),
-(3, 10, 1, 25, 'Đường thủy', 189500000, 'Đã nhập kho', NULL),
-(4, 10, 7, 36, 'Đường thủy', 273950000, 'Chờ lấy hàng', NULL),
-(5, 10, 11, 13, 'Đường thủy', 100700000, 'Chờ xác nhận', NULL),
-(6, 9, 8, 14, 'Hàng không', 176800000, 'Chờ xác nhận', NULL),
-(7, 10, 4, 44, 'Đường thủy', 320750000, 'Đang hủy', NULL),
-(8, 10, 10, 12, 'Đường thủy', 90900000, 'Đang hủy', NULL),
-(9, 10, 1, 25, 'Đường thủy', 189500000, 'Chờ lấy hàng', NULL),
-(10, 10, 7, 36, 'Đường thủy', 273950000, 'Chờ xác nhận', NULL),
+(1, 10, 10, 2, 'Đường thủy', 16900000, 'Đang giao', NULL),
+(2, 10, 4, 44, 'Đường thủy', 320750000, 'Đang giao', NULL),
+(3, 10, 1, 25, 'Đường thủy', 189500000, 'Đang giao', NULL),
+(4, 10, 7, 36, 'Đường thủy', 273950000, 'Đang giao', NULL),
+(5, 10, 11, 13, 'Đường thủy', 100700000, 'Đang giao', NULL),
+(6, 9, 8, 14, 'Hàng không', 176800000, 'Đang giao', NULL),
+(7, 10, 4, 44, 'Đường thủy', 320750000, 'Đang giao', NULL),
+(8, 10, 10, 12, 'Đường thủy', 90900000, 'Đang giao', NULL),
+(9, 10, 1, 25, 'Đường thủy', 189500000, 'Đang giao', NULL),
+(10, 10, 7, 36, 'Đường thủy', 273950000, 'Đang giao', NULL),
 (11, 10, 11, 3, 'Đường thủy', 24700000, 'Chờ xác nhận', NULL),
 (12, 9, 8, 14, 'Hàng không', 176800000, 'Chờ xác nhận', NULL),
 (13, 17, 2, 1, 'Hàng không', 6300000, 'Chờ xác nhận', NULL),
@@ -451,7 +451,7 @@ INSERT INTO `storage` (`id`, `product_id`, `quantity`, `sold_quantity`) VALUES
 (1, 1, 10, 2),
 (2, 2, 20, 1),
 (3, 3, 44, 450),
-(4, 4, 133, 0),
+(4, 4, 137, 0),
 (5, 5, 145, 15),
 (6, 6, 24, 253),
 (7, 7, 12, 254),
