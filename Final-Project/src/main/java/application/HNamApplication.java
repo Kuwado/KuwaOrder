@@ -15,7 +15,7 @@ public class HNamApplication extends Application {
         MainController mc = new MainController();
         mc.setAvatarPath("/images/whUserAvartar.jpg");
         mc.setSidebarPath("/view/parts/sidebar/siteOrderList.fxml");
-        mc.setContentPath("/view/content/order/siteOrder.fxml");
+        mc.setContentPath("/view/content/order/VOsiteOrder.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);
         Scene scene = new Scene(fxmlLoader.load());

@@ -4,10 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import model.Order;
 import model.tabledata.VOSiteOrder;
 
-public class OrderDetailController {
+public class VOOrderDetailController {
 
         @FXML
         private TextArea note;

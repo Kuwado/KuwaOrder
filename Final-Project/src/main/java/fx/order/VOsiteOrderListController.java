@@ -3,6 +3,7 @@ package fx.order;
 import controller.OrderController;
 import controller.SiteOrderController;
 import controller.SiteProductController;
+import fx.breadcrumb.VOBreadcrumbController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ import model.tabledata.VOSiteOrder;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class siteOrderListController {
+public class VOsiteOrderListController {
 
     @FXML
     private TableColumn<VOSiteOrder, String> unit;
@@ -82,8 +83,8 @@ public class siteOrderListController {
 
     @FXML
     void initialize() {
-        OBreadcrumbController.number = 1;
-        OBreadcrumbController ob = new OBreadcrumbController();
+        VOBreadcrumbController.number = 1;
+        VOBreadcrumbController ob = new VOBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
         ArrayList<SiteOrder> siteOrders = siteOrderController.getAllSiteOrdersBySiteID(1);
         ArrayList<SiteProduct> siteProducts = new ArrayList<>();
@@ -111,14 +112,14 @@ public class siteOrderListController {
     }
     private void showOrderDetails(VOSiteOrder SiteOrder) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/siteOrderDetail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/VOsiteOrderDetail.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Chi tiết đơn hàng");
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(table.getScene().getWindow());
             stage.setScene(new Scene(loader.load()));
 
-            SiteOrderDetailController controller = loader.getController();
+            VOSiteOrderDetailController controller = loader.getController();
             controller.setDialogStage(stage);
             controller.setOrder(SiteOrder);
 
