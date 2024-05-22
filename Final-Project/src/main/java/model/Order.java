@@ -10,21 +10,6 @@ public class Order {
     private String note;
     private int requestId;
 
-    private Product product;
-    private String productName;
-
-    public Order(int id, Product product, int quantity, String unit, String desiredDate, String status, String note) {
-        this.id = id;
-        this.product = product;
-        this.productId = product.getId();
-        this.productName = product.getName();
-        this.quantity = quantity;
-        this.unit = unit;
-        this.desiredDate = desiredDate;
-        this.status = status;
-        this.note = note;
-    }
-
     public Order() {
     }
 
@@ -39,7 +24,20 @@ public class Order {
         this.requestId = requestId;
     }
 
+    public Order(int productId, int quantity, String desiredDate, String note) {
+        this.productId = productId;
+        this.quantity = quantity;
+        this.desiredDate = desiredDate;
+        this.note = note;
+    }
 
+    public Order(int productId, int quantity, String desiredDate, String note, int requestId) {
+        this.productId = productId;
+        this.quantity = quantity;
+        this.desiredDate = desiredDate;
+        this.note = note;
+        this.requestId = requestId;
+    }
 
     public int getId() {
         return id;
@@ -72,12 +70,5 @@ public class Order {
     public int getRequestId() {
         return requestId;
     }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
+    
 }

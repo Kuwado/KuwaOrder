@@ -148,5 +148,30 @@ public class RequestSystem implements DBInterface<Request> {
         }
     }
 
+    // Lấy request mới nhất
+    public Request selectLast() {
+        Request request = null;
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "SELECT * FROM requests ORDER BY id DESC LIMIT 1";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) { // Kiểm tra xem có dữ liệu trong ResultSet hay không
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int orderQuantity = rs.getInt("order_quantity");
+                String sendDate = rs.getString("send_date");
+                String description = rs.getString("description");
+                String status = rs.getString("status");
+                request = new Request(id, name, orderQuantity, sendDate, description, status);
+            }
+
+            DbUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return request;
+    }
 
 }

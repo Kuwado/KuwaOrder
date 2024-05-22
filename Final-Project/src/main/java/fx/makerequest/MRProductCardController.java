@@ -1,4 +1,4 @@
-package fx.product;
+package fx.makerequest;
 
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
@@ -7,6 +7,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,24 +15,22 @@ import model.Product;
 
 import java.util.Objects;
 
-public class ProductCardController {
-    private Product product;
-
-    @FXML
-    private VBox productCard;
-
+public class MRProductCardController {
     @FXML
     private ImageView productImage;
 
     @FXML
     private Label productName;
 
-    public ProductCardController() {
-        // No-argument constructor required by FXML
-    }
+    @FXML
+    private VBox productCard;
 
-    public void setProduct(Product product) {
+    private Product product;
+    private MRMyListener myListener;
+
+    public void setProduct(Product product, MRMyListener myListener) {
         this.product = product;
+        this.myListener = myListener;
         if (productName != null && productImage != null) {
             productName.setText(product.getName());
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(product.getImage())));
@@ -41,8 +40,12 @@ public class ProductCardController {
     }
 
     @FXML
+    private void click(MouseEvent mouseEvent) {
+        myListener.onClickListener(product);
+    }
+
+    @FXML
     void initialize() {
-        shadowPreviewCard();
     }
 
     private void shadowPreviewCard() {
