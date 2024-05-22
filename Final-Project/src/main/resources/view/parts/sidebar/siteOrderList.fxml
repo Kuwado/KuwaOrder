@@ -12,7 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Button mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách đơn hàng ">
             <graphic>
@@ -26,6 +26,18 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
+      <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" styleClass="sidebar-btn" text="Danh sách sản phẩm">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icons/to-do-list.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
         <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="user-btn" text="Site 1">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
