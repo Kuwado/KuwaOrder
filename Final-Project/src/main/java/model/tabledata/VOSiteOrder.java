@@ -16,9 +16,9 @@ public class VOSiteOrder {
     private String productName;
     private int quantity;
     private String unit;
-    private double productPrice;
+    private String productPrice;
     private String deliveryType;
-    private double deliveryPrice;
+    private String deliveryPrice;
     private String status;
     private String note;
     private int siteProductID;
@@ -35,9 +35,9 @@ public class VOSiteOrder {
         Order order = orderController.getOrderById(siteOrder.getOrderId());
         this.productName = productController.getProductById(order.getProductId()).getName();
         this.unit = order.getUnit();
-        this.productPrice = siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getPrice();
+        this.productPrice = String.format("%,d", Math.round(siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getPrice()));
         this.deliveryType = siteOrder.getDeliveryType();
-        this.deliveryPrice = siteOrder.getPrice() - siteOrder.getQuantity()*siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getPrice();
+        this.deliveryPrice = String.format("%,d",Math.round(siteOrder.getPrice() - siteOrder.getQuantity()*siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getPrice()));
         this.status = siteOrder.getStatus();
         this.note = siteOrder.getNote();
         this.siteProductID = siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getId();
@@ -62,7 +62,7 @@ public class VOSiteOrder {
         return unit;
     }
 
-    public double getProductPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
@@ -70,7 +70,7 @@ public class VOSiteOrder {
         return deliveryType;
     }
 
-    public double getDeliveryPrice() {
+    public String getDeliveryPrice() {
         return deliveryPrice;
     }
 
