@@ -23,6 +23,7 @@ public class CSReorderController {
     public ComboBox<Integer> productIdComboBox;
     public TableColumn<CSReorder, CheckBox> productSelectedColumn;
 
+    public Button updateButton;
     public Button cancelButton;
     public Button fastReorderButton;
 
@@ -36,6 +37,8 @@ public class CSReorderController {
     public TableColumn<CSReorder, CheckBox> selectedColumn;
     public Button reorderButton;
     public TableColumn<CSReorder, Integer> siteProductIdColumn;
+
+    public TextField sumProduct;
 
     @FXML
     private void initialize() {
@@ -65,6 +68,7 @@ public class CSReorderController {
             loadProductTableData();
             loadSiteTableData();
         });
+
 
         loadProductTableData();
         loadSiteTableData();
@@ -125,6 +129,24 @@ public class CSReorderController {
         productIdComboBox.getItems().setAll(uniqueProductIds);
     }
 
+    public void update() {
+        ObservableList<CSReorder> items = sitesTable.getItems();
+        int sum = 0;
+        for (CSReorder item : items) {
+            String quantityText = item.getQuantity().getText();
+            if (quantityText != null && !quantityText.isEmpty()) {
+                try {
+                    int newValue = Integer.parseInt(quantityText);
+                    sum += newValue;
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid quantity value: " + quantityText);
+                }
+            }
+        }
+        System.out.println("Sum = " + sum);
+        sumProduct.setText(String.valueOf(sum));
+    }
+
 
     public void cancel() {
 
@@ -137,5 +159,8 @@ public class CSReorderController {
     public void reorder() {
 
     }
+
+
+
 
 }

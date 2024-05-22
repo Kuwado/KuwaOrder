@@ -27,13 +27,22 @@
                         <TableColumn fx:id="unitColumn" prefWidth="109.0" text="Đơn vị" />
                         <TableColumn fx:id="statusColumn" prefWidth="250.0" text="Trạng thái" />
                         <TableColumn fx:id="desiredDateColumn" prefWidth="255.0" text="Ngày nhận mong muốn" />
-                        <TableColumn fx:id="selectedQuantityColumn" prefWidth="180.0" text="Số lượng đã chọn" />
+                        <TableColumn fx:id="selectedQuantityColumn" prefWidth="180.0" text="Số lượng đã chọn" visible="false" />
                         <TableColumn fx:id="productSelectedColumn" prefWidth="75.0" text="Chọn" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="sumProduct" alignment="CENTER" prefWidth="250.0" promptText="Tổng sổ sản phẩm đã chọn" />
+                        <Button fx:id="updateButton" mnemonicParsing="false" onAction="#update" prefWidth="135.0" text="Cập nhật" />
+                     </children>
+                     <padding>
+                        <Insets top="15.0" />
+                     </padding>
+                  </HBox>
                   <Label text="Danh sách site" />
                   <HBox prefWidth="200.0">
                      <children>

@@ -24,7 +24,7 @@ public class ThucApplication extends Application {
         fxmlLoader.setController(mc);
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/lam.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
         //System.out.println(CSReorder.siteData());
