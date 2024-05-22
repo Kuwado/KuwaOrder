@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="620.0" style="-fx-background-color: yellow;" styleClass="table-area" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.wh.WHDetailController">
+<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="620.0" style="-fx-background-color: white;" styleClass="table-area" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.wh.WHDetailController">
 <top>
     <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="620.0" style="-fx-background-color: #1b1b32;" BorderPane.alignment="BOTTOM_LEFT">
         <children>
@@ -44,7 +44,7 @@
         <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="183.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagePd" fitHeight="183.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -156,7 +156,6 @@
                                         <Insets right="20.0" />
                                     </padding>
                                 </HBox>
-                              <Button fx:id="changeQuantity" mnemonicParsing="false" prefHeight="17.0" prefWidth="58.0" styleClass="confirm-btn" text="Sửa" />
                             </children>
                             <VBox.margin>
                                 <Insets left="20.0" right="20.0" />
@@ -201,15 +200,15 @@
             </HBox>
             <HBox prefHeight="37.0" prefWidth="580.0" styleClass="line-bottom">
                <children>
-                  <HBox prefHeight="35.0" prefWidth="356.0">
+                  <HBox prefHeight="35.0" prefWidth="402.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="244.0" styleClass="preview-card-title" text="Phương thức vận chuyển:" />
-                        <Label fx:id="deBy" prefHeight="35.0" prefWidth="79.0" styleClass="preview-card-text" text="Ngựa" />
+                        <Label fx:id="deBy" prefHeight="35.0" prefWidth="107.0" styleClass="preview-card-text" text="Ngựa" />
                      </children></HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="35.0" prefWidth="182.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="64.0" styleClass="preview-card-title" text="Giá:" />
-                        <Label fx:id="price" prefHeight="38.0" prefWidth="98.0" styleClass="preview-card-text" text="1110000" />
+                        <Label fx:id="price" prefHeight="35.0" prefWidth="143.0" styleClass="preview-card-text" text="1110000" />
                      </children>
                   </HBox>
                </children>

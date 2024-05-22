@@ -1,16 +1,16 @@
 package fx.wh;
+
 import fx.LoginController;
 import fx.MainController;
 import fx.breadcrumb.WHBreadcrumbController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import solution.Paginator;
@@ -23,25 +23,35 @@ public abstract class WHController<T> {
     public HBox breadcrumb;
 
     @FXML
+    private TextField searchInput;
+
+    @FXML
     public Pagination pagination;
 
     public int number = 9;
+    @FXML
+    public TableColumn<T, String> name;
 
-    public abstract void insertToTable();
+    public void getName(TableColumn<T, String> name) {
+        this.name = name;
+    }
+
+    public abstract void insertToTable(ObservableList<T> items);
     public abstract void setDataToTrans(T data);
 
     public void setBreadcrumb(int number, String path) {
         WHBreadcrumbController.number = number;
-        fx.breadcrumb.WHBreadcrumbController moc = new WHBreadcrumbController();
+        WHBreadcrumbController moc = new WHBreadcrumbController();
         moc.loadBreadcrumb(breadcrumb, path);
     }
 
     public void startTable(TableView<T> table, ObservableList<T> items) {
-        insertToTable();
+
+        insertToTable(items);
         Paginator.setPagination(table, pagination, items, number);
     }
 
-    public Button makeButton(TableView<T> table,  int index, String path) {
+    public Button makeButton(TableView<T> table, int index, String path) {
         Button button = new Button();
         button.getStyleClass().add("table-view-btn");
         button.setOnAction(event -> {
@@ -50,6 +60,7 @@ public abstract class WHController<T> {
         });
         return button;
     }
+
     public void viewDetail(T data, ActionEvent event, String path) {
         try {
             setDataToTrans(data);

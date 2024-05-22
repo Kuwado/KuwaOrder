@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.tabledata.WHSiteOrder;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,8 +22,8 @@ import java.io.IOException;
 
 public class WHDetailController {
 
+    @FXML private ImageView imagePd; // ImageView cho hình ảnh sản phẩm
     @FXML private Button cancelBtn;
-    @FXML private Button changeQuantity;
     @FXML private Label deBy;
     @FXML private Button makeOrderBtn;
     @FXML private Label note;
@@ -72,7 +74,14 @@ public class WHDetailController {
 
         // Kiểm tra nếu trạng thái của đơn hàng đã là "Đã nhập kho"
         // thì hiển thị thông báo và không tiến hành cập nhật
-        if (!status.getText().equals("Đã nhập kho")) {
+        if (!status.getText().equals("Đã nhập kho") && !status.getText().equals("Đang giao")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Thông báo");
+            alert.setHeaderText(null);
+            alert.setContentText("Đơn hàng chưa giao, không thể nhập kho!");
+            alert.showAndWait();
+        }
+        if (status.getText().equals("Đang giao")) {
             siteOrderSystem.updateStatus(siteOrderId, newStatus);
             // Sau đó đóng cửa sổ popup
             Stage stage = (Stage) makeOrderBtn.getScene().getWindow();
@@ -92,7 +101,8 @@ public class WHDetailController {
             }, 1000);
 
             System.out.println("Nhập kho thành công!");
-        } else {
+        }
+        if (status.getText().equals("Đã nhập kho")){
             // Hiển thị thông báo nếu đơn hàng đã nhập kho trước đó
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Thông báo");
@@ -109,7 +119,6 @@ public class WHDetailController {
             whListController.refreshTable();
         }
     }
-
 
     private void showSuccessPopup() {
         Platform.runLater(() -> {
@@ -128,7 +137,7 @@ public class WHDetailController {
 
     // Phương thức để thiết lập dữ liệu cho các Label từ bên ngoài controller
     public void setData(String requestId, String status, String productName, int orderQuantity, String orderUnit,
-                        String orderId, String deBy, String price, String note, int productId, int siteOrderId) {
+                        String orderId, String deBy, double price, String note, String imageUrl, int productId, int siteOrderId) {
         this.requestId.setText(requestId);
         this.status.setText(status);
         this.productName.setText(productName);
@@ -136,10 +145,13 @@ public class WHDetailController {
         this.orderUnit.setText(orderUnit);
         this.orderId.setText(orderId);
         this.deBy.setText(deBy);
-        this.price.setText(price);
+        this.price.setText(String.format("%,.0f", price));
         this.note.setText(note);
         this.productId = productId;
         this.quantity = orderQuantity;
-        this.siteOrderId = siteOrderId; // Lưu id của SiteOrder để sử dụng khi cập nhật trạng thái
+        this.siteOrderId = siteOrderId;
+
+        Image image = new Image(getClass().getResourceAsStream(imageUrl));
+        imagePd.setImage(image);
     }
 }
