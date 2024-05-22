@@ -11,6 +11,7 @@ import model.SiteProduct;
 public class VOSiteOrder {
     private static int iDCounter = 1;
     private int id;
+    private int siteOrderID;
     private String siteName;
     private String productName;
     private int quantity;
@@ -26,8 +27,9 @@ public class VOSiteOrder {
     private final ProductController productController = new ProductController();
     private final OrderController orderController = new OrderController();
     private final SiteProductController siteProductController = new SiteProductController();
-    public VOSiteOrder(SiteOrder siteOrder, SiteProduct siteProduct){
+    public VOSiteOrder(SiteOrder siteOrder){
         this.id = iDCounter++;
+        this.siteOrderID = siteOrder.getId();
         this.siteName = siteController.getSiteById(siteOrder.getSiteId()).getName();
         this.quantity = siteOrder.getQuantity();
         Order order = orderController.getOrderById(siteOrder.getOrderId());
@@ -38,10 +40,7 @@ public class VOSiteOrder {
         this.deliveryPrice = siteOrder.getPrice() - siteOrder.getQuantity()*siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getPrice();
         this.status = siteOrder.getStatus();
         this.note = siteOrder.getNote();
-        this.siteProductID = siteProduct.getId();
-    }
-    public VOSiteOrder(SiteProduct siteProduct){
-        this.siteProductID = siteProduct.getId();
+        this.siteProductID = siteProductController.getSiteproductFromProductAndSite(order.getProductId(),siteOrder.getSiteId()).getId();
     }
     public int getId() {
         return id;
@@ -90,5 +89,8 @@ public class VOSiteOrder {
 
     public int getSiteProductID(){
         return siteProductID;
+    }
+    public int getSiteOrderID(){
+        return siteOrderID;
     }
 }

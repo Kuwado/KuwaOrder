@@ -6,6 +6,7 @@ import controller.SiteProductController;
 import fx.breadcrumb.VOBreadcrumbController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -71,6 +73,9 @@ public class VOsiteOrderListController {
     @FXML
     private Button deliverOrderButton;
 
+    @FXML
+    private TextField searchField;
+
     public void setTable(TableView<VOSiteOrder> table){
         this.table = table;
     }
@@ -87,15 +92,30 @@ public class VOsiteOrderListController {
         VOBreadcrumbController ob = new VOBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
         ArrayList<SiteOrder> siteOrders = siteOrderController.getAllSiteOrdersBySiteID(1);
-        ArrayList<SiteProduct> siteProducts = new ArrayList<>();
-        for (SiteOrder siteOrder : siteOrders) {
-            siteProducts = siteProductController.getSiteproductsByProduct(orderController.getOrderById(siteOrder.getOrderId()).getProductId());
-        }
-        for (int i = 0; i < siteOrders.size(); i++){
-            voSiteOrders.add(new VOSiteOrder(siteOrders.get(i),siteProducts.get(i)));
+        for (SiteOrder siteOrder : siteOrders){
+            voSiteOrders.add(new VOSiteOrder(siteOrder));
         }
         insertToTable();
         table.setItems(voSiteOrders);
+
+        FilteredList<VOSiteOrder> filteredData = new FilteredList<>(voSiteOrders, p -> true);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(voSiteOrder -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (voSiteOrder.getProductName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (voSiteOrder.getSiteName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        table.setItems(filteredData);
+
         table.setOnMouseClicked(event -> {
             if (table.getSelectionModel().getSelectedItem() != null) {
                 VOSiteOrder selectedSiteOrder = table.getSelectionModel().getSelectedItem();
@@ -104,13 +124,13 @@ public class VOsiteOrderListController {
                     showOrderDetails(selectedSiteOrder);
                 } else {
                     handleOrderSelection(selectedSiteOrder);
-
                 }
             }
         });
         VOSiteOrder.setiDCounter(1);
     }
-    private void showOrderDetails(VOSiteOrder SiteOrder) {
+
+    private void showOrderDetails(VOSiteOrder siteOrder) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/VOsiteOrderDetail.fxml"));
             Stage stage = new Stage();
@@ -121,7 +141,7 @@ public class VOsiteOrderListController {
 
             VOSiteOrderDetailController controller = loader.getController();
             controller.setDialogStage(stage);
-            controller.setOrder(SiteOrder);
+            controller.setOrder(siteOrder);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -176,10 +196,9 @@ public class VOsiteOrderListController {
         if (selectedOrder != null) {
             int deliverQuantity = selectedOrder.getQuantity();
             int siteProductId = selectedOrder.getSiteProductID();
-            System.out.println(siteProductId);
             siteProductController.updateQuantityAndSoldQuantity(siteProductId, deliverQuantity);
             selectedOrder.setStatus("Đang giao");
-            siteOrderController.updateStatus(selectedOrder.getId(), "Đang giao");
+            siteOrderController.updateStatus(selectedOrder.getSiteOrderID(), "Đang giao");
             table.refresh();
         }
     }
