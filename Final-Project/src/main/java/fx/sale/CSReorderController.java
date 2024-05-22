@@ -7,6 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.tabledata.CSReorder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class CSReorderController {
     public TableView<CSReorder> productTable;
     public TableColumn<CSReorder, Integer> siteOrderIdColumn;
@@ -32,9 +35,12 @@ public class CSReorderController {
     public TableColumn<CSReorder, TextField> quantityColumn;
     public TableColumn<CSReorder, CheckBox> selectedColumn;
     public Button reorderButton;
+    public TableColumn<CSReorder, Integer> siteProductIdColumn;
 
     @FXML
     private void initialize() {
+        //System.out.println("Initializing CSReorderController");
+
         siteOrderIdColumn.setCellValueFactory(new PropertyValueFactory<>("siteOrderId"));
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
@@ -45,117 +51,26 @@ public class CSReorderController {
         selectedQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("selectedQuantity"));
         productSelectedColumn.setCellValueFactory(new PropertyValueFactory<>("productSelected"));
 
+        siteIdColumn.setCellValueFactory(new PropertyValueFactory<>("siteId"));
+        siteNameColumn.setCellValueFactory(new PropertyValueFactory<>("siteName"));
+        siteProductIdColumn.setCellValueFactory(new PropertyValueFactory<>("siteProductId"));
+        deliveryColumn.setCellValueFactory(new PropertyValueFactory<>("delivery"));
+        expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("expectedDate"));
+        quantityInStockColumn.setCellValueFactory(new PropertyValueFactory<>("quantityInStock"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        selectedColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
 
         loadProductIdComboBoxData();
-        productIdComboBox.setOnAction(e -> loadProductTableData());
+        productIdComboBox.setOnAction(e -> {
+            loadProductTableData();
+            loadSiteTableData();
+        });
 
         loadProductTableData();
-
-
-        System.out.println(CSReorder.siteData());
-
-
-
-
         loadSiteTableData();
-
     }
 
-    private class ReorderSiteList {
-        private int siteId;
-        private String siteName;
-        private int productId;
-        private String delivery;
-        private String expectedDate;
-        private int quantityInStock;
-        private TextField quantity;
-        private CheckBox selected;
 
-        public ReorderSiteList(int siteId, String siteName, String delivery, String expectedDate, int quantityInStock, TextField quantity, CheckBox selected) {
-            this.siteId = siteId;
-            this.siteName = siteName;
-            this.delivery = delivery;
-            this.expectedDate = expectedDate;
-            this.quantityInStock = quantityInStock;
-            this.quantity = quantity;
-            this.selected = selected;
-        }
-
-        public ReorderSiteList(int siteId, String siteName, int productId, String delivery, String expectedDate, int quantityInStock, TextField quantity, CheckBox selected) {
-            this.siteId = siteId;
-            this.siteName = siteName;
-            this.productId = productId;
-            this.delivery = delivery;
-            this.expectedDate = expectedDate;
-            this.quantityInStock = quantityInStock;
-            this.quantity = quantity;
-            this.selected = selected;
-        }
-
-        public int getSiteId() {
-            return siteId;
-        }
-
-        public void setSiteId(int siteId) {
-            this.siteId = siteId;
-        }
-
-        public String getSiteName() {
-            return siteName;
-        }
-
-        public void setSiteName(String siteName) {
-            this.siteName = siteName;
-        }
-
-        public int getProductId() {
-            return productId;
-        }
-
-        public void setProductId(int productId) {
-            this.productId = productId;
-        }
-
-        public String getDelivery() {
-            return delivery;
-        }
-
-        public void setDelivery(String delivery) {
-            this.delivery = delivery;
-        }
-
-        public String getExpectedDate() {
-            return expectedDate;
-        }
-
-        public void setExpectedDate(String expectedDate) {
-            this.expectedDate = expectedDate;
-        }
-
-        public int getQuantityInStock() {
-            return quantityInStock;
-        }
-
-        public void setQuantityInStock(int quantityInStock) {
-            this.quantityInStock = quantityInStock;
-        }
-
-        public TextField getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(TextField quantity) {
-            this.quantity = quantity;
-        }
-
-        public CheckBox getSelected() {
-            return selected;
-        }
-
-        public void setSelected(CheckBox selected) {
-            this.selected = selected;
-        }
-    }
 
     private void loadSiteTableData() {
         Integer selectedProductId = productIdComboBox.getValue();
@@ -166,31 +81,16 @@ public class CSReorderController {
         }
 
         ObservableList<CSReorder> allSites = CSReorder.siteData();
+        //System.out.println("Chạy được tới đây nè" + allSites);
         ObservableList<CSReorder> filteredSites = FXCollections.observableArrayList();
 
-        for(CSReorder site : allSites) {
-            if(site.getProductId() == selectedProductId) {
+        for (CSReorder site : allSites) {
+            if (site.getSiteProductId() == selectedProductId) {
                 filteredSites.add(site);
             }
         }
 
-        ObservableList<ReorderSiteList> list = FXCollections.observableArrayList();
-
-        for(CSReorder site : filteredSites) {
-
-            int siteId = site.getSiteId();
-            String siteName = site.getSiteName();
-            int quantityInStock = site.getQuantityInStock();
-            TextField quantity = new TextField();
-            CheckBox selected = new CheckBox();
-            String delivery = "Tàu";
-            String expectedDate =  java.time.LocalDate.now().toString();
-            list.add(new ReorderSiteList(siteId, siteName, delivery, expectedDate, quantityInStock, quantity, selected));
-
-        }
-
-        //sitesTable.setItems(list);
-
+        sitesTable.setItems(filteredSites);
     }
 
     private void loadProductTableData() {
@@ -216,9 +116,13 @@ public class CSReorderController {
 
     private void loadProductIdComboBoxData() {
         ObservableList<CSReorder> items = CSReorder.productData();
-        for(CSReorder item : items) {
-            productIdComboBox.getItems().add(item.getProductId());
+        Set<Integer> uniqueProductIds = new HashSet<>();
+
+        for (CSReorder item : items) {
+            uniqueProductIds.add(item.getProductId());
         }
+
+        productIdComboBox.getItems().setAll(uniqueProductIds);
     }
 
 

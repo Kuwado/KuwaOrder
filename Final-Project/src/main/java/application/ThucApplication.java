@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.tabledata.CSReorder;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class ThucApplication extends Application {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
+        //System.out.println(CSReorder.siteData());
     }
 
     public static void main(String[] args) {

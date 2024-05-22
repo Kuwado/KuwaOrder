@@ -3,9 +3,13 @@ package model.tabledata;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
+import net.synedra.validatorfx.Check;
 
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CSReorder {
 
@@ -39,10 +43,10 @@ public class CSReorder {
     private int airDate;
     private String expectedDate;
     private int quantityInStock;
-    private int quantity;
+    private TextField quantity;
     private CheckBox selected;
 
-    public CSReorder(int siteId, String siteName, int siteProductId, String delivery, String expectedDate, int quantityInStock, int quantity, CheckBox selected) {
+    public CSReorder(int siteId, String siteName, int siteProductId, String delivery, String expectedDate, int quantityInStock, TextField quantity, CheckBox selected) {
         this.siteId = siteId;
         this.siteName = siteName;
         this.siteProductId = siteProductId;
@@ -52,6 +56,7 @@ public class CSReorder {
         this.quantity = quantity;
         this.selected = selected;
     }
+
 
     public static ObservableList<CSReorder> productData() {
         ObservableList<CSReorder> list = FXCollections.observableArrayList();
@@ -77,6 +82,7 @@ public class CSReorder {
                 CheckBox productSelected = new CheckBox();
 
                 list.add(new CSReorder(siteOrderId, productId, productName, quantity, unit, status, desiredDate, selectedQuantity, productSelected));
+                //System.out.println("Added product " + productName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,23 +98,37 @@ public class CSReorder {
                 "FROM siteorders AS so " +
                 "JOIN orders AS o on so.order_id = o.id " +
                 "JOIN siteproducts AS sp ON o.product_id = sp.product_id " +
-                "JOIN sites as s ON sp.site_id = s.id " +
-                "WHERE so.status = 'Đang đặt lại';";
+                "JOIN sites as s ON sp.site_id = s.id WHERE so.status = 'Đang đặt lại';";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "")) {
+            //System.out.println("Connected to the database.");
+
+            try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+                //System.out.println("Executed query: " + sqlQuery);
+
+                while (resultSet.next()) {
+                    int siteId = resultSet.getInt("site_id");
+                    String siteName = resultSet.getString("name");
+                    int siteProductId = resultSet.getInt("product_id");
+                    int shipDate = resultSet.getInt("ship_date");
+                    int airDate = resultSet.getInt("air_date");
+                    String delivery1 = "Tàu";
+                    String delivery2 = "Máy bay";
+                    LocalDate today = LocalDate.now();
+                    String expectedDate1 = today.plusDays(shipDate).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    String expectedDate2 = today.plusDays(airDate).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                    int quantityInStock = resultSet.getInt("quantity_in_stock");
+
+                    TextField quantity1 = new TextField();
+                    TextField quantity2 = new TextField();
+                    CheckBox selected = new CheckBox();
 
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
-
-            while (resultSet.next()) {
-                int siteId = resultSet.getInt("site_id");
-                String siteName = resultSet.getString("name");
-                int siteProductId = resultSet.getInt("product_id");
-                int shipDate = resultSet.getInt("ship_date");
-                int airdate = resultSet.getInt("air_date");
-                int quantityInStock = resultSet.getInt("quantity_in_stock");
-
-                list.add(new CSReorder(siteId, siteName, siteProductId, shipDate, airdate, quantityInStock));
+                    list.add(new CSReorder(siteId, siteName, siteProductId, delivery1, expectedDate1, quantityInStock, quantity1, selected));
+                    list.add(new CSReorder(siteId, siteName, siteProductId, delivery2, expectedDate2, quantityInStock, quantity2, selected));
+                    //System.out.println("Added site: " + siteName);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,14 +137,6 @@ public class CSReorder {
         return list;
     }
 
-    public CSReorder(int siteId, String siteName, int siteProductId, int shipDate, int airDate, int quantityInStock) {
-        this.siteId = siteId;
-        this.siteName = siteName;
-        this.siteProductId = siteProductId;
-        this.shipDate = shipDate;
-        this.airDate = airDate;
-        this.quantityInStock = quantityInStock;
-    }
 
     public int getSiteOrderId() {
         return siteOrderId;
@@ -238,11 +250,11 @@ public class CSReorder {
         this.quantityInStock = quantityInStock;
     }
 
-    public int getQuantity() {
+    public TextField getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(TextField quantity) {
         this.quantity = quantity;
     }
 
