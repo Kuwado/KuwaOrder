@@ -59,7 +59,6 @@ public class MOBreadcrumbController extends BreadcrumbController {
             fxmlLoader.setController(mc);
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/makeOrder.css")).toExternalForm());
             stage.setTitle("KuwaOrder");
             stage.setScene(scene);
             stage.show();

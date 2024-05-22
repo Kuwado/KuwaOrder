@@ -362,7 +362,6 @@ public class MOOrderController extends MOController<MOChosenSite> {
 
         Scene scene = new Scene(pane);
         scene.getStylesheets().add(Objects.requireNonNull(MOOrderController.class.getResource("/css/styles.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(MOOrderController.class.getResource("/css/makeOrder.css")).toExternalForm());
         primaryStage.setScene(scene);
 
         // Đặt vị trí cho pop-up

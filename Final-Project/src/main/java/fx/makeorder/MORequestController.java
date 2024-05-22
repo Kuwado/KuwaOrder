@@ -115,6 +115,8 @@ public class MORequestController extends MOController<MOOrder> {
                     ArrayList<MOChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
                     if (siteProducts.isEmpty()) {
                         quickMakeOrderBtn.setDisable(true);
+                    } else {
+                        quickMakeOrderBtn.setDisable(false);
                     }
                 }
             }
