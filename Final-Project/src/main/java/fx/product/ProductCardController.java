@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.Product;
 
-import javax.swing.*;
 import java.util.Objects;
 
 public class ProductCardController {

@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="sidebar-btn" text="Bộ phận bán hàng">
+      <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="102.0" prefWidth="258.0" styleClass="sidebar" text="Bộ phận bán hàng" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -42,7 +42,7 @@
             </ImageView>
          </graphic>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
          <VBox.margin>
             <Insets top="425.0" />
