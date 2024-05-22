@@ -13,7 +13,7 @@ public class SuccessPopupController {
     private Label successLabel;
 
     // Thời gian trễ trước khi đóng popup (2 giây)
-    private static final int DELAY_SECONDS = 2;
+    private static final int DELAY_SECONDS = 1;
 
     @FXML
     public void initialize() {

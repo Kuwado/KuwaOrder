@@ -64,7 +64,7 @@ public class WHListController extends WHController<WHSiteOrder> {
     public void initialize() {
         setBreadcrumb(1, "/view/parts/breadcrumbs/warehousee.fxml");
         loadData();
-        number = 9;
+        number = 7;
         startTable(table, whSiteOrders);
     }
 
@@ -99,10 +99,6 @@ public class WHListController extends WHController<WHSiteOrder> {
         System.out.println("Trạng Thái: " + order.getTrangThai());
     }
 
-    @FXML
-    void viewAll(ActionEvent event) {
-        table.setItems(whSiteOrders);
-    }
 
     @Override
     public void insertToTable() {
@@ -124,17 +120,17 @@ public class WHListController extends WHController<WHSiteOrder> {
     private void runPopUp(String path, double width, double height) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         BorderPane pane = loader.load();
-
         // Lấy controller của cửa sổ pop-up
         WHDetailController controller = loader.getController();
 
+        controller.setWHListController(this);
         // Khởi tạo các đối tượng cần thiết dựa trên selectedOrder
         SiteOrder sod = siteOrderController.getSiteOrderById(selectedOrder.getId());
 
         // Kiểm tra nếu sod là null
         if (sod == null) {
             System.out.println("SiteOrder with id " + selectedOrder.getId() + " not found.");
-            return; // Hoặc xử lý lỗi tùy ý bạn
+            return;
         }
 
         Order ood = orderController.getOrderById(sod.getOrderId());
@@ -142,7 +138,7 @@ public class WHListController extends WHController<WHSiteOrder> {
         // Kiểm tra nếu ood là null
         if (ood == null) {
             System.out.println("Order with id " + sod.getOrderId() + " not found.");
-            return; // Hoặc xử lý lỗi tùy ý bạn
+            return;
         }
 
         Product prd = productController.getProductById(ood.getProductId());
@@ -150,7 +146,7 @@ public class WHListController extends WHController<WHSiteOrder> {
         // Kiểm tra nếu prd là null
         if (prd == null) {
             System.out.println("Product with id " + ood.getProductId() + " not found.");
-            return; // Hoặc xử lý lỗi tùy ý bạn
+            return;
         }
 
         // Truyền dữ liệu sang cửa sổ pop-up
@@ -197,9 +193,11 @@ public class WHListController extends WHController<WHSiteOrder> {
 
     public void refreshTable() {
         System.out.println("Refreshing table...");  // Debug message
-        whSiteOrders.clear();
         loadData();
-        table.setItems(whSiteOrders);  // Ensure table items are updated
+        number = 7;
+        startTable(table, whSiteOrders); // Ensure table items are updated
         table.refresh();
+
     }
+
 }

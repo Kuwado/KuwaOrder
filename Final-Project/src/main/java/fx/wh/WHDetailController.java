@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.StageStyle;
 import model.subsytem.SiteOrderSystem;
 import model.subsytem.StorageSystem;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.tabledata.WHSiteOrder;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -59,7 +61,6 @@ public class WHDetailController {
 
     private void handleMakeOrder() {
         // Xử lý sự kiện khi nhấn nút "Nhập Kho"
-        System.out.println("Nhập kho thành công!");
 
         // Thực hiện các hành động khác liên quan đến nhập kho
         StorageSystem storageSystem = new StorageSystem();
@@ -67,33 +68,48 @@ public class WHDetailController {
 
         // Cập nhật trạng thái của SiteOrder
         SiteOrderSystem siteOrderSystem = new SiteOrderSystem();
-        siteOrderSystem.updateStatus(siteOrderId, "Đã nhập kho");
+        String newStatus = "Đã nhập kho";
 
-        // Sau đó đóng cửa sổ popup
-        Stage stage = (Stage) makeOrderBtn.getScene().getWindow();
-        stage.close();
+        // Kiểm tra nếu trạng thái của đơn hàng đã là "Đã nhập kho"
+        // thì hiển thị thông báo và không tiến hành cập nhật
+        if (!status.getText().equals("Đã nhập kho")) {
+            siteOrderSystem.updateStatus(siteOrderId, newStatus);
+            // Sau đó đóng cửa sổ popup
+            Stage stage = (Stage) makeOrderBtn.getScene().getWindow();
+            stage.close();
 
-        // Làm mới bảng
-        refreshTableInListController();
+            WHSiteOrder.resetIdCounter();
+            // Cập nhật danh sách whSiteOrders trong WHListController
+            updateWHListControllerData();
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                showSuccessPopup();
-                timer.cancel(); // Hủy lịch trình sau khi hoàn thành
-            }
-        }, 2000);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    showSuccessPopup();
+                    timer.cancel(); // Hủy lịch trình sau khi hoàn thành
+                }
+            }, 1000);
+
+            System.out.println("Nhập kho thành công!");
+        } else {
+            // Hiển thị thông báo nếu đơn hàng đã nhập kho trước đó
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Thông báo");
+            alert.setHeaderText(null);
+            alert.setContentText("Đơn hàng đã nhập kho trước đó!");
+            alert.showAndWait();
+        }
     }
 
     // Thêm phương thức để làm mới bảng trong WHListController
-    private void refreshTableInListController() {
-        // Giả sử bạn có tham chiếu tới WHListController từ WHDetailController
+    private void updateWHListControllerData() {
         WHListController whListController = getWHListController();
         if (whListController != null) {
             whListController.refreshTable();
         }
     }
+
 
     private void showSuccessPopup() {
         Platform.runLater(() -> {
