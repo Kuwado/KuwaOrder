@@ -1,8 +1,7 @@
 package fx.wh;
 import fx.LoginController;
 import fx.MainController;
-import fx.breadcrumb.MOBreadcrumbController;
-import fx.warehouse.WHBreadcrumbController;
+import fx.breadcrumb.WHBreadcrumbController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,17 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import solution.Paginator;
-import solution.Transition;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public abstract class whController<T> {
+public abstract class WHController<T> {
     @FXML
     public HBox breadcrumb;
 
@@ -36,7 +32,7 @@ public abstract class whController<T> {
 
     public void setBreadcrumb(int number, String path) {
         WHBreadcrumbController.number = number;
-        WHBreadcrumbController moc = new WHBreadcrumbController();
+        fx.breadcrumb.WHBreadcrumbController moc = new WHBreadcrumbController();
         moc.loadBreadcrumb(breadcrumb, path);
     }
 

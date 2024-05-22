@@ -31,3 +31,11 @@
     -fx-text-fill: white;
     -fx-underline: true;
 }
+
+.vbox {
+    -fx-background-color: #a0d468; /* Màu xanh */
+    -fx-border-radius: 5px; /* Góc bo tròn cho vbox */
+    -fx-background-radius: 5px; /* Góc bo tròn cho màu nền */
+}
+
+

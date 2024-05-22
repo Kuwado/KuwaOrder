@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class whListController extends whController<WHSiteOrder> {
+public class WHListController extends WHController<WHSiteOrder> {
     private WHSiteOrder selectedOrder;
 
     @FXML
@@ -69,6 +69,7 @@ public class whListController extends whController<WHSiteOrder> {
     }
 
     private void loadData() {
+        whSiteOrders.clear();  // Clear the list before loading new data
         List<SiteOrder> orders = siteOrderController.getAllSiteOrders();
         for (SiteOrder order : orders) {
             Button button = new Button("Action");
@@ -125,12 +126,32 @@ public class whListController extends whController<WHSiteOrder> {
         BorderPane pane = loader.load();
 
         // Lấy controller của cửa sổ pop-up
-        whDetailController controller = loader.getController();
+        WHDetailController controller = loader.getController();
 
         // Khởi tạo các đối tượng cần thiết dựa trên selectedOrder
         SiteOrder sod = siteOrderController.getSiteOrderById(selectedOrder.getId());
+
+        // Kiểm tra nếu sod là null
+        if (sod == null) {
+            System.out.println("SiteOrder with id " + selectedOrder.getId() + " not found.");
+            return; // Hoặc xử lý lỗi tùy ý bạn
+        }
+
         Order ood = orderController.getOrderById(sod.getOrderId());
+
+        // Kiểm tra nếu ood là null
+        if (ood == null) {
+            System.out.println("Order with id " + sod.getOrderId() + " not found.");
+            return; // Hoặc xử lý lỗi tùy ý bạn
+        }
+
         Product prd = productController.getProductById(ood.getProductId());
+
+        // Kiểm tra nếu prd là null
+        if (prd == null) {
+            System.out.println("Product with id " + ood.getProductId() + " not found.");
+            return; // Hoặc xử lý lỗi tùy ý bạn
+        }
 
         // Truyền dữ liệu sang cửa sổ pop-up
         controller.setData(
@@ -142,8 +163,11 @@ public class whListController extends whController<WHSiteOrder> {
                 selectedOrder.getMaDonHang(),
                 selectedOrder.getPhuongThuc(),
                 String.valueOf(sod.getPrice()),
-                sod.getNote()
+                sod.getNote(),
+                prd.getId(),
+                selectedOrder.getId()
         );
+        controller.setWHListController(this);
 
         Stage primaryStage = new Stage();
         primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -168,5 +192,14 @@ public class whListController extends whController<WHSiteOrder> {
         primaryStage.setY(popupY);
 
         primaryStage.show();
+    }
+
+
+    public void refreshTable() {
+        System.out.println("Refreshing table...");  // Debug message
+        whSiteOrders.clear();
+        loadData();
+        table.setItems(whSiteOrders);  // Ensure table items are updated
+        table.refresh();
     }
 }
