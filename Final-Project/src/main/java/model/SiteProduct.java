@@ -1,5 +1,7 @@
 package model;
 
+import controller.ProductController;
+
 public class SiteProduct {
     private int id;
     private int siteId;
@@ -7,8 +9,10 @@ public class SiteProduct {
     private int quantity;
     private int soldQuantity;
     private double price;
+    private String productName;
 
     private Product product;
+    private String productPrice;
 
 
     public SiteProduct(Product product, double price, int quantity, int soldQuantity) {
@@ -16,6 +20,16 @@ public class SiteProduct {
         this.price = price;
         this.quantity = quantity;
         this.soldQuantity = soldQuantity;
+    }
+    private final ProductController productController = new ProductController();
+    public SiteProduct(SiteProduct siteProduct){
+        this.id = siteProduct.getId();
+        this.quantity = siteProduct.getQuantity();
+        this.soldQuantity = siteProduct.getSoldQuantity();
+        this.price = siteProduct.getPrice();
+        this.productPrice = String.format("%,d",Math.round(price));
+        this.productId = siteProduct.getProductId();
+        this.productName = productController.getProductById(siteProduct.getProductId()).getName();
     }
 
     public SiteProduct() {
@@ -52,6 +66,12 @@ public class SiteProduct {
 
     public double getPrice() {
         return price;
+    }
+    public String getProductName(){
+        return productName;
+    }
+    public String getProductPrice(){
+        return productPrice;
     }
 
     public Product getProduct() {
