@@ -14,8 +14,8 @@ public class NamDepTrai extends Application {
     public void start(Stage stage) throws IOException {
         MainController mc = new MainController();
         mc.setAvatarPath("/images/whUserAvartar.jpg");
-        mc.setSidebarPath("/view/parts/sidebar/warehouseManage.fxml");
-        mc.setContentPath("/view/content/wh/whList.fxml");
+        mc.setSidebarPath("/view/parts/sidebar/WarehouseManage.fxml");
+        mc.setContentPath("/view/content/wh/WHList.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);
         Scene scene = new Scene(fxmlLoader.load());

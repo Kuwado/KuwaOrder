@@ -114,7 +114,7 @@ public class WHDetailController {
     private void showSuccessPopup() {
         Platform.runLater(() -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popUp/successPopup.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popUp/WHSuccessPopup.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 stage.initStyle(StageStyle.UNDECORATED);
