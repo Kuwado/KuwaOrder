@@ -67,7 +67,7 @@
                         <Insets left="20.0" right="15.0" top="15.0" />
                      </VBox.margin>
                      <children>
-                        <Label text="Hai Nam ngon ngon" textFill="WHITE">
+                        <Label fx:id="name" text="Hai Nam ngon ngon" textFill="WHITE">
                            <styleClass>
                               <String fx:value="preview-card-title" />
                               <String fx:value="font-size-22" />
@@ -78,7 +78,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="preview-card">
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+                        <ImageView fx:id="image" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../images/whUserAvartar.jpg" />
                            </image>
@@ -168,14 +168,14 @@
                      <children>
                         <VBox fx:id="product1" alignment="TOP_CENTER" onMouseClicked="#chooseProd" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
-                                    <Image url="@../../images/whUserAvartar.jpg" />
+                                    <Image url="@../../images/avatar.jpg" />
                                  </image>
                               </ImageView>
                               <VBox alignment="CENTER" prefHeight="60.0">
                                  <children>
-                                    <Label prefHeight="50.0" text="Hai babababab dd">
+                                    <Label prefHeight="50.0" text="Product1">
                                        <styleClass>
                                           <String fx:value="text-wrap" />
                                           <String fx:value="cp-product-name" />
@@ -197,7 +197,7 @@
                      <children>
                         <VBox fx:id="product7" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage1" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -226,7 +226,7 @@
                      <children>
                         <VBox fx:id="product8" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage2" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -255,7 +255,7 @@
                      <children>
                         <VBox fx:id="product6" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage3" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -284,7 +284,7 @@
                      <children>
                         <VBox fx:id="product4" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage4" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -313,7 +313,7 @@
                      <children>
                         <VBox fx:id="product3" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage5" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -342,7 +342,7 @@
                      <children>
                         <VBox fx:id="product5" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage6" fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="90.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
@@ -369,16 +369,16 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="240.0" maxWidth="200.0" prefHeight="240.0" prefWidth="200.0" styleClass="product-card-item" GridPane.columnIndex="1">
                      <children>
-                        <VBox fx:id="product2" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                        <VBox fx:id="product2" alignment="TOP_CENTER" onMouseClicked="#chooseProd" prefHeight="200.0" prefWidth="100.0" styleClass="mini-card-product" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                            <children>
-                              <ImageView fx:id="productImage7" fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
+                              <ImageView fitHeight="120.0" fitWidth="120.0" focusTraversable="true" pickOnBounds="true" styleClass="card-image-product">
                                  <image>
                                     <Image url="@../../images/whUserAvartar.jpg" />
                                  </image>
                               </ImageView>
                               <VBox alignment="CENTER" prefHeight="60.0" styleClass="pc-name-area">
                                  <children>
-                                    <Label prefHeight="50.0" text="Hai babababab dd">
+                                    <Label prefHeight="50.0" text="Product2">
                                        <styleClass>
                                           <String fx:value="text-wrap" />
                                           <String fx:value="cp-product-name" />
