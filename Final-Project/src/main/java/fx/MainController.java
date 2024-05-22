@@ -1,17 +1,22 @@
 package fx;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import solution.Transition;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class MainController {
 
@@ -115,6 +120,20 @@ public class MainController {
             }
         });
     }
+
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
+        stage.setTitle("KuwaOrder");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
 }

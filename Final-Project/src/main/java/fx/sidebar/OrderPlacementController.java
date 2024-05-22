@@ -59,6 +59,13 @@ public class OrderPlacementController {
         changeUC(event, "/view/content/makeorder/MORequestList.fxml");
     }
 
+
+    @FXML
+    void cancelOrder(ActionEvent event) {
+        activeIndex = 4;
+        changeUC(event, "/view/content/sale/HandleCancelSiteOrder.fxml");
+    }
+
     private void changeUC(ActionEvent event, String path) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

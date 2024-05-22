@@ -175,7 +175,7 @@ public class VOsiteOrderListController {
         VOSiteOrder selectedOrder = table.getSelectionModel().getSelectedItem();
         if (selectedOrder != null) {
             selectedOrder.setStatus("Chờ lấy hàng");
-            siteOrderController.updateStatus(selectedOrder.getId(), "Chờ lấy hàng");
+            siteOrderController.updateStatus(selectedOrder.getSiteOrderID(), "Chờ lấy hàng");
             table.refresh();
         }
     }
@@ -184,8 +184,8 @@ public class VOsiteOrderListController {
     private void handleCancelOrder() {
         VOSiteOrder selectedOrder = table.getSelectionModel().getSelectedItem();
         if (selectedOrder != null) {
-            selectedOrder.setStatus("Đã hủy");
-            siteOrderController.updateStatus(selectedOrder.getId(), "Đã hủy");
+            selectedOrder.setStatus("Đang hủy");
+            siteOrderController.updateStatus(selectedOrder.getId(), "Đang hủy");
             table.refresh();
         }
     }

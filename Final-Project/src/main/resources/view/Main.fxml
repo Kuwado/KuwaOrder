@@ -116,7 +116,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button id="avatar-item-last" mnemonicParsing="false" styleClass="avatar-item" text="Đăng xuất">
+                              <Button id="avatar-item-last" mnemonicParsing="false" onAction="#logout" styleClass="avatar-item" text="Đăng xuất">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

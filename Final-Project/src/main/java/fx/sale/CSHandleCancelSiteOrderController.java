@@ -1,18 +1,26 @@
 package fx.sale;
 
+import fx.LoginController;
+import fx.MainController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.tabledata.CSCancelSiteOrderList;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CSHandleCancelSiteOrderController {
@@ -52,7 +60,7 @@ public class CSHandleCancelSiteOrderController {
     }
 
     @FXML
-    public void reorder(ActionEvent e) {
+    public void reorder(ActionEvent e) throws IOException {
         ObservableList<CSCancelSiteOrderList> items = cancelSiteOrderIdTable.getItems();
         List<Integer> reorderIds = new ArrayList<>();
         for (CSCancelSiteOrderList item : items) {
@@ -71,6 +79,21 @@ public class CSHandleCancelSiteOrderController {
             }
         }
         cancelSiteOrderIdTable.refresh();
+
+        Node source = (Node) e.getSource();
+        Stage stage2 = (Stage) source.getScene().getWindow();
+        stage2.close();
+        MainController mc = new MainController();
+        mc.setSidebarPath(LoginController.sidebarPath);
+        mc.setContentPath("/view/content/sale/Reorder1.fxml");
+        mc.setAvatarPath(LoginController.imagePath);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
+        fxmlLoader.setController(mc);
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
+        stage2.setTitle("Hello!");
+        stage2.setScene(scene);
+        stage2.show();
     }
 
     @FXML
