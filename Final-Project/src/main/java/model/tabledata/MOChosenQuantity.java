@@ -21,7 +21,6 @@ public class MOChosenQuantity {
         this.stt = true;
     }
 
-
     public MOChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice, double productPrice, int quantity) {
         this.siteId = siteId;
         this.chosenQuantity = chosenQuantity;
@@ -29,6 +28,16 @@ public class MOChosenQuantity {
         this.deliveryPrice = deliveryPrice;
         this.productPrice = productPrice;
         this.quantity = quantity;
+    }
+
+    public MOChosenQuantity(int siteId, int chosenQuantity, String deliveryType, double deliveryPrice, double productPrice, int quantity, boolean stt) {
+        this.siteId = siteId;
+        this.chosenQuantity = chosenQuantity;
+        this.deliveryType = deliveryType;
+        this.deliveryPrice = deliveryPrice;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.stt = true;
     }
 
     public int getSiteId() {
