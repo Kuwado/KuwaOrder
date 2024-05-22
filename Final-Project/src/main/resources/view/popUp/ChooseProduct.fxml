@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="700.0" prefWidth="1250.0" style="-fx-background-color: #1b1b32;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makerequest.ChooseProductController">
+<HBox prefHeight="700.0" prefWidth="1250.0" style="-fx-background-color: #1b1b32;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makerequest.MRChooseProductController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="400.0" style="-fx-background-color: #00ccff;">
          <children>
