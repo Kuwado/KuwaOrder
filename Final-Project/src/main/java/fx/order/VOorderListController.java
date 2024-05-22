@@ -3,6 +3,7 @@ package fx.order;
 import controller.OrderController;
 import controller.SiteOrderController;
 import controller.SiteProductController;
+import fx.breadcrumb.VOBreadcrumbController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class orderListController {
+public class VOorderListController {
 
     // Data Product
     Product product1 = new Product(1, "Tivi", "Tivi thì để sờ em chứ còn làm gì", "../images/products/1-tivi.jpg", "Điện máy");
@@ -167,8 +168,8 @@ public class orderListController {
     private final OrderController orderController = new OrderController();
     @FXML
     void initialize() {
-        OBreadcrumbController.number = 1;
-        OBreadcrumbController ob = new OBreadcrumbController();
+        VOBreadcrumbController.number = 1;
+        VOBreadcrumbController ob = new VOBreadcrumbController();
         ob.loadBreadcrumb(breadcrumb, "/view/parts/breadcrumbs/order.fxml");
         ArrayList<SiteOrder> siteOrders = siteOrderController.getAllSiteOrders();
         ArrayList<SiteProduct> siteProducts = new ArrayList<>();
@@ -191,14 +192,14 @@ public class orderListController {
 
     private void showOrderDetails(VOSiteOrder SiteOrder) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/orderDetail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/content/order/VOorderDetail.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Chi tiết đơn hàng");
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(table.getScene().getWindow());
             stage.setScene(new Scene(loader.load()));
 
-            OrderDetailController controller = loader.getController();
+            VOOrderDetailController controller = loader.getController();
             controller.setDialogStage(stage);
             controller.setOrder(SiteOrder);
 
