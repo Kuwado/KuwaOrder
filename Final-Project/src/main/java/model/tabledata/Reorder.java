@@ -18,10 +18,10 @@ public class Reorder {
     private String unit;
     private String status;
     private String desiredDate;
-    private TextField selectedQuantity;
+    private int selectedQuantity;
     private CheckBox productSelected;
 
-    public Reorder(int siteOrderId, int productId, String productName, int productQuantity, String unit, String status, String desiredDate, TextField selectedQuantity, CheckBox productSelected) {
+    public Reorder(int siteOrderId, int productId, String productName, int productQuantity, String unit, String status, String desiredDate, int selectedQuantity, CheckBox productSelected) {
         this.siteOrderId = siteOrderId;
         this.productId = productId;
         this.productName = productName;
@@ -31,6 +31,28 @@ public class Reorder {
         this.desiredDate = desiredDate;
         this.selectedQuantity = selectedQuantity;
         this.productSelected = productSelected;
+    }
+
+    private int siteId;
+    private String siteName;
+    private int siteProductId;
+    private String delivery;
+    private int shipDate;
+    private int airDate;
+    private String expectedDate;
+    private int quantityInStock;
+    private int quantity;
+    private CheckBox selected;
+
+    public Reorder(int siteId, String siteName, int siteProductId, String delivery, String expectedDate, int quantityInStock, int quantity, CheckBox selected) {
+        this.siteId = siteId;
+        this.siteName = siteName;
+        this.siteProductId = siteProductId;
+        this.delivery = delivery;
+        this.expectedDate = expectedDate;
+        this.quantityInStock = quantityInStock;
+        this.quantity = quantity;
+        this.selected = selected;
     }
 
     public static ObservableList<Reorder> productData() {
@@ -53,7 +75,7 @@ public class Reorder {
                 String unit = resultSet.getString("unit");
                 String desiredDate = resultSet.getString("desired_date");
                 String status = resultSet.getString("status");
-                TextField selectedQuantity = new TextField();
+                int selectedQuantity = 0;
                 CheckBox productSelected = new CheckBox();
 
                 list.add(new Reorder(siteOrderId, productId, productName, quantity, unit, status, desiredDate, selectedQuantity, productSelected));
@@ -65,6 +87,35 @@ public class Reorder {
         return list;
 
     }
+
+    public static ObservableList<Reorder> siteData() {
+        ObservableList<Reorder> list = FXCollections.observableArrayList();
+        String sqlQuery = "SELECT s.id, s.name, sp.product_id, s.ship_date, s.air_date, sp.quantity-sp.sold_quantity AS quantity_in_stock " +
+                "FROM sites AS s JOIN siteproducts AS sp ON s.id = sp.site_id;";
+
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+
+            while (resultSet.next()) {
+                int siteId = resultSet.getInt("id");
+                String sitename = resultSet.getString("name");
+                int siteProductId = resultSet.getInt("product_id");
+                int shipDate = resultSet.getInt("ship_date");
+                int airdate = resultSet.getInt("air_date");
+                int quantityInStock = resultSet.getInt("quantity_in_stock");
+
+                list.add(new Reorder());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
 
 
     public int getSiteOrderId() {
@@ -123,11 +174,11 @@ public class Reorder {
         this.desiredDate = desiredDate;
     }
 
-    public TextField getSelectedQuantity() {
+    public int getSelectedQuantity() {
         return selectedQuantity;
     }
 
-    public void setSelectedQuantity(TextField selectedQuantity) {
+    public void setSelectedQuantity(int selectedQuantity) {
         this.selectedQuantity = selectedQuantity;
     }
 
@@ -137,5 +188,85 @@ public class Reorder {
 
     public void setProductSelected(CheckBox productSelected) {
         this.productSelected = productSelected;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
+    }
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
+    public String getExpectedDate() {
+        return expectedDate;
+    }
+
+    public void setExpectedDate(String expectedDate) {
+        this.expectedDate = expectedDate;
+    }
+
+    public int getQuantityInStock() {
+        return quantityInStock;
+    }
+
+    public void setQuantityInStock(int quantityInStock) {
+        this.quantityInStock = quantityInStock;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public CheckBox getSelected() {
+        return selected;
+    }
+
+    public void setSelected(CheckBox selected) {
+        this.selected = selected;
+    }
+
+    public int getSiteProductId() {
+        return siteProductId;
+    }
+
+    public void setSiteProductId(int siteProductId) {
+        this.siteProductId = siteProductId;
+    }
+
+    public int getShipDate() {
+        return shipDate;
+    }
+
+    public void setShipDate(int shipDate) {
+        this.shipDate = shipDate;
+    }
+
+    public int getAirDate() {
+        return airDate;
+    }
+
+    public void setAirDate(int airDate) {
+        this.airDate = airDate;
     }
 }

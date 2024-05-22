@@ -47,6 +47,7 @@
                      <columns>
                         <TableColumn fx:id="siteIdColumn" prefWidth="163.0" text="Mã site" />
                         <TableColumn fx:id="siteNameColumn" prefWidth="408.0" text="Tên site" />
+                        <TableColumn fx:id="siteProductIdColumn" prefWidth="75.0" text="Mã sản phẩm" />
                         <TableColumn fx:id="deliveryColumn" prefWidth="178.0" text="Vận chuyển" />
                         <TableColumn fx:id="expectedDateColumn" minWidth="0.0" prefWidth="277.0" text="Ngày nhận dự kiến" />
                         <TableColumn fx:id="quantityInStockColumn" prefWidth="75.0" text="Số lượng trong kho" />

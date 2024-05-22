@@ -29,7 +29,7 @@ public class ReOrderController {
     public TableColumn<Reorder, String> deliveryColumn;
     public TableColumn<Reorder, String> expectedDateColumn;
     public TableColumn<Reorder, Integer> quantityInStockColumn;
-    public TableColumn<Reorder, Integer> quantityColumn;
+    public TableColumn<Reorder, TextField> quantityColumn;
     public TableColumn<Reorder, CheckBox> selectedColumn;
     public Button reorderButton;
 
