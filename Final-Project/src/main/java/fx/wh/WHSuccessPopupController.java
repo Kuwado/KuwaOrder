@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class SuccessPopupController {
+public class WHSuccessPopupController {
 
     @FXML
     private Label successLabel;
