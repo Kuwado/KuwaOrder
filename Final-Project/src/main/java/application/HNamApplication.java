@@ -19,7 +19,7 @@ public class HNamApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);
         Scene scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/siteOrder.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

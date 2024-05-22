@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../css/siteOrder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.order.VOsiteOrderListController">
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.order.VOsiteOrderListController">
     <children>
         <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
@@ -76,7 +76,6 @@
                               <Insets left="600.0" />
                            </VBox.margin>
                         </HBox>
-                                <Pagination fx:id="pagination" maxWidth="200.0" prefHeight="80.0" prefWidth="200.0" />
                             </children>
                         </VBox>
                     </children>
