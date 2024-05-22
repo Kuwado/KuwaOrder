@@ -59,7 +59,7 @@ public class LoginController {
                      contentPath = "/view/content/order/VOsiteOrder.fxml";
                      break;
                  case "sitent":
-                     sidebarPath = "/view/parts/sidebar/siteOrderList.fxml";
+                     sidebarPath = "/view/parts/sidebar/siteOrderList1.fxml";
                      contentPath = "/view/content/site/HandleSiteOrderForm.fxml";
                      break;
                  case "sale":

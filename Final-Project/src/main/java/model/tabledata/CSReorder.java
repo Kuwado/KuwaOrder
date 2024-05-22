@@ -135,7 +135,7 @@ public class CSReorder {
 
     public static ObservableList<CSReorder> siteData() {
         ObservableList<CSReorder> list = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT sp.site_id, s.name, o.product_id, s.ship_date, s.air_date, sp.quantity - sp.sold_quantity as quantity_in_stock " +
+        String sqlQuery = "SELECT sp.site_id, s.name, o.product_id, s.ship_date, s.air_date, sp.quantity as quantity_in_stock " +
                 "FROM siteorders AS so " +
                 "JOIN orders AS o on so.order_id = o.id " +
                 "JOIN siteproducts AS sp ON o.product_id = sp.product_id " +

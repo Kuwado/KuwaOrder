@@ -80,23 +80,31 @@ public class CSReorderController {
     private void loadSiteTableData() {
         Integer selectedProductId = productIdComboBox.getValue();
 
-        if(selectedProductId == null) {
+        if (selectedProductId == null) {
             sitesTable.setItems(FXCollections.observableArrayList());
             return;
         }
 
         ObservableList<CSReorder> allSites = CSReorder.siteData();
-        //System.out.println("Chạy được tới đây nè" + allSites);
         ObservableList<CSReorder> filteredSites = FXCollections.observableArrayList();
+        Set<Integer> addedSiteIds = new HashSet<>();
+
+        int cnt = 0;
 
         for (CSReorder site : allSites) {
-            if (site.getSiteProductId() == selectedProductId) {
+            if (site.getSiteProductId() == selectedProductId && !addedSiteIds.contains(site.getSiteId())) {
                 filteredSites.add(site);
+                if(++cnt == 1) continue;
+                else {
+                    addedSiteIds.add(site.getSiteId());
+                    cnt = 0;
+                }
             }
         }
 
         sitesTable.setItems(filteredSites);
     }
+
 
     private void loadProductTableData() {
         Integer selectedProductId = productIdComboBox.getValue();
@@ -174,7 +182,10 @@ public class CSReorderController {
         System.out.println("quantity = " + quantity);
 
         if(quantity != Integer.parseInt(sumProduct.getText())) {
-            System.out.println("Vui lòng chọn số lượng phù hợp");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Thông báo");
+            alert.setContentText("Vui lòng chọn đúng số lượng cần đặt lại");
+            alert.showAndWait();
             return;
         }
 
@@ -184,8 +195,19 @@ public class CSReorderController {
             if (quantityText != null && !quantityText.isEmpty()) {
                 try {
                     int qtt = Integer.parseInt(quantityText);
+                    if(qtt > site.getQuantityInStock()) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Không đủ số lượng");
+                        alert.setContentText("Vui lòng nhập số lượng nhỏ hơn hoặc bằng số lượng đang có trong kho");
+                        alert.showAndWait();
+                        return;
+                    }
                     CSReorder.reorder(CSReorder.getOrderId(tmp.getSiteOrderId()), site.getSiteId(), quantity, site.getDelivery());
                     CSCancelSiteOrderList.updateStatus(tmp.getSiteOrderId(), "Đã đặt lại");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Thông báo");
+                    alert.setContentText("Đặt lại thành công");
+                    alert.showAndWait();
                     loadProductTableData();
                     loadProductIdComboBoxData();
                 } catch (NumberFormatException e) {

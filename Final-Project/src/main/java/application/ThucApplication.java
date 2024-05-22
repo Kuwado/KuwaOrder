@@ -17,8 +17,8 @@ public class ThucApplication extends Application {
         MainController mc = new MainController();
         mc.setSidebarPath("/view/parts/sidebar/OrderPlacement.fxml");
         //mc.setContentPath("/view/content/site/HandleSiteOrderForm.fxml");
-        mc.setContentPath("/view/content/sale/Reorder1.fxml");
-        //mc.setContentPath("/view/content/sale/HandleCancelSiteOrder.fxml");
+        //mc.setContentPath("/view/content/sale/Reorder1.fxml");
+        mc.setContentPath("/view/content/sale/HandleCancelSiteOrder.fxml");
         mc.setAvatarPath("/images/thuc.jpg");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
         fxmlLoader.setController(mc);
