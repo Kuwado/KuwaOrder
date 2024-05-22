@@ -48,7 +48,36 @@ public class ReOrderController {
 
         loadProductIdComboBoxData();
         productIdComboBox.setOnAction(e -> loadProductTableData());
+
         loadProductTableData();
+
+
+        System.out.println(Reorder.siteData());
+
+
+
+
+        loadSiteTableData();
+
+    }
+
+    private class ReorderSiteList {
+
+    }
+
+    private void loadSiteTableData() {
+        Integer selectedProductId = productIdComboBox.getValue();
+
+        if(selectedProductId == null) {
+            sitesTable.setItems(FXCollections.observableArrayList());
+            return;
+        }
+
+        ObservableList<Reorder> allSites = Reorder.siteData();
+        ObservableList<Reorder> filteredSites = FXCollections.observableArrayList();
+
+
+
     }
 
     private void loadProductTableData() {

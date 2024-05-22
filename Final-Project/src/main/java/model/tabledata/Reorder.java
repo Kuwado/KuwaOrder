@@ -90,8 +90,12 @@ public class Reorder {
 
     public static ObservableList<Reorder> siteData() {
         ObservableList<Reorder> list = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT s.id, s.name, sp.product_id, s.ship_date, s.air_date, sp.quantity-sp.sold_quantity AS quantity_in_stock " +
-                "FROM sites AS s JOIN siteproducts AS sp ON s.id = sp.site_id;";
+        String sqlQuery = "SELECT sp.site_id, s.name, o.product_id, s.ship_date, s.air_date, sp.quantity - sp.sold_quantity as quantity_in_stock " +
+                "FROM siteorders AS so " +
+                "JOIN orders AS o on so.order_id = o.id " +
+                "JOIN siteproducts AS sp ON o.product_id = sp.product_id " +
+                "JOIN sites as s ON sp.site_id = s.id " +
+                "WHERE so.status = 'Đang đặt lại';";
 
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kuwaorder", "root", "");
@@ -99,14 +103,14 @@ public class Reorder {
              ResultSet resultSet = statement.executeQuery(sqlQuery)) {
 
             while (resultSet.next()) {
-                int siteId = resultSet.getInt("id");
-                String sitename = resultSet.getString("name");
+                int siteId = resultSet.getInt("site_id");
+                String siteName = resultSet.getString("name");
                 int siteProductId = resultSet.getInt("product_id");
                 int shipDate = resultSet.getInt("ship_date");
                 int airdate = resultSet.getInt("air_date");
                 int quantityInStock = resultSet.getInt("quantity_in_stock");
 
-                list.add(new Reorder());
+                list.add(new Reorder(siteId, siteName, siteProductId, shipDate, airdate, quantityInStock));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -115,8 +119,14 @@ public class Reorder {
         return list;
     }
 
-
-
+    public Reorder(int siteId, String siteName, int siteProductId, int shipDate, int airDate, int quantityInStock) {
+        this.siteId = siteId;
+        this.siteName = siteName;
+        this.siteProductId = siteProductId;
+        this.shipDate = shipDate;
+        this.airDate = airDate;
+        this.quantityInStock = quantityInStock;
+    }
 
     public int getSiteOrderId() {
         return siteOrderId;
