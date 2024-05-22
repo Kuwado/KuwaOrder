@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -27,9 +26,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MRChooseProductController {
-
-    @FXML
-    private Button actionBtn;
 
     @FXML
     private DatePicker date;
@@ -51,12 +47,6 @@ public class MRChooseProductController {
 
     @FXML
     private TextField quantityInput;
-
-    @FXML
-    private Button searchBtn;
-
-    @FXML
-    private TextField searchInput;
 
     @FXML
     void makeOrder(ActionEvent event) {

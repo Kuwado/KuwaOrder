@@ -15,14 +15,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Request;
 import model.tabledata.MROrder;
-import model.Product;
 import model.Order;
 import solution.DateConverter;
 
@@ -31,9 +29,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MRRequestController extends MRMOController<MROrder> {
-
-    @FXML
-    private HBox breadcrumb;
 
     @FXML
     private TableColumn<MROrder, String> desired_date;
@@ -57,12 +52,6 @@ public class MRRequestController extends MRMOController<MROrder> {
     private Label orderUnit;
 
     @FXML
-    private AnchorPane previewCard;
-
-    @FXML
-    private VBox previewContent;
-
-    @FXML
     private TableColumn<MROrder, Integer> productID;
 
     @FXML
@@ -70,12 +59,6 @@ public class MRRequestController extends MRMOController<MROrder> {
 
     @FXML
     private TableColumn<MROrder, Integer> quantity;
-
-    @FXML
-    private Button chooseProductBtn;
-
-    @FXML
-    private Button makeOrderBtn;
 
     @FXML
     private TableView<MROrder> table;
