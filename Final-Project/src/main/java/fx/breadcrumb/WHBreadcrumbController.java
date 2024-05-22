@@ -1,4 +1,4 @@
-package fx.warehouse;
+package fx.breadcrumb;
 
 import fx.breadcrumb.BreadcrumbController;
 import javafx.fxml.FXML;

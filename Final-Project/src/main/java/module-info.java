@@ -17,7 +17,6 @@ module application {
     // opens
     opens fx to javafx.fxml;
     opens fx.wh to javafx.fxml;
-    opens fx.warehouse to javafx.fxml;
     opens fx.order to javafx.fxml;
     opens fx.makeorder to javafx.fxml;
     opens fx.site to javafx.base, javafx.fxml;
