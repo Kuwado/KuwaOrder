@@ -11,6 +11,7 @@ import java.sql.*;
 
 public class Reorder {
 
+    private int siteOrderId;
     private int productId;
     private String productName;
     private int productQuantity;
@@ -18,8 +19,10 @@ public class Reorder {
     private String status;
     private String desiredDate;
     private TextField selectedQuantity;
+    private CheckBox productSelected;
 
-    public Reorder(int productId, String productName, int productQuantity, String unit, String status, String desiredDate, TextField selectedQuantity) {
+    public Reorder(int siteOrderId, int productId, String productName, int productQuantity, String unit, String status, String desiredDate, TextField selectedQuantity, CheckBox productSelected) {
+        this.siteOrderId = siteOrderId;
         this.productId = productId;
         this.productName = productName;
         this.productQuantity = productQuantity;
@@ -27,11 +30,12 @@ public class Reorder {
         this.status = status;
         this.desiredDate = desiredDate;
         this.selectedQuantity = selectedQuantity;
+        this.productSelected = productSelected;
     }
 
     public static ObservableList<Reorder> productData() {
         ObservableList<Reorder> list = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT p.id, p.name, so.quantity, o.unit, o.desired_date, so.status " +
+        String sqlQuery = "SELECT so.id AS siteOrderId, p.id, p.name, so.quantity, o.unit, o.desired_date, so.status " +
                 "FROM products AS p " +
                 "JOIN orders AS o ON p.id = o.product_id " +
                 "JOIN siteorders AS so ON so.order_id = o.id " +
@@ -42,6 +46,7 @@ public class Reorder {
              ResultSet resultSet = statement.executeQuery(sqlQuery)) {
 
             while (resultSet.next()) {
+                int siteOrderId = resultSet.getInt("siteOrderId");
                 int productId = resultSet.getInt("id");
                 String productName = resultSet.getString("name");
                 int quantity = resultSet.getInt("quantity");
@@ -49,9 +54,9 @@ public class Reorder {
                 String desiredDate = resultSet.getString("desired_date");
                 String status = resultSet.getString("status");
                 TextField selectedQuantity = new TextField();
+                CheckBox productSelected = new CheckBox();
 
-
-                list.add(new Reorder(productId, productName, quantity, unit, status, desiredDate, selectedQuantity));
+                list.add(new Reorder(siteOrderId, productId, productName, quantity, unit, status, desiredDate, selectedQuantity, productSelected));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,14 +67,13 @@ public class Reorder {
     }
 
 
+    public int getSiteOrderId() {
+        return siteOrderId;
+    }
 
-
-
-
-
-
-
-
+    public void setSiteOrderId(int siteOrderId) {
+        this.siteOrderId = siteOrderId;
+    }
 
     public int getProductId() {
         return productId;
@@ -125,5 +129,13 @@ public class Reorder {
 
     public void setSelectedQuantity(TextField selectedQuantity) {
         this.selectedQuantity = selectedQuantity;
+    }
+
+    public CheckBox getProductSelected() {
+        return productSelected;
+    }
+
+    public void setProductSelected(CheckBox productSelected) {
+        this.productSelected = productSelected;
     }
 }
