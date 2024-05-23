@@ -95,7 +95,7 @@
             </VBox>
             <AnchorPane fx:id="previewCard" layoutX="656.0" layoutY="4.0" styleClass="preview-card-area" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <VBox fx:id="previewContent" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: #00ccff;" styleClass="preview-card" AnchorPane.topAnchor="150.0">
+                  <VBox fx:id="previewContent" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: #00ccff;" AnchorPane.topAnchor="150.0">
                      <children>
                         <HBox alignment="CENTER" styleClass="preview-card-name">
                            <VBox.margin>
@@ -171,6 +171,10 @@
                            </children>
                         </HBox>
                      </children>
+                     <styleClass>
+                        <String fx:value="preview-card" />
+                        <String fx:value="shadow-card" />
+                     </styleClass>
                   </VBox>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="90.0">
                      <image>

@@ -2,11 +2,14 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" styleClass="sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sidebar.OrderPlacementController">
+<VBox minHeight="700.0" minWidth="240.0" prefHeight="700.0" prefWidth="240.0" style="-fx-background-color: black;" styleClass="sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.sidebar.OrderPlacementController">
    <children>
       <Button fx:id="btn1" mnemonicParsing="false" onAction="#backHome" styleClass="sidebar-btn" text="Trang chủ " VBox.vgrow="ALWAYS">
          <graphic>
@@ -68,5 +71,23 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <HBox prefHeight="400.0" prefWidth="240.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="240.0">
+               <children>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/choices.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="BP đặt hàng quốc tế" textFill="#00ccff">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </VBox>
