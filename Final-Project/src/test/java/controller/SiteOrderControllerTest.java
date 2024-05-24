@@ -28,7 +28,6 @@ class SiteOrderControllerTest {
             assertEquals(expected.getPrice(), actual.getPrice(), "Giá không khớp: Expected=" + expected.getPrice() + ", Actual=" + actual.getPrice());
             assertEquals(expected.getStatus(), actual.getStatus(), "Trạng thái không khớp: Expected=" + expected.getStatus() + ", Actual=" + actual.getStatus());
             assertEquals(expected.getNote(), actual.getNote(), "Ghi chú không khớp: Expected=" + expected.getNote() + ", Actual=" + actual.getNote());
-
         }
     }
 
