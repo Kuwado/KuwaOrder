@@ -1,0 +1,12 @@
+INDEX VERSION 1.134+C:\Users\JULLER\ITSS\2023.2-147730-02\Homework01\20215054-LuuVietHoan\.metadata\.plugins\org.eclipse.jdt.core
+919507985.index
+86142894.index
+692254555.index
+51614014.index
+1865797976.index
+2217837514.index
+2209383983.index
+2152528950.index
+1696264553.index
+3730607596.index
+1104365379.index

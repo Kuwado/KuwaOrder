@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.order.VOorderListController">
+    <children>
+        <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+            <children>
+                <VBox alignment="TOP_CENTER" layoutX="291.0" layoutY="20.0" prefHeight="580.0" prefWidth="800.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+                            <children>
+                                <HBox alignment="CENTER" maxHeight="40.0" prefHeight="40.0" prefWidth="340.0" styleClass="search-bar">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/icons/magnifying-glass.png" />
+                                            </image>
+                                        </ImageView>
+                                        <TextField fx:id="searchField" prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên yêu cầu" styleClass="search-input" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <padding>
+                                <Insets left="50.0" />
+                            </padding>
+                        </HBox>
+                        <TableView fx:id="table" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1200.0" styleClass="tb">
+                            <columns>
+                                <TableColumn fx:id="id" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" styleClass="tb-col-first" text="STT" />
+                                <TableColumn fx:id="productName" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" styleClass="tb-col" text="Tên sản phẩm" />
+                                <TableColumn fx:id="siteName" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" styleClass="tb-col" text="Tên site" />
+                                <TableColumn fx:id="quantity" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" styleClass="tb-col" text="Số lượng" />
+                                <TableColumn fx:id="unit" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" styleClass="tb-col" text="Đơn vị" />
+                                <TableColumn fx:id="productPrice" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" styleClass="tb-col" text="Giá sản phẩm" />
+                                <TableColumn fx:id="deliveryType" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="tb-col" text="Hình thức vận chuyển" />
+                                <TableColumn fx:id="deliveryPrice" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" styleClass="tb-col" text="Giá vận chuyển" />
+                                <TableColumn fx:id="status" maxWidth="155.0" minWidth="155.0" prefWidth="155.0" styleClass="tb-col" text="Trạng thái" />
+                            </columns>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                        </TableView>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
