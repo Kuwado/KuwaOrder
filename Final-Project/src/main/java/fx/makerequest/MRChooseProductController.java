@@ -146,7 +146,7 @@ public class MRChooseProductController {
                 gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
                 gridPane.setMaxHeight(Region.USE_PREF_SIZE);
 
-                GridPane.setMargin(anchorPane, new Insets(10));
+                //GridPane.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
