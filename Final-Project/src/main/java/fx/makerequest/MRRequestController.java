@@ -172,6 +172,10 @@ public class MRRequestController extends MRMOController<MROrder> {
             Order od = new Order(o.getProductId(), o.getQuantity(), DateConverter.convertDateFormat2(o.getDesiredDate()), o.getNote(), request.getId());
             orderController.insert(od);
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Yêu cầu đặt hàng tạo thành công!");
+        alert.showAndWait();
 
         orders = new ArrayList<>();
 
