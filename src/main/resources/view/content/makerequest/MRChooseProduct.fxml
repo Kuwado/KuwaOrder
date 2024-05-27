@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="700.0" prefWidth="1250.0" style="-fx-background-color: #1b1b32;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.makerequest.MRChooseProductController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="400.0" style="-fx-background-color: #00ccff;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="80.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="173.0" text="Products" textFill="#1b337f">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label text="Picker" textFill="#1b1b32">
+                     <font>
+                        <Font name="Cambria" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxWidth="360.0" prefHeight="65.0" prefWidth="360.0">
+               <children>
+                  <TextField fx:id="searchInput" prefHeight="40.0" prefWidth="244.0" promptText="Bạn cần tìm gì?" styleClass="transparent">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="cp-search-btn" text="Tìm" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <styleClass>
+                  <String fx:value="cp-search-box" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </HBox>
+            <VBox fx:id="previewContent" maxWidth="320.0" prefHeight="430.0" prefWidth="320.0" style="-fx-background-color: #1b337f;" styleClass="cp-content">
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" styleClass="cp-content-name">
+                     <VBox.margin>
+                        <Insets left="20.0" right="15.0" top="15.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label fx:id="name" text="Hai Nam ngon ngon" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="preview-card-title" />
+                              <String fx:value="font-size-22" />
+                              <String fx:value="text-fill-white" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="image" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../images/whUserAvartar.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="text-fill-white" text="Số lượng: ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="quantityInput" prefHeight="42.0" prefWidth="180.0" promptText="Số lượng cần đặt" styleClass="cp-number-input">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="97.0" styleClass="text-fill-white" text="Ngày nhận: ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Label>
+                        <DatePicker fx:id="date" prefHeight="42.0" prefWidth="163.0" styleClass="cp-date">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></DatePicker>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="noteInput" prefHeight="60.0" prefWidth="271.0" promptText="Ghi chú (nếu có )" styleClass="cp-note">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="10.0" />
+                           </HBox.margin></TextArea>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin></HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="actionBtn" mnemonicParsing="false" onAction="#makeOrder" text="Thêm đơn đặt">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="action-button" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#back" styleClass="quick-button" text="Quay lại">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ScrollPane maxHeight="647.0" prefHeight="650.0" prefWidth="820.0" styleClass="list-product">
+         <content>
+            <GridPane fx:id="gridPane" prefHeight="720.0" prefWidth="800.0" styleClass="cp-grid">
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </content>
+         <padding>
+            <Insets bottom="1.0" top="1.0" />
+         </padding>
+         <HBox.margin>
+            <Insets bottom="24.0" left="20.0" top="25.0" />
+         </HBox.margin>
+      </ScrollPane>
+   </children>
+</HBox>

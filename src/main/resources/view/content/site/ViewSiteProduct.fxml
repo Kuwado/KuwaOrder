@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../css/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.site.ViewSiteProductController">
+    <children>
+        <HBox fx:id="breadcrumb" alignment="CENTER_LEFT" styleClass="breadcrumb" />
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1260.0">
+            <children>
+                <VBox alignment="TOP_CENTER" layoutX="287.0" layoutY="20.0" prefHeight="580.0" prefWidth="700.0" styleClass="table-area" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="273.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+                            <children>
+                                <HBox alignment="CENTER" maxHeight="40.0" prefHeight="40.0" prefWidth="340.0" styleClass="search-bar">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/icons/magnifying-glass.png" />
+                                            </image>
+                                        </ImageView>
+                                        <TextField fx:id="searchField" prefHeight="40.0" prefWidth="300.0" promptText="Nhập tên sản phẩm" styleClass="search-input" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <padding>
+                                <Insets left="50.0" />
+                            </padding>
+                        </HBox>
+                        <TableView fx:id="table" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="639.0" styleClass="tb">
+                            <columns>
+                                <TableColumn fx:id="id" maxWidth="118.0" minWidth="31.60107421875" prefWidth="60.0" styleClass="tb-col-first" text="STT" />
+                                <TableColumn fx:id="productName" maxWidth="244.80007934570312" minWidth="62.265625" prefWidth="139.25634765625" styleClass="tb-col" text="Tên sản phẩm" />
+                        <TableColumn fx:id="productID" maxWidth="244.80007934570312" minWidth="62.265625" prefWidth="144.74359130859375" styleClass="tb-col" text="ID Sản phẩm" />
+                                <TableColumn fx:id="quantity" maxWidth="284.734375" minWidth="36.0" prefWidth="82.7574462890625" styleClass="tb-col" text="Số lượng" />
+                                <TableColumn fx:id="soldQuantity" maxWidth="370.49969482421875" minWidth="29.754638671875" prefWidth="97.5057373046875" styleClass="tb-col" text="Số lượng bán" />
+                        <TableColumn fx:id="productPrice" maxWidth="370.49969482421875" minWidth="29.754638671875" prefWidth="160.49420166015625" styleClass="tb-col" text="Giá sản phẩm" />
+                            </columns>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </TableView>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

@@ -1,0 +1,376 @@
+package fx.makeorder;
+
+import controller.ProductController;
+import controller.SiteController;
+import controller.SiteProductController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import model.*;
+import model.tabledata.MOChosenQuantity;
+import model.tabledata.MOChosenSite;
+import model.SiteProduct;
+import solution.DateConverter;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
+
+public class MOOrderController extends MOController<MOChosenSite> {
+    @FXML
+    private TableView<MOChosenSite> table;
+
+    @FXML
+    private TableColumn<MOChosenSite, Integer> id;
+
+    @FXML
+    private TableColumn<MOChosenSite, Integer> siteQuantity;
+
+    @FXML
+    private TableColumn<MOChosenSite, String> unit;
+
+    @FXML
+    private TableColumn<MOChosenSite, Integer> shipDate;
+
+    @FXML
+    private TableColumn<MOChosenSite, Integer> airDate;
+
+    @FXML
+    private TableColumn<MOChosenSite, String> numberInput;
+
+    @FXML
+    private Label productName;
+
+    @FXML
+    private Label siteNameCard;
+
+    @FXML
+    private Label soldQuantity;
+
+    @FXML
+    private Label orderUnit;
+
+    @FXML
+    private Button shipBtn;
+
+    @FXML
+    private Button airBtn;
+
+    @FXML
+    private TextField cardNumberInput;
+
+    @FXML
+    private Label airPrice;
+
+    @FXML
+    private Label shipPrice;
+
+    @FXML
+    private Label slcm;
+
+    @FXML
+    private Label slcc;
+
+    @FXML
+    private Button makeOrderBtn;
+
+    @FXML
+    void viewAll(ActionEvent event) {
+        viewAllTable(table, chosenSites);
+    }
+
+    private static Order order;
+    private final SiteController siteController = new SiteController();
+    private final ProductController productController = new ProductController();
+    private final SiteProductController siteProductController = new SiteProductController();
+    private ArrayList<MOChosenQuantity> chosenQuantities = new ArrayList<>();
+    private ObservableList<MOChosenSite> chosenSites = FXCollections.observableArrayList();
+    private int needQuantity = order.getQuantity();
+    private boolean sttQuantity;
+    private int date = DateConverter.roundedDaysDifferenceFromToday(order.getDesiredDate());
+
+    @FXML
+    void initialize() {
+
+        // Load dữ liệu
+        ArrayList<MOChosenQuantity> siteProducts = siteProductController.getSiteToMakeOrder(order.getProductId(), date);
+        ArrayList<Site> sites = siteProductController.getSitesFromSiteProduct(order.getProductId());
+        Product product = productController.getProductById(order.getProductId());
+
+        // Thêm input vào data table
+        for (MOChosenQuantity sp : siteProducts) {
+            TextField tf = new TextField();
+            tf.getStyleClass().add("number-input");
+            Site site = siteController.getSiteById(sp.getSiteId());
+            chosenSites.add(new MOChosenSite(order, product, site, sp, tf));
+        }
+
+        // Set breadcrumbs
+        setBreadcrumb(4, "/view/parts/breadcrumbs/MakeOrder.fxml");
+
+        // Table
+        number = 8;
+        startTable(table, chosenSites);
+
+        // Nếu không có site phù hợp -> ẩn nút tạo đơn
+        if (siteProducts.isEmpty()) {
+            makeOrderBtn.setDisable(true);
+        }
+
+        // Preview card
+        cardNumberInput.setEditable(false);
+        slcm.setText(String.valueOf(order.getQuantity()));
+        slcc.setText(String.valueOf(order.getQuantity()));
+        productName.setText(productController.getProductById(order.getProductId()).getName());
+        insertDataToChosenQuantities();
+        makeAppearPreviewCard(table);
+
+        // Reset stt
+        MOChosenSite.setIdCounter(1);
+    }
+
+    public static void setOrder(Order order) {
+        MOOrderController.order = order;
+    }
+
+    @Override
+    public void insertToTable(ObservableList<MOChosenSite> css) {
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        siteQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        shipDate.setCellValueFactory(new PropertyValueFactory<>("shipDate"));
+        airDate.setCellValueFactory(new PropertyValueFactory<>("airDate"));
+        numberInput.setCellValueFactory(new PropertyValueFactory<>("action"));
+        table.setItems(css);
+    }
+
+    private void addActiveClass(Button button, String name) {
+        if (!button.getStyleClass().contains(name)) {
+            button.getStyleClass().add(name);
+        }
+    }
+
+    @Override
+    public void insertToPreviewCard(MOChosenSite chosenSite) {
+        Site site = chosenSite.getSite();
+        Product product = chosenSite.getProduct();
+        SiteProduct siteProduct = siteProductController.getSiteproductFromProductAndSite(product.getId(), site.getId());
+        siteNameCard.setText(site.getName());
+        soldQuantity.setText(String.valueOf(siteProduct.getSoldQuantity()));
+        airPrice.setText(String.format("%,d", Math.round(site.getAirPrice())));
+        shipPrice.setText(String.format("%,d", Math.round(site.getShipPrice())));
+        orderUnit.setText(order.getUnit());
+        cardNumberInput.setText(chosenSite.getAction().getText());
+        // Setup button delivery khi chọn
+        addActiveClass(shipBtn, "option-btn");
+        shipBtn.getStyleClass().remove("hidden-option-btn");
+        shipBtn.getStyleClass().remove("option-btn-active");
+        addActiveClass(airBtn, "option-btn");
+        airBtn.getStyleClass().remove("hidden-option-btn");
+        airBtn.getStyleClass().remove("option-btn-active");
+        // Check điều kiện các button
+        if (chosenSite.getDeliveryStt() != null && chosenSite.getDeliveryStt().equals("Đường thủy")) {
+            addActiveClass(shipBtn, "option-btn-active");
+            airBtn.getStyleClass().remove("option-btn-active");
+        }
+        else if (chosenSite.getDeliveryStt() != null && chosenSite.getDeliveryStt().equals("Hàng không")) {
+            addActiveClass(airBtn, "option-btn-active");
+            shipBtn.getStyleClass().remove("option-btn-active");
+        }
+
+        if (chosenSite.getShipDate() > date) {
+            shipBtn.getStyleClass().remove("option-btn");
+            addActiveClass(shipBtn, "hidden-option-btn");
+        } else {
+            //Gán sự kiện nhấn cho nút Ship
+            shipBtn.setOnAction(event -> {
+                addActiveClass(shipBtn, "option-btn-active");
+                airBtn.getStyleClass().remove("option-btn-active");
+                String shipDeli = "Đường thủy";
+                chosenSite.setDeliveryStt(shipDeli);
+                updateChosenQuantities(new MOChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), shipDeli, chosenSite.getSite().getShipPrice()));
+            });
+        }
+        if (chosenSite.getAirDate() > date ) {
+            airBtn.getStyleClass().remove("option-btn");
+            addActiveClass(airBtn, "hidden-option-btn");
+        } else {
+            // Gán sự kiện nhấn cho nút Air
+            airBtn.setOnAction(event -> {
+                addActiveClass(airBtn, "option-btn-active");
+                shipBtn.getStyleClass().remove("option-btn-active");
+                String airDeli = "Hàng không";
+                chosenSite.setDeliveryStt(airDeli);
+                updateChosenQuantities(new MOChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), airDeli, chosenSite.getSite().getAirPrice()));
+            });
+        }
+    }
+
+    private void insertDataToChosenQuantities() {
+        for (MOChosenSite chosenSite : chosenSites) {
+            chosenSite.getAction().textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*")) {
+                    chosenSite.getAction().setText(newValue.replaceAll("[^\\d]", ""));
+                }
+
+                if (checkQuantitySite(chosenSite)) {
+                    cardNumberInput.setText(chosenSite.getAction().getText());
+                    updateChosenQuantities(new MOChosenQuantity(chosenSite.getSite().getId(), changeFromTextIntoInteger(chosenSite), chosenSite.getDeliveryStt(), 50));
+                    if (!sttQuantity) {
+                        chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
+                    }
+                    slcc.setText(String.valueOf(needQuantity));
+                } else {
+                    quantityError2();
+                    chosenSite.getAction().deleteText(chosenSite.getAction().getLength() - 1, chosenSite.getAction().getLength());
+                }
+            });
+        }
+    }
+
+    private int changeFromTextIntoInteger(MOChosenSite chosenSite) {
+        String text = chosenSite.getAction().getText(); // Trim để loại bỏ khoảng trắng
+        if (text.isEmpty()) {
+            return 0;
+        } else
+            return Integer.parseInt(text);
+    }
+
+    private boolean checkQuantitySite(MOChosenSite chosenSite) {
+        int quan = changeFromTextIntoInteger(chosenSite);
+        if (quan > chosenSite.getQuantity()) {
+            return false;
+        } else
+            return true;
+    }
+
+    private void updateChosenQuantities(MOChosenQuantity chosenQuantity) {
+        Optional<MOChosenQuantity> existingCq = chosenQuantities.stream()
+                .filter(cq -> cq.getSiteId() == chosenQuantity.getSiteId())
+                .findFirst();
+
+        int bu = needQuantity;
+
+        if (chosenQuantity.getChosenQuantity() > 0) {
+            if (existingCq.isPresent()) {
+                needQuantity = needQuantity - chosenQuantity.getChosenQuantity() + existingCq.get().getChosenQuantity();
+            } else {
+                needQuantity -= chosenQuantity.getChosenQuantity();
+            }
+        } else {
+            if (existingCq.isPresent()) {
+                needQuantity += existingCq.get().getChosenQuantity();
+            }
+        }
+
+        if (needQuantity >= 0) {
+            if (chosenQuantity.getChosenQuantity() > 0) {
+                if (existingCq.isPresent()) {
+                    existingCq.get().setChosenQuantity(chosenQuantity.getChosenQuantity());
+                    if (chosenQuantity.getDeliveryType() != null) {
+                        existingCq.get().setDeliveryType(chosenQuantity.getDeliveryType());
+                        existingCq.get().setDeliveryPrice(chosenQuantity.getDeliveryPrice());
+                    }
+                } else {
+                    chosenQuantities.add(chosenQuantity);
+                }
+            } else if (existingCq.isPresent()) {
+                chosenQuantities.remove(existingCq.get());
+            }
+            sttQuantity = true;
+        } else {
+            quantityError();
+            needQuantity = bu;
+            if (existingCq.isPresent()) {
+                needQuantity = bu + existingCq.get().getChosenQuantity();
+                chosenQuantities.remove(existingCq.get());
+            } else {
+                needQuantity = bu;
+            }
+            sttQuantity = false;
+        }
+    }
+
+    private void quantityError() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Số lượng quá lớn");
+        alert.setHeaderText(null);
+        alert.setContentText("Số lượng bạn nhập vượt quá số lượng còn thiếu! Vui lòng nhập lại");
+        alert.showAndWait();
+    }
+
+    private void quantityError2() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Số lượng quá lớn");
+        alert.setHeaderText(null);
+        alert.setContentText("Số lượng bạn nhập vượt quá số lượng còn trong kho của site! Vui lòng nhập lại");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void makeSiteOrder(ActionEvent event) throws IOException {
+        MOExpectedSiteOrderController.setDate(date);
+        MOExpectedSiteOrderController.setOrder(order);
+        MOExpectedSiteOrderController.setChosenSites(chosenQuantities);
+        // Gửi stage đến success
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MOSuccessController.setStageOrder(stage);
+        if (!chosenQuantities.isEmpty()) {
+            MOConfirmSiteController.setChosenQuantities(chosenQuantities);
+            MOConfirmSiteController.setsDate(order.getDesiredDate());
+            runPopUp("/view/popUp/MOConfirmSite.fxml", 620, 450);
+        } else {
+            runPopUp("/view/popUp/MOExpectedSiteOrder.fxml", 700, 700);
+        }
+    }
+
+    @Override
+    public boolean setDataToTrans(MOChosenSite chosenSite) {
+        return true;
+    }
+
+    public static void runPopUp(String path, double width, double height) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MOOrderController.class.getResource(path));
+        Stage primaryStage = new Stage();
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
+
+        BorderPane pane = loader.load();
+
+        // Lấy kích thước của màn hình
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+
+        // Tính toán vị trí để pop-up được hiển thị chính giữa màn hình
+        double popupX = (screenWidth - width) / 2;
+        double popupY = (screenHeight - height) / 2;
+
+        Scene scene = new Scene(pane);
+        scene.getStylesheets().add(Objects.requireNonNull(MOOrderController.class.getResource("/css/styles.css")).toExternalForm());
+        primaryStage.setScene(scene);
+
+        // Đặt vị trí cho pop-up
+        primaryStage.setX(popupX);
+        primaryStage.setY(popupY);
+
+        primaryStage.show();
+    }
+
+
+
+}

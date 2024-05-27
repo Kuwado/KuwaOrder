@@ -1,0 +1,93 @@
+package model;
+
+public class SiteOrder {
+    private int id;
+    private int orderId;
+    private int siteId;
+    private int quantity;
+    private String deliveryType;
+    private double price;
+    private String status;
+    private String note;
+
+    public SiteOrder() {
+    }
+
+
+    public SiteOrder(int id, int orderId, int siteId, int quantity, String deliveryType, double price, String status, String note) {
+        this.id = id;
+        this.orderId = orderId;
+        this.siteId = siteId;
+        this.quantity = quantity;
+        this.deliveryType = deliveryType;
+        this.price = price;
+        this.status = status;
+        this.note = note;
+    }
+
+    public SiteOrder(int orderId, int siteId, int quantity, String deliveryType, double price) {
+        this.orderId = orderId;
+        this.siteId = siteId;
+        this.quantity = quantity;
+        this.deliveryType = deliveryType;
+        this.price = price;
+    }
+
+    public SiteOrder(int id, int siteId, String deliveryType, String status) {
+        this.id = id;
+        this.siteId = siteId;
+        this.deliveryType = deliveryType;
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+
+    @Override
+    public String toString() {
+        return "SiteOrder{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", siteId=" + siteId +
+                ", quantity=" + quantity +
+                ", deliveryType='" + deliveryType + '\'' +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
+}
