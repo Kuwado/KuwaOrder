@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 22, 2024 lúc 06:43 PM
+-- Thời gian đã tạo: Th6 12, 2024 lúc 10:56 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -43,40 +43,40 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `product_id`, `quantity`, `unit`, `desired_date`, `status`, `note`, `request_id`) VALUES
-(1, 1, 50, 'cái', '30/05/2024', 'Chờ xử lý', 'mua site nào xịn nhé', 1),
-(8, 2, 45, 'cái', '28/05/2024', 'Chờ xử lý', 'khách cần gấp', 1),
-(9, 3, 69, 'cái', '22/05/2024', 'Chờ xử lý', 'kaka', 1),
-(10, 4, 120, 'cái', '30/05/2024', 'Chờ xử lý', NULL, 1),
-(11, 5, 150, 'cái', '23/05/2024', 'Đã tạo đơn', NULL, 2),
-(12, 6, 142, 'cái', '24/05/2024', 'Tạo đơn thiếu', NULL, 2),
-(13, 7, 145, 'cái', '25/05/2024', 'Tạo đơn thiếu', NULL, 3),
-(14, 8, 500, 'cái', '20/05/2024', 'Tạo đơn thiếu', NULL, 3),
-(15, 9, 333, 'cái', '22/05/2024', 'Tạo đơn thiếu', NULL, 4),
-(16, 10, 25, 'cái', '21/05/2024', 'Tạo đơn thiếu', NULL, 4),
-(17, 11, 50, 'cái', '28/05/2024', 'Đã tạo đơn', 'kiii', 5),
-(18, 12, 2, 'cái', '29/05/2024', 'Đã tạo đơn', 'Cần cái nịt', 5),
-(19, 11, 20, 'cái', '24/05/2024', 'Đã tạo đơn', NULL, 6),
+(1, 1, 50, 'cái', '14/06/2024', 'Chờ xử lý', 'mua site nào xịn nhé', 1),
+(8, 2, 45, 'cái', '15/06/2024', 'Chờ xử lý', 'khách cần gấp', 1),
+(9, 3, 69, 'cái', '16/06/2024', 'Chờ xử lý', 'kaka', 1),
+(10, 4, 120, 'cái', '17/06/2024', 'Chờ xử lý', NULL, 1),
+(11, 5, 150, 'cái', '23/06/2024', 'Chờ xử lý', NULL, 2),
+(12, 6, 142, 'cái', '24/05/2024', 'Chờ xử lý', NULL, 2),
+(13, 7, 145, 'cái', '25/05/2024', 'Chờ xử lý', NULL, 3),
+(14, 8, 500, 'cái', '20/05/2024', 'Chờ xử lý', NULL, 3),
+(15, 9, 333, 'cái', '22/05/2024', 'Chờ xử lý', NULL, 4),
+(16, 10, 25, 'cái', '21/05/2024', 'Chờ xử lý', NULL, 4),
+(17, 11, 50, 'cái', '28/05/2024', 'Chờ xử lý', 'kiii', 5),
+(18, 12, 2, 'cái', '29/05/2024', 'Chờ xử lý', 'Cần cái nịt', 5),
+(19, 11, 20, 'cái', '24/05/2024', 'Chờ xử lý', NULL, 6),
 (20, 3, 100, 'cái', '20/05/2024', 'Chờ xử lý', NULL, 6),
-(21, 7, 120, 'cái', '21/05/2024', 'Tạo đơn thiếu', NULL, 7),
-(22, 6, 230, 'cái', '22/05/2024', 'Tạo đơn thiếu', NULL, 7),
-(23, 9, 532, 'cái', '24/05/2024', 'Đã tạo đơn', NULL, 8),
-(24, 3, 145, 'cái', '22/05/2024', 'Tạo đơn thiếu', '66554hh', 8),
+(21, 7, 120, 'cái', '21/05/2024', 'Chờ xử lý', NULL, 7),
+(22, 6, 230, 'cái', '22/05/2024', 'Chờ xử lý', NULL, 7),
+(23, 9, 532, 'cái', '24/05/2024', 'Chờ xử lý', NULL, 8),
+(24, 3, 145, 'cái', '22/05/2024', 'Chờ xử lý', '66554hh', 8),
 (25, 4, 12, 'cái', '23/05/2024', 'Chờ xử lý', NULL, 9),
 (26, 5, 54, 'cái', '22/05/2024', 'Chờ xử lý', NULL, 9),
 (27, 1, 88, 'cái', '22/05/2024', 'Chờ xử lý', NULL, 10),
 (28, 2, 55, 'cái', '23/05/2024', 'Chờ xử lý', NULL, 10),
-(29, 3, 12, 'cái', '22/05/2024', 'Đã tạo đơn', NULL, 11),
-(30, 4, 154, 'cái', '21/05/2024', 'Tạo đơn thiếu', NULL, 11),
-(31, 5, 44, 'cái', '21/05/2024', 'Tạo đơn thiếu', NULL, 12),
-(32, 11, 44, 'cái', '21/05/2024', 'Tạo đơn thiếu', NULL, 12),
-(34, 8, 145, 'cái', '23/05/2024', 'Chờ xử lý', 'kaka', 1),
-(35, 5, 44, 'cái', '25/05/2024', 'Chờ xử lý', 'ko co dau', 1),
-(36, 6, 130, 'cái', '25/05/2024', 'Chờ xử lý', 'mua nhe', 1),
-(37, 7, 20, 'cái', '26/05/2024', 'Chờ xử lý', NULL, 1),
-(38, 9, 360, 'cái', '27/05/2024', 'Chờ xử lý', 'aaa', 1),
-(39, 10, 111, 'cái', '24/05/2024', 'Chờ xử lý', '455', 1),
-(40, 11, 33, 'cái', '25/05/2024', 'Chờ xử lý', 'gg', 1),
-(41, 12, 2, 'cái', '26/05/2024', 'Chờ xử lý', 'nit', 1),
+(29, 3, 12, 'cái', '22/05/2024', 'Chờ xử lý', NULL, 11),
+(30, 4, 154, 'cái', '21/05/2024', 'Chờ xử lý', NULL, 11),
+(31, 5, 44, 'cái', '21/05/2024', 'Chờ xử lý', NULL, 12),
+(32, 11, 44, 'cái', '21/05/2024', 'Chờ xử lý', NULL, 12),
+(34, 8, 145, 'cái', '18/06/2024', 'Chờ xử lý', 'kaka', 1),
+(35, 5, 44, 'cái', '19/06/2024', 'Chờ xử lý', 'ko co dau', 1),
+(36, 6, 130, 'cái', '20/06/2024', 'Chờ xử lý', 'mua nhe', 1),
+(37, 7, 20, 'cái', '21/06/2024', 'Chờ xử lý', NULL, 1),
+(38, 9, 360, 'cái', '22/06/2024', 'Chờ xử lý', 'aaa', 1),
+(39, 10, 111, 'cái', '23/06/2024', 'Chờ xử lý', '455', 1),
+(40, 11, 33, 'cái', '24/06/2024', 'Chờ xử lý', 'gg', 1),
+(41, 12, 2, 'cái', '25/06/2024', 'Chờ xử lý', 'nit', 1),
 (42, 1, 10, 'cái', '30/05/2024', 'Chờ xử lý', '22', 19),
 (43, 2, 10, 'cái', '30/05/2024', 'Đã tạo đơn', '22', 19),
 (44, 3, 10, 'cái', '30/05/2024', 'Chờ xử lý', '22', 19),
@@ -92,8 +92,24 @@ INSERT INTO `orders` (`id`, `product_id`, `quantity`, `unit`, `desired_date`, `s
 (54, 3, 20, 'cái', '30/05/2024', 'Đã tạo đơn', '10', 21),
 (55, 2, 14, 'cái', '30/05/2024', 'Đã tạo đơn', 'hhh', 22),
 (56, 3, 14, 'cái', '30/05/2024', 'Đã tạo đơn', 'hhh', 22),
-(57, 7, 14, 'cái', '30/05/2024', 'Chờ xử lý', 'hhh', 22),
-(58, 11, 14, 'cái', '30/05/2024', 'Chờ xử lý', 'hhh', 22);
+(57, 7, 14, 'cái', '30/05/2024', 'Đã tạo đơn', 'hhh', 22),
+(58, 11, 14, 'cái', '30/05/2024', 'Đã tạo đơn', 'hhh', 22),
+(59, 2, 12, 'cái', '31/05/2024', 'Chờ xử lý', 'ko chhh', 23),
+(60, 6, 24, 'cái', '07/06/2024', 'Đã tạo đơn', 'ko ', 23),
+(61, 6, 12, 'cái', '31/05/2024', 'Chờ xử lý', 'note', 25),
+(62, 7, 12, 'cái', '31/05/2024', 'Chờ xử lý', 'note', 25),
+(63, 8, 12, 'cái', '31/05/2024', 'Chờ xử lý', 'note', 25),
+(64, 1, 120, 'cái', '31/05/2024', 'Đã tạo đơn', 'note', 26),
+(65, 6, 115, 'cái', '31/05/2024', 'Chờ xử lý', 'note', 26),
+(66, 7, 115, 'cái', '31/05/2024', 'Chờ xử lý', 'note', 26),
+(67, 2, 100, 'cái', '18/06/2024', 'Đã tạo đơn', 'hh', 27),
+(68, 1, 102, 'cái', '18/06/2024', 'Đã tạo đơn', 'hh', 27),
+(69, 6, 20, 'cái', '17/06/2024', 'Đã tạo đơn', 'hh', 27),
+(70, 7, 25, 'cái', '20/06/2024', 'Đã tạo đơn', 'hh', 27),
+(71, 1, 100, 'cái', '19/06/2024', 'Chờ xử lý', 'ff', 28),
+(72, 6, 45, 'cái', '17/06/2024', 'Chờ xử lý', 'ff', 28),
+(73, 7, 450, 'cái', '16/06/2024', 'Tạo đơn thiếu', 'ff', 28),
+(74, 9, 450, 'cái', '18/06/2024', 'Chờ xử lý', 'ff', 28);
 
 --
 -- Bẫy `orders`
@@ -187,7 +203,7 @@ CREATE TABLE `requests` (
 --
 
 INSERT INTO `requests` (`id`, `name`, `order_quantity`, `send_date`, `description`, `status`) VALUES
-(1, 'Request 01', 7, '2024-05-18 11:34:15', 'Cần đặt cấp tốc ', 'Chờ xử lý'),
+(1, 'Request 01', 12, '2024-05-18 11:34:15', 'Cần đặt cấp tốc ', 'Chờ xử lý'),
 (2, 'Request 02', 2, '2024-05-18 11:34:15', 'Mua lẹ em ơi', 'Chờ xử lý'),
 (3, 'Request 03', 2, '2024-05-18 11:34:15', 'Chú ý chọn hàng xịn', 'Chờ xử lý'),
 (4, 'Request 04', 2, '2024-05-18 11:34:15', 'Yêu cầu đặt hàng về hàng đặt', 'Chờ xử lý'),
@@ -208,7 +224,12 @@ INSERT INTO `requests` (`id`, `name`, `order_quantity`, `send_date`, `descriptio
 (19, 'request quan', 4, '2024-05-22 14:57:45', 'ko co', 'Chờ xử lý'),
 (20, 'khong co ten', 5, '2024-05-22 14:59:54', 'hehe', 'Chờ xử lý'),
 (21, '33', 1, '2024-05-22 15:12:55', '55', 'Chờ xử lý'),
-(22, 'yeu cau', 2, '2024-05-22 15:20:44', 'nuuu', 'Chờ xử lý');
+(22, 'yeu cau', 0, '2024-05-22 15:20:44', 'nuuu', 'Đã xử lý'),
+(23, 'Request kaka', 1, '2024-05-24 12:08:45', 'sgdfhgfdh', 'Chờ xử lý'),
+(25, '', 3, '2024-05-25 00:19:08', '', 'Chờ xử lý'),
+(26, 'Request Demo', 2, '2024-05-25 00:19:57', 'Note of Reqeust', 'Chờ xử lý'),
+(27, 'test 13/06', 0, '2024-06-12 20:40:19', 'ko co', 'Đã xử lý'),
+(28, 'test 13/06', 3, '2024-06-12 20:46:10', 'ko co mo ta', 'Chờ xử lý');
 
 -- --------------------------------------------------------
 
@@ -232,16 +253,16 @@ CREATE TABLE `siteorders` (
 --
 
 INSERT INTO `siteorders` (`id`, `order_id`, `site_id`, `quantity`, `delivery_type`, `price`, `status`, `note`) VALUES
-(1, 10, 10, 2, 'Đường thủy', 16900000, 'Đang giao', NULL),
-(2, 10, 4, 44, 'Đường thủy', 320750000, 'Đang giao', NULL),
-(3, 10, 1, 25, 'Đường thủy', 189500000, 'Đang giao', NULL),
-(4, 10, 7, 36, 'Đường thủy', 273950000, 'Đang giao', NULL),
-(5, 10, 11, 13, 'Đường thủy', 100700000, 'Đang giao', NULL),
-(6, 9, 8, 14, 'Hàng không', 176800000, 'Đang giao', NULL),
-(7, 10, 4, 44, 'Đường thủy', 320750000, 'Đang giao', NULL),
-(8, 10, 10, 12, 'Đường thủy', 90900000, 'Đang giao', NULL),
-(9, 10, 1, 25, 'Đường thủy', 189500000, 'Đang giao', NULL),
-(10, 10, 7, 36, 'Đường thủy', 273950000, 'Đang giao', NULL),
+(1, 10, 10, 2, 'Đường thủy', 16900000, 'Đã nhập kho', NULL),
+(2, 10, 4, 44, 'Đường thủy', 320750000, 'Chờ lấy hàng', NULL),
+(3, 10, 1, 25, 'Đường thủy', 189500000, 'Đã nhập kho', NULL),
+(4, 10, 7, 36, 'Đường thủy', 273950000, 'Chờ lấy hàng', NULL),
+(5, 10, 11, 13, 'Đường thủy', 100700000, 'Chờ xác nhận', NULL),
+(6, 9, 8, 14, 'Hàng không', 176800000, 'Chờ xác nhận', NULL),
+(7, 10, 4, 44, 'Đường thủy', 320750000, 'Đang đặt lại', NULL),
+(8, 10, 10, 12, 'Đường thủy', 90900000, 'Đang hủy', NULL),
+(9, 10, 1, 25, 'Đường thủy', 189500000, 'Chờ lấy hàng', NULL),
+(10, 10, 7, 36, 'Đường thủy', 273950000, 'Chờ xác nhận', NULL),
 (11, 10, 11, 3, 'Đường thủy', 24700000, 'Chờ xác nhận', NULL),
 (12, 9, 8, 14, 'Hàng không', 176800000, 'Chờ xác nhận', NULL),
 (13, 17, 2, 1, 'Hàng không', 6300000, 'Chờ xác nhận', NULL),
@@ -263,7 +284,7 @@ INSERT INTO `siteorders` (`id`, `order_id`, `site_id`, `quantity`, `delivery_typ
 (29, 23, 7, 235, 'Hàng không', 6662000, 'Đã đặt lại', NULL),
 (30, 23, 12, 30, 'Hàng không', 5017000, 'Đã xác nhận', NULL),
 (31, 19, 3, 1, 'Hàng không', 6175000, 'Chờ xác nhận', NULL),
-(32, 19, 7, 1, 'Hàng không', 5900000, 'Đang hủy', NULL),
+(32, 19, 7, 1, 'Hàng không', 5900000, 'Đang đặt lại', NULL),
 (33, 19, 9, 1, 'Hàng không', 6430000, 'Chờ xác nhận', NULL),
 (34, 19, 12, 1, 'Hàng không', 6300000, 'Đang đặt lại', NULL),
 (35, 19, 2, 16, 'Hàng không', 28800000, 'Chờ xác nhận', NULL),
@@ -276,36 +297,71 @@ INSERT INTO `siteorders` (`id`, `order_id`, `site_id`, `quantity`, `delivery_typ
 (42, 18, 11, 1, 'Đường thủy', 9779677000, 'Đang hủy', NULL),
 (43, 18, 8, 1, 'Đường thủy', 9879043210, 'Chờ xác nhận', NULL),
 (44, 22, 5, 7, 'Hàng không', 223000000, 'Chờ xác nhận', NULL),
-(45, 29, 8, 12, 'Hàng không', 152300000, 'Chờ xác nhận', NULL),
+(45, 29, 8, 12, 'Hàng không', 152300000, 'Đã xác nhận', NULL),
 (46, 24, 8, 14, 'Hàng không', 176800000, 'Chờ xác nhận', NULL),
 (47, 8, 12, 45, 'Đường thủy', 667315000, 'Chờ xác nhận', NULL),
 (48, 34, 5, 20, 'Hàng không', 6017000, 'Chờ xác nhận', NULL),
 (49, 34, 8, 11, 'Hàng không', 5310670, 'Chờ xác nhận', NULL),
 (50, 34, 11, 5, 'Hàng không', 4604750, 'Đang hủy', NULL),
 (51, 34, 9, 109, 'Hàng không', 5050280, 'Chờ xác nhận', NULL),
-(52, 1, 3, 3, 'Đường thủy', 62497000, 'Chờ xác nhận', NULL),
+(52, 1, 3, 3, 'Đường thủy', 62497000, 'Đang đặt lại', NULL),
 (53, 1, 8, 11, 'Đường thủy', 223600000, 'Đang đặt lại', NULL),
 (54, 1, 2, 20, 'Đường thủy', 412200000, 'Chờ xác nhận', NULL),
 (55, 1, 5, 16, 'Đường thủy', 331000000, 'Chờ xác nhận', NULL),
 (56, 41, 3, 1, 'Đường thủy', 9891388888, 'Đang hủy', NULL),
 (57, 41, 11, 1, 'Hàng không', 9782377000, 'Chờ xác nhận', NULL),
-(58, 39, 3, 41, 'Hàng không', 86500000, 'Đang đặt lại', NULL),
+(58, 39, 3, 41, 'Hàng không', 86500000, 'Đã đặt lại', NULL),
 (59, 39, 12, 36, 'Hàng không', 80350000, 'Chờ xác nhận', NULL),
 (60, 55, 1, 9, 'Đường thủy', 137000000, 'Đang giao', NULL),
 (61, 55, 2, 5, 'Đường thủy', 76200000, 'Chờ xác nhận', NULL),
-(62, 56, 1, 14, 'Đường thủy', 170000000, 'Chờ xác nhận', NULL),
+(62, 56, 1, 14, 'Đường thủy', 170000000, 'Đang hủy', NULL),
 (63, 52, 1, 15, 'Đường thủy', 317000000, 'Chờ xác nhận', NULL),
 (64, 52, 3, 3, 'Đường thủy', 62497000, 'Chờ xác nhận', NULL),
 (65, 52, 8, 2, 'Đường thủy', 42700000, 'Đang đặt lại', NULL),
-(66, 54, 1, 14, 'Đường thủy', 170000000, 'Chờ xác nhận', NULL),
+(66, 54, 1, 14, 'Đường thủy', 170000000, 'Đã xác nhận', NULL),
 (67, 54, 7, 6, 'Đường thủy', 72950000, 'Chờ xác nhận', NULL),
 (68, 43, 1, 9, 'Đường thủy', 137000000, 'Chờ xác nhận', NULL),
 (69, 43, 2, 1, 'Đường thủy', 17000000, 'Chờ xác nhận', NULL),
-(70, 23, 7, 235, 'Máy bay', 0, 'Chờ xác nhận', NULL),
-(71, 17, 3, 5, 'Máy bay', 0, 'Chờ xác nhận', NULL),
-(72, 17, 3, 5, 'Tàu', 0, 'Chờ xác nhận', NULL),
-(73, 17, 3, 5, 'Máy bay', 0, 'Chờ xác nhận', NULL),
-(74, 17, 7, 5, 'Tàu', 0, 'Chờ xác nhận', NULL);
+(75, 57, 6, 12, 'Đường thủy', 53300000, 'Đã xác nhận', NULL),
+(76, 57, 9, 2, 'Đường thủy', 11250000, 'Đang hủy', NULL),
+(77, 1, 1, 2, 'Đường thủy', 44000000, 'Chờ xác nhận', NULL),
+(78, 1, 6, 15, 'Đường thủy', 320300000, 'Chờ xác nhận', NULL),
+(79, 1, 2, 4, 'Hàng không', 86800000, 'Chờ xác nhận', NULL),
+(80, 1, 8, 3, 'Đường thủy', 62800000, 'Chờ xác nhận', NULL),
+(81, 1, 3, 3, 'Đường thủy', 62497000, 'Chờ xác nhận', NULL),
+(82, 1, 5, 23, 'Đường thủy', 474500000, 'Chờ xác nhận', NULL),
+(83, 58, 7, 14, 'Đường thủy', 21750000, 'Chờ xác nhận', NULL),
+(84, 60, 3, 8, 'Đường thủy', 242500000, 'Chờ xác nhận', NULL),
+(85, 60, 9, 15, 'Đường thủy', 464450000, 'Chờ xác nhận', NULL),
+(86, 60, 7, 1, 'Đường thủy', 31950000, 'Chờ xác nhận', NULL),
+(87, 64, 1, 5, 'Đường thủy', 107000000, 'Chờ xác nhận', NULL),
+(88, 64, 10, 10, 'Hàng không', 208000050, 'Chờ xác nhận', NULL),
+(89, 64, 2, 3, 'Hàng không', 66300000, 'Chờ xác nhận', NULL),
+(90, 64, 4, 20, 'Đường thủy', 416750000, 'Chờ xác nhận', NULL),
+(91, 64, 3, 3, 'Đường thủy', 62497000, 'Chờ xác nhận', NULL),
+(92, 64, 8, 11, 'Đường thủy', 223600000, 'Chờ xác nhận', NULL),
+(93, 64, 5, 23, 'Đường thủy', 474500000, 'Chờ xác nhận', NULL),
+(94, 64, 9, 33, 'Đường thủy', 682250000, 'Chờ xác nhận', NULL),
+(95, 64, 11, 12, 'Đường thủy', 252700000, 'Chờ xác nhận', NULL),
+(100, 67, 12, 45, 'Đường thủy', 667315000, 'Chờ xác nhận', NULL),
+(101, 67, 2, 8, 'Đường thủy', 120600000, 'Chờ xác nhận', NULL),
+(102, 67, 8, 44, 'Đường thủy', 656780000, 'Chờ xác nhận', NULL),
+(103, 67, 6, 3, 'Đường thủy', 49550000, 'Chờ xác nhận', NULL),
+(104, 70, 6, 12, 'Đường thủy', 53300000, 'Chờ xác nhận', NULL),
+(105, 70, 9, 13, 'Đường thủy', 59650000, 'Chờ xác nhận', NULL),
+(106, 68, 3, 3, 'Đường thủy', 62497000, 'Chờ xác nhận', NULL),
+(107, 68, 8, 11, 'Đường thủy', 223600000, 'Chờ xác nhận', NULL),
+(108, 68, 2, 20, 'Đường thủy', 412200000, 'Chờ xác nhận', NULL),
+(109, 68, 5, 23, 'Đường thủy', 474500000, 'Chờ xác nhận', NULL),
+(110, 68, 9, 33, 'Đường thủy', 682250000, 'Chờ xác nhận', NULL),
+(111, 68, 4, 12, 'Hàng không', 252500000, 'Chờ xác nhận', NULL),
+(112, 69, 7, 13, 'Đường thủy', 389550000, 'Chờ xác nhận', NULL),
+(113, 69, 3, 7, 'Đường thủy', 212500000, 'Chờ xác nhận', NULL),
+(114, 73, 6, 12, 'Hàng không', 54800000, 'Chờ xác nhận', NULL),
+(115, 73, 9, 22, 'Hàng không', 101750000, 'Chờ xác nhận', NULL),
+(116, 73, 1, 18, 'Hàng không', 85000000, 'Chờ xác nhận', NULL),
+(117, 73, 10, 50, 'Hàng không', 234200000, 'Chờ xác nhận', NULL),
+(118, 73, 5, 29, 'Đường thủy', 140025000, 'Chờ xác nhận', NULL);
 
 -- --------------------------------------------------------
 
@@ -451,7 +507,7 @@ INSERT INTO `storage` (`id`, `product_id`, `quantity`, `sold_quantity`) VALUES
 (1, 1, 10, 2),
 (2, 2, 20, 1),
 (3, 3, 44, 450),
-(4, 4, 137, 0),
+(4, 4, 133, 0),
 (5, 5, 145, 15),
 (6, 6, 24, 253),
 (7, 7, 12, 254),
@@ -554,7 +610,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -566,13 +622,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `siteorders`
 --
 ALTER TABLE `siteorders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT cho bảng `siteproducts`

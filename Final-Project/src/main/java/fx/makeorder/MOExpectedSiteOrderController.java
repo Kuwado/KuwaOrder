@@ -171,6 +171,7 @@ public class MOExpectedSiteOrderController {
 
     @FXML
     void cancel(ActionEvent event) {
+        MOExpectedSiteOrder.setIdCounter(1);
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
@@ -183,7 +184,7 @@ public class MOExpectedSiteOrderController {
             siteOrderController.insert(siteOrder);
         }
         orderController.updateStatus(order.getId(), status);
-
+        MOExpectedSiteOrder.setIdCounter(1);
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();

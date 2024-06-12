@@ -119,7 +119,7 @@ public class MORequestListController extends MOController<MORequest> {
                 dates[i] = orders.get(i).getDesiredDate();
             }
             DateConverter.sortDates(dates);
-            exDate = dates[0];
+            exDate = dates[orders.size() - 1];
         } else {
             exDate = "Chưa có";
         }
