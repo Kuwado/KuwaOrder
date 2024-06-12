@@ -168,12 +168,12 @@
                   </VBox>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="-10.0">
                      <image>
-                        <Image url="@../../../images/icons/kẹp.png" />
+                        <Image url="@../../../images/icons/kep.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="-10.0">
                      <image>
-                        <Image url="@../../../images/icons/kẹp.png" />
+                        <Image url="@../../../images/icons/kep.png" />
                      </image>
                   </ImageView>
                </children>

@@ -87,7 +87,6 @@ class SiteOrderControllerTest {
                 new SiteOrder(order.getId(), 11, 10, "Đường thủy", 210900000),
                 new SiteOrder(order.getId(), 8, 11, "Đường thủy", 223600000),
                 new SiteOrder(order.getId(), 2, 9, "Đường thủy", 186700000)
-
                 ));
         checkData(siteOrders, expectedResults);
     }
